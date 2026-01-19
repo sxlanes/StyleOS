@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-background text-text-main font-sans antialiased;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply tracking-tight font-bold;
+    }
+}
+
+@layer utilities {
+    .glass-card {
+        @apply bg-surface/60 backdrop-blur-md border border-glass-border;
+    }
+
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400;
+    }
+
+    .neon-glow {
+        box-shadow: 0 0 20px rgba(197, 160, 89, 0.15);
+    }
+}
