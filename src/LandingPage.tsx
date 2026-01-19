@@ -27,6 +27,7 @@ function LandingPage() {
                         <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button>
                         <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors">Comparatif</button>
                         <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button>
+                        <Link to="/demos" className="hover:text-primary transition-colors font-bold ml-4">NOS DÉMOS</Link>
                     </div>
                     <Link to="/login" className="bg-surface border border-glass-border hover:border-white/20 text-white px-6 py-2 rounded-full text-sm font-medium transition-all">
                         Connexion
