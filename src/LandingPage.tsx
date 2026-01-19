@@ -8,7 +8,14 @@ import FinancialComparison from './components/FinancialComparison';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
 
-function App() {
+function LandingPage() {
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="min-h-screen bg-background text-text-main selection:bg-primary selection:text-black">
 
@@ -17,9 +24,9 @@ function App() {
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="text-2xl font-bold tracking-tighter">StyleOS<span className="text-primary">.</span></div>
                     <div className="hidden md:flex gap-8 text-sm font-medium text-text-muted">
-                        <a href="#features" className="hover:text-white transition-colors">Fonctionnalités</a>
-                        <a href="#comparison" className="hover:text-white transition-colors">Comparatif</a>
-                        <a href="#pricing" className="hover:text-white transition-colors">Tarifs</a>
+                        <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button>
+                        <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors">Comparatif</button>
+                        <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button>
                     </div>
                     <Link to="/login" className="bg-surface border border-glass-border hover:border-white/20 text-white px-6 py-2 rounded-full text-sm font-medium transition-all">
                         Connexion
@@ -67,13 +74,13 @@ function App() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <a href="#demo" className="px-8 py-4 bg-[#B88746] text-black font-bold rounded-full text-lg hover:bg-[#A07030] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#B88746]/20">
+                            <button onClick={() => scrollToSection('demo')} className="px-8 py-4 bg-[#B88746] text-black font-bold rounded-full text-lg hover:bg-[#A07030] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#B88746]/20">
                                 <Play className="w-5 h-5 fill-black" />
                                 Écouter la Démo IA
-                            </a>
-                            <a href="#pricing" className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-full text-lg hover:bg-white/10 transition-all text-center">
+                            </button>
+                            <button onClick={() => scrollToSection('pricing')} className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-full text-lg hover:bg-white/10 transition-all text-center">
                                 Voir les Tarifs
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -120,4 +127,4 @@ function App() {
     )
 }
 
-export default App;
+export default LandingPage;
