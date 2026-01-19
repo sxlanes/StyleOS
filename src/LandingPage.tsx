@@ -32,7 +32,7 @@ function App() {
                 {/* Visual: Man Image (Left/Background) */}
                 <div className="absolute inset-y-0 left-0 w-full md:w-[60%] z-0">
                     <img
-                        src="/hero-model.png"
+                        src="hero-model.png"
                         alt="StyleOS Barber"
                         className="w-full h-full object-cover object-center md:object-right opacity-80 md:opacity-100 mask-image-linear-gradient"
                     />
