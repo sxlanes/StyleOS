@@ -124,6 +124,47 @@ function LandingPage() {
             <PricingSection />
             <OfferSection />
 
+            {/* Footer */}
+            <footer className="bg-black py-12 border-t border-white/10 text-center md:text-left">
+                <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+                    <div>
+                        <div className="text-2xl font-bold tracking-tighter text-white mb-4">StyleOS<span className="text-primary">.</span></div>
+                        <p className="text-gray-500 text-sm">
+                            L'excellence opérationnelle pour les salons de coiffure et barbiers modernes.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-white mb-4">Produit</h4>
+                        <ul className="space-y-2 text-sm text-gray-500">
+                            <li><button onClick={() => scrollToSection('features')} className="hover:text-primary transition-colors">Fonctionnalités</button></li>
+                            <li><button onClick={() => scrollToSection('demo')} className="hover:text-primary transition-colors">Démo IA</button></li>
+                            <li><button onClick={() => scrollToSection('pricing')} className="hover:text-primary transition-colors">Tarifs</button></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-white mb-4">Légal</h4>
+                        <ul className="space-y-2 text-sm text-gray-500">
+                            <li><a href="#" className="hover:text-white transition-colors">Mentions Légales</a></li>
+                            <li><a href="#" className="hover:text-white transition-colors">CGV</a></li>
+                            <li><a href="#" className="hover:text-white transition-colors">Confidentialité</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-white mb-4">Contact</h4>
+                        <ul className="space-y-2 text-sm text-gray-500">
+                            <li>bordeaux@styleos.fr</li>
+                            <li>+33 7 00 00 00 00</li>
+                            <li className="pt-2">
+                                <Link to="/login" className="text-primary hover:text-white transition-colors">Espace Client</Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-white/5 text-center text-xs text-gray-600">
+                    &copy; {new Date().getFullYear()} StyleOS. Tous droits réservés. Fait avec passion à Bordeaux.
+                </div>
+            </footer>
+
         </div>
     )
 }
