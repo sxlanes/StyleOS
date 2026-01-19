@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { Check, Star, MapPin, Clock, Phone, Scissors, Calendar, X, User } from 'lucide-react';
+import { Check, Star, MapPin, Clock, Phone, Scissors, Calendar, X, User, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Demo253 = () => {
     // --- STATE MANAGEMENT ---
@@ -79,13 +80,22 @@ const Demo253 = () => {
 
     return (
         <div className="min-h-screen bg-black text-white selection:bg-[#D4AF37] selection:text-black font-sans">
-            {/* Navigation (Simplifiée pour la demo) */}
+            {/* Navigation */}
             <nav className="fixed w-full top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="text-2xl font-bold tracking-widest uppercase font-serif text-[#D4AF37]">253 Barber Club</div>
-                    <a href="https://www.planity.com/253-barber-club-33000-bordeaux" target="_blank" className="bg-[#D4AF37] text-black px-6 py-2 rounded-none uppercase text-xs font-bold tracking-widest hover:bg-white transition-all">
+                    <div className="flex items-center gap-4">
+                        <Link to="/" className="text-white/50 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                            <ArrowLeft className="w-4 h-4" /> Retour
+                        </Link>
+                        <div className="w-px h-6 bg-white/10 hidden md:block"></div>
+                        <div className="text-xl md:text-2xl font-bold tracking-widest uppercase font-serif text-[#D4AF37]">253 Barber Club</div>
+                    </div>
+                    <button onClick={() => document.getElementById('ai-section')?.scrollIntoView({ behavior: 'smooth' })} className="bg-[#D4AF37] text-black px-6 py-2 rounded-none uppercase text-xs font-bold tracking-widest hover:bg-white transition-all hidden md:block">
                         Réserver
-                    </a>
+                    </button>
+                    <button onClick={() => document.getElementById('ai-section')?.scrollIntoView({ behavior: 'smooth' })} className="md:hidden bg-[#D4AF37] text-black p-2 rounded-full">
+                        <Calendar className="w-5 h-5" />
+                    </button>
                 </div>
             </nav>
 
@@ -356,7 +366,7 @@ const Demo253 = () => {
             {/* Map Section */}
             <section className="h-96 w-full grayscale contrast-125 brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-700">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2829.3524675549887!2d-0.5843429232479641!3d44.83466177107074!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5527d7da9801af%3A0xc68d60167c1e5504!2s253%20Cr%20du%20Mar%C3%A9chal%20Gallieni%2C%2033000%20Bordeaux!5e0!3m2!1sfr!2sfr!4v1705680000000!5m2!1sfr!2sfr"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2830.108383253354!2d-0.6023758233797213!3d44.81935657623161!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd5527e557d25bf3%3A0xace525203f705c5e!2s253%20BARBER%20CLUB!5e0!3m2!1ses!2sfr!4v1768865030543!5m2!1ses!2sfr"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
