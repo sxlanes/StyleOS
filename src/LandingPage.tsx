@@ -1,4 +1,5 @@
 import { Play, PhoneOff } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import ComparisonTable from './components/ComparisonTable';
 import SolutionStack from './components/SolutionStack';
 import AudioDemo from './components/AudioDemo';
@@ -20,9 +21,9 @@ function App() {
                         <a href="#comparison" className="hover:text-white transition-colors">Comparatif</a>
                         <a href="#pricing" className="hover:text-white transition-colors">Tarifs</a>
                     </div>
-                    <button className="bg-surface border border-glass-border hover:border-white/20 text-white px-6 py-2 rounded-full text-sm font-medium transition-all">
+                    <Link to="/login" className="bg-surface border border-glass-border hover:border-white/20 text-white px-6 py-2 rounded-full text-sm font-medium transition-all">
                         Connexion
-                    </button>
+                    </Link>
                 </div>
             </nav>
 
@@ -66,10 +67,10 @@ function App() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">
-                            <button className="px-8 py-4 bg-[#B88746] text-black font-bold rounded-full text-lg hover:bg-[#A07030] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#B88746]/20">
+                            <a href="#demo" className="px-8 py-4 bg-[#B88746] text-black font-bold rounded-full text-lg hover:bg-[#A07030] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#B88746]/20">
                                 <Play className="w-5 h-5 fill-black" />
                                 Écouter la Démo IA
-                            </button>
+                            </a>
                             <a href="#pricing" className="px-8 py-4 bg-transparent border border-white/20 text-white font-medium rounded-full text-lg hover:bg-white/10 transition-all text-center">
                                 Voir les Tarifs
                             </a>

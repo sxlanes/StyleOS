@@ -2,7 +2,7 @@ import { PlayCircle, Mic } from 'lucide-react';
 
 const AudioDemo = () => {
     return (
-        <section className="py-24 bg-surface border-y border-glass-border">
+        <section id="demo" className="py-24 bg-surface border-y border-glass-border">
             <div className="max-w-4xl mx-auto px-6 text-center">
                 <div className="inline-flex items-center gap-2 text-primary text-sm font-bold tracking-widest uppercase mb-4">
                     <Mic className="w-4 h-4 animate-pulse" /> Analyse en Direct
