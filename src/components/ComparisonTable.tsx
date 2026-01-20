@@ -47,12 +47,12 @@ const ComparisonTable = () => {
 
                         {/* Row 3 */}
                         <div className="grid grid-cols-3 p-6 border-b border-glass-border hover:bg-white/5 transition-colors">
-                            <div className="font-semibold text-white">Concurrence</div>
+                            <div className="font-semibold text-white">Image de Marque</div>
                             <div className="text-gray-500 text-center text-sm flex items-center justify-center gap-2">
-                                <X className="w-4 h-4" /> Promeut vos voisins
+                                <X className="w-4 h-4" /> Noyé dans la masse
                             </div>
                             <div className="text-white text-center font-bold flex items-center justify-center gap-2">
-                                <Check className="w-5 h-5 text-primary" /> Vous êtes exclusif
+                                <Check className="w-5 h-5 text-primary" /> Identité Incomparable
                             </div>
                         </div>
 
