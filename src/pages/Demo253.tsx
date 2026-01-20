@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { Check, Star, MapPin, Clock, Phone, Scissors, Calendar, X, User, ArrowLeft } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Check, MapPin, Clock, Phone, Calendar, X, User, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Demo253 = () => {
@@ -16,11 +16,11 @@ const Demo253 = () => {
 
     // --- CALL SIMULATION LOGIC ---
     const SCRIPT = [
-        { sender: 'Antoine', text: "253 Barber Club, Antoine à l'appareil. Je peux vous aider ?" },
+        { sender: 'Sarah', text: "253 Barber Club, Sarah à l'appareil. Je peux vous aider ?" },
         { sender: 'Client', text: "Salut, je cherche un créneau pour une barbe demain vers 11h." },
-        { sender: 'Antoine', text: "Je regarde... J'ai une disponibilité à 11h00 pile. Ça vous irait ?" },
+        { sender: 'Sarah', text: "Je regarde... J'ai une disponibilité à 11h00 pile. Ça vous irait ?" },
         { sender: 'Client', text: "Oui, c'est parfait." },
-        { sender: 'Antoine', text: "C'est noté ! Je vous ai bloqué le créneau. À demain !" }
+        { sender: 'Sarah', text: "C'est noté ! Je vous ai bloqué le créneau. À demain !" }
     ];
 
     const startSimulation = () => {
@@ -189,7 +189,7 @@ const Demo253 = () => {
                         Appelez-nous.
                     </h2>
                     <p className="text-xl md:text-2xl font-light mb-10 max-w-2xl mx-auto">
-                        Notre assistant IA, <span className="font-bold">Antoine</span>, gère vos rendez-vous 24/7 par téléphone.
+                        Notre assistant IA, <span className="font-bold">Sarah</span>, gère vos rendez-vous 24/7 par téléphone.
                         Ne tombez plus jamais sur notre répondeur qui vous coûte des clients.
                     </p>
                     <div className="flex justify-center gap-8 text-sm font-bold uppercase tracking-widest mb-16">
@@ -223,16 +223,16 @@ const Demo253 = () => {
                             <div className="flex-1 flex flex-col relative z-10 overflow-hidden">
                                 {callStatus === 'idle' && (
                                     <div className="flex-1 flex flex-col items-center justify-center text-center opacity-80">
-                                        <div className="w-20 h-20 bg-black text-[#D4AF37] rounded-full flex items-center justify-center font-serif font-bold text-3xl mb-4 shadow-xl">A</div>
-                                        <p className="font-bold text-lg">Antoine (IA)</p>
-                                        <p className="text-sm">Assistant 253 Barber Club</p>
+                                        <div className="w-20 h-20 bg-black text-[#D4AF37] rounded-full flex items-center justify-center font-serif font-bold text-3xl mb-4 shadow-xl">S</div>
+                                        <p className="font-bold text-lg">Sarah (IA)</p>
+                                        <p className="text-sm">Assistante 253 Barber Club</p>
                                     </div>
                                 )}
 
                                 {(callStatus === 'connected' || callStatus === 'completed') && (
                                     <div className="flex-1 overflow-y-auto space-y-4 pr-2 scroll-smooth">
                                         {transcript.map((msg, i) => (
-                                            <div key={i} className={`p-3 rounded-xl text-sm max-w-[85%] animate-fade-in ${msg.sender === 'Antoine' ? 'bg-black text-[#D4AF37] self-start rounded-tl-none mr-auto' : 'bg-white text-black self-end rounded-tr-none ml-auto border border-black/5'}`}>
+                                            <div key={i} className={`p-3 rounded-xl text-sm max-w-[85%] animate-fade-in ${msg.sender === 'Sarah' ? 'bg-black text-[#D4AF37] self-start rounded-tl-none mr-auto' : 'bg-white text-black self-end rounded-tr-none ml-auto border border-black/5'}`}>
                                                 <div className="text-[10px] uppercase font-bold opacity-50 mb-1">{msg.sender}</div>
                                                 {msg.text}
                                             </div>

@@ -1,4 +1,4 @@
-import { Play, PhoneOff } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ComparisonTable from './components/ComparisonTable';
 import SolutionStack from './components/SolutionStack';
@@ -87,37 +87,11 @@ function LandingPage() {
                 </div>
             </header>
 
+
             <SolutionStack />
 
-            {/* Financial Pain Section */}
-            <section className="py-24 bg-surface/30 relative">
-                <div className="max-w-4xl mx-auto px-6 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-16 text-white uppercase tracking-tight">
-                        Votre téléphone vous <span className="text-red-500">coûte de l'argent</span>.
-                    </h2>
-
-                    <div className="grid md:grid-cols-3 gap-8 mb-12">
-                        <div className="p-8 rounded-2xl bg-black border border-glass-border">
-                            <PhoneOff className="w-10 h-10 text-red-500 mx-auto mb-4" />
-                            <div className="text-4xl font-bold text-white mb-2">2</div>
-                            <div className="text-text-muted text-sm uppercase tracking-wider">Appels Manqués / Jour</div>
-                        </div>
-                        <div className="flex items-center justify-center text-4xl text-text-muted font-thin">=</div>
-                        <div className="p-8 rounded-2xl bg-black border border-glass-border relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-red-500/10 group-hover:bg-red-500/20 transition-all"></div>
-                            <div className="text-4xl font-bold text-red-500 mb-2">€14,000</div>
-                            <div className="text-text-muted text-sm uppercase tracking-wider">Perte Revanus / An</div>
-                        </div>
-                    </div>
-
-                    <p className="text-xl text-text-muted font-light">
-                        Chaque fois que vous arrêtez une coupe pour répondre, vous perdez votre concentration. <br />
-                        Chaque fois que vous ne répondez pas, ce client appelle <span className="text-white border-b border-white/20">Planity</span>.
-                    </p>
-                </div>
-            </section>
-
             <ComparisonTable />
+
             <AudioDemo />
             <ROICalculator />
             <FinancialComparison />

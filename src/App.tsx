@@ -4,6 +4,7 @@ import LandingPage from './LandingPage';
 import Demo253 from './pages/Demo253';
 
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
 import DemosPage from './pages/DemosPage';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/demos" element={<DemosPage />} />
                 <Route path="/demo/253-barber-club" element={<Demo253 />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </Router>
     );

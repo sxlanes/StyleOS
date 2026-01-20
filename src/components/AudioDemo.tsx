@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { PlayCircle, PauseCircle, Mic } from 'lucide-react';
 
 const AudioDemo = () => {
@@ -24,7 +24,7 @@ const AudioDemo = () => {
                 </div>
                 <h2 className="text-4xl font-bold mb-8">N'IMAGINEZ PAS. ÉCOUTEZ.</h2>
                 <p className="text-text-muted mb-12">
-                    Lancez l'audio ci-dessous pour entendre 'Antoine' gérer une demande de changement de rendez-vous complexe.
+                    Lancez l'audio ci-dessous pour entendre 'Sarah' gérer une demande de changement de rendez-vous complexe.
                 </p>
 
                 {/* Audio Player UI Wrapper */}
@@ -33,7 +33,7 @@ const AudioDemo = () => {
                     {/* Hidden Audio Element - REPLACE src with actual file */}
                     <audio
                         ref={audioRef}
-                        src="demo-antoine.mp3"
+                        src="https://static1.squarespace.com/static/5e32b61044a8b143b36ce382/t/5e46c7b50a3a7b51d13cf890/1652905383717/French-Female-Voiceover-Sylvie.mp3"
                         onEnded={() => setIsPlaying(false)}
                     />
 
@@ -58,7 +58,7 @@ const AudioDemo = () => {
 
                         <div className="flex-1 text-left">
                             <div className="text-xs text-text-muted uppercase tracking-wider mb-1">Lecture Démo</div>
-                            <div className="text-white font-medium text-lg">Présentation Antoine IA</div>
+                            <div className="text-white font-medium text-lg">Présentation Sarah IA</div>
                             {/* Fake Progress Bar - Could serve real progress later */}
                             <div className="w-full h-1 bg-gray-800 rounded-full mt-3 overflow-hidden">
                                 <div className={`h-full bg-white transition-all duration-[2000ms] ease-linear ${isPlaying ? 'w-full' : 'w-1/3'}`}></div>
