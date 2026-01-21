@@ -493,11 +493,8 @@ const Dashboard = () => {
                             </div>
                         </div>
                     </div>
-                        </div>
-
-                    </main >
                 )}
-            </main >
+            </main>
         </div >
     );
 };
