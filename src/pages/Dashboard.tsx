@@ -218,6 +218,15 @@ const Dashboard = () => {
 
                 {/* Accounting Actions */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    {/* Hidden File Input for n8n Scan */}
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleFileUpload}
+                        hidden
+                        accept="image/*,application/pdf"
+                    />
+
                     <div className="bg-blue-900/10 border border-blue-500/20 p-8 rounded-3xl flex items-center justify-between relative overflow-hidden group hover:border-blue-500/40 transition-all">
                         <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors"></div>
                         <div className="relative z-10">
@@ -231,15 +240,18 @@ const Dashboard = () => {
                         </button>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center justify-between group hover:border-[#D4AF37]/50 transition-all relative overflow-hidden cursor-pointer">
+                    <div onClick={handleScanClick} className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center justify-between group hover:border-[#D4AF37]/50 transition-all relative overflow-hidden cursor-pointer">
                         <div className="absolute inset-0 bg-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div className="relative z-10">
                             <h3 className="font-bold text-xl text-white flex items-center gap-3 mb-2">
-                                <Camera className="w-6 h-6 text-[#D4AF37]" /> Scan Facture IA
+                                {isScanning ? <Loader2 className="w-6 h-6 animate-spin text-[#D4AF37]" /> : <Camera className="w-6 h-6 text-[#D4AF37]" />}
+                                {isScanning ? "Analyse IA en cours..." : "Scan Facture IA"}
                             </h3>
-                            <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors max-w-xs">Prenez une photo d'une facture. L'IA la catégorise instantanément.</p>
+                            <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors max-w-xs">
+                                {isScanning ? "Envoi à n8n pour extraction des données..." : "Prenez une photo d'une facture. L'IA la catégorise instantanément."}
+                            </p>
                         </div>
-                        <button className="relative z-10 bg-[#D4AF37] text-black px-6 py-3 rounded-xl font-bold text-sm hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 hover:shadow-[#D4AF37]/20 hover:scale-105 active:scale-95">
+                        <button disabled={isScanning} className="relative z-10 bg-[#D4AF37] text-black px-6 py-3 rounded-xl font-bold text-sm hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 hover:shadow-[#D4AF37]/20 hover:scale-105 active:scale-95 disabled:opacity-50">
                             Scanner
                         </button>
                     </div>
@@ -269,7 +281,7 @@ const Dashboard = () => {
                                         <td className="px-8 py-5 text-gray-400">{(appt as any).type || (i % 2 === 0 ? "Coupe + Barbe" : "Taille Barbe")}</td>
                                         <td className="px-8 py-5">
                                             <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border ${appt.status === 'Confirmé' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                                                    'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
+                                                'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
                                                 }`}>
                                                 {appt.status}
                                             </span>
