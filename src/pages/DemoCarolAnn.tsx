@@ -5,56 +5,141 @@ import { Link } from 'react-router-dom';
 
 const SERVICES = [
     {
-        category: "Soins Visage",
-        id: "visage",
-        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=2070", // Luxury Facial
+        category: "Épilation",
+        id: "epilation",
         items: [
-            { name: "Soin Signature Carol-Ann", price: "85€", duration: "1h", description: "Notre soin emblématique pour un éclat immédiat." },
-            { name: "Hydratation Intense", price: "75€", duration: "50min", description: "Bain d'hydratation à l'acide hyaluronique." },
-            { name: "Anti-Âge Kobido", price: "95€", duration: "1h15", description: "Massage liftant japonais traditionnel." },
-            { name: "Peeling Éclat", price: "65€", duration: "45min", description: "Rénovation cellulaire douce." },
+            { name: "Création Ligne Sourcils", price: "15€", duration: "15min", description: "Restructuration complète à la pince pour un regard ouvert." },
+            { name: "Lèvres ou Menton", price: "10€", duration: "10min", description: "Épilation douce à la cire basse température." },
+            { name: "Aisselles", price: "15€", duration: "15min", description: "Soin apaisant post-épilation inclus." },
+            { name: "Maillot Classique", price: "20€", duration: "20min", description: "Échancrure standard pour le quotidien." },
+            { name: "Maillot Semi-Intégral", price: "30€", duration: "30min", description: "Pour plus de confort et d'esthétique." },
+            { name: "Maillot Intégral", price: "38€", duration: "40min", description: "Finition parfaite, hygiène irréprochable." },
+            { name: "Jambes Complètes", price: "35€", duration: "40min", description: "Cire tiède pour une peau douce durablement." }
         ]
     },
     {
-        category: "Massages",
-        id: "massages",
-        image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=2070", // Massage Spa
+        category: "Zone unique",
+        id: "zone-unique",
         items: [
-            { name: "Massage Relaxant", price: "80€", duration: "1h", description: "Détente musculaire aux huiles chaudes." },
-            { name: "Drainage Lymphatique", price: "90€", duration: "1h", description: "Technique Renata França." },
-            { name: "Massage Pierres Chaudes", price: "85€", duration: "1h", description: "Chaleur diffusée pour une relaxation profonde." },
+            { name: "Zone Visage Spécifique", price: "10€", duration: "10min", description: "Joues, front ou cou." },
+            { name: "Sillon Inter-Fessier", price: "10€", duration: "10min", description: "En complément d'un maillot." }
         ]
     },
     {
-        category: "Minceur (LPG)",
-        id: "minceur",
-        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=2074", // Body/Health
+        category: "Épilation forfait",
+        id: "epilation-forfait",
         items: [
-            { name: "Séance LPG Corps", price: "60€", duration: "35min", description: "Destockage des graisses et lissage." },
-            { name: "Cure 10 Séances", price: "540€", duration: "10 x 35min", description: "Programme intensif minceur." },
-            { name: "Bilan Minceur", price: "Offert", duration: "20min", description: "Analyse personnalisée de vos besoins." },
+            { name: "Visage + Sourcils", price: "22€", duration: "20min", description: "Forfait complet pour l'harmonie du visage." },
+            { name: "Demi-Jambes + Maillot + Aisselles", price: "45€", duration: "45min", description: "L'essentiel mensuel." },
+            { name: "Jambes Complètes + Maillot Intégral + Aisselles", price: "75€", duration: "75min", description: "Le grand soin complet." }
         ]
     },
     {
-        category: "Épilations",
-        id: "epilations",
-        image: "https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&q=80&w=2070", // Smooth skin/flower
+        category: "Épilation Homme",
+        id: "epilation-homme",
         items: [
-            { name: "Jambes Complètes", price: "28€", duration: "30min", description: "Cire tiède peau sensible." },
-            { name: "Maillot Intégral", price: "25€", duration: "20min", description: "Finition parfaite." },
-            { name: "Aisselles", price: "12€", duration: "15min", description: "Douceur longue durée." },
-            { name: "Sourcils", price: "10€", duration: "15min", description: "Restructuration de la ligne." },
+            { name: "Sourcils Homme", price: "15€", duration: "15min", description: "Nettoyage naturel et structuration." },
+            { name: "Dos ou Torse", price: "35€", duration: "30min", description: "Épilation large zone à la cire tiède." },
+            { name: "Épaules", price: "20€", duration: "20min", description: "Retrait des poils disgracieux." }
         ]
     },
     {
-        category: "Beauté du Regard",
-        id: "regard",
-        image: "https://images.unsplash.com/photo-1587909209111-5097ee578ec3?auto=format&fit=crop&q=80&w=2070", // Eye lashes
+        category: "Les mains & ongles",
+        id: "mains-ongles",
         items: [
-            { name: "Rehaussement Cils", price: "55€", duration: "45min", description: "Courbure naturelle pour 6 semaines." },
-            { name: "Teinture Cils", price: "15€", duration: "20min", description: "Intensifiez votre regard." },
+            { name: "Manucure Express", price: "25€", duration: "30min", description: "Façonnage, cuticules et base soin." },
+            { name: "Pose Vernis Semi-Permanent", price: "40€", duration: "45min", description: "Tenue 2-3 semaines, brillance miroir, manucure russe incluse." },
+            { name: "Renfort Gainage (Gel)", price: "55€", duration: "60min", description: "Pour ongles fragiles ou cassants." },
+            { name: "Extensions Gel (Chablon)", price: "75€", duration: "1h30", description: "Longueur et forme sur mesure." },
+            { name: "Nail Art (par ongle)", price: "2€", duration: "5min", description: "Design simple ou complexe." }
         ]
     },
+    {
+        category: "Drainage",
+        id: "drainage",
+        items: [
+            { name: "Drainage Lymphatique (Corps)", price: "80€", duration: "60min", description: "Méthode Renata França inspirée. Détoxifie et allège." },
+            { name: "Madérothérapie (Jambes)", price: "60€", duration: "45min", description: "Massage aux outils en bois pour casser la cellulite." }
+        ]
+    },
+    {
+        category: "LPG Minceur",
+        id: "lpg-minceur",
+        items: [
+            { name: "Bilan LPG Personnalisé", price: "50€", duration: "30min", description: "Diagnostic morphologique obligatoire avant cure." },
+            { name: "Séance Zone Ciblée (10min)", price: "20€", duration: "10min", description: "Traiter une zone spécifique (bras, ventre, culotte de cheval)." },
+            { name: "Soin Global (30min)", price: "60€", duration: "30min", description: "Lissage cellulite et raffermissement." },
+            { name: "Forfait 10 Séances", price: "540€", duration: "30min/séance", description: "Protocole intensif (2 séances offertes)." }
+        ]
+    },
+    {
+        category: "LPG Bien-être",
+        id: "lpg-bien-etre",
+        items: [
+            { name: "Soin Relaxation", price: "40€", duration: "30min", description: "Détente musculaire profonde par micro-battements." },
+            { name: "Soin Jambes Légères", price: "40€", duration: "30min", description: "Relance la circulation veineuse et lymphatique." }
+        ]
+    },
+    {
+        category: "LPG Visage Fondamentaux",
+        id: "lpg-visage-fondamentaux",
+        items: [
+            { name: "Soin Éclat", price: "35€", duration: "20min", description: "Teint frais et oxygéné avant un événement." },
+            { name: "Soin Détox", price: "35€", duration: "20min", description: "Draine les toxines et réduit les poches." },
+            { name: "Soin Regard & Lèvres", price: "30€", duration: "20min", description: "Lisse les ridules d'expression." }
+        ]
+    },
+    {
+        category: "LPG Visage Excellence",
+        id: "lpg-visage-excellence",
+        items: [
+            { name: "Anti-Âge Repulpant", price: "65€", duration: "45min", description: "Retrouvez vos volumes et comblez les rides." },
+            { name: "Anti-Âge Affinant", price: "65€", duration: "45min", description: "Pour les visages qui ont tendance à s'empâter." }
+        ]
+    },
+    {
+        category: "Visage Signature",
+        id: "visage-signature",
+        items: [
+            { name: "Le Grand Soin by Carol-Ann", price: "120€", duration: "1h30", description: "Alliance techniques manuelles et technologies. Le soin ultime." },
+            { name: "Hydratation Profonde", price: "80€", duration: "60min", description: "Bain d'hydratation pour peaux assoiffées." }
+        ]
+    },
+    {
+        category: "Kobido",
+        id: "kobido",
+        items: [
+            { name: "Massage Kobido Authentique", price: "85€", duration: "60min", description: "Lifting manuel japonais. Stimule collagène et élastine." },
+            { name: "Cure Kobido (5 séances)", price: "390€", duration: "60min/séance", description: "Pour un effet anti-âge durable." }
+        ]
+    },
+    {
+        category: "Les pieds",
+        id: "pieds",
+        items: [
+            { name: "Beauté des Pieds", price: "45€", duration: "45min", description: "Soin des cuticules, limage et hydratation." },
+            { name: "Soin Anti-Callosités (Yumi Feet)", price: "40€", duration: "30min", description: "Élimine les peaux mortes sans lame. Pieds de bébé garantis." },
+            { name: "Pose Semi-Permanent Pieds", price: "40€", duration: "40min", description: "Tenue longue durée." }
+        ]
+    },
+    {
+        category: "Beauté du regard",
+        id: "beaute-regard",
+        items: [
+            { name: "Rehaussement de Cils + Teinture", price: "75€", duration: "1h", description: "Courbure naturelle et effet mascara." },
+            { name: "Teinture Sourcils", price: "15€", duration: "15min", description: "Intensifie le regard naturellement." },
+            { name: "Extensions Cil à Cil", price: "90€", duration: "1h30", description: "Effet naturel, un cil sur un cil." },
+            { name: "Volume Russe léger", price: "110€", duration: "2h00", description: "Pour un regard plus sophistiqué." }
+        ]
+    },
+    {
+        category: "Soin du corps",
+        id: "soin-corps",
+        items: [
+            { name: "Gommage Corps aux Sels", price: "40€", duration: "30min", description: "Exfoliation pour une peau douce et soyeuse." },
+            { name: "Modelage Relaxant Sur-Mesure", price: "70€", duration: "60min", description: "Massage intuitif selon vos besoins." }
+        ]
+    }
 ];
 
 const DemoCarolAnn = () => {
@@ -209,8 +294,8 @@ const DemoCarolAnn = () => {
                                 }}
                                 key={cat.id}
                                 className={`w - full text - left py - 3 px - 4 rounded - lg transition - all duration - 300 flex items - center justify - between group ${activeCategory === cat.id
-                                        ? 'bg-[#064E3B] text-white shadow-lg'
-                                        : 'text-stone-600 hover:bg-stone-100'
+                                    ? 'bg-[#064E3B] text-white shadow-lg'
+                                    : 'text-stone-600 hover:bg-stone-100'
                                     } `}
                             >
                                 <span className="font-medium">{cat.category}</span>
@@ -246,8 +331,8 @@ const DemoCarolAnn = () => {
                                         key={itemIdx}
                                         onClick={() => toggleService(item.name)}
                                         className={`p - 4 rounded - xl border transition - all duration - 300 cursor - pointer group relative overflow - hidden ${selectedServices.has(item.name)
-                                                ? 'bg-[#064E3B]/5 border-[#064E3B] shadow-md'
-                                                : 'bg-white border-stone-100 hover:border-[#064E3B]/30 hover:shadow-sm'
+                                            ? 'bg-[#064E3B]/5 border-[#064E3B] shadow-md'
+                                            : 'bg-white border-stone-100 hover:border-[#064E3B]/30 hover:shadow-sm'
                                             } `}
                                     >
                                         {selectedServices.has(item.name) && (
@@ -267,8 +352,8 @@ const DemoCarolAnn = () => {
                                                 <Clock size={12} /> {item.duration}
                                             </span>
                                             <span className={`px - 2 py - 1 rounded - full transition - colors ${selectedServices.has(item.name)
-                                                    ? 'bg-[#064E3B] text-white'
-                                                    : 'bg-stone-100 text-stone-500 group-hover:bg-[#064E3B] group-hover:text-white'
+                                                ? 'bg-[#064E3B] text-white'
+                                                : 'bg-stone-100 text-stone-500 group-hover:bg-[#064E3B] group-hover:text-white'
                                                 } `}>
                                                 {selectedServices.has(item.name) ? 'Sélectionné' : 'Choisir'}
                                             </span>
