@@ -42,7 +42,7 @@ const ComparisonTable = () => {
             <div className="max-w-6xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                        L'ANNUAIRE <span className="text-text-muted text-2xl mx-4">VS</span> <span className="text-primary">VOTRE MARQUE</span>
+                        PLANITY <span className="text-text-muted text-2xl mx-4">VS</span> <span className="text-primary">STYLEOS</span>
                     </h2>
                     <p className="text-text-muted max-w-2xl mx-auto text-lg">
                         Ne soyez plus un simple choix dans une liste. Devenez la référence.
