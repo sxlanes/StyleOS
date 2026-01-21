@@ -91,8 +91,8 @@ const SolutionStack = () => {
                                 key={feature.id}
                                 onClick={() => setActiveFeature(index)}
                                 className={`group text-left p-6 rounded-2xl border transition-all duration-300 relative overflow-hidden ${activeFeature === index
-                                        ? 'bg-white/5 border-primary/50 shadow-[0_0_30px_rgba(0,0,0,0.5)]'
-                                        : 'bg-transparent border-transparent hover:bg-white/5'
+                                    ? 'bg-white/5 border-primary/50 shadow-[0_0_30px_rgba(0,0,0,0.5)]'
+                                    : 'bg-transparent border-transparent hover:bg-white/5'
                                     }`}
                             >
                                 <div className={`absolute top-0 left-0 w-1 h-full bg-gradient-to-b ${feature.gradient} transition-opacity duration-300 ${activeFeature === index ? 'opacity-100' : 'opacity-0'}`}></div>
@@ -100,7 +100,10 @@ const SolutionStack = () => {
                                 <div className="flex items-center gap-4 relative z-10">
                                     <div className={`p-3 rounded-xl bg-black/50 border border-white/10 transition-colors ${activeFeature === index ? feature.color : 'text-gray-500 group-hover:text-gray-300'
                                         }`}>
-                                        <feature.icon className="w-6 h-6" />
+                                        {(() => {
+                                            const Icon = feature.icon;
+                                            return <Icon className="w-6 h-6" />;
+                                        })()}
                                     </div>
                                     <div>
                                         <h3 className={`text-lg font-bold transition-colors ${activeFeature === index ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}>
@@ -128,7 +131,10 @@ const SolutionStack = () => {
                             <div className="p-10 relative z-10 flex flex-col h-full">
                                 <div className="mb-8">
                                     <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest mb-6 ${features[activeFeature].color}`}>
-                                        <features[activeFeature].icon className="w-3 h-3" />
+                                        {(() => {
+                                            const ActiveIcon = features[activeFeature].icon;
+                                            return <ActiveIcon className="w-3 h-3" />;
+                                        })()}
                                         Module {activeFeature + 1}
                                     </div>
                                     <h3 className="text-4xl font-bold text-white mb-6 leading-tight">
