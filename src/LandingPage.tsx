@@ -35,48 +35,58 @@ function LandingPage() {
                 </div>
             </nav>
 
-            {/* Cinematic Hero / Intro Section */}
-            <header className="relative h-screen w-full overflow-hidden bg-black flex flex-col items-center justify-center">
+            {/* Hero Section - Split Layout (User Request: "Distribución anterior") */}
+            <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0a0a0a]">
 
-                {/* Background Image with Zoom Effect */}
-                <div className="absolute inset-0 z-0">
+                {/* Visual: Man Image (Left/Background) */}
+                <div className="absolute inset-y-0 left-0 w-full md:w-[60%] z-0">
                     <img
                         src="hero-model.png"
-                        alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-center opacity-60 animate-slow-zoom"
+                        alt="StyleOS Barber"
+                        className="w-full h-full object-cover object-center md:object-right opacity-80 md:opacity-100 mask-image-linear-gradient"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black"></div>
+                    {/* Gradient Overlay to fade image into black on the right */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-[#0a0a0a]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent md:hidden"></div>
                 </div>
 
-                {/* Content */}
-                <div className="relative z-10 text-center max-w-4xl px-6 animate-fade-in-up">
-                    <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[#B88746]/30 bg-[#B88746]/10 backdrop-blur-md">
-                        <span className="text-[#B88746] text-xs font-bold uppercase tracking-[0.3em]">StyleOS • Bordeaux</span>
+                {/* Content: Text (Right aligned) */}
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-2">
+                    <div className="hidden md:block"></div> {/* Spacer for image */}
+
+                    <div className="flex flex-col justify-center text-left pt-32 md:pt-0 animate-fade-in-up">
+                        <div className="inline-block mb-4 px-3 py-1 rounded bg-[#B88746]/10 border border-[#B88746]/20 text-[#B88746] text-xs font-bold uppercase tracking-[0.2em] w-fit">
+                            StyleOS • Bordeaux
+                        </div>
+
+                        <h1 className="text-5xl md:text-8xl font-bold leading-[0.9] text-[#B88746] uppercase font-sans tracking-tighter mb-2">
+                            DISTINGUEZ-VOUS<br />
+                            <span className="text-white/90">DE LA MASSE.</span>
+                        </h1>
+
+                        <h2 className="text-xl md:text-2xl text-white font-bold bg-clip-text mb-8 tracking-wide">
+                            COUPEZ DES CHEVEUX, PAS DES APPELS.
+                        </h2>
+
+                        <p className="text-lg text-gray-400 max-w-lg mb-10 leading-relaxed font-light">
+                            Ne soyez pas juste une ligne dans une liste Planity.
+                            <br />
+                            Offrez-vous un <strong>site web ultra-personnalisé</strong> et un <strong>agent IA</strong> qui gèrent votre business pendant que vous créez.
+                        </p>
+
+                        {/* Single "Explorer" Button (User Request: "Botón de Explorer le system") */}
+                        <div>
+                            <button
+                                onClick={() => scrollToSection('solution-stack')}
+                                className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#B88746]/50 transition-all duration-500"
+                            >
+                                <div className="absolute inset-0 w-0 bg-[#B88746] transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
+                                <span className="relative text-white font-bold uppercase tracking-[0.2em] text-sm flex items-center gap-3">
+                                    Explorer Le Système <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </span>
+                            </button>
+                        </div>
                     </div>
-
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white uppercase tracking-tighter mb-8 leading-none">
-                        Distinguez<br />
-                        <span className="text-[#B88746] italic font-serif">Vous.</span>
-                    </h1>
-
-                    <p className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto mb-12 font-light tracking-wide leading-relaxed">
-                        L'excellence digitale pour les salons qui refusent d'être ordinaires.
-                    </p>
-
-                    <button
-                        onClick={() => scrollToSection('solution-stack')}
-                        className="group relative px-10 py-5 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#B88746]/50 transition-all duration-500"
-                    >
-                        <div className="absolute inset-0 w-0 bg-[#B88746] transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
-                        <span className="relative text-white font-bold uppercase tracking-[0.2em] text-sm flex items-center gap-3">
-                            Explorer Le Système <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                    </button>
-                </div>
-
-                {/* Scroll Indicator */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/30">
-                    <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/50 to-transparent"></div>
                 </div>
             </header>
 

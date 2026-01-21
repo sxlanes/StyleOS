@@ -13,7 +13,7 @@ const PricingSection = () => {
             price: pricingMode === 'subscription' ? "50 €" : "1 490 €",
             period: pricingMode === 'subscription' ? "/mois" : "unique",
             maintenance: pricingMode === 'one-time' ? "120€/an + Domaine" : null,
-            savings: pricingMode === 'one-time' ? "-15%" : null,
+            savings: pricingMode === 'one-time' ? "Économisez -20%" : null,
             icon: X,
             description: "Votre vitrine digitale premium.",
             features: [
