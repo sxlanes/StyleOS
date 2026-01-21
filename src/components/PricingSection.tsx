@@ -111,6 +111,9 @@ const PricingSection = () => {
                             <li className="flex items-center gap-2">
                                 <Check className="w-3 h-3 text-primary" /> Prise de RDV Autonome
                             </li>
+                            <li className="flex items-center gap-2 text-text-muted/40">
+                                <X className="w-3 h-3" /> Gestion Réseaux Sociaux
+                            </li>
                         </ul>
                         <button className="w-full py-3 bg-surface border border-glass-border group-hover:bg-white/10 text-white text-sm font-bold rounded-xl transition-all">
                             Automatiser mon salon
