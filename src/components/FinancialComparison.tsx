@@ -1,56 +1,59 @@
-import { Euro, TrendingUp, Zap } from 'lucide-react';
+import { Zap, Coffee, TrendingUp, CheckCircle2 } from 'lucide-react';
 
 const FinancialComparison = () => {
     return (
         <section className="py-24 bg-surface/20 border-y border-glass-border relative overflow-hidden">
-            {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
-
             <div className="max-w-5xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6 uppercase tracking-tight">
                         L'INVESTISSEMENT <span className="text-primary">INTELLIGENT</span>
                     </h2>
                     <p className="text-text-muted max-w-2xl mx-auto text-lg">
-                        Un nouveau client par jour suffit pour payer StyleOS.
-                        Le reste ? C'est du bénéfice pur.
+                        Ne le voyez pas comme une dépense. C'est votre machine à cash.
                     </p>
                 </div>
 
-                <div className="glass-card rounded-3xl overflow-hidden border border-glass-border max-w-4xl mx-auto">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
 
-                    <div className="p-10 bg-black/60 text-center">
-                        <div className="flex flex-col md:flex-row items-center justify-center gap-12">
+                    {/* The Cost */}
+                    <div className="bg-black/40 border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center relative overflow-hidden">
+                        <div className="p-4 bg-white/5 rounded-full mb-6">
+                            <Coffee className="w-8 h-8 text-gray-400" />
+                        </div>
+                        <h3 className="text-gray-400 font-bold uppercase tracking-wider text-sm mb-2">Coût Quotidien</h3>
+                        <div className="text-5xl font-bold text-white mb-2">4 €</div>
+                        <p className="text-gray-500 text-sm">Moins cher qu'un café Starbucks.</p>
+                    </div>
 
-                            {/* Cost */}
-                            <div className="relative">
-                                <div className="text-text-muted uppercase text-sm tracking-widest mb-2">Coût StyleOS (Pro)</div>
-                                <div className="text-4xl font-bold text-white">4 € <span className="text-sm font-normal text-gray-500">/ jour</span></div>
-                                <div className="text-xs text-gray-600 mt-1">(125€ / mois)</div>
-                            </div>
+                    {/* The Gain */}
+                    <div className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-3xl p-8 flex flex-col items-center text-center relative overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+                        <div className="absolute top-0 right-0 px-3 py-1 bg-[#D4AF37] text-black text-[10px] font-bold uppercase rounded-bl-xl tracking-wider">
+                            Rentabilité
+                        </div>
+                        <div className="p-4 bg-[#D4AF37]/20 rounded-full mb-6">
+                            <TrendingUp className="w-8 h-8 text-[#D4AF37]" />
+                        </div>
+                        <h3 className="text-[#D4AF37] font-bold uppercase tracking-wider text-sm mb-2">Gain avec 1 SEUL RDV sauvé</h3>
+                        <div className="text-5xl font-bold text-white mb-2">25 €</div>
+                        <p className="text-[#D4AF37]/80 text-sm">Un seul client récupéré paye votre semaine.</p>
+                    </div>
 
-                            <div className="text-gray-600 text-6xl font-thin hidden md:block">VS</div>
+                </div>
 
-                            {/* Gain */}
-                            <div className="relative">
-                                <div className="text-text-muted uppercase text-sm tracking-widest mb-2">Gain 1 Client (Moyenne)</div>
-                                <div className="text-4xl font-bold text-green-400">25 € <span className="text-sm font-normal text-gray-500">/ coupe</span></div>
-                            </div>
-
+                <div className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div className="flex items-start gap-4">
+                        <div className="p-3 bg-green-500/20 rounded-full mt-1">
+                            <CheckCircle2 className="w-6 h-6 text-green-400" />
+                        </div>
+                        <div>
+                            <h4 className="text-xl font-bold text-white mb-2">Le Calcul est Simple</h4>
+                            <p className="text-gray-400 text-sm leading-relaxed">
+                                Si Sarah (l'IA) répond au téléphone quand vous êtes occupé et prend <strong>juste 1 rendez-vous par semaine</strong> que vous auriez manqué...
+                                <span className="text-white font-bold"> StyleOS est 100% remboursé.</span>
+                                <br />Tout le reste, c'est du bonus pour vous.
+                            </p>
                         </div>
                     </div>
-
-                    <div className="bg-primary/10 p-8 border-t border-primary/20 text-center">
-                        <h3 className="text-2xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-                            <Zap className="w-6 h-6 text-primary fill-primary" />
-                            Rentabilité Immédiate
-                        </h3>
-                        <p className="text-lg text-gray-300">
-                            Il suffit que <strong>Sarah IA</strong> récupère <span className="text-white font-bold border-b border-primary">1 seul appel manqué</span> tous les 6 jours pour que l'outil soit gratuit.
-                            <br /><span className="text-sm opacity-60 mt-2 block">(Et elle en prendra des dizaines par semaine.)</span>
-                        </p>
-                    </div>
-
                 </div>
             </div>
         </section>
