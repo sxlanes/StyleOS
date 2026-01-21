@@ -1,4 +1,4 @@
-import { Play } from 'lucide-react';
+import { Play, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ComparisonTable from './components/ComparisonTable';
 import SolutionStack from './components/SolutionStack';
