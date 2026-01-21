@@ -1,108 +1,92 @@
-import { useState, useEffect } from 'react';
-import { Bot, Phone, Star, MapPin, ArrowRight, Check, Sparkles, Play, Clock, Search, Menu, X, Instagram, Facebook } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+```
+import { useState, useEffect, useRef } from 'react';
+import { MapPin, Phone, Star, Clock, Instagram, Facebook, ArrowRight, Menu, X, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SERVICES = [
     {
-        category: "Épilation",
+        category: "Soins Visage",
+        id: "visage",
+        image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=2070", // Luxury Facial
         items: [
-            { name: "Création Ligne Sourcils", price: "15€", time: "15min", description: "Restructuration complète à la pince." },
-            { name: "Lèvres ou Menton", price: "10€", time: "10min", description: "Cire base température douceur." },
-            { name: "Aisselles", price: "15€", time: "15min", description: "Soin apaisant inclus." },
-            { name: "Maillot Classique", price: "20€", time: "20min", description: "Échancrure standard." },
-            { name: "Maillot Semi-Intégral", price: "30€", time: "30min", description: "Confort et esthétique." },
-            { name: "Maillot Intégral", price: "38€", time: "40min", description: "Finition parfaite." },
-            { name: "Jambes Complètes", price: "35€", time: "40min", description: "Douceur durable." }
+            { name: "Soin Signature Carol-Ann", price: "85€", duration: "1h", description: "Notre soin emblématique pour un éclat immédiat." },
+            { name: "Hydratation Intense", price: "75€", duration: "50min", description: "Bain d'hydratation à l'acide hyaluronique." },
+            { name: "Anti-Âge Kobido", price: "95€", duration: "1h15", description: "Massage liftant japonais traditionnel." },
+            { name: "Peeling Éclat", price: "65€", duration: "45min", description: "Rénovation cellulaire douce." },
         ]
     },
     {
-        category: "Zone unique",
+        category: "Massages",
+        id: "massages",
+        image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=2070", // Massage Spa
         items: [
-            { name: "Zone Visage Spécifique", price: "10€", time: "10min", description: "Joues, front ou cou." },
-            { name: "Sillon Inter-Fessier", price: "10€", time: "10min", description: "Complément maillot." }
+            { name: "Massage Relaxant", price: "80€", duration: "1h", description: "Détente musculaire aux huiles chaudes." },
+            { name: "Drainage Lymphatique", price: "90€", duration: "1h", description: "Technique Renata França." },
+            { name: "Massage Pierres Chaudes", price: "85€", duration: "1h", description: "Chaleur diffusée pour une relaxation profonde." },
         ]
     },
     {
-        category: "Forfaits Épilation",
+        category: "Minceur (LPG)",
+        id: "minceur",
+        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=2074", // Body/Health
         items: [
-            { name: "Visage + Sourcils", price: "22€", time: "20min", description: "Harmonie complète du visage." },
-            { name: "Demi-Jambes + Maillot + Aisselles", price: "45€", time: "45min", description: "L'essentiel mensuel." },
-            { name: "Jambes Complètes + Maillot Intégral + Aisselles", price: "75€", time: "75min", description: "Le grand soin complet." }
+            { name: "Séance LPG Corps", price: "60€", duration: "35min", description: "Destockage des graisses et lissage." },
+            { name: "Cure 10 Séances", price: "540€", duration: "10 x 35min", description: "Programme intensif minceur." },
+            { name: "Bilan Minceur", price: "Offert", duration: "20min", description: "Analyse personnalisée de vos besoins." },
         ]
     },
     {
-        category: "Épilation Homme",
+        category: "Épilations",
+        id: "epilations",
+        image: "https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&q=80&w=2070", // Smooth skin/flower
         items: [
-            { name: "Sourcils Homme", price: "15€", time: "15min", description: "Nettoyage naturel." },
-            { name: "Dos ou Torse", price: "35€", time: "30min", description: "Cire tiède large zone." },
-            { name: "Épaules", price: "20€", time: "20min", description: "Retrait poils disgracieux." }
-        ]
-    },
-    {
-        category: "Mains & Ongles",
-        items: [
-            { name: "Manucure Express", price: "25€", time: "30min", description: "Façonnage et soin." },
-            { name: "Semi-Permanent", price: "40€", time: "45min", description: "Tenue 2-3 semaines." },
-            { name: "Renfort Gainage (Gel)", price: "55€", time: "60min", description: "Pour ongles fragiles." },
-            { name: "Extensions Gel", price: "75€", time: "1h30", description: "Longueur sur mesure." }
-        ]
-    },
-    {
-        category: "Drainage & Corps",
-        items: [
-            { name: "Drainage Lymphatique", price: "80€", time: "60min", description: "Méthode inspirée Renata França." },
-            { name: "Madérothérapie (Jambes)", price: "60€", time: "45min", description: "Anti-cellulite outils bois." },
-            { name: "Gommage Corps Sels", price: "40€", time: "30min", description: "Peau douce et soyeuse." },
-            { name: "Modelage Relaxant", price: "70€", time: "60min", description: "Massage intuitif." }
-        ]
-    },
-    {
-        category: "Expertise LPG",
-        items: [
-            { name: "Bilan Personnalisé", price: "50€", time: "30min", description: "Diagnostic morphologique." },
-            { name: "Séance Zone (10min)", price: "20€", time: "10min", description: "Bras, ventre ou culotte de cheval." },
-            { name: "Soin Global (30min)", price: "60€", time: "30min", description: "Lissage et fermeté." },
-            { name: "Forfait 10 Séances", price: "540€", time: "Cure", description: "2 séances offertes." }
-        ]
-    },
-    {
-        category: "Visage & Kobido",
-        items: [
-            { name: "Soin Éclat LPG", price: "35€", time: "20min", description: "Teint frais immédiat." },
-            { name: "Massage Kobido", price: "85€", time: "60min", description: "Lifting manuel japonais." },
-            { name: "Le Grand Soin Signature", price: "120€", time: "1h30", description: "Technique manuelle + LPG." }
+            { name: "Jambes Complètes", price: "28€", duration: "30min", description: "Cire tiède peau sensible." },
+            { name: "Maillot Intégral", price: "25€", duration: "20min", description: "Finition parfaite." },
+            { name: "Aisselles", price: "12€", duration: "15min", description: "Douceur longue durée." },
+            { name: "Sourcils", price: "10€", duration: "15min", description: "Restructuration de la ligne." },
         ]
     },
     {
         category: "Beauté du Regard",
+        id: "regard",
+        image: "https://images.unsplash.com/photo-1587909209111-5097ee578ec3?auto=format&fit=crop&q=80&w=2070", // Eye lashes
         items: [
-            { name: "Rehaussement + Teinture", price: "75€", time: "1h", description: "Courbure naturelle." },
-            { name: "Extensions Cil à Cil", price: "90€", time: "1h30", description: "Effet naturel." },
-            { name: "Volume Russe léger", price: "110€", time: "2h00", description: "Regard sophistiqué." }
+            { name: "Rehaussement Cils", price: "55€", duration: "45min", description: "Courbure naturelle pour 6 semaines." },
+            { name: "Teinture Cils", price: "15€", duration: "20min", description: "Intensifiez votre regard." },
         ]
     },
-    {
-        category: "Les Pieds",
-        items: [
-            { name: "Beauté des Pieds", price: "45€", time: "45min", description: "Soin complet." },
-            { name: "Soin Yumi Feet", price: "40€", time: "30min", description: "Anti-callosités efficace." }
-        ]
-    }
 ];
 
 const DemoCarolAnn = () => {
-    const navigate = useNavigate();
-    const [activeCategory, setActiveCategory] = useState(SERVICES[0].category);
+    const [activeCategory, setActiveCategory] = useState(SERVICES[0].id);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [selectedServices, setSelectedServices] = useState<Set<string>>(new Set());
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const scrollToCategory = (category: string) => {
-        setActiveCategory(category);
+    // Scroll Spy Logic
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = SERVICES.map(s => document.getElementById(s.id));
+            const scrollPosition = window.scrollY + 150; // Offset
+
+            for (const section of sections) {
+                if (section && section.offsetTop <= scrollPosition && (section.offsetTop + section.offsetHeight) > scrollPosition) {
+                    setActiveCategory(section.id);
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToCategory = (id: string) => {
+        setActiveCategory(id);
         setIsMenuOpen(false);
-        const element = document.getElementById(category);
+        const element = document.getElementById(id);
         if (element) {
             const offset = 100;
             const bodyRect = document.body.getBoundingClientRect().top;
@@ -117,6 +101,15 @@ const DemoCarolAnn = () => {
         }
     };
 
+    const toggleService = (itemName: string) => {
+        setSelectedServices(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(itemName)) newSet.delete(itemName);
+            else newSet.add(itemName);
+            return newSet;
+        });
+    };
+
     return (
         <div className="min-h-screen bg-[#FAFAF9] text-[#1C1917] font-sans selection:bg-[#064E3B] selection:text-white">
 
@@ -128,7 +121,7 @@ const DemoCarolAnn = () => {
             {/* Header */}
             <header className="sticky top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-[#E7E5E4] shadow-sm transition-all">
                 <div className="max-w-7xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-3 group cursor-pointer" onClick={() => navigate('/')}>
+                    <Link to="/" className="flex items-center gap-3 group cursor-pointer">
                         <div className="w-10 h-10 border border-[#064E3B] rounded-full flex items-center justify-center bg-[#F5F5F4] group-hover:bg-[#064E3B] transition-colors">
                             <span className="font-serif text-[#064E3B] group-hover:text-white font-bold text-xl transition-colors">C</span>
                         </div>
@@ -136,13 +129,13 @@ const DemoCarolAnn = () => {
                             <span className="font-serif text-lg tracking-widest text-[#1C1917]">L'ESTHÉTIQUE</span>
                             <span className="text-[10px] tracking-[0.2em] text-[#064E3B] uppercase font-medium">By Carol-Ann</span>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center gap-6">
-                        <button onClick={() => navigate('/')} className="text-xs uppercase tracking-widest text-gray-500 hover:text-[#064E3B] transition-colors">
+                        <Link to="/" className="text-xs uppercase tracking-widest text-gray-500 hover:text-[#064E3B] transition-colors">
                             Retour StyleOS
-                        </button>
+                        </Link>
                         <button className="px-6 py-2.5 bg-[#064E3B] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#065F46] transition-all rounded-sm shadow-lg shadow-[#064E3B]/20">
                             Prendre RDV
                         </button>
@@ -155,13 +148,13 @@ const DemoCarolAnn = () => {
                 </div>
 
                 {/* Mobile Dropdown Nav */}
-                <div className={`md:hidden absolute w-full bg-white border-b border-[#E7E5E4] transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className={`md:hidden absolute w - full bg - white border - b border - [#E7E5E4] transition - all duration - 300 overflow - hidden ${ isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0' } `}>
                     <div className="py-2 px-4 flex flex-col gap-1">
                         {SERVICES.map((service, index) => (
                             <button
                                 key={index}
-                                onClick={() => scrollToCategory(service.category)}
-                                className={`text-left py-3 px-2 text-sm uppercase tracking-wide border-b border-gray-50 last:border-0 ${activeCategory === service.category ? 'text-[#064E3B] font-bold' : 'text-gray-500'}`}
+                                onClick={() => scrollToCategory(service.id)}
+                                className={`text - left py - 3 px - 2 text - sm uppercase tracking - wide border - b border - gray - 50 last: border - 0 ${ activeCategory === service.id ? 'text-[#064E3B] font-bold' : 'text-gray-500' } `}
                             >
                                 {service.category}
                             </button>
@@ -208,16 +201,23 @@ const DemoCarolAnn = () => {
                 <aside className="hidden md:block w-64 shrink-0 relative">
                     <div className="sticky top-28 space-y-1">
                         <h3 className="font-serif text-xl mb-6 pl-4 border-l-2 border-[#064E3B] text-[#064E3B]">La Carte</h3>
-                        {SERVICES.map((service, index) => (
+                        {SERVICES.map((cat) => (
                             <button
-                                key={index}
-                                onClick={() => scrollToCategory(service.category)}
-                                className={`block w-full text-left py-2 px-4 text-xs uppercase tracking-widest transition-all border-l-2 hover:bg-[#F5F5F4]
-                                    ${activeCategory === service.category
-                                        ? 'border-[#064E3B] text-[#064E3B] font-bold bg-[#F5F5F4]'
-                                        : 'border-transparent text-gray-400 hover:text-gray-600 hover:border-gray-300'}`}
+                                onClick={() => {
+                                    setActiveCategory(cat.id);
+                                    document.getElementById(cat.id)?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                key={cat.id}
+                                className={`w - full text - left py - 3 px - 4 rounded - lg transition - all duration - 300 flex items - center justify - between group ${
+    activeCategory === cat.id
+        ? 'bg-[#064E3B] text-white shadow-lg'
+        : 'text-stone-600 hover:bg-stone-100'
+} `}
                             >
-                                {service.category}
+                                <span className="font-medium">{cat.category}</span>
+                                {activeCategory === cat.id && (
+                                    <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></div>
+                                )}
                             </button>
                         ))}
                         <div className="pt-8">
@@ -235,7 +235,7 @@ const DemoCarolAnn = () => {
                 {/* Services Grid */}
                 <main className="flex-1">
                     {SERVICES.map((cat, idx) => (
-                        <div key={idx} id={cat.category} className="mb-12 scroll-mt-32">
+                        <div key={idx} id={cat.id} className="mb-12 scroll-mt-32">
                             <div className="flex items-end gap-4 mb-6 pb-2 border-b border-[#E7E5E4]">
                                 <h3 className="font-serif text-2xl md:text-3xl text-[#1C1917]">{cat.category}</h3>
                                 <span className="text-xs text-gray-400 uppercase tracking-widest mb-1">{cat.items.length} Prestations</span>
@@ -243,14 +243,38 @@ const DemoCarolAnn = () => {
 
                             <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
                                 {cat.items.map((item, itemIdx) => (
-                                    <div key={itemIdx} className="group cursor-pointer hover:bg-white p-4 -mx-4 rounded-lg transition-colors">
-                                        <div className="flex justify-between items-baseline mb-2">
-                                            <h4 className="font-bold text-[#1C1917] group-hover:text-[#064E3B] transition-colors">{item.name}</h4>
-                                            <span className="font-serif text-lg text-[#064E3B]">{item.price}</span>
+                                    <div
+                                        key={itemIdx}
+                                        onClick={() => toggleService(item.name)}
+                                        className={`p - 4 rounded - xl border transition - all duration - 300 cursor - pointer group relative overflow - hidden ${
+    selectedServices.has(item.name)
+        ? 'bg-[#064E3B]/5 border-[#064E3B] shadow-md'
+        : 'bg-white border-stone-100 hover:border-[#064E3B]/30 hover:shadow-sm'
+} `}
+                                    >
+                                        {selectedServices.has(item.name) && (
+                                            <div className="absolute top-0 right-0 p-2 bg-[#064E3B] text-white rounded-bl-xl">
+                                                <Check size={12} />
+                                            </div>
+                                        )}
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h4 className={`font - serif text - lg font - medium transition - colors ${ selectedServices.has(item.name) ? 'text-[#064E3B]' : 'text-stone-800' } `}>
+                                                {item.name}
+                                            </h4>
+                                            <span className="font-bold text-[#D4AF37]">{item.price}</span>
                                         </div>
-                                        <div className="flex justify-between items-center">
-                                            <p className="text-sm text-gray-500 font-light">{item.description}</p>
-                                            <span className="text-[10px] uppercase text-gray-400 bg-[#F5F5F4] px-2 py-1 rounded-full whitespace-nowrap ml-4">{item.time}</span>
+                                        <p className="text-sm text-stone-500 mb-3 line-clamp-2">{item.description}</p>
+                                        <div className="flex items-center gap-4 text-xs text-stone-400 font-medium">
+                                            <span className="flex items-center gap-1">
+                                                <Clock size={12} /> {item.duration}
+                                            </span>
+                                            <span className={`px - 2 py - 1 rounded - full transition - colors ${
+    selectedServices.has(item.name)
+        ? 'bg-[#064E3B] text-white'
+        : 'bg-stone-100 text-stone-500 group-hover:bg-[#064E3B] group-hover:text-white'
+} `}>
+                                                {selectedServices.has(item.name) ? 'Sélectionné' : 'Choisir'}
+                                            </span>
                                         </div>
                                     </div>
                                 ))}
@@ -280,7 +304,7 @@ const DemoCarolAnn = () => {
                         <div className="group text-center relative">
                             <div className="w-40 h-40 mx-auto rounded-full p-1 border border-[#064E3B]/20 mb-6 relative bg-[#FAFAF9] flex items-center justify-center">
                                 <div className="absolute inset-0 bg-[#064E3B]/5 rounded-full animate-pulse"></div>
-                                <Bot className="w-12 h-12 text-[#064E3B]" />
+                                <img src="https://cdn-icons-png.flaticon.com/512/8943/8943377.png" alt="AI Assistant" className="w-12 h-12 text-[#064E3B]" />
                             </div>
                             <h3 className="font-serif text-2xl text-[#1C1917] mb-1 flex items-center justify-center gap-2">
                                 Sarah <span className="bg-[#064E3B] text-white text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">IA</span>
@@ -361,9 +385,20 @@ const DemoCarolAnn = () => {
                 <div className="text-center pt-8 border-t border-white/10 text-white/20 text-xs uppercase tracking-widest">
                     Pulsé par StyleOS • Excellence Digitale
                 </div>
+                {/* Floating Booking Button */}
+                {selectedServices.size > 0 && (
+                    <div className="fixed bottom-6 right-6 z-50 animate-bounce-in">
+                        <button className="bg-[#064E3B] text-white px-8 py-4 rounded-full font-bold shadow-2xl flex items-center gap-3 hover:bg-[#053d2e] transition-colors hover:scale-105 active:scale-95">
+                            <span>Réserver ({selectedServices.size})</span>
+                            <div className="w-1 h-1 bg-white/50 rounded-full"></div>
+                            <span className="text-[#D4AF37]">Mettre les mains dans la beauté</span>
+                        </button>
+                    </div>
+                )}
             </footer>
         </div>
     );
 };
 
 export default DemoCarolAnn;
+```

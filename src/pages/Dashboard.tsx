@@ -27,7 +27,7 @@ const Dashboard = () => {
         net: 0
     });
 
-    const [view, setView] = useState<'dashboard' | 'calendar' | 'calls'>('dashboard');
+    const [view, setView] = useState<'dashboard' | 'calendar' | 'calls' | 'accounting' | 'clients' | 'campaigns'>('dashboard');
     const [callsLog, setCallsLog] = useState([
         { id: 1, caller: "06 12 34 56 78", time: "10:30", duration: "1m 20s", status: "Pris de RDV", sentiment: "positive" },
         { id: 2, caller: "07 98 76 54 32", time: "09:15", duration: "0m 45s", status: "Annulation", sentiment: "negative" },
@@ -165,10 +165,16 @@ const Dashboard = () => {
                     >
                         <Calendar className="w-5 h-5" /> Rendez-vous
                     </div>
-                    <div className="text-blue-400/80 bg-blue-500/10 hover:bg-blue-500/20 p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors border border-blue-500/10">
+                    <div
+                        onClick={() => setView('accounting')}
+                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'accounting' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-blue-400/80 hover:bg-white/5 hover:text-white'}`}
+                    >
                         <FileText className="w-5 h-5" /> Comptabilité (IA)
                     </div>
-                    <div className="text-gray-400 hover:bg-white/5 hover:text-white p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
+                    <div
+                        onClick={() => setView('clients')}
+                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'clients' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                    >
                         <Users className="w-5 h-5" /> Clients
                     </div>
                 </nav>
@@ -200,7 +206,7 @@ const Dashboard = () => {
                         <button onClick={addMockAppointment} className="bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
                             <Plus className="w-4 h-4" /> Simuler RDV
                         </button>
-                        <button className="bg-[#D4AF37] text-black px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#c5a02e] transition-all shadow-lg shadow-[#D4AF37]/20">
+                        <button onClick={() => setView('campaigns')} className="bg-[#D4AF37] text-black px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#c5a02e] transition-all shadow-lg shadow-[#D4AF37]/20">
                             Nouvelle Campagne
                         </button>
                     </div>
@@ -279,7 +285,7 @@ const Dashboard = () => {
                                     </h3>
                                     <p className="text-sm text-blue-300/70 max-w-xs">Générez le rapport complet PDF/Excel pour votre expert-comptable.</p>
                                 </div>
-                                <button className="relative z-10 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95">
+                                <button onClick={() => alert("PDF Généré et envoyé par email !")} className="relative z-10 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95">
                                     Générer PDF
                                 </button>
                             </div>
@@ -374,8 +380,8 @@ const Dashboard = () => {
                                     </div>
                                     <div className="flex items-center gap-4">
                                         <span className={`px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider border ${call.status === 'Pris de RDV' ? 'border-green-500/20 text-green-400 bg-green-500/5' :
-                                                call.status === 'Annulation' ? 'border-red-500/20 text-red-400 bg-red-500/5' :
-                                                    'border-blue-500/20 text-blue-400 bg-blue-500/5'
+                                            call.status === 'Annulation' ? 'border-red-500/20 text-red-400 bg-red-500/5' :
+                                                'border-blue-500/20 text-blue-400 bg-blue-500/5'
                                             }`}>
                                             {call.status}
                                         </span>
@@ -391,8 +397,108 @@ const Dashboard = () => {
                         </div>
                     </div>
                 )}
-            </main>
-        </div>
+
+                {view === 'accounting' && (
+                    <div className="space-y-6">
+                        <div className="bg-gradient-to-r from-blue-900/20 to-black border border-blue-500/20 p-8 rounded-3xl relative overflow-hidden">
+                            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-3"><FileText className="w-6 h-6 text-blue-400" /> Comptabilité Automatisée</h2>
+                            <p className="text-gray-400 max-w-2xl mb-6">
+                                Votre assistant IA a catégorisé toutes vos dépenses. Exportez votre bilan pour votre comptable en un clic.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                                <div className="bg-black/30 p-6 rounded-2xl border border-white/10">
+                                    <div className="text-xs uppercase text-gray-500 font-bold mb-2">Chiffre d'Affaires (Mois)</div>
+                                    <div className="text-3xl font-bold text-white">{stats.revenue} €</div>
+                                </div>
+                                <div className="bg-black/30 p-6 rounded-2xl border border-white/10">
+                                    <div className="text-xs uppercase text-gray-500 font-bold mb-2">Dépenses Déductibles</div>
+                                    <div className="text-3xl font-bold text-red-400">- {stats.expenses} €</div>
+                                </div>
+                                <div className="bg-black/30 p-6 rounded-2xl border border-white/10">
+                                    <div className="text-xs uppercase text-gray-500 font-bold mb-2">TVA Collectée (Est.)</div>
+                                    <div className="text-3xl font-bold text-blue-400">{Math.round(stats.revenue * 0.2)} €</div>
+                                </div>
+                            </div>
+                            <button onClick={() => alert("Bilan Comptable Généré !")} className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-blue-500/20 transition-all">
+                                Télécharger le Bilan Complet (PDF)
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {view === 'clients' && (
+                    <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden">
+                        <div className="p-8 border-b border-white/10 flex justify-between items-center">
+                            <h2 className="text-xl font-bold flex items-center gap-2">
+                                <Users className="w-5 h-5 text-[#D4AF37]" /> Base Clients
+                            </h2>
+                            <button className="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors">Exporter CSV</button>
+                        </div>
+                        <table className="w-full text-sm text-left">
+                            <thead className="bg-black/40 text-gray-500 uppercase text-xs font-bold tracking-wider">
+                                <tr>
+                                    <th className="px-8 py-5">Nom</th>
+                                    <th className="px-8 py-5">Dernier RDV</th>
+                                    <th className="px-8 py-5">Total Dépensé</th>
+                                    <th className="px-8 py-5">Fidélité</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 text-gray-300">
+                                <tr className="hover:bg-white/5">
+                                    <td className="px-8 py-5 font-bold text-white">Sophie Martin</td>
+                                    <td className="px-8 py-5">Il y a 2 jours</td>
+                                    <td className="px-8 py-5">340 €</td>
+                                    <td className="px-8 py-5"><span className="px-2 py-1 bg-[#D4AF37]/20 text-[#D4AF37] rounded text-xs font-bold">Gold</span></td>
+                                </tr>
+                                <tr className="hover:bg-white/5">
+                                    <td className="px-8 py-5 font-bold text-white">Thomas Bernard</td>
+                                    <td className="px-8 py-5">Il y a 1 semaine</td>
+                                    <td className="px-8 py-5">85 €</td>
+                                    <td className="px-8 py-5"><span className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs font-bold">Silver</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+
+                {view === 'campaigns' && (
+                    <div className="max-w-3xl mx-auto">
+                        <div className="bg-gradient-to-b from-[#D4AF37]/10 to-black border border-[#D4AF37]/30 rounded-3xl p-8 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-4 opacity-10">
+                                <TrendingUp size={100} />
+                            </div>
+                            <h2 className="text-2xl font-bold text-white mb-6 relative z-10">Créer une Campagne SMS</h2>
+
+                            <div className="space-y-6 relative z-10">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-400 mb-2">Nom de la campagne</label>
+                                    <input type="text" placeholder="Promo Été 2024" className="w-full bg-black/50 border border-white/10 rounded-xl p-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors" />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-400 mb-2">Message</label>
+                                    <textarea rows={4} placeholder="Bonjour {prenom}, profitez de -20% ..." className="w-full bg-black/50 border border-white/10 rounded-xl p-4 text-white focus:border-[#D4AF37] focus:outline-none transition-colors"></textarea>
+                                </div>
+                                <div className="p-4 bg-[#D4AF37]/10 rounded-xl border border-[#D4AF37]/20">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="text-[#D4AF37] font-bold text-sm">Audience Estimée</span>
+                                        <span className="text-white font-bold">142 Clients</span>
+                                    </div>
+                                    <div className="w-full bg-black/50 h-2 rounded-full overflow-hidden">
+                                        <div className="bg-[#D4AF37] h-full w-[65%]"></div>
+                                    </div>
+                                </div>
+                                <button onClick={() => alert("Campagne lancée ! Envoi en cours...")} className="w-full bg-[#D4AF37] hover:bg-[#c5a02e] text-black font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-[#D4AF37]/20">
+                                    Lancer la Campagne
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+
+                    </main >
+                )}
+            </main >
+        </div >
     );
 };
 
