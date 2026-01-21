@@ -71,7 +71,7 @@ function LandingPage() {
                         <p className="text-lg text-gray-400 max-w-lg mb-10 leading-relaxed font-light">
                             Ne soyez pas juste une ligne dans une liste Planity.
                             <br />
-                            Offrez-vous un <strong>site web 'Dark Luxury'</strong> et un <strong>agent IA</strong> qui gèrent votre business pendant que vous créez.
+                            Offrez-vous un <strong>site web ultra-personnalisé</strong> et un <strong>agent IA</strong> qui gèrent votre business pendant que vous créez.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4">

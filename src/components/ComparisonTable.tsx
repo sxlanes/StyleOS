@@ -6,7 +6,7 @@ const ComparisonTable = () => {
             icon: Globe,
             name: "Identité Visuelle",
             competitor: "Identique aux concurrents",
-            us: "Design 'Dark Luxury' Unique"
+            us: "Design Unique & Personnalisé"
         },
         {
             icon: Phone,

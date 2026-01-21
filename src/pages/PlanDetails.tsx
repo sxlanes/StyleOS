@@ -8,7 +8,7 @@ const plans = {
         description: "Votre vitrine digitale premium.",
         icon: Monitor,
         features: [
-            "Site Web 'Dark Luxury' sur mesure",
+            "Site Web Personnalisé sur mesure",
             "Maintenance Technique incluse",
             "Réservation en Ligne (via module externe ou intégré basic)",
             "Hébergement rapide et sécurisé",

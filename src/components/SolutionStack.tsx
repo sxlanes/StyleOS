@@ -5,11 +5,11 @@ const features = [
     {
         id: 'web',
         icon: Monitor,
-        title: "Vitrine & Identité",
+        title: "Site Web Personnalisé",
         subtitle: "Ne soyez plus un parmi d'autres.",
-        description: "Votre salon mérite mieux qu'une page standardisée. Nous créons un site web immersive qui capture l'essence de votre marque. C'est votre territoire, vos règles, votre image.",
+        description: "Votre salon mérite mieux qu'une page standardisée. Nous créons un site web immersif qui capture l'essence de votre marque. C'est votre territoire, vos règles, votre image.",
         details: [
-            "Design 'Dark Luxury' sur mesure",
+            "Design Unique & Identitaire",
             "Optimisé pour la conversion (Réservation)",
             "SEO Local Dominant (Google Maps & Search)",
             "Expérience Mobile-First Fluide"

@@ -22,7 +22,7 @@ const OfferSection = () => {
 
                         <ul className="text-left space-y-4 mb-8 text-white/90">
                             <li className="flex items-start gap-3">
-                                <span className="text-primary text-xl">✓</span> Site Web 'Dark Luxury' Sur-Mesure
+                                <span className="text-primary text-xl">✓</span> Site Web Personnalisé Sur-Mesure
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="text-primary text-xl">✓</span> Configuration de l'Agent IA 'Antoine'
