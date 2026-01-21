@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Lock, Mail, Loader2 } from 'lucide-react';
+import { ArrowLeft, Lock, Mail, Loader2, CheckCircle2 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 
@@ -8,6 +8,8 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [isResetMode, setIsResetMode] = useState(false); // Toggle between Login and Reset
+    const [resetSent, setResetSent] = useState(false); // Success state for reset
     const navigate = useNavigate();
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -24,14 +26,32 @@ const Login = () => {
             if (error) throw error;
 
             if (data.user) {
-                // Successful login
                 console.log('Logged in:', data.user);
-                // Redirect to dashboard
                 navigate('/dashboard');
             }
         } catch (err: any) {
             console.error('Login error:', err);
-            setError(err.message || 'Une erreur est survenue lors de la connexion.');
+            setError(err.message === 'Invalid login credentials' ? 'Identifiants incorrects.' : err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleResetPassword = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        try {
+            const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: `${window.location.origin}/update-password`, // This page needs to exist ideally, or just dashboard
+            });
+
+            if (error) throw error;
+            setResetSent(true);
+        } catch (err: any) {
+            console.error('Reset error:', err);
+            setError(err.message);
         } finally {
             setLoading(false);
         }
@@ -59,7 +79,9 @@ const Login = () => {
 
                     <div className="text-center mb-10">
                         <h1 className="text-4xl font-serif font-bold text-white mb-2">StyleOS<span className="text-[#D4AF37]">.</span></h1>
-                        <p className="text-gray-400">Accédez à votre tableau de bord Barber</p>
+                        <p className="text-gray-400">
+                            {isResetMode ? "Réinitialisation du mot de passe" : "Accédez à votre tableau de bord Barber"}
+                        </p>
                     </div>
 
                     <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl relative overflow-hidden group">
@@ -71,54 +93,84 @@ const Login = () => {
                             </div>
                         )}
 
-                        <form onSubmit={handleLogin} className="space-y-6">
-                            <div>
-                                <label className="block text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-2">Email Professionnel</label>
-                                <div className="relative">
-                                    <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
-                                    <input
-                                        type="email"
-                                        required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-gray-600"
-                                        placeholder="contact@barberclub.com"
-                                    />
+                        {resetSent ? (
+                            <div className="text-center py-8">
+                                <div className="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/20">
+                                    <CheckCircle2 className="w-8 h-8" />
                                 </div>
+                                <h3 className="text-xl font-bold text-white mb-2">Email Envoyé</h3>
+                                <p className="text-gray-400 text-sm mb-6">
+                                    Vérifiez votre boîte mail ({email}) pour réinitialiser votre mot de passe.
+                                </p>
+                                <button
+                                    onClick={() => { setIsResetMode(false); setResetSent(false); }}
+                                    className="text-[#D4AF37] hover:text-white text-sm font-bold transition-colors"
+                                >
+                                    Retour à la connexion
+                                </button>
                             </div>
-
-                            <div>
-                                <label className="block text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-2">Mot de Passe</label>
-                                <div className="relative">
-                                    <Lock className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
-                                    <input
-                                        type="password"
-                                        required
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-gray-600"
-                                        placeholder="••••••••"
-                                    />
+                        ) : (
+                            <form onSubmit={isResetMode ? handleResetPassword : handleLogin} className="space-y-6">
+                                <div>
+                                    <label className="block text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-2">Email Professionnel</label>
+                                    <div className="relative">
+                                        <Mail className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
+                                        <input
+                                            type="email"
+                                            required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-gray-600"
+                                            placeholder="contact@barberclub.com"
+                                        />
+                                    </div>
                                 </div>
-                            </div>
 
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full bg-[#D4AF37] text-black font-bold py-4 rounded-xl uppercase tracking-widest hover:bg-[#b0902c] transition-all shadow-lg flex items-center justify-center gap-2 group-disabled:opacity-70"
-                            >
-                                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Connexion"}
-                            </button>
-                        </form>
+                                {!isResetMode && (
+                                    <div>
+                                        <label className="block text-xs font-bold uppercase tracking-widest text-[#D4AF37] mb-2">Mot de Passe</label>
+                                        <div className="relative">
+                                            <Lock className="absolute left-4 top-3.5 w-5 h-5 text-gray-500" />
+                                            <input
+                                                type="password"
+                                                required
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
+                                                className="w-full bg-black/40 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-gray-600"
+                                                placeholder="••••••••"
+                                            />
+                                        </div>
+                                    </div>
+                                )}
 
-                        <div className="mt-8 text-center space-y-4">
-                            <div>
-                                <a href="#" className="text-xs text-gray-500 hover:text-white transition-colors border-b border-transparent hover:border-white pb-0.5">Mot de passe oublié ?</a>
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full bg-[#D4AF37] text-black font-bold py-4 rounded-xl uppercase tracking-widest hover:bg-[#b0902c] transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                                >
+                                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (isResetMode ? "Envoyer le lien" : "Connexion")}
+                                </button>
+                            </form>
+                        )}
+
+                        {!resetSent && (
+                            <div className="mt-8 text-center space-y-4">
+                                <div>
+                                    <button
+                                        type="button"
+                                        onClick={() => { setIsResetMode(!isResetMode); setError(null); }}
+                                        className="text-xs text-gray-500 hover:text-white transition-colors border-b border-transparent hover:border-white pb-0.5"
+                                    >
+                                        {isResetMode ? "Annuler et se connecter" : "Mot de passe oublié ?"}
+                                    </button>
+                                </div>
+                                {!isResetMode && (
+                                    <div className="text-sm text-gray-400">
+                                        Pas encore de compte ? <Link to="/signup" className="text-white hover:text-[#D4AF37] font-medium transition-colors">Créer un compte</Link>
+                                    </div>
+                                )}
                             </div>
-                            <div className="text-sm text-gray-400">
-                                Pas encore de compte ? <Link to="/signup" className="text-white hover:text-[#D4AF37] font-medium transition-colors">Créer un compte</Link>
-                            </div>
-                        </div>
+                        )}
                     </div>
 
                     <div className="mt-8 text-center text-xs text-gray-600">
