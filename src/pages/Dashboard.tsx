@@ -28,6 +28,11 @@ const Dashboard = () => {
     });
 
     const [view, setView] = useState<'dashboard' | 'calendar' | 'calls'>('dashboard');
+    const [callsLog, setCallsLog] = useState([
+        { id: 1, caller: "06 12 34 56 78", time: "10:30", duration: "1m 20s", status: "Pris de RDV", sentiment: "positive" },
+        { id: 2, caller: "07 98 76 54 32", time: "09:15", duration: "0m 45s", status: "Annulation", sentiment: "negative" },
+        { id: 3, caller: "06 00 11 22 33", time: "Hier", duration: "2m 10s", status: "Question Tarif", sentiment: "neutral" },
+    ]);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isScanning, setIsScanning] = useState(false);
 
@@ -74,7 +79,7 @@ const Dashboard = () => {
                 .select('*')
                 .eq('user_id', userId)
                 .order('date', { ascending: false })
-                .limit(10);
+                .limit(50);
 
             if (data) {
                 // Map DB data to UI format if needed, or use directly
@@ -348,10 +353,42 @@ const Dashboard = () => {
                 )}
 
                 {view === 'calls' && (
-                    <div className="flex flex-col items-center justify-center h-[500px] text-gray-500">
-                        <Phone className="w-16 h-16 mb-4 opacity-20" />
-                        <h3 className="text-xl font-bold mb-2">Journal d'Appels IA</h3>
-                        <p>Les enregistrements et transcriptions de Sarah IA apparaîtront ici.</p>
+                    <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+                        <div className="p-6 border-b border-white/10 flex justify-between items-center">
+                            <h2 className="text-xl font-bold flex items-center gap-2">
+                                <Phone className="w-5 h-5 text-[#D4AF37]" /> Journal d'Appels IA
+                            </h2>
+                            <span className="text-xs font-mono text-gray-500">Sarah AI v2.1</span>
+                        </div>
+                        <div className="divide-y divide-white/5">
+                            {callsLog.map(call => (
+                                <div key={call.id} className="p-4 flex items-center justify-between hover:bg-white/5 transition-colors group cursor-pointer">
+                                    <div className="flex items-center gap-4">
+                                        <div className={`p-2 rounded-full ${call.sentiment === 'positive' ? 'bg-green-500/10 text-green-500' : call.sentiment === 'negative' ? 'bg-red-500/10 text-red-500' : 'bg-blue-500/10 text-blue-500'}`}>
+                                            <Phone className="w-4 h-4" />
+                                        </div>
+                                        <div>
+                                            <div className="font-bold text-white">{call.caller}</div>
+                                            <div className="text-xs text-gray-500">{call.time} • Durée: {call.duration}</div>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <span className={`px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider border ${call.status === 'Pris de RDV' ? 'border-green-500/20 text-green-400 bg-green-500/5' :
+                                                call.status === 'Annulation' ? 'border-red-500/20 text-red-400 bg-red-500/5' :
+                                                    'border-blue-500/20 text-blue-400 bg-blue-500/5'
+                                            }`}>
+                                            {call.status}
+                                        </span>
+                                        <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <div className="w-0 h-0 border-l-[6px] border-l-white border-y-[4px] border-y-transparent ml-0.5"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="p-4 bg-black/20 text-center text-xs text-gray-500 uppercase tracking-widest font-bold hover:text-white cursor-pointer transition-colors">
+                            Voir tout l'historique
+                        </div>
                     </div>
                 )}
             </main>

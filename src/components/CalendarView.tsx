@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Clock, MapPin, User, Calendar as CalendarIcon, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 
 // Mock Component for Calendar to avoid heavy dependencies for now
@@ -6,6 +6,22 @@ import { useState } from 'react';
 const CalendarView = ({ appointments }: { appointments: any[] }) => {
     const today = new Date();
     const [currentDate, setCurrentDate] = useState(today);
+
+    const handlePrevDay = () => {
+        const prev = new Date(currentDate);
+        prev.setDate(prev.getDate() - 1);
+        setCurrentDate(prev);
+    };
+
+    const handleNextDay = () => {
+        const next = new Date(currentDate);
+        next.setDate(next.getDate() + 1);
+        setCurrentDate(next);
+    };
+
+    const handleToday = () => {
+        setCurrentDate(new Date());
+    };
 
     // Mock hours 9am - 19pm
     const hours = Array.from({ length: 11 }, (_, i) => i + 9);
@@ -16,12 +32,14 @@ const CalendarView = ({ appointments }: { appointments: any[] }) => {
     };
 
     const getAppointmentsForHour = (hour: number) => {
-        // Find appointments that start in this hour (mock logic)
-        // In real app, check timestamps properly
         return appointments.filter(apt => {
             const aptDate = new Date(apt.date);
-            // Check if same day and hour (very simplified for demo)
-            return aptDate.getHours() === hour;
+            return (
+                aptDate.getHours() === hour &&
+                aptDate.getDate() === currentDate.getDate() &&
+                aptDate.getMonth() === currentDate.getMonth() &&
+                aptDate.getFullYear() === currentDate.getFullYear()
+            );
         });
     };
 
@@ -34,9 +52,9 @@ const CalendarView = ({ appointments }: { appointments: any[] }) => {
                     <p className="text-sm text-gray-500">3 Rendez-vous aujourd'hui</p>
                 </div>
                 <div className="flex gap-2">
-                    <button className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ChevronLeft className="w-5 h-5" /></button>
-                    <button className="px-3 py-1 bg-[#D4AF37] text-black font-bold rounded-lg text-sm">Aujourd'hui</button>
-                    <button className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ChevronRight className="w-5 h-5" /></button>
+                    <button onClick={handlePrevDay} className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ChevronLeft className="w-5 h-5" /></button>
+                    <button onClick={handleToday} className="px-3 py-1 bg-[#D4AF37] text-black font-bold rounded-lg text-sm">Aujourd'hui</button>
+                    <button onClick={handleNextDay} className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ChevronRight className="w-5 h-5" /></button>
                 </div>
             </div>
 

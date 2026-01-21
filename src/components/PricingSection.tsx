@@ -53,8 +53,8 @@ const PricingSection = () => {
 
                     {/* Plan 2: Pilotage (89€) - NEW */}
                     <div className="glass-card p-6 rounded-3xl border border-white/5 hover:border-primary/30 transition-all bg-black/40 flex flex-col relative group">
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-900 border border-blue-500 text-blue-100 text-[10px] font-bold uppercase rounded-full tracking-wider shadow-lg">
-                            Gestion Pro
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-blue-900 border border-blue-500 text-blue-100 text-[10px] font-bold uppercase rounded-full tracking-wider shadow-lg text-center whitespace-nowrap">
+                            Gestion Pro <span className="block text-[8px] normal-case opacity-80 font-normal">Idéal pour lâcher le papier</span>
                         </div>
                         <div className="mb-4">
                             <h3 className="text-lg font-bold text-white mb-2 flex items-center gap-2">
@@ -105,18 +105,15 @@ const PricingSection = () => {
                             <li className="flex items-center gap-2">
                                 <Check className="w-3 h-3 text-primary" /> <strong>Agent IA Sarah (24/7)</strong>
                             </li>
+                            <li className="ml-5 text-[10px] text-text-muted italic -mt-2 mb-1">
+                                Remplace une réceptionniste (Économisez ~24k€/an)
+                            </li>
                             <li className="flex items-center gap-2">
                                 <Check className="w-3 h-3 text-primary" /> Prise de RDV Autonome
                             </li>
-                            <li className="flex items-center gap-2 text-text-muted/40">
-                                <X className="w-3 h-3" /> Sync Planity
-                            </li>
-                            <li className="flex items-center gap-2 text-text-muted/40">
-                                <X className="w-3 h-3" /> Gestion Réseaux Sociaux
-                            </li>
                         </ul>
                         <button className="w-full py-3 bg-surface border border-glass-border group-hover:bg-white/10 text-white text-sm font-bold rounded-xl transition-all">
-                            Choisir Accélération
+                            Automatiser mon salon
                         </button>
                     </div>
 
@@ -167,8 +164,13 @@ const PricingSection = () => {
 
                 </div>
 
-                <div className="mt-16 text-center text-text-muted text-sm flex items-center justify-center gap-2">
-                    <ShieldCheck className="w-4 h-4" /> Garantie 30 jours satisfait ou remboursé sur tous les plans.
+                <div className="mt-16 text-center">
+                    <div className="text-text-muted text-sm flex items-center justify-center gap-2 mb-2">
+                        <ShieldCheck className="w-4 h-4" /> Garantie 30 jours satisfait ou remboursé sur tous les plans.
+                    </div>
+                    <p className="text-xs text-primary/80 font-medium">
+                        0% de commission sur vos réservations. Ce que vous gagnez est 100% à vous.
+                    </p>
                 </div>
             </div>
         </section>
