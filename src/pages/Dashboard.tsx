@@ -1,12 +1,30 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, LayoutDashboard, Phone, Calendar, TrendingUp, Users, FileText, Wallet, Camera, CreditCard } from 'lucide-react';
+import { LogOut, LayoutDashboard, Phone, Calendar, TrendingUp, Users, FileText, Wallet, Camera, CreditCard, Plus } from 'lucide-react';
+
+interface Appointment {
+    id: number;
+    client_name: string;
+    type: string;
+    status: string;
+    date: string;
+    amount: number;
+}
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [appointments, setAppointments] = useState<Appointment[]>([]);
+
+    // Stats State
+    const [stats, setStats] = useState({
+        calls: 24,
+        revenue: 0,
+        expenses: 450, // Fixed for demo
+        net: 0
+    });
 
     useEffect(() => {
         const checkUser = async () => {
@@ -15,31 +33,90 @@ const Dashboard = () => {
                 navigate('/login');
             } else {
                 setUser(user);
+                fetchDashboardData(user.id);
             }
-            setLoading(false);
         };
 
         checkUser();
     }, [navigate]);
+
+    const fetchDashboardData = async (userId: string) => {
+        try {
+            // Fetch Appointments
+            const { data, error } = await supabase
+                .from('appointments')
+                .select('*')
+                .eq('user_id', userId)
+                .order('date', { ascending: false })
+                .limit(10);
+
+            if (data) {
+                // Map DB data to UI format if needed, or use directly
+                // Assuming DB has columns: client_name, status, amount, date (type is missing in DB, we'll mock it)
+                const mappedData = data.map((item: any) => ({
+                    ...item,
+                    type: 'Réservation Web', // Default for now
+                    time: new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                }));
+                setAppointments(mappedData);
+
+                // Calculate Revenue
+                const totalRevenue = data.reduce((acc: number, curr: any) => acc + (Number(curr.amount) || 0), 0);
+
+                setStats(prev => ({
+                    ...prev,
+                    revenue: totalRevenue,
+                    net: totalRevenue - prev.expenses
+                }));
+            }
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
         navigate('/login');
     };
 
-    if (loading) return <div className="min-h-screen bg-black text-white flex items-center justify-center">Chargement...</div>;
+    const addMockAppointment = async () => {
+        if (!user) return;
+
+        const newAppt = {
+            user_id: user.id,
+            client_name: "Nouveau Client",
+            date: new Date().toISOString(),
+            amount: 35,
+            status: "Confirmé"
+        };
+
+        const { data, error } = await supabase
+            .from('appointments')
+            .insert([newAppt])
+            .select();
+
+        if (!error && data) {
+            fetchDashboardData(user.id); // Refresh
+        } else {
+            console.error(error);
+        }
+    };
+
+    if (loading) return <div className="min-h-screen bg-black text-white flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#D4AF37]"></div></div>;
 
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white flex">
+        <div className="min-h-screen bg-[#0a0a0a] text-white flex font-sans">
             {/* Sidebar */}
-            <aside className="w-64 bg-black border-r border-white/10 hidden md:flex flex-col p-6">
+            <aside className="w-64 bg-black border-r border-white/10 hidden md:flex flex-col p-6 sticky top-0 h-screen">
                 <div className="mb-10 flex items-center gap-2">
-                    <div className="w-8 h-8 bg-[#D4AF37] rounded-lg"></div>
-                    <span className="font-bold text-xl tracking-tight">StyleOS</span>
+                    <div className="w-8 h-8 bg-[#D4AF37] rounded-lg shadow-[0_0_15px_rgba(212,175,55,0.3)]"></div>
+                    <span className="font-bold text-xl tracking-tight font-serif">StyleOS</span>
                 </div>
 
                 <nav className="flex-1 space-y-2">
-                    <div className="bg-white/5 text-[#D4AF37] p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer">
+                    <div className="bg-white/5 text-[#D4AF37] p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer shadow-inner shadow-white/5 border border-white/5">
                         <LayoutDashboard className="w-5 h-5" /> Dashboard
                     </div>
                     <div className="text-gray-400 hover:bg-white/5 hover:text-white p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
@@ -48,7 +125,7 @@ const Dashboard = () => {
                     <div className="text-gray-400 hover:bg-white/5 hover:text-white p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
                         <Calendar className="w-5 h-5" /> Rendez-vous
                     </div>
-                    <div className="text-blue-400/80 bg-blue-500/10 hover:bg-blue-500/20 p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
+                    <div className="text-blue-400/80 bg-blue-500/10 hover:bg-blue-500/20 p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors border border-blue-500/10">
                         <FileText className="w-5 h-5" /> Comptabilité (IA)
                     </div>
                     <div className="text-gray-400 hover:bg-white/5 hover:text-white p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
@@ -58,15 +135,15 @@ const Dashboard = () => {
 
                 <div className="pt-6 border-t border-white/10">
                     <div className="flex items-center gap-3 mb-4 px-2">
-                        <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs font-bold">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/20 flex items-center justify-center text-xs font-bold shadow-lg">
                             {user?.email?.[0].toUpperCase()}
                         </div>
                         <div className="flex-1 overflow-hidden">
-                            <p className="text-sm font-medium truncate">{user?.email}</p>
-                            <p className="text-xs text-green-500">En ligne</p>
+                            <p className="text-sm font-medium truncate text-gray-200">{user?.user_metadata?.business_name || "Mon Salon"}</p>
+                            <p className="text-xs text-green-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> En ligne</p>
                         </div>
                     </div>
-                    <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 text-red-400 hover:bg-red-500/10 p-2 rounded-lg transition-colors text-sm">
+                    <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 text-red-400 hover:bg-red-500/10 hover:text-red-300 p-2 rounded-lg transition-colors text-sm font-medium">
                         <LogOut className="w-4 h-4" /> Déconnexion
                     </button>
                 </div>
@@ -74,128 +151,140 @@ const Dashboard = () => {
 
             {/* Main Content */}
             <main className="flex-1 p-8 overflow-y-auto">
-                <header className="flex justify-between items-center mb-8">
+                <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
                     <div>
-                        <h1 className="text-2xl font-bold mb-1">Bonjour, Barber! 👋</h1>
-                        <p className="text-text-muted">Voici ce qu'il s'est passé aujourd'hui.</p>
+                        <h1 className="text-3xl font-bold mb-1 text-white tracking-tight">Vue d'ensemble</h1>
+                        <p className="text-gray-500 font-medium">Bienvenue, {user?.user_metadata?.business_name}.</p>
                     </div>
                     <div className="flex gap-4">
-                        <button className="bg-[#D4AF37] text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-white transition-colors">
-                            Nouvelle Campagne SMS
+                        <button onClick={addMockAppointment} className="bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
+                            <Plus className="w-4 h-4" /> Simuler RDV
+                        </button>
+                        <button className="bg-[#D4AF37] text-black px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#c5a02e] transition-all shadow-lg shadow-[#D4AF37]/20">
+                            Nouvelle Campagne
                         </button>
                     </div>
                 </header>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                        <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 bg-blue-500/20 text-blue-400 rounded-xl">
+                    {/* Calls Card */}
+                    <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
+                        <div className="flex justify-between items-start mb-6">
+                            <div className="p-3 bg-blue-500/20 text-blue-400 rounded-2xl">
                                 <Phone className="w-6 h-6" />
                             </div>
+                            <span className="text-xs font-bold bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full border border-green-500/20">+12%</span>
                         </div>
-                        <div className="text-3xl font-bold mb-1">24</div>
-                        <div className="text-sm text-text-muted">Appels gérés</div>
+                        <div className="text-4xl font-bold mb-1 text-white tracking-tighter">{stats.calls}</div>
+                        <div className="text-sm text-gray-400 font-medium">Appels gérés (IA)</div>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                        <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 bg-[#D4AF37]/20 text-[#D4AF37] rounded-xl">
+                    {/* Revenue Card */}
+                    <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
+                        <div className="flex justify-between items-start mb-6">
+                            <div className="p-3 bg-[#D4AF37]/20 text-[#D4AF37] rounded-2xl">
                                 <TrendingUp className="w-6 h-6" />
                             </div>
                         </div>
-                        <div className="text-3xl font-bold mb-1">1,240 €</div>
-                        <div className="text-sm text-text-muted">Chiffre d'Affaires (Brut)</div>
+                        <div className="text-4xl font-bold mb-1 text-white tracking-tighter">{stats.revenue} €</div>
+                        <div className="text-sm text-gray-400 font-medium">Chiffre d'Affaires</div>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
-                        <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 bg-red-500/20 text-red-500 rounded-xl">
+                    {/* Expenses Card */}
+                    <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
+                        <div className="flex justify-between items-start mb-6">
+                            <div className="p-3 bg-red-500/20 text-red-500 rounded-2xl">
                                 <CreditCard className="w-6 h-6" />
                             </div>
                         </div>
-                        <div className="text-3xl font-bold mb-1">- 450 €</div>
-                        <div className="text-sm text-text-muted">Dépenses (Loyer, Matos)</div>
+                        <div className="text-4xl font-bold mb-1 text-white tracking-tighter">- {stats.expenses} €</div>
+                        <div className="text-sm text-gray-400 font-medium whitespace-nowrap">Dépenses (Loyer, Matos)</div>
                     </div>
 
-                    <div className="bg-gradient-to-br from-green-900/40 to-black border border-green-500/30 p-6 rounded-2xl relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-20 h-20 bg-green-500/20 blur-[40px] rounded-full"></div>
-                        <div className="flex justify-between items-start mb-4 relative z-10">
-                            <div className="p-3 bg-green-500/20 text-green-400 rounded-xl">
+                    {/* Net Profit Card - Highlighted */}
+                    <div className="bg-gradient-to-br from-green-900/60 to-black border border-green-500/30 p-6 rounded-3xl relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 blur-[60px] rounded-full group-hover:bg-green-500/30 transition-all duration-500"></div>
+                        <div className="flex justify-between items-start mb-6 relative z-10">
+                            <div className="p-3 bg-green-500/20 text-green-400 rounded-2xl border border-green-500/20">
                                 <Wallet className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-bold bg-green-500/20 text-green-400 px-2 py-1 rounded">NET</span>
+                            <span className="text-[10px] font-bold bg-green-500 text-black px-2 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-green-500/20">Net Pocket</span>
                         </div>
-                        <div className="text-3xl font-bold mb-1 text-white relative z-10">790 €</div>
-                        <div className="text-sm text-green-400/80 relative z-10">Bénéfice Réel (Poche)</div>
+                        <div className="text-4xl font-bold mb-1 text-white relative z-10 tracking-tighter shadow-black drop-shadow-lg">{stats.net} €</div>
+                        <div className="text-sm text-green-400/90 relative z-10 font-bold">Bénéfice Réel</div>
                     </div>
                 </div>
 
                 {/* Accounting Actions */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <div className="bg-blue-900/10 border border-blue-500/20 p-6 rounded-2xl flex items-center justify-between">
-                        <div>
-                            <h3 className="font-bold text-lg text-blue-100 flex items-center gap-2">
-                                <FileText className="w-5 h-5" /> Export Comptable
+                    <div className="bg-blue-900/10 border border-blue-500/20 p-8 rounded-3xl flex items-center justify-between relative overflow-hidden group hover:border-blue-500/40 transition-all">
+                        <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors"></div>
+                        <div className="relative z-10">
+                            <h3 className="font-bold text-xl text-blue-100 flex items-center gap-3 mb-2">
+                                <FileText className="w-6 h-6" /> Export Comptable
                             </h3>
-                            <p className="text-sm text-blue-300/60 mt-1">Envoyez le rapport mensuel à votre expert.</p>
+                            <p className="text-sm text-blue-300/70 max-w-xs">Générez le rapport complet PDF/Excel pour votre expert-comptable.</p>
                         </div>
-                        <button className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-colors shadow-lg shadow-blue-500/20">
+                        <button className="relative z-10 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95">
                             Générer PDF
                         </button>
                     </div>
 
-                    <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex items-center justify-between group hover:border-[#D4AF37]/50 transition-colors">
-                        <div>
-                            <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                                <Camera className="w-5 h-5 text-[#D4AF37]" /> Scan Facture IA
+                    <div className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center justify-between group hover:border-[#D4AF37]/50 transition-all relative overflow-hidden cursor-pointer">
+                        <div className="absolute inset-0 bg-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div className="relative z-10">
+                            <h3 className="font-bold text-xl text-white flex items-center gap-3 mb-2">
+                                <Camera className="w-6 h-6 text-[#D4AF37]" /> Scan Facture IA
                             </h3>
-                            <p className="text-sm text-text-muted mt-1">Prenez une photo, l'IA catégorise la dépense.</p>
+                            <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors max-w-xs">Prenez une photo d'une facture. L'IA la catégorise instantanément.</p>
                         </div>
-                        <button className="bg-[#D4AF37] text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-white transition-colors">
+                        <button className="relative z-10 bg-[#D4AF37] text-black px-6 py-3 rounded-xl font-bold text-sm hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 hover:shadow-[#D4AF37]/20 hover:scale-105 active:scale-95">
                             Scanner
                         </button>
                     </div>
                 </div>
 
                 {/* Recent Activity Table */}
-                <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-                    <div className="p-6 border-b border-white/10 flex justify-between items-center">
-                        <h3 className="font-bold">Activité Récente</h3>
-                        <button className="text-xs text-[#D4AF37] hover:underline">Tout voir</button>
+                <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md">
+                    <div className="p-8 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                        <h3 className="font-bold text-lg text-white">Activité Récente</h3>
+                        <button className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-white transition-colors">Tout voir</button>
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left">
-                            <thead className="bg-white/5 text-text-muted uppercase text-xs">
+                            <thead className="bg-black/40 text-gray-500 uppercase text-xs font-bold tracking-wider">
                                 <tr>
-                                    <th className="px-6 py-4">Client</th>
-                                    <th className="px-6 py-4">Type</th>
-                                    <th className="px-6 py-4">Status</th>
-                                    <th className="px-6 py-4">Heure</th>
-                                    <th className="px-6 py-4">Montant</th>
+                                    <th className="px-8 py-5">Client</th>
+                                    <th className="px-8 py-5">Type Service</th>
+                                    <th className="px-8 py-5">Status</th>
+                                    <th className="px-8 py-5">Heure</th>
+                                    <th className="px-8 py-5 text-right">Montant</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5 text-gray-300">
-                                {[
-                                    { name: 'Thomas Dubos', type: 'Appel Entrant', status: 'Converti', time: '14:30', amount: '25€' },
-                                    { name: 'Lucas Martin', type: 'Appel Entrant', status: 'Converti', time: '11:15', amount: '25€' },
-                                    { name: 'Inconnu (06...)', type: 'Appel Manqué', status: 'Rappelé', time: '10:05', amount: '-' },
-                                    { name: 'Sofiane B.', type: 'Réservation Web', status: 'Confirmé', time: '09:45', amount: '45€' },
-                                ].map((row, i) => (
-                                    <tr key={i} className="hover:bg-white/5 transition-colors">
-                                        <td className="px-6 py-4 font-medium text-white">{row.name}</td>
-                                        <td className="px-6 py-4">{row.type}</td>
-                                        <td className="px-6 py-4">
-                                            <span className={`px-2 py-1 rounded text-xs font-bold ${row.status === 'Converti' || row.status === 'Confirmé' ? 'bg-green-500/20 text-green-400' :
-                                                'bg-yellow-500/20 text-yellow-400'
+                                {appointments.length > 0 ? appointments.map((appt, i) => (
+                                    <tr key={i} className="hover:bg-white/5 transition-colors group">
+                                        <td className="px-8 py-5 font-bold text-white group-hover:text-[#D4AF37] transition-colors">{appt.client_name}</td>
+                                        <td className="px-8 py-5 text-gray-400">{(appt as any).type || (i % 2 === 0 ? "Coupe + Barbe" : "Taille Barbe")}</td>
+                                        <td className="px-8 py-5">
+                                            <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border ${appt.status === 'Confirmé' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                                                    'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
                                                 }`}>
-                                                {row.status}
+                                                {appt.status}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-gray-500">{row.time}</td>
-                                        <td className="px-6 py-4 text-white font-medium">{row.amount}</td>
+                                        <td className="px-8 py-5 text-gray-500 font-mono">{(appt as any).time}</td>
+                                        <td className="px-8 py-5 text-white font-bold font-mono text-right text-lg">{appt.amount} €</td>
                                     </tr>
-                                ))}
+                                )) : (
+                                    <tr>
+                                        <td colSpan={5} className="px-8 py-12 text-center text-gray-500">
+                                            Aucune activité récente. <br />
+                                            <span className="text-xs">Cliquez sur "Simuler RDV" pour tester.</span>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
