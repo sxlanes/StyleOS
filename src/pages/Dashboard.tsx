@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, LayoutDashboard, Phone, Calendar, TrendingUp, Users, FileText, Wallet, Camera, CreditCard, Plus } from 'lucide-react';
+import { LogOut, LayoutDashboard, Phone, Calendar, TrendingUp, Users, FileText, Wallet, Camera, CreditCard, Plus, Loader2 } from 'lucide-react';
+import CalendarView from '../components/CalendarView';
 
 interface Appointment {
     id: number;
@@ -25,6 +26,31 @@ const Dashboard = () => {
         expenses: 450, // Fixed for demo
         net: 0
     });
+
+    const [view, setView] = useState<'dashboard' | 'calendar' | 'calls'>('dashboard');
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [isScanning, setIsScanning] = useState(false);
+
+    const handleScanClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        setIsScanning(true);
+        // Simulate n8n processing time
+        setTimeout(() => {
+            setIsScanning(false);
+            setStats(prev => ({
+                ...prev,
+                expenses: prev.expenses + 120, // Simul ajout dépense
+                net: prev.revenue - (prev.expenses + 120)
+            }));
+            alert("Facture analysée avec succès ! Dépense ajoutée.");
+        }, 2000);
+    };
 
     useEffect(() => {
         const checkUser = async () => {
@@ -116,13 +142,22 @@ const Dashboard = () => {
                 </div>
 
                 <nav className="flex-1 space-y-2">
-                    <div className="bg-white/5 text-[#D4AF37] p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer shadow-inner shadow-white/5 border border-white/5">
+                    <div
+                        onClick={() => setView('dashboard')}
+                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'dashboard' ? 'bg-white/5 text-[#D4AF37] shadow-inner shadow-white/5 border border-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                    >
                         <LayoutDashboard className="w-5 h-5" /> Dashboard
                     </div>
-                    <div className="text-gray-400 hover:bg-white/5 hover:text-white p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
+                    <div
+                        onClick={() => setView('calls')}
+                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'calls' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                    >
                         <Phone className="w-5 h-5" /> Journal d'Appels
                     </div>
-                    <div className="text-gray-400 hover:bg-white/5 hover:text-white p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors">
+                    <div
+                        onClick={() => setView('calendar')}
+                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'calendar' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                    >
                         <Calendar className="w-5 h-5" /> Rendez-vous
                     </div>
                     <div className="text-blue-400/80 bg-blue-500/10 hover:bg-blue-500/20 p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors border border-blue-500/10">
@@ -167,140 +202,158 @@ const Dashboard = () => {
                 </header>
 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                    {/* Calls Card */}
-                    <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
-                        <div className="flex justify-between items-start mb-6">
-                            <div className="p-3 bg-blue-500/20 text-blue-400 rounded-2xl">
-                                <Phone className="w-6 h-6" />
+
+                {view === 'dashboard' && (
+                    <>
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                            {/* Calls Card */}
+                            <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="p-3 bg-blue-500/20 text-blue-400 rounded-2xl">
+                                        <Phone className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-xs font-bold bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full border border-green-500/20">+12%</span>
+                                </div>
+                                <div className="text-4xl font-bold mb-1 text-white tracking-tighter">{stats.calls}</div>
+                                <div className="text-sm text-gray-400 font-medium">Appels gérés (IA)</div>
                             </div>
-                            <span className="text-xs font-bold bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full border border-green-500/20">+12%</span>
-                        </div>
-                        <div className="text-4xl font-bold mb-1 text-white tracking-tighter">{stats.calls}</div>
-                        <div className="text-sm text-gray-400 font-medium">Appels gérés (IA)</div>
-                    </div>
 
-                    {/* Revenue Card */}
-                    <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
-                        <div className="flex justify-between items-start mb-6">
-                            <div className="p-3 bg-[#D4AF37]/20 text-[#D4AF37] rounded-2xl">
-                                <TrendingUp className="w-6 h-6" />
+                            {/* Revenue Card */}
+                            <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="p-3 bg-[#D4AF37]/20 text-[#D4AF37] rounded-2xl">
+                                        <TrendingUp className="w-6 h-6" />
+                                    </div>
+                                </div>
+                                <div className="text-4xl font-bold mb-1 text-white tracking-tighter">{stats.revenue} €</div>
+                                <div className="text-sm text-gray-400 font-medium">Chiffre d'Affaires</div>
+                            </div>
+
+                            {/* Expenses Card */}
+                            <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
+                                <div className="flex justify-between items-start mb-6">
+                                    <div className="p-3 bg-red-500/20 text-red-500 rounded-2xl">
+                                        <CreditCard className="w-6 h-6" />
+                                    </div>
+                                </div>
+                                <div className="text-4xl font-bold mb-1 text-white tracking-tighter">- {stats.expenses} €</div>
+                                <div className="text-sm text-gray-400 font-medium whitespace-nowrap">Dépenses (Loyer, Matos)</div>
+                            </div>
+
+                            {/* Net Profit Card - Highlighted */}
+                            <div className="bg-gradient-to-br from-green-900/60 to-black border border-green-500/30 p-6 rounded-3xl relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 blur-[60px] rounded-full group-hover:bg-green-500/30 transition-all duration-500"></div>
+                                <div className="flex justify-between items-start mb-6 relative z-10">
+                                    <div className="p-3 bg-green-500/20 text-green-400 rounded-2xl border border-green-500/20">
+                                        <Wallet className="w-6 h-6" />
+                                    </div>
+                                    <span className="text-[10px] font-bold bg-green-500 text-black px-2 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-green-500/20">Net Pocket</span>
+                                </div>
+                                <div className="text-4xl font-bold mb-1 text-white relative z-10 tracking-tighter shadow-black drop-shadow-lg">{stats.net} €</div>
+                                <div className="text-sm text-green-400/90 relative z-10 font-bold">Bénéfice Réel</div>
                             </div>
                         </div>
-                        <div className="text-4xl font-bold mb-1 text-white tracking-tighter">{stats.revenue} €</div>
-                        <div className="text-sm text-gray-400 font-medium">Chiffre d'Affaires</div>
-                    </div>
 
-                    {/* Expenses Card */}
-                    <div className="bg-gradient-to-b from-white/10 to-transparent border border-white/10 p-6 rounded-3xl backdrop-blur-sm">
-                        <div className="flex justify-between items-start mb-6">
-                            <div className="p-3 bg-red-500/20 text-red-500 rounded-2xl">
-                                <CreditCard className="w-6 h-6" />
+                        {/* Accounting Actions */}
+                        <div className="grid md:grid-cols-2 gap-6 mb-8">
+                            {/* Hidden File Input for n8n Scan */}
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                onChange={handleFileUpload}
+                                hidden
+                                accept="image/*,application/pdf"
+                            />
+
+                            <div className="bg-blue-900/10 border border-blue-500/20 p-8 rounded-3xl flex items-center justify-between relative overflow-hidden group hover:border-blue-500/40 transition-all">
+                                <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors"></div>
+                                <div className="relative z-10">
+                                    <h3 className="font-bold text-xl text-blue-100 flex items-center gap-3 mb-2">
+                                        <FileText className="w-6 h-6" /> Export Comptable
+                                    </h3>
+                                    <p className="text-sm text-blue-300/70 max-w-xs">Générez le rapport complet PDF/Excel pour votre expert-comptable.</p>
+                                </div>
+                                <button className="relative z-10 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95">
+                                    Générer PDF
+                                </button>
+                            </div>
+
+                            <div onClick={handleScanClick} className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center justify-between group hover:border-[#D4AF37]/50 transition-all relative overflow-hidden cursor-pointer">
+                                <div className="absolute inset-0 bg-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div className="relative z-10">
+                                    <h3 className="font-bold text-xl text-white flex items-center gap-3 mb-2">
+                                        {isScanning ? <Loader2 className="w-6 h-6 animate-spin text-[#D4AF37]" /> : <Camera className="w-6 h-6 text-[#D4AF37]" />}
+                                        {isScanning ? "Analyse IA en cours..." : "Scan Facture IA"}
+                                    </h3>
+                                    <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors max-w-xs">
+                                        {isScanning ? "Envoi à n8n pour extraction des données..." : "Prenez une photo d'une facture. L'IA la catégorise instantanément."}
+                                    </p>
+                                </div>
+                                <button disabled={isScanning} className="relative z-10 bg-[#D4AF37] text-black px-6 py-3 rounded-xl font-bold text-sm hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 hover:shadow-[#D4AF37]/20 hover:scale-105 active:scale-95 disabled:opacity-50">
+                                    Scanner
+                                </button>
                             </div>
                         </div>
-                        <div className="text-4xl font-bold mb-1 text-white tracking-tighter">- {stats.expenses} €</div>
-                        <div className="text-sm text-gray-400 font-medium whitespace-nowrap">Dépenses (Loyer, Matos)</div>
-                    </div>
 
-                    {/* Net Profit Card - Highlighted */}
-                    <div className="bg-gradient-to-br from-green-900/60 to-black border border-green-500/30 p-6 rounded-3xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/20 blur-[60px] rounded-full group-hover:bg-green-500/30 transition-all duration-500"></div>
-                        <div className="flex justify-between items-start mb-6 relative z-10">
-                            <div className="p-3 bg-green-500/20 text-green-400 rounded-2xl border border-green-500/20">
-                                <Wallet className="w-6 h-6" />
+                        {/* Recent Activity Table */}
+                        <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md">
+                            <div className="p-8 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                                <h3 className="font-bold text-lg text-white">Activité Récente</h3>
+                                <button className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-white transition-colors">Tout voir</button>
                             </div>
-                            <span className="text-[10px] font-bold bg-green-500 text-black px-2 py-1 rounded-full uppercase tracking-wider shadow-lg shadow-green-500/20">Net Pocket</span>
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-sm text-left">
+                                    <thead className="bg-black/40 text-gray-500 uppercase text-xs font-bold tracking-wider">
+                                        <tr>
+                                            <th className="px-8 py-5">Client</th>
+                                            <th className="px-8 py-5">Type Service</th>
+                                            <th className="px-8 py-5">Status</th>
+                                            <th className="px-8 py-5">Heure</th>
+                                            <th className="px-8 py-5 text-right">Montant</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-white/5 text-gray-300">
+                                        {appointments.length > 0 ? appointments.map((appt, i) => (
+                                            <tr key={i} className="hover:bg-white/5 transition-colors group">
+                                                <td className="px-8 py-5 font-bold text-white group-hover:text-[#D4AF37] transition-colors">{appt.client_name}</td>
+                                                <td className="px-8 py-5 text-gray-400">{(appt as any).type || (i % 2 === 0 ? "Coupe + Barbe" : "Taille Barbe")}</td>
+                                                <td className="px-8 py-5">
+                                                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border ${appt.status === 'Confirmé' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+                                                        'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
+                                                        }`}>
+                                                        {appt.status}
+                                                    </span>
+                                                </td>
+                                                <td className="px-8 py-5 text-gray-500 font-mono">{(appt as any).time}</td>
+                                                <td className="px-8 py-5 text-white font-bold font-mono text-right text-lg">{appt.amount} €</td>
+                                            </tr>
+                                        )) : (
+                                            <tr>
+                                                <td colSpan={5} className="px-8 py-12 text-center text-gray-500">
+                                                    Aucune activité récente. <br />
+                                                    <span className="text-xs">Cliquez sur "Simuler RDV" pour tester.</span>
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div className="text-4xl font-bold mb-1 text-white relative z-10 tracking-tighter shadow-black drop-shadow-lg">{stats.net} €</div>
-                        <div className="text-sm text-green-400/90 relative z-10 font-bold">Bénéfice Réel</div>
-                    </div>
-                </div>
+                    </>
+                )}
 
-                {/* Accounting Actions */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    {/* Hidden File Input for n8n Scan */}
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handleFileUpload}
-                        hidden
-                        accept="image/*,application/pdf"
-                    />
+                {view === 'calendar' && (
+                    <CalendarView appointments={appointments} />
+                )}
 
-                    <div className="bg-blue-900/10 border border-blue-500/20 p-8 rounded-3xl flex items-center justify-between relative overflow-hidden group hover:border-blue-500/40 transition-all">
-                        <div className="absolute inset-0 bg-blue-500/5 group-hover:bg-blue-500/10 transition-colors"></div>
-                        <div className="relative z-10">
-                            <h3 className="font-bold text-xl text-blue-100 flex items-center gap-3 mb-2">
-                                <FileText className="w-6 h-6" /> Export Comptable
-                            </h3>
-                            <p className="text-sm text-blue-300/70 max-w-xs">Générez le rapport complet PDF/Excel pour votre expert-comptable.</p>
-                        </div>
-                        <button className="relative z-10 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-500/20 hover:scale-105 active:scale-95">
-                            Générer PDF
-                        </button>
+                {view === 'calls' && (
+                    <div className="flex flex-col items-center justify-center h-[500px] text-gray-500">
+                        <Phone className="w-16 h-16 mb-4 opacity-20" />
+                        <h3 className="text-xl font-bold mb-2">Journal d'Appels IA</h3>
+                        <p>Les enregistrements et transcriptions de Sarah IA apparaîtront ici.</p>
                     </div>
-
-                    <div onClick={handleScanClick} className="bg-white/5 border border-white/10 p-8 rounded-3xl flex items-center justify-between group hover:border-[#D4AF37]/50 transition-all relative overflow-hidden cursor-pointer">
-                        <div className="absolute inset-0 bg-[#D4AF37]/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div className="relative z-10">
-                            <h3 className="font-bold text-xl text-white flex items-center gap-3 mb-2">
-                                {isScanning ? <Loader2 className="w-6 h-6 animate-spin text-[#D4AF37]" /> : <Camera className="w-6 h-6 text-[#D4AF37]" />}
-                                {isScanning ? "Analyse IA en cours..." : "Scan Facture IA"}
-                            </h3>
-                            <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors max-w-xs">
-                                {isScanning ? "Envoi à n8n pour extraction des données..." : "Prenez une photo d'une facture. L'IA la catégorise instantanément."}
-                            </p>
-                        </div>
-                        <button disabled={isScanning} className="relative z-10 bg-[#D4AF37] text-black px-6 py-3 rounded-xl font-bold text-sm hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 hover:shadow-[#D4AF37]/20 hover:scale-105 active:scale-95 disabled:opacity-50">
-                            Scanner
-                        </button>
-                    </div>
-                </div>
-
-                {/* Recent Activity Table */}
-                <div className="bg-white/5 border border-white/10 rounded-3xl overflow-hidden backdrop-blur-md">
-                    <div className="p-8 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
-                        <h3 className="font-bold text-lg text-white">Activité Récente</h3>
-                        <button className="text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-white transition-colors">Tout voir</button>
-                    </div>
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-left">
-                            <thead className="bg-black/40 text-gray-500 uppercase text-xs font-bold tracking-wider">
-                                <tr>
-                                    <th className="px-8 py-5">Client</th>
-                                    <th className="px-8 py-5">Type Service</th>
-                                    <th className="px-8 py-5">Status</th>
-                                    <th className="px-8 py-5">Heure</th>
-                                    <th className="px-8 py-5 text-right">Montant</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/5 text-gray-300">
-                                {appointments.length > 0 ? appointments.map((appt, i) => (
-                                    <tr key={i} className="hover:bg-white/5 transition-colors group">
-                                        <td className="px-8 py-5 font-bold text-white group-hover:text-[#D4AF37] transition-colors">{appt.client_name}</td>
-                                        <td className="px-8 py-5 text-gray-400">{(appt as any).type || (i % 2 === 0 ? "Coupe + Barbe" : "Taille Barbe")}</td>
-                                        <td className="px-8 py-5">
-                                            <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border ${appt.status === 'Confirmé' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-                                                'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'
-                                                }`}>
-                                                {appt.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-8 py-5 text-gray-500 font-mono">{(appt as any).time}</td>
-                                        <td className="px-8 py-5 text-white font-bold font-mono text-right text-lg">{appt.amount} €</td>
-                                    </tr>
-                                )) : (
-                                    <tr>
-                                        <td colSpan={5} className="px-8 py-12 text-center text-gray-500">
-                                            Aucune activité récente. <br />
-                                            <span className="text-xs">Cliquez sur "Simuler RDV" pour tester.</span>
-                                        </td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                )}
             </main>
         </div>
     );

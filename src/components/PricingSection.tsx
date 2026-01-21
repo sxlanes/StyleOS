@@ -1,4 +1,4 @@
-import { Check, ShieldCheck, X, Zap, Crown, Calculator, FileText } from 'lucide-react';
+import { Check, ShieldCheck, X, Zap, Crown, Calculator } from 'lucide-react';
 
 const PricingSection = () => {
     return (
