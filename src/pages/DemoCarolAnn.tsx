@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Bot, Phone, Star, MapPin, ArrowRight, Check, Sparkles, Play, Clock, ShieldCheck, Heart, ChevronRight, Info, User, Calendar, Search, Menu, X, Instagram, Facebook, Scissors } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
