@@ -1,4 +1,4 @@
-```
+
 import { useState, useEffect, useRef } from 'react';
 import { MapPin, Phone, Star, Clock, Instagram, Facebook, ArrowRight, Menu, X, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -148,13 +148,13 @@ const DemoCarolAnn = () => {
                 </div>
 
                 {/* Mobile Dropdown Nav */}
-                <div className={`md:hidden absolute w - full bg - white border - b border - [#E7E5E4] transition - all duration - 300 overflow - hidden ${ isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0' } `}>
+                <div className={`md:hidden absolute w - full bg - white border - b border - [#E7E5E4] transition - all duration - 300 overflow - hidden ${isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'} `}>
                     <div className="py-2 px-4 flex flex-col gap-1">
                         {SERVICES.map((service, index) => (
                             <button
                                 key={index}
                                 onClick={() => scrollToCategory(service.id)}
-                                className={`text - left py - 3 px - 2 text - sm uppercase tracking - wide border - b border - gray - 50 last: border - 0 ${ activeCategory === service.id ? 'text-[#064E3B] font-bold' : 'text-gray-500' } `}
+                                className={`text - left py - 3 px - 2 text - sm uppercase tracking - wide border - b border - gray - 50 last: border - 0 ${activeCategory === service.id ? 'text-[#064E3B] font-bold' : 'text-gray-500'} `}
                             >
                                 {service.category}
                             </button>
@@ -208,11 +208,10 @@ const DemoCarolAnn = () => {
                                     document.getElementById(cat.id)?.scrollIntoView({ behavior: 'smooth' });
                                 }}
                                 key={cat.id}
-                                className={`w - full text - left py - 3 px - 4 rounded - lg transition - all duration - 300 flex items - center justify - between group ${
-    activeCategory === cat.id
-        ? 'bg-[#064E3B] text-white shadow-lg'
-        : 'text-stone-600 hover:bg-stone-100'
-} `}
+                                className={`w - full text - left py - 3 px - 4 rounded - lg transition - all duration - 300 flex items - center justify - between group ${activeCategory === cat.id
+                                        ? 'bg-[#064E3B] text-white shadow-lg'
+                                        : 'text-stone-600 hover:bg-stone-100'
+                                    } `}
                             >
                                 <span className="font-medium">{cat.category}</span>
                                 {activeCategory === cat.id && (
@@ -246,11 +245,10 @@ const DemoCarolAnn = () => {
                                     <div
                                         key={itemIdx}
                                         onClick={() => toggleService(item.name)}
-                                        className={`p - 4 rounded - xl border transition - all duration - 300 cursor - pointer group relative overflow - hidden ${
-    selectedServices.has(item.name)
-        ? 'bg-[#064E3B]/5 border-[#064E3B] shadow-md'
-        : 'bg-white border-stone-100 hover:border-[#064E3B]/30 hover:shadow-sm'
-} `}
+                                        className={`p - 4 rounded - xl border transition - all duration - 300 cursor - pointer group relative overflow - hidden ${selectedServices.has(item.name)
+                                                ? 'bg-[#064E3B]/5 border-[#064E3B] shadow-md'
+                                                : 'bg-white border-stone-100 hover:border-[#064E3B]/30 hover:shadow-sm'
+                                            } `}
                                     >
                                         {selectedServices.has(item.name) && (
                                             <div className="absolute top-0 right-0 p-2 bg-[#064E3B] text-white rounded-bl-xl">
@@ -258,7 +256,7 @@ const DemoCarolAnn = () => {
                                             </div>
                                         )}
                                         <div className="flex justify-between items-start mb-2">
-                                            <h4 className={`font - serif text - lg font - medium transition - colors ${ selectedServices.has(item.name) ? 'text-[#064E3B]' : 'text-stone-800' } `}>
+                                            <h4 className={`font - serif text - lg font - medium transition - colors ${selectedServices.has(item.name) ? 'text-[#064E3B]' : 'text-stone-800'} `}>
                                                 {item.name}
                                             </h4>
                                             <span className="font-bold text-[#D4AF37]">{item.price}</span>
@@ -268,11 +266,10 @@ const DemoCarolAnn = () => {
                                             <span className="flex items-center gap-1">
                                                 <Clock size={12} /> {item.duration}
                                             </span>
-                                            <span className={`px - 2 py - 1 rounded - full transition - colors ${
-    selectedServices.has(item.name)
-        ? 'bg-[#064E3B] text-white'
-        : 'bg-stone-100 text-stone-500 group-hover:bg-[#064E3B] group-hover:text-white'
-} `}>
+                                            <span className={`px - 2 py - 1 rounded - full transition - colors ${selectedServices.has(item.name)
+                                                    ? 'bg-[#064E3B] text-white'
+                                                    : 'bg-stone-100 text-stone-500 group-hover:bg-[#064E3B] group-hover:text-white'
+                                                } `}>
                                                 {selectedServices.has(item.name) ? 'Sélectionné' : 'Choisir'}
                                             </span>
                                         </div>
@@ -401,4 +398,4 @@ const DemoCarolAnn = () => {
 };
 
 export default DemoCarolAnn;
-```
+
