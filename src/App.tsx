@@ -2,6 +2,7 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import Demo253 from './pages/Demo253';
+import DemoCarolAnn from './pages/DemoCarolAnn';
 
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/demos" element={<DemosPage />} />
                 <Route path="/demo/253-barber-club" element={<Demo253 />} />
+                <Route path="/demo/carol-ann" element={<DemoCarolAnn />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/plan/:planId" element={<PlanDetails />} />
             </Routes>

@@ -12,6 +12,7 @@ Voici la liste des meilleures opportunités identifiées à Bordeaux. Elles sont
 *   **Website:** https://www.planity.com/lesthetique-by-carol-ann-33000-bordeaux
 *   **Situation:** 100% dépendant de Planity. Potentiel "Luxe" inexploité.
 *   **Estimation Coût Planity:** **~117€/mois** (89€ Abo + ~28€ SMS estimé). **~1 404€/an**.
+*   👉 **Voir Démo StyleOS:** http://localhost:5173/#/demo/carol-ann
 
 ## 3. Barber City (Score: 9/10)
 *   **Website:** https://www.planity.com/mb-barber-shop-33200-bordeaux

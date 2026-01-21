@@ -53,7 +53,31 @@ const DemosPage = () => {
                         </div>
                     </Link>
 
-                    {/* Placeholder Card 2 */}
+                    {/* Demo Card 2: Carol-Ann */}
+                    <Link to="/demo/carol-ann" className="group relative rounded-3xl overflow-hidden border border-white/10 bg-black/40 aspect-[4/3] block">
+                        {/* Background Image / Placeholder */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10"></div>
+                        <img
+                            src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=2070&auto=format&fit=crop"
+                            alt="L'Esthétique by Carol-Ann"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-60 group-hover:opacity-80"
+                        />
+
+                        <div className="absolute inset-0 z-20 flex flex-col justify-end p-8">
+                            <div className="inline-block px-3 py-1 rounded bg-[#D4AF37] text-black text-xs font-bold uppercase tracking-widest w-fit mb-4">
+                                Luxury
+                            </div>
+                            <h3 className="text-3xl font-serif font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
+                                L'Esthétique
+                                <span className="block text-sm font-sans font-normal opacity-80 mt-1">by Carol-Ann</span>
+                            </h3>
+                            <p className="text-gray-300 text-sm flex items-center gap-2">
+                                Voir la démo <ExternalLink className="w-4 h-4" />
+                            </p>
+                        </div>
+                    </Link>
+
+                    {/* Placeholder Card 3 */}
                     <div className="relative rounded-3xl overflow-hidden border border-white/5 bg-white/5 aspect-[4/3] flex items-center justify-center group">
                         <div className="text-center p-6">
                             <div className="w-16 h-16 rounded-full bg-white/5 mx-auto mb-4 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
