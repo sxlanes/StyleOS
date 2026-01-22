@@ -7,12 +7,12 @@ const OfferSection = () => {
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
 
             <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-                <h2 className="text-5xl md:text-7xl font-bold mb-8 text-white tracking-tight">
-                    REPRENEZ VOTRE <br /> <span className="text-primary">INDÉPENDANCE</span>
+                <h2 className="text-5xl md:text-7xl font-black mb-8 text-white tracking-tighter uppercase leading-[0.9]">
+                    DOMINEZ VOTRE <br /> <span className="text-primary italic">TERRITOIRE</span>
                 </h2>
 
-                <p className="text-xl text-text-muted mb-12 max-w-2xl mx-auto">
-                    Rejoignez le cercle exclusif des barbiers bordelais qui possèdent leurs données, leur marque et leur avenir.
+                <p className="text-xl text-text-muted mb-12 max-w-2xl mx-auto font-light">
+                    Rejoignez l'élite des barbiers bordelais qui ont remplacé le chaos par la Dominance Blue-Chip.
                 </p>
 
                 {/* The Offer Card */}
@@ -35,10 +35,42 @@ const OfferSection = () => {
                             </li>
                         </ul>
 
-                        <button className="w-full py-4 bg-white text-black font-bold text-lg rounded-full hover:bg-gray-200 transition-colors">
-                            Demander un Accès
-                        </button>
-                        <p className="text-xs text-gray-500 mt-4">Limité à 5 nouveaux salons sur Bordeaux ce mois-ci.</p>
+                        <form className="space-y-6 mt-8">
+                            <div className="relative">
+                                <input
+                                    type="text"
+                                    id="salon"
+                                    placeholder=" "
+                                    className="peer w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-transparent focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
+                                />
+                                <label
+                                    htmlFor="salon"
+                                    className="absolute left-4 top-4 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary"
+                                >
+                                    Nom du Salon
+                                </label>
+                            </div>
+
+                            <div className="relative">
+                                <input
+                                    type="email"
+                                    id="email-contact"
+                                    placeholder=" "
+                                    className="peer w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-transparent focus:outline-none focus:border-primary/50 focus:bg-white/10 transition-all"
+                                />
+                                <label
+                                    htmlFor="email-contact"
+                                    className="absolute left-4 top-4 text-gray-500 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:top-1 peer-focus:text-xs peer-focus:text-primary peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-xs peer-[:not(:placeholder-shown)]:text-primary"
+                                >
+                                    Email Professionnel
+                                </label>
+                            </div>
+
+                            <button className="w-full py-5 bg-primary text-black font-black uppercase tracking-widest text-sm rounded-xl hover:bg-white transition-all shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95">
+                                Demander mon Audit Gratuit
+                            </button>
+                            <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-[0.2em]">Priorité aux salons de Bordeaux • Limité à 5 places</p>
+                        </form>
                     </div>
                 </div>
 

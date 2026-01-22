@@ -5,14 +5,14 @@ const features = [
     {
         id: 'web',
         icon: Monitor,
-        title: "Site Web Personnalisé",
-        subtitle: "Ne soyez plus un parmi d'autres.",
-        description: "Votre salon mérite mieux qu'une page standardisée. Nous créons un site web immersif qui capture l'essence de votre marque. C'est votre territoire, vos règles, votre image.",
+        title: "Dominance Digitale",
+        subtitle: "Votre image, votre autorité.",
+        description: "Votre salon est une destination, pas une commodité. Nous érigeons un bastion digital sur-mesure qui impose votre style dès le premier clic. C'est l'expérience Blue-Chip, sans compromis.",
         details: [
-            "Design Unique & Identitaire",
-            "Optimisé pour la conversion (Réservation)",
-            "SEO Local Dominant (Google Maps & Search)",
-            "Expérience Mobile-First Fluide"
+            "Branding 'Dark Luxury' Sur-Mesure",
+            "SEO Local de Haute Précision",
+            "Entonnoirs de Réservation Haute-Vitesse",
+            "Propriété Totale (Zéro Commission)"
         ],
         gradient: "from-blue-500/20 to-purple-500/20",
         color: "text-blue-400"
@@ -36,13 +36,13 @@ const features = [
         id: 'ai',
         icon: Cpu,
         title: "Sarah IA",
-        subtitle: "Votre secrétariat 24/7.",
-        description: "Pendant que vous coupez, Sarah répond. Elle gère les appels, filtre les curieux, et remplit votre agenda. Plus d'appels manqués, plus d'interruptions, juste du business.",
+        subtitle: "Dominance Opérationnelle Tier 1.",
+        description: "Pendant que vous créez, Sarah domine votre accueil. Elle gère les flux entrants, filtre les opportunités, et sécurise votre agenda. C'est votre rempart contre les interruptions, votre moteur de croissance.",
         details: [
             "Réponse Téléphonique Instantanée",
-            "Voix Humaine & Naturelle",
-            "Gestion des Rendez-vous & Annulations",
-            "Réponses aux Questions Fréquentes"
+            "Full WhatsApp Automation AI",
+            "Voix Humaine & Naturelle (Elite)",
+            "Gestion Intelligente des Agendas"
         ],
         gradient: "from-[#D4AF37]/20 to-orange-500/20",
         color: "text-[#D4AF37]"

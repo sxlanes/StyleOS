@@ -1,88 +1,83 @@
-import { useState } from 'react';
-import { Check, ShieldCheck, X, Zap, Crown, Calculator } from 'lucide-react';
+import { Check, ShieldCheck, Zap, Crown, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
     const navigate = useNavigate();
-    const [pricingMode, setPricingMode] = useState<'subscription' | 'one-time'>('subscription');
 
     const plans = [
         {
-            id: 'flagship',
-            name: "Flagship",
-            price: pricingMode === 'subscription' ? "50 €" : "1 490 €",
-            period: pricingMode === 'subscription' ? "/mois" : "unique",
-            maintenance: pricingMode === 'one-time' ? "120€/an + Domaine" : null,
-            savings: pricingMode === 'one-time' ? "Économisez -20%" : null,
-            icon: X,
-            description: "Votre vitrine digitale premium.",
+            id: 'basic',
+            name: "Basic",
+            price: "50 €",
+            period: "/mois",
+            icon: ShieldCheck,
+            roi: "Image de Marque Elite",
+            description: "Propulsez votre identité visuelle.",
             features: [
-                { text: "Site Web 'Dark Luxury'", included: true },
-                { text: "Maintenance Technique", included: true },
-                { text: "Réservation en Ligne", included: true },
-                { text: "Module Compta IA", included: false },
-                { text: "Agent IA Sarah", included: false }
+                { text: "Création Site Web (Setup initial)", included: true, bold: true },
+                { text: "Système de Réservation", included: true, bold: false },
+                { text: "Maintenance & Hébergement", included: true, bold: false },
+                { text: "Paiement Nom de Domaine", included: true, bold: false },
+                { text: "Sarah IA", included: false, bold: false }
             ],
-            cta: "Choisir Flagship",
+            cta: "Démarrer en Basic",
             highlight: false
         },
         {
-            id: 'pilotage',
-            name: "Pilotage",
-            price: pricingMode === 'subscription' ? "89 €" : "2 890 €",
-            period: pricingMode === 'subscription' ? "/mois" : "unique",
-            maintenance: pricingMode === 'one-time' ? "120€/an + Domaine" : null,
-            savings: pricingMode === 'one-time' ? "-20%" : null,
-            icon: Calculator,
-            description: "Maîtrisez votre argent.",
-            badge: "Gestion Pro",
-            subBadge: "Idéal pour lâcher le papier",
-            features: [
-                { text: "Tout du Flagship", included: true },
-                { text: "Module Compta IA", included: true, bold: true },
-                { text: "Calcul Bénéfice Net Réel", included: true },
-                { text: "Scan Factures (Photo)", included: true },
-                { text: "Export Expert-Comptable", included: true }
-            ],
-            cta: "Choisir Pilotage",
-            highlight: false
-        },
-        {
-            id: 'acceleration',
-            name: "Accélération",
-            price: pricingMode === 'subscription' ? "125 €" : "4 490 €",
-            period: pricingMode === 'subscription' ? "/mois" : "unique",
-            maintenance: pricingMode === 'one-time' ? "120€/an + Domaine" : null,
-            savings: pricingMode === 'one-time' ? "-25%" : null,
+            id: 'pro',
+            name: "Pro",
+            price: "109 €",
+            period: "/mois",
             icon: Zap,
-            description: "L'automatisation intelligente.",
+            roi: "~450€ / mois économisés",
+            description: "Sarah IA à votre service 24h/24.",
             features: [
-                { text: "Tout du pack Pilotage", included: true, bold: true },
-                { text: "Agent IA Sarah (24/7)", included: true, bold: true },
-                { text: "Agenda Automatisé", included: true },
-                { text: "Réponse Appels Manqués", included: true },
-                { text: "Gestion Réseaux Sociaux", included: false, italic: true }
+                { text: "Tout du Pack Basic", included: true, bold: false },
+                { text: "Sarah IA Ilimitée", included: true, bold: true },
+                { text: "Support Technique 24/7", included: true, bold: false },
+                { text: "Maintenance Premium", included: true, bold: false },
+                { text: "Pilotage Compta IA", included: false, bold: false }
             ],
-            cta: "Automatiser mon salon",
+            cta: "Démarrer en Pro",
+            highlight: false
+        },
+        {
+            id: 'elite',
+            name: "Elite",
+            price: "199 €",
+            period: "/mois",
+            icon: Crown,
+            roi: "~1200€ / mois économisés",
+            description: "Domination totale et gestion automatisée.",
+            badge: "Plus Populaire",
+            features: [
+                { text: "Tout du Pack Pro", included: true, bold: false },
+                { text: "Pilotage Compta IA Complet", included: true, bold: true },
+                { text: "Automatisation des Avis", included: true, bold: true },
+                { text: "Gestion de Réputation Auto", included: true, bold: true },
+                { text: "Support Dédié", included: true, bold: false }
+            ],
+            cta: "Devenir Elite",
             highlight: true
         },
         {
             id: 'empire',
             name: "Empire",
-            price: pricingMode === 'subscription' ? "250 €" : "8 990 €",
-            period: pricingMode === 'subscription' ? "/mois" : "unique",
-            maintenance: pricingMode === 'one-time' ? "120€/an + Domaine" : null,
-            savings: pricingMode === 'one-time' ? "-30%" : null,
-            icon: Crown,
-            description: "Dominez votre marché.",
+            price: "279 €",
+            period: "/mois",
+            icon: TrendingUp,
+            roi: "ROI Illimité / Multi-siège",
+            description: "Pour les visionnaires multi-établissements.",
+            badge: "-30% OFF TEMPORAIRE",
+            oldPrice: "399 €",
             features: [
-                { text: "Tout du pack Accélération", included: true, bold: true },
-                { text: "Gestion Réseaux Sociaux", included: true, bold: true },
-                { text: "Création Contenu (4/mois)", included: true },
-                { text: "pubs Facebook/Insta Ads", included: true },
-                { text: "Coaching Business 1-1", included: true }
+                { text: "Tout du Pack Elite", included: true, bold: true },
+                { text: "Gestion de Réseaux Sociaux", included: true, bold: true },
+                { text: "Stratégie Marketing Dédiée", included: true, bold: true },
+                { text: "Support 24/7 VIP", included: true, bold: true },
+                { text: "Rapports Multi-sièges", included: true, bold: false }
             ],
-            cta: "Choisir Empire",
+            cta: "Bâtir l'Empire",
             highlight: false
         }
     ];
@@ -95,94 +90,77 @@ const PricingSection = () => {
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+                    <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase text-white">
                         Investissez dans votre <span className="text-primary italic">Liberté</span>
                     </h2>
-                    <p className="text-xl text-text-muted max-w-2xl mx-auto mb-8">
-                        Choisissez le modèle qui vous convient : Abonnement sans engagement ou Achat unique.
+                    <p className="text-xl text-gray-400 max-w-3xl mx-auto font-medium leading-relaxed mb-8">
+                        Reprenez le contrôle de votre temps et de votre croissance avec nos plans partenaires Blue-Chip.
                     </p>
-
-                    {/* Pricing Toggle */}
-                    <div className="inline-flex items-center p-1 bg-white/5 rounded-full border border-white/10 mb-8 self-center">
-                        <button
-                            onClick={() => setPricingMode('subscription')}
-                            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${pricingMode === 'subscription'
-                                ? 'bg-primary text-black shadow-lg scale-105'
-                                : 'text-white/60 hover:text-white'
-                                }`}
-                        >
-                            Abonnement (Mensuel)
-                        </button>
-                        <button
-                            onClick={() => setPricingMode('one-time')}
-                            className={`px-6 py-2 rounded-full text-sm font-bold transition-all ${pricingMode === 'one-time'
-                                ? 'bg-primary text-black shadow-lg scale-105'
-                                : 'text-white/60 hover:text-white'
-                                }`}
-                        >
-                            Paiement Unique
-                        </button>
-                    </div>
                 </div>
 
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     {plans.map((plan, index) => (
                         <div
                             key={index}
-                            className={`relative p-8 rounded-3xl border transition-all duration-300 group hover:-translate-y-2 flex flex-col
+                            className={`relative p-8 rounded-[2.5rem] border transition-all duration-500 group hover:-translate-y-4 flex flex-col overflow-hidden
                                 ${plan.highlight
-                                    ? 'bg-gradient-to-b from-white/10 to-black border-primary/50 shadow-[0_0_50px_rgba(212,175,55,0.1)]'
-                                    : 'bg-black/40 border-white/10 hover:border-white/20'
+                                    ? 'bg-gradient-to-br from-white/15 via-black to-black border-primary/50 shadow-[0_30px_60px_-15px_rgba(212,175,55,0.15)] hover:shadow-[0_50px_80px_-20px_rgba(212,175,55,0.25)]'
+                                    : 'bg-surface/30 border-white/10 hover:border-white/30 backdrop-blur-xl shadow-2xl hover:bg-white/[0.02]'
                                 }
                             `}
                         >
-                            {plan.highlight && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-black px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg whitespace-nowrap">
-                                    Le Plus Populaire
+                            {/* Hover Shine Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
+
+                            {plan.badge && (
+                                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-[0.2em] shadow-lg whitespace-nowrap z-20 
+                                    ${plan.id === 'empire' ? 'bg-red-500 text-white animate-pulse' : 'bg-primary text-black'}`}>
+                                    {plan.badge}
                                 </div>
                             )}
 
-                            <div className="mb-8">
-                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-colors
-                                    ${plan.highlight ? 'bg-primary text-black' : 'bg-white/5 text-white group-hover:bg-white/10'}
+                            <div className="relative z-10 mb-8">
+                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3
+                                    ${plan.highlight ? 'bg-primary text-black shadow-[0_0_20px_rgba(212,175,55,0.4)]' : 'bg-white/5 text-white group-hover:bg-primary/20 group-hover:text-primary'}
                                 `}>
                                     <plan.icon className="w-6 h-6" />
                                 </div>
 
-                                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                                <p className="text-text-muted text-sm min-h-[40px]">{plan.description}</p>
+                                <h3 className="text-2xl font-black mb-2 uppercase tracking-tighter text-white">{plan.name}</h3>
+                                <p className="text-gray-400 text-[10px] font-bold leading-relaxed min-h-[40px] uppercase tracking-wider">{plan.description}</p>
                             </div>
 
-                            <div className="mb-8">
-                                <div className="flex items-baseline gap-1">
-                                    <span className="text-4xl font-bold tracking-tight">{plan.price}</span>
-                                    {plan.period && <span className="text-text-muted text-sm">{plan.period}</span>}
+                            <div className="relative z-10 mb-6">
+                                <div className="flex items-baseline gap-2 mb-2">
+                                    <div className="flex flex-col">
+                                        {plan.oldPrice && <span className="text-gray-600 text-sm line-through font-bold mb-1">{plan.oldPrice}</span>}
+                                        <span className="text-5xl font-black tracking-tighter text-white italic">{plan.price.split(' ')[0]}</span>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-primary font-bold text-lg leading-none">€</span>
+                                        <span className="text-gray-500 text-[10px] uppercase font-black tracking-widest">{plan.period.replace('/', '')}</span>
+                                    </div>
                                 </div>
-                                {plan.maintenance && (
-                                    <div className="text-xs text-primary mt-2 font-medium">
-                                        {plan.maintenance}
-                                    </div>
-                                )}
-                                {(plan as any).subBadge && (
-                                    <div className="inline-block mt-3 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold w-full text-center">
-                                        {(plan as any).subBadge}
-                                    </div>
-                                )}
+                                <div className="inline-block px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-wider">
+                                    ROI: {plan.roi}
+                                </div>
                             </div>
 
-                            <ul className="space-y-4 mb-8 flex-1">
+                            <ul className="relative z-10 space-y-4 mb-10 flex-1">
                                 {plan.features.map((feature, idx) => (
-                                    <li key={idx} className={`flex items-start gap-3 text-sm ${!feature.included ? 'opacity-40' : ''}`}>
+                                    <li key={idx} className={`flex items-start gap-3 text-[10px] transition-all duration-300 ${!feature.included ? 'opacity-20' : 'group-hover:translate-x-1'}`}>
                                         {feature.included ? (
-                                            <Check className={`w-5 h-5 shrink-0 ${plan.highlight ? 'text-primary' : 'text-white'}`} />
+                                            <div className={`p-0.5 rounded-full shrink-0 ${plan.highlight ? 'bg-primary/20 text-primary' : 'bg-white/10 text-gray-400'}`}>
+                                                <Check className="w-3 h-3" />
+                                            </div>
                                         ) : (
-                                            <X className="w-5 h-5 shrink-0 text-white/40" />
+                                            <div className="w-4 h-4 shrink-0" />
                                         )}
                                         <span className={`
-                                            ${feature.bold ? 'font-bold text-white' : 'text-gray-400'}
-                                            ${(feature as any).italic ? 'italic text-gray-500' : ''}
+                                            ${feature.bold ? 'font-black text-white uppercase tracking-wide' : 'text-gray-400 font-bold'}
                                             ${!feature.included ? 'line-through' : ''}
+                                            ${feature.text === 'Pilotage Compta IA Complet' ? 'text-primary' : ''}
                                         `}>
                                             {feature.text}
                                         </span>
@@ -192,10 +170,10 @@ const PricingSection = () => {
 
                             <button
                                 onClick={() => navigate(`/plan/${plan.id}`)}
-                                className={`w-full py-4 rounded-xl font-bold uppercase tracking-wide transition-all mt-auto
+                                className={`relative z-10 w-full py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] transition-all duration-500
                                     ${plan.highlight
-                                        ? 'bg-primary text-black hover:bg-white hover:scale-105 shadow-lg'
-                                        : 'bg-white/5 text-white hover:bg-white/20 hover:scale-105 border border-white/10'
+                                        ? 'bg-primary text-black hover:bg-white hover:scale-105 shadow-[0_15px_30px_rgba(212,175,55,0.2)]'
+                                        : 'bg-white/5 text-white hover:bg-primary hover:text-black border border-white/10 hover:border-primary'
                                     }
                                 `}
                             >
@@ -206,9 +184,9 @@ const PricingSection = () => {
                 </div>
 
                 <div className="mt-16 text-center">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-sm font-medium">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary/80 text-xs font-bold uppercase tracking-widest">
                         <ShieldCheck className="w-4 h-4" />
-                        <span>0% de commission sur vos réservations. Ce que vous gagnez est 100% à vous.</span>
+                        <span>Propriété Totale. Zéro Commissions. Indépendance Garantie.</span>
                     </div>
                 </div>
 

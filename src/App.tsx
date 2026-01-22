@@ -9,6 +9,8 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import DemosPage from './pages/DemosPage';
 import PlanDetails from './pages/PlanDetails';
+import LegalMentions from './pages/LegalMentions';
+import TermsOfService from './pages/TermsOfService';
 
 function App() {
     return (
@@ -22,6 +24,8 @@ function App() {
                 <Route path="/demo/carol-ann" element={<DemoCarolAnn />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/plan/:planId" element={<PlanDetails />} />
+                <Route path="/legal" element={<LegalMentions />} />
+                <Route path="/terms" element={<TermsOfService />} />
             </Routes>
         </Router>
     );

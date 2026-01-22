@@ -1,4 +1,5 @@
-import { Play, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, X as CloseIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ComparisonTable from './components/ComparisonTable';
 import SolutionStack from './components/SolutionStack';
@@ -7,12 +8,21 @@ import ROICalculator from './components/ROICalculator';
 import FinancialComparison from './components/FinancialComparison';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
+import SuccessStories from './components/SuccessStories';
 
 function LandingPage() {
+    const [isDemoOpen, setIsDemoOpen] = useState(false);
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
         }
     };
 
@@ -35,53 +45,61 @@ function LandingPage() {
                 </div>
             </nav>
 
-            {/* Hero Section - Cinematic Layout (Restored) */}
-            <header className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-black">
-
-                {/* Visual: Background Image with Gradient Overlay */}
+            {/* Hero Section - True Integrated Layout */}
+            <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
+                {/* Full-screen Background with focal points */}
                 <div className="absolute inset-0 z-0">
                     <img
                         src="hero-model.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover opacity-60"
+                        className="w-full h-full object-cover object-[25%_center] opacity-60"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0a0a0a]"></div>
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000_100%)] opacity-80"></div>
+                    {/* Cinematic Overlay: Gradient from left (lighter) to right (pure black) */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/40 to-black"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                 </div>
 
-                {/* Content: Centered Text */}
-                <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center animate-fade-in-up">
-                    <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md">
-                        StyleOS • Bordeaux
+                <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col items-start justify-center min-h-[80vh]">
+                    {/* Content Overlays the model slightly */}
+                    <div className="w-full lg:w-3/4 text-left animate-fade-in-up">
+                        <div className="inline-block mb-10 px-6 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
+                            StyleOS • Bordeaux • L'Élite
+                        </div>
+
+                        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.8] text-white uppercase font-sans tracking-tighter mb-12">
+                            Distinguez<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] bg-[length:200%_auto] animate-shimmer">VOUS.</span>
+                        </h1>
+
+                        <div className="max-w-2xl">
+                            <h2 className="text-2xl md:text-4xl text-gray-200 font-bold mb-10 tracking-tight">
+                                Coupez des cheveux, <span className="text-primary italic">pas des appels.</span>
+                            </h2>
+
+                            <p className="text-xl text-gray-400 mb-12 leading-relaxed font-medium opacity-80">
+                                Ne soyez plus un simple matricule Planity.
+                                Propulsez votre salon au rang de destination Tier 1 avec votre propia infrastructure digitale autonome.
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-6">
+                                <button
+                                    onClick={() => scrollToSection('features')}
+                                    className="group relative px-12 py-6 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#D4AF37]/50 transition-all duration-700 hover:shadow-[0_0_40px_rgba(212,175,55,0.2)]"
+                                >
+                                    <div className="absolute inset-0 w-0 bg-gradient-to-r from-primary/20 to-transparent transition-all duration-700 ease-out group-hover:w-full"></div>
+                                    <span className="relative text-white font-black uppercase tracking-[0.3em] text-[11px] flex items-center gap-4">
+                                        Explorer Le Système
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-2 group-hover:text-primary transition-all duration-300" />
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.9] text-white uppercase font-sans tracking-tighter mb-8 drop-shadow-2xl">
-                        Distinguez-vous<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB]">De La Masse.</span>
-                    </h1>
-
-                    <h2 className="text-xl md:text-2xl text-gray-300 font-medium mb-10 tracking-wide max-w-2xl mx-auto">
-                        Coupez des cheveux, pas des appels.
-                    </h2>
-
-                    <p className="text-lg text-gray-400 max-w-xl mx-auto mb-12 leading-relaxed font-light">
-                        Ne soyez pas juste une ligne dans une liste Planity.
-                        <br />
-                        Offrez-vous un <strong>site web ultra-personnalisé</strong> et un <strong>agent IA</strong> qui gèrent votre business.
-                    </p>
-
-                    {/* Single "Explorer" Button */}
-                    <div>
-                        <button
-                            onClick={() => scrollToSection('solution-stack')}
-                            className="group relative px-10 py-5 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#D4AF37]/50 transition-all duration-500"
-                        >
-                            <div className="absolute inset-0 w-0 bg-[#D4AF37] transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
-                            <span className="relative text-white font-bold uppercase tracking-[0.2em] text-sm flex items-center gap-3">
-                                Explorer Le Système <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </span>
-                        </button>
-                    </div>
+                {/* Decorative Elements */}
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+                    <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent"></div>
                 </div>
             </header>
 
@@ -89,6 +107,7 @@ function LandingPage() {
             <SolutionStack />
 
             <ComparisonTable />
+            <SuccessStories />
 
             <AudioDemo />
             <ROICalculator />
@@ -116,9 +135,8 @@ function LandingPage() {
                     <div>
                         <h4 className="font-bold text-white mb-4">Légal</h4>
                         <ul className="space-y-2 text-sm text-gray-500">
-                            <li><a href="#" className="hover:text-white transition-colors">Mentions Légales</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">CGV</a></li>
-                            <li><a href="#" className="hover:text-white transition-colors">Confidentialité</a></li>
+                            <li><Link to="/legal" className="hover:text-white transition-colors">Mentions Légales</Link></li>
+                            <li><Link to="/terms" className="hover:text-white transition-colors">CGV & CGU</Link></li>
                         </ul>
                     </div>
                     <div>
@@ -137,8 +155,53 @@ function LandingPage() {
                 </div>
             </footer>
 
+
+            {/* Live Demo Video Modal */}
+            {isDemoOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-500">
+                    {/* Backdrop */}
+                    <div
+                        className="absolute inset-0 bg-black/95 backdrop-blur-2xl"
+                        onClick={() => setIsDemoOpen(false)}
+                    ></div>
+
+                    {/* Modal Container */}
+                    <div className="relative w-full max-w-6xl aspect-video bg-black rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(212,175,55,0.2)] animate-in zoom-in-95 duration-500">
+                        {/* Close Button */}
+                        <button
+                            onClick={() => setIsDemoOpen(false)}
+                            className="absolute top-6 right-6 z-20 p-4 bg-white/10 hover:bg-white/20 rounded-full transition-colors text-white group"
+                        >
+                            <CloseIcon className="w-6 h-6 group-hover:rotate-90 transition-transform duration-500" />
+                        </button>
+
+                        {/* Video Player */}
+                        <div className="absolute inset-0 w-full h-full">
+                            <video
+                                className="w-full h-full object-cover"
+                                autoPlay
+                                muted
+                                controls
+                                playsInline
+                            >
+                                <source src="https://cdn.pixabay.com/video/2020/07/26/45643-445695034_tiny.mp4" type="video/mp4" />
+                                Votre navigateur ne supporte pas la lecture de vidéos.
+                            </video>
+
+                            {/* Cinematic Gradient Overlays */}
+                            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-black/40"></div>
+                        </div>
+
+                        {/* Modal Footer/Info */}
+                        <div className="absolute bottom-10 left-10 z-10 hidden md:block">
+                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-2">StyleOS Live Experience</h3>
+                            <p className="text-primary text-xs font-bold uppercase tracking-[0.2em]">Demo Sarah IA • Automatisation Totale</p>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-    )
+    );
 }
 
 export default LandingPage;

@@ -17,58 +17,63 @@ const AudioDemo = () => {
     };
 
     return (
-        <section id="demo" className="py-24 bg-surface border-y border-glass-border">
-            <div className="max-w-4xl mx-auto px-6 text-center">
-                <div className="inline-flex items-center gap-2 text-primary text-sm font-bold tracking-widest uppercase mb-4">
-                    <Mic className="w-4 h-4 animate-pulse" /> Analyse en Direct
+        <section id="demo" className="py-32 bg-surface border-y border-white/5 relative overflow-hidden">
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+                <div className="inline-flex items-center gap-3 text-primary text-xs font-black tracking-[0.4em] uppercase mb-8">
+                    <Mic className="w-4 h-4 animate-pulse" /> Système Sarah IA Actif
                 </div>
-                <h2 className="text-4xl font-bold mb-8">N'IMAGINEZ PAS. ÉCOUTEZ.</h2>
-                <p className="text-text-muted mb-12">
-                    Lancez l'audio ci-dessous pour entendre 'Sarah' gérer une demande de changement de rendez-vous complexe.
+
+                <h2 className="text-5xl md:text-7xl font-black mb-10 tracking-tighter uppercase text-white">
+                    N'IMAGINEZ PAS.<br />
+                    <span className="text-primary italic text-4xl md:text-6xl">ÉCOUTEZ VOTRE FUTUR.</span>
+                </h2>
+
+                <p className="text-gray-400 text-xl font-medium mb-16 max-w-2xl mx-auto">
+                    Sarah IA ne se contente de répondre. Elle comprend, conseille et vend votre expertise 24h/24.
                 </p>
 
                 {/* Audio Player UI Wrapper */}
-                <div className="w-full max-w-2xl mx-auto bg-black p-6 rounded-3xl border border-glass-border shadow-2xl relative overflow-hidden">
+                <div className="w-full max-w-3xl mx-auto bg-black/60 p-10 rounded-[3rem] border border-white/10 shadow-2xl backdrop-blur-xl relative overflow-hidden mb-16 group hover:border-primary/20 transition-all duration-700">
 
-                    {/* Hidden Audio Element - REPLACE src with actual file */}
                     <audio
                         ref={audioRef}
                         src="https://static1.squarespace.com/static/5e32b61044a8b143b36ce382/t/5e46c7b50a3a7b51d13cf890/1652905383717/French-Female-Voiceover-Sylvie.mp3"
                         onEnded={() => setIsPlaying(false)}
                     />
 
-                    {/* Background Waveform Effect */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-10 gap-1 pointer-events-none">
-                        {[...Array(50)].map((_, i) => (
-                            <div key={i} className={`w-1 bg-primary h-full transition-all duration-300 ${isPlaying ? 'animate-pulse' : ''}`} style={{ height: `${Math.random() * 100}%` }}></div>
-                        ))}
-                    </div>
-
-                    <div className="relative z-10 flex items-center gap-6">
+                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
                         <button
                             onClick={togglePlay}
-                            className="w-16 h-16 bg-primary text-black rounded-full flex items-center justify-center hover:scale-105 transition-transform"
+                            className="w-24 h-24 bg-primary text-black rounded-full flex items-center justify-center hover:scale-110 transition-all duration-500 shadow-[0_0_40px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_60px_rgba(212,175,55,0.5)]"
                         >
                             {isPlaying ? (
-                                <PauseCircle className="w-8 h-8 fill-black" />
+                                <PauseCircle className="w-10 h-10 fill-black" />
                             ) : (
-                                <PlayCircle className="w-8 h-8 fill-black" />
+                                <PlayCircle className="w-10 h-10 fill-black" />
                             )}
                         </button>
 
-                        <div className="flex-1 text-left">
-                            <div className="text-xs text-text-muted uppercase tracking-wider mb-1">Lecture Démo</div>
-                            <div className="text-white font-medium text-lg">Présentation Sarah IA</div>
-                            {/* Fake Progress Bar - Could serve real progress later */}
-                            <div className="w-full h-1 bg-gray-800 rounded-full mt-3 overflow-hidden">
-                                <div className={`h-full bg-white transition-all duration-[2000ms] ease-linear ${isPlaying ? 'w-full' : 'w-1/3'}`}></div>
+                        <div className="flex-1 text-left w-full">
+                            <div className="text-[10px] text-primary uppercase font-black tracking-widest mb-2">Démo Interaction Vocale</div>
+                            <div className="text-white font-black text-2xl uppercase tracking-tight mb-4">Sarah gère un rendez-vous complexe</div>
+
+                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                <div className={`h-full bg-primary shadow-[0_0_15px_rgba(212,175,55,0.8)] transition-all duration-[4000ms] ease-linear ${isPlaying ? 'w-full' : 'w-0'}`}></div>
+                            </div>
+                            <div className="flex justify-between mt-3 text-[10px] font-black text-gray-600 uppercase tracking-widest">
+                                <span>{isPlaying ? 'Interaction en cours' : 'Prêt pour lecture'}</span>
+                                <span>02:45</span>
                             </div>
                         </div>
-
-                        <div className="text-sm text-text-muted font-mono">
-                            {isPlaying ? 'En cours...' : '0:00 / 1:30'}
-                        </div>
                     </div>
+                </div>
+
+                <div className="flex flex-col items-center gap-4">
+                    <p className="text-gray-600 text-[10px] font-black uppercase tracking-widest">
+                        Exemple réel d'interaction Sarah IA (Audio)
+                    </p>
                 </div>
             </div>
         </section>
