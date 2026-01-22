@@ -22,10 +22,10 @@ const features = [
         icon: Calculator,
         title: "Pilotage Financier",
         subtitle: "La clarté absolue sur vos profits.",
-        description: "Arrêtez de piloter à l'aveugle. StyleOS digère vos factures, calcule vos marges en temps réel et prépare tout pour votre comptable. Sachez exactement ce qui rentre dans votre poche.",
+        description: "Arrêtez de piloter à l'aveugle. StyleOS digère vos factures, calcule vos marges en temps réel et libère 4 HEURES de gestion administrative par semaine.",
         details: [
             "Dashboard de Bénéfice Net (Réel)",
-            "Scan de Factures par IA (Photo)",
+            "Scan de Factures IA (4h gagnées/sem)",
             "Catégorisation Automatique des Dépenses",
             "Export Comptable en 1 Clic"
         ],
