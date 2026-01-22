@@ -93,9 +93,20 @@ const PricingSection = () => {
                     <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tighter uppercase text-white">
                         Investissez dans votre <span className="text-primary italic">Liberté</span>
                     </h2>
-                    <p className="text-xl text-gray-400 max-w-3xl mx-auto font-medium leading-relaxed mb-8">
+                    <p className="text-xl text-gray-400 max-w-3xl mx-auto font-medium leading-relaxed mb-10">
                         Reprenez le contrôle de votre temps et de votre croissance avec nos plans partenaires Blue-Chip.
                     </p>
+
+                    {/* Setup Fee Notice - Elegant */}
+                    <div className="inline-flex flex-col md:flex-row items-center gap-4 bg-primary/5 border border-primary/20 p-6 rounded-[2rem] backdrop-blur-md mb-12">
+                        <div className="flex items-center gap-3">
+                            <Zap className="w-5 h-5 text-primary animate-pulse" />
+                            <span className="text-white font-black uppercase tracking-[0.2em] text-[10px]">Note Stratégique :</span>
+                        </div>
+                        <p className="text-gray-400 text-sm font-bold">
+                            Un setup initial de <span className="text-white">289€</span> est requis pour la création sur-mesure de votre infrastructure digitale.
+                        </p>
+                    </div>
                 </div>
 
 
