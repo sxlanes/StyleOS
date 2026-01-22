@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Monitor, Calculator, Cpu, TrendingUp, Check, ArrowRight } from 'lucide-react';
+import { Monitor, Calculator, Cpu, TrendingUp, Check, ArrowRight, Star } from 'lucide-react';
 
 const features = [
     {
@@ -61,6 +61,21 @@ const features = [
         ],
         gradient: "from-pink-500/20 to-rose-500/20",
         color: "text-pink-400"
+    },
+    {
+        id: 'reviews',
+        icon: Star,
+        title: "Réputation IA",
+        subtitle: "Le moteur de confiance automatique.",
+        description: "Transformez chaque client satisfait en un ambassadeur digital. Notre système sollicite, filtre et publie vos avis Google automatiquement pour dominer le classement local sans lever le petit doigt.",
+        details: [
+            "Sollicitation Automatique par SMS/WA",
+            "Filtrage Intelligent des Avis",
+            "IA de Réponse aux Commentaires",
+            "Boost du Référencement Google Maps"
+        ],
+        gradient: "from-yellow-500/20 to-amber-500/20",
+        color: "text-amber-400"
     }
 ];
 
