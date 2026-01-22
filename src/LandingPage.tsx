@@ -35,57 +35,52 @@ function LandingPage() {
                 </div>
             </nav>
 
-            {/* Hero Section - Split Layout (User Request: "Distribución anterior") */}
-            <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#0a0a0a]">
+            {/* Hero Section - Cinematic Layout (Restored) */}
+            <header className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-black">
 
-                {/* Visual: Man Image (Left/Background) */}
-                <div className="absolute inset-y-0 left-0 w-full md:w-[60%] z-0">
+                {/* Visual: Background Image with Gradient Overlay */}
+                <div className="absolute inset-0 z-0">
                     <img
                         src="hero-model.png"
-                        alt="StyleOS Barber"
-                        className="w-full h-full object-cover object-center md:object-right opacity-80 md:opacity-100 mask-image-linear-gradient"
+                        alt="StyleOS Atmosphere"
+                        className="w-full h-full object-cover opacity-60"
                     />
-                    {/* Gradient Overlay to fade image into black on the right */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/20 to-[#0a0a0a]"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent md:hidden"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-[#0a0a0a]"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000_100%)] opacity-80"></div>
                 </div>
 
-                {/* Content: Text (Right aligned) */}
-                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid md:grid-cols-2">
-                    <div className="hidden md:block"></div> {/* Spacer for image */}
+                {/* Content: Centered Text */}
+                <div className="relative z-10 w-full max-w-5xl mx-auto px-6 text-center animate-fade-in-up">
+                    <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md">
+                        StyleOS • Bordeaux
+                    </div>
 
-                    <div className="flex flex-col justify-center text-left pt-32 md:pt-0 animate-fade-in-up">
-                        <div className="inline-block mb-4 px-3 py-1 rounded bg-[#B88746]/10 border border-[#B88746]/20 text-[#B88746] text-xs font-bold uppercase tracking-[0.2em] w-fit">
-                            StyleOS • Bordeaux
-                        </div>
+                    <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold leading-[0.9] text-white uppercase font-sans tracking-tighter mb-8 drop-shadow-2xl">
+                        Distinguez-vous<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB]">De La Masse.</span>
+                    </h1>
 
-                        <h1 className="text-5xl md:text-8xl font-bold leading-[0.9] text-[#B88746] uppercase font-sans tracking-tighter mb-2">
-                            DISTINGUEZ-VOUS<br />
-                            <span className="text-white/90">DE LA MASSE.</span>
-                        </h1>
+                    <h2 className="text-xl md:text-2xl text-gray-300 font-medium mb-10 tracking-wide max-w-2xl mx-auto">
+                        Coupez des cheveux, pas des appels.
+                    </h2>
 
-                        <h2 className="text-xl md:text-2xl text-white font-bold bg-clip-text mb-8 tracking-wide">
-                            COUPEZ DES CHEVEUX, PAS DES APPELS.
-                        </h2>
+                    <p className="text-lg text-gray-400 max-w-xl mx-auto mb-12 leading-relaxed font-light">
+                        Ne soyez pas juste une ligne dans une liste Planity.
+                        <br />
+                        Offrez-vous un <strong>site web ultra-personnalisé</strong> et un <strong>agent IA</strong> qui gèrent votre business.
+                    </p>
 
-                        <p className="text-lg text-gray-400 max-w-lg mb-10 leading-relaxed font-light">
-                            Ne soyez pas juste une ligne dans une liste Planity.
-                            <br />
-                            Offrez-vous un <strong>site web ultra-personnalisé</strong> et un <strong>agent IA</strong> qui gèrent votre business pendant que vous créez.
-                        </p>
-
-                        {/* Single "Explorer" Button (User Request: "Botón de Explorer le system") */}
-                        <div>
-                            <button
-                                onClick={() => scrollToSection('solution-stack')}
-                                className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#B88746]/50 transition-all duration-500"
-                            >
-                                <div className="absolute inset-0 w-0 bg-[#B88746] transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
-                                <span className="relative text-white font-bold uppercase tracking-[0.2em] text-sm flex items-center gap-3">
-                                    Explorer Le Système <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </span>
-                            </button>
-                        </div>
+                    {/* Single "Explorer" Button */}
+                    <div>
+                        <button
+                            onClick={() => scrollToSection('solution-stack')}
+                            className="group relative px-10 py-5 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#D4AF37]/50 transition-all duration-500"
+                        >
+                            <div className="absolute inset-0 w-0 bg-[#D4AF37] transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
+                            <span className="relative text-white font-bold uppercase tracking-[0.2em] text-sm flex items-center gap-3">
+                                Explorer Le Système <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                            </span>
+                        </button>
                     </div>
                 </div>
             </header>
