@@ -45,46 +45,49 @@ function LandingPage() {
                 </div>
             </nav>
 
-            {/* Hero Section - True Integrated Layout */}
-            <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
-                {/* Full-screen Background with focal points */}
-                <div className="absolute inset-0 z-0">
+            {/* Hero Section - Split Layout: Face Left, Content Right */}
+            <header className="relative min-h-screen flex flex-col lg:flex-row pt-20 overflow-hidden bg-black">
+                {/* Left Side: The Face (No text over it) */}
+                <div className="w-full lg:w-1/2 relative h-[50vh] lg:h-auto overflow-hidden order-1">
                     <img
                         src="hero-model.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-[25%_center] opacity-60"
+                        className="w-full h-full object-cover object-[25%_center] lg:object-center opacity-80 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
-                    {/* Cinematic Overlay: Gradient from left (lighter) to right (pure black) */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/40 to-black"></div>
+                    {/* Cinematic Gradients for blending */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/0 via-transparent to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+
+                    {/* Decorative Vertical Accent */}
+                    <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden lg:block"></div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col items-start justify-center min-h-[80vh]">
-                    {/* Content Overlays the model slightly */}
-                    <div className="w-full lg:w-3/4 text-left animate-fade-in-up">
-                        <div className="inline-block mb-10 px-6 py-2 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-[#D4AF37] text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
+                {/* Right Side: The Content Area */}
+                <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 lg:py-0 relative z-10 order-2">
+                    <div className="max-w-2xl animate-fade-in-up">
+                        <div className="inline-block mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
                             StyleOS • Bordeaux • L'Élite
                         </div>
 
-                        <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.8] text-white uppercase font-sans tracking-tighter mb-12">
+                        <h1 className="text-6xl md:text-7xl lg:text-9xl font-black leading-[0.85] text-white uppercase font-sans tracking-tighter mb-12">
                             Distinguez<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] bg-[length:200%_auto] animate-shimmer">VOUS.</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer">VOUS.</span>
                         </h1>
 
-                        <div className="max-w-2xl">
-                            <h2 className="text-2xl md:text-4xl text-gray-200 font-bold mb-10 tracking-tight">
+                        <div className="space-y-10">
+                            <h2 className="text-2xl md:text-3xl text-gray-200 font-bold tracking-tight">
                                 Coupez des cheveux, <span className="text-primary italic">pas des appels.</span>
                             </h2>
 
-                            <p className="text-xl text-gray-400 mb-12 leading-relaxed font-medium opacity-80">
+                            <p className="text-lg text-gray-400 leading-relaxed font-medium opacity-80 max-w-lg">
                                 Ne soyez plus un simple matricule Planity.
-                                Propulsez votre salon au rang de destination Tier 1 avec votre propia infrastructure digitale autonome.
+                                Propulsez votre salon au rang de destination Tier 1 avec votre propre infrastructure digitale autonome.
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-6">
+                            <div className="pt-4">
                                 <button
                                     onClick={() => scrollToSection('features')}
-                                    className="group relative px-12 py-6 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-[#D4AF37]/50 transition-all duration-700 hover:shadow-[0_0_40px_rgba(212,175,55,0.2)]"
+                                    className="group relative px-12 py-6 bg-transparent overflow-hidden rounded-full border border-white/20 hover:border-primary/50 transition-all duration-700 hover:shadow-[0_0_40px_rgba(212,175,55,0.2)]"
                                 >
                                     <div className="absolute inset-0 w-0 bg-gradient-to-r from-primary/20 to-transparent transition-all duration-700 ease-out group-hover:w-full"></div>
                                     <span className="relative text-white font-black uppercase tracking-[0.3em] text-[11px] flex items-center gap-4">
@@ -97,8 +100,8 @@ function LandingPage() {
                     </div>
                 </div>
 
-                {/* Decorative Elements */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+                {/* Decorative Scroll Indicator */}
+                <div className="absolute bottom-10 right-10 animate-bounce opacity-40 hidden lg:block">
                     <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent"></div>
                 </div>
             </header>
