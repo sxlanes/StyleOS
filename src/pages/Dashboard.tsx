@@ -28,6 +28,7 @@ const Dashboard = () => {
     });
 
     const [view, setView] = useState<'dashboard' | 'calendar' | 'calls' | 'accounting' | 'clients' | 'campaigns'>('dashboard');
+    const isAdmin = user?.email?.toLowerCase() === 'nicolaslopezsolanes@gmail.com';
     const [callsLog, setCallsLog] = useState([
         { id: 1, caller: "06 12 34 56 78", time: "10:30", duration: "1m 20s", status: "Pris de RDV", sentiment: "positive" },
         { id: 2, caller: "07 98 76 54 32", time: "09:15", duration: "0m 45s", status: "Annulation", sentiment: "negative" },
@@ -165,18 +166,22 @@ const Dashboard = () => {
                     >
                         <Calendar className="w-5 h-5" /> Rendez-vous
                     </div>
-                    <div
-                        onClick={() => setView('accounting')}
-                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'accounting' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-blue-400/80 hover:bg-white/5 hover:text-white'}`}
-                    >
-                        <FileText className="w-5 h-5" /> Comptabilité (IA)
-                    </div>
-                    <div
-                        onClick={() => setView('clients')}
-                        className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'clients' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
-                    >
-                        <Users className="w-5 h-5" /> Clients
-                    </div>
+                    {isAdmin && (
+                        <>
+                            <div
+                                onClick={() => setView('accounting')}
+                                className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'accounting' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-blue-400/80 hover:bg-white/5 hover:text-white'}`}
+                            >
+                                <FileText className="w-5 h-5" /> Comptabilité (IA)
+                            </div>
+                            <div
+                                onClick={() => setView('clients')}
+                                className={`p-3 rounded-xl flex items-center gap-3 font-medium cursor-pointer transition-colors ${view === 'clients' ? 'bg-white/5 text-[#D4AF37] border border-white/5' : 'text-gray-400 hover:bg-white/5 hover:text-white'}`}
+                            >
+                                <Users className="w-5 h-5" /> Clients
+                            </div>
+                        </>
+                    )}
                 </nav>
 
                 <div className="pt-6 border-t border-white/10">
@@ -185,7 +190,10 @@ const Dashboard = () => {
                             {user?.email?.[0].toUpperCase()}
                         </div>
                         <div className="flex-1 overflow-hidden">
-                            <p className="text-sm font-medium truncate text-gray-200">{user?.user_metadata?.business_name || "Mon Salon"}</p>
+                            <p className="text-sm font-medium truncate text-gray-200">
+                                {user?.user_metadata?.business_name || "Mon Salon"}
+                                {isAdmin && <span className="ml-2 bg-[#D4AF37] text-black text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Admin</span>}
+                            </p>
                             <p className="text-xs text-green-500 flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> En ligne</p>
                         </div>
                     </div>
@@ -206,9 +214,11 @@ const Dashboard = () => {
                         <button onClick={addMockAppointment} className="bg-white/5 border border-white/10 text-white px-4 py-2 rounded-xl font-bold text-sm hover:bg-white/10 transition-colors flex items-center gap-2">
                             <Plus className="w-4 h-4" /> Simuler RDV
                         </button>
-                        <button onClick={() => setView('campaigns')} className="bg-[#D4AF37] text-black px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#c5a02e] transition-all shadow-lg shadow-[#D4AF37]/20">
-                            Nouvelle Campagne
-                        </button>
+                        {isAdmin && (
+                            <button onClick={() => setView('campaigns')} className="bg-[#D4AF37] text-black px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-[#c5a02e] transition-all shadow-lg shadow-[#D4AF37]/20">
+                                Nouvelle Campagne
+                            </button>
+                        )}
                     </div>
                 </header>
 
