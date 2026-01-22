@@ -9,6 +9,7 @@ import FinancialComparison from './components/FinancialComparison';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
 import SuccessStories from './components/SuccessStories';
+import ProcessSection from './components/ProcessSection';
 
 function LandingPage() {
     const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -36,6 +37,7 @@ function LandingPage() {
                     <div className="hidden md:flex gap-8 text-sm font-medium text-text-muted">
                         <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button>
                         <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors">Comparatif</button>
+                        <button onClick={() => scrollToSection('process')} className="hover:text-white transition-colors">Process</button>
                         <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button>
                         <Link to="/demos" className="hover:text-primary transition-colors font-bold ml-4">NOS DÉMOS</Link>
                     </div>
@@ -115,6 +117,7 @@ function LandingPage() {
             <AudioDemo />
             <ROICalculator />
             <FinancialComparison />
+            <ProcessSection />
             <PricingSection />
             <OfferSection />
 
@@ -154,20 +157,6 @@ function LandingPage() {
                     </div>
                 </div>
 
-                {/* WhatsApp Floating Button */}
-                <a
-                    href="https://wa.me/33781741525"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="fixed bottom-10 right-10 z-[100] p-5 bg-[#25D366] text-white rounded-full shadow-[0_20px_50px_rgba(37,211,102,0.4)] hover:scale-110 hover:-translate-y-2 transition-all duration-500 group"
-                >
-                    <svg className="w-8 h-8 fill-current" viewBox="0 0 24 24">
-                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.483 8.413-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.308 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
-                    </svg>
-                    <div className="absolute right-full mr-6 top-1/2 -translate-y-1/2 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] px-4 py-2 rounded-full whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity">
-                        Besoin d'aide ? WhatsApp
-                    </div>
-                </a>
                 <div className="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-white/5 text-center text-xs text-gray-600">
                     &copy; {new Date().getFullYear()} StyleOS. Tous droits réservés. Fait avec passion à Bordeaux.
                 </div>
