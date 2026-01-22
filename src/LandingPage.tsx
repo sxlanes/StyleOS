@@ -65,34 +65,34 @@ function LandingPage() {
                     <img
                         src="hero-model.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover lg:object-left object-center opacity-70 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
+                        className="w-full h-full object-cover object-[20%_center] lg:object-left opacity-60 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
                     {/* Cinematic Gradients - Stronger blend on mobile, professional shift on desktop */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/60 to-black hidden lg:block"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/60 to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                     {/* Enhanced Mobile/Tablet Overlay */}
-                    <div className="absolute inset-0 bg-black/60 lg:hidden"></div>
+                    <div className="absolute inset-0 bg-black/70 lg:hidden text-center"></div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
                     {/* Content Area - Responsive Alignment */}
                     <div className="lg:w-1/2 lg:ml-auto animate-fade-in-up text-center lg:text-left">
-                        <div className="inline-block mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
+                        <div className="inline-block mb-8 lg:mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
                             StyleOS • Bordeaux • L'Élite
                         </div>
 
-                        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] font-black leading-[0.85] text-white uppercase font-sans tracking-tighter mb-12">
+                        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[7.2rem] font-black leading-[0.85] text-white uppercase font-sans tracking-tighter mb-8 lg:mb-12">
                             Distinguez<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer italic">VOUS.</span>
                         </h1>
 
-                        <div className="space-y-10 max-w-lg mx-auto lg:mx-0">
-                            <h2 className="text-xl md:text-3xl text-gray-200 font-bold tracking-tight">
+                        <div className="space-y-8 lg:space-y-10 max-w-lg mx-auto lg:mx-0">
+                            <h2 className="text-lg md:text-3xl text-gray-200 font-bold tracking-tight">
                                 Coupez des cheveux, <span className="text-primary italic">pas des appels.</span>
                             </h2>
 
-                            <p className="text-base md:text-lg text-gray-400 leading-relaxed font-medium opacity-80">
+                            <p className="text-sm md:text-lg text-gray-400 leading-relaxed font-medium opacity-80">
                                 Ne soyez plus un simple matricule Planity.
                                 Propulsez votre salon au rang de destination Tier 1 avec votre propre infrastructure digitale autonome.
                             </p>
