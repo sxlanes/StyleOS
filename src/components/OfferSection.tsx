@@ -25,7 +25,7 @@ const OfferSection = () => {
                                 <span className="text-primary text-xl">✓</span> Site Web Personnalisé Sur-Mesure
                             </li>
                             <li className="flex items-start gap-3">
-                                <span className="text-primary text-xl">✓</span> Configuration de l'Agent IA 'Antoine'
+                                <span className="text-primary text-xl">✓</span> Configuration de l'Agent IA 'Sarah'
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="text-primary text-xl">✓</span> 1 Mois de Support VIP "Gant Blanc"

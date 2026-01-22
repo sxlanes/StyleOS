@@ -4,9 +4,9 @@ const steps = [
     {
         icon: Lightbulb,
         number: "01",
-        title: "Audit & Stratégie",
+        title: "Audit Sarah IA & Stratégie",
         duration: "30 MIN",
-        description: "Analyse de votre flux actuel, identification des fuites de revenus et définition de votre futur écosystème digital.",
+        description: "Analyse chirurgicale de votre flux par Sarah IA pour identifier vos fuites de revenus et configurer votre futur moteur de croissance.",
         color: "text-blue-400",
         bg: "bg-blue-400/10"
     },

@@ -50,14 +50,14 @@ const features = [
     {
         id: 'growth',
         icon: TrendingUp,
-        title: "Croissance & Réseaux",
-        subtitle: "Attirez les clients que vous voulez.",
-        description: "On ne poste pas pour faire joli. On poste pour attirer. Notre équipe gère votre stratégie de contenu pour transformer vos followers en clients fidèles et augmenter votre ticket moyen.",
+        title: "Croissance Sarah IA",
+        subtitle: "Elle attire les clients pour vous.",
+        description: "Sarah IA ne se contente pas de gérer vos rendez-vous. Elle analyse les tendances pour piloter votre stratégie de contenu et transformer vos followers en clients fidèles et à haut panier moyen.",
         details: [
-            "Stratégie de Contenu Mensuelle",
-            "Montage Vidéo & Design Posts",
+            "Stratégie de Contenu Pilotée par IA",
+            "Montage Vidéo & Design Automatisé",
             "Croissance d'Audience Ciblée",
-            "Gestion de la E-Réputation"
+            "Veille Concurrentielle Temps-Réel"
         ],
         gradient: "from-pink-500/20 to-rose-500/20",
         color: "text-pink-400"
@@ -65,14 +65,14 @@ const features = [
     {
         id: 'reviews',
         icon: Star,
-        title: "Réputation IA",
-        subtitle: "Le moteur de confiance automatique.",
-        description: "Transformez chaque client satisfait en un ambassadeur digital. Notre système sollicite, filtre et publie vos avis Google automatiquement pour dominer le classement local sans lever le petit doigt.",
+        title: "Réputation by Sarah",
+        subtitle: "Elle protège votre image 24h/7.",
+        description: "Transformez chaque client satisfait en ambassadeur. Sarah IA sollicite, filtre et répond à vos avis Google automatiquement pour vous placer en pole position sur les recherches locales.",
         details: [
-            "Sollicitation Automatique par SMS/WA",
-            "Filtrage Intelligent des Avis",
-            "IA de Réponse aux Commentaires",
-            "Boost du Référencement Google Maps"
+            "Sollicitation Automatique Sarah",
+            "Filtrage Anti-Avis Négatifs",
+            "Réponses IA Personnalisées",
+            "Boost SEO Google Maps Natif"
         ],
         gradient: "from-yellow-500/20 to-amber-500/20",
         color: "text-amber-400"
