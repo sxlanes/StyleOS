@@ -58,41 +58,41 @@ function LandingPage() {
                 </div>
             </nav>
 
-            {/* Hero Section - Integrated Full Screen Layout */}
+            {/* Hero Section - Integrated Cinematic Layout */}
             <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
-                {/* Background Image - Integrated */}
+                {/* Background Image - Firmly on the left */}
                 <div className="absolute inset-0 z-0 h-full w-full">
                     <img
                         src="hero-model.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover lg:object-[12%_center] object-center opacity-80 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
+                        className="w-full h-full object-cover lg:object-left object-center opacity-70 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
-                    {/* Cinematic Gradients for blending */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/0 via-black/40 to-black hidden lg:block"></div>
+                    {/* Cinematic Gradients - Stronger blend on mobile, professional shift on desktop */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/60 to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
-                    {/* Extra mobile gradient */}
-                    <div className="absolute inset-0 bg-black/70 lg:hidden"></div>
+                    {/* Enhanced Mobile/Tablet Overlay */}
+                    <div className="absolute inset-0 bg-black/60 lg:hidden"></div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-                    {/* Content Area - Positioned to the right to keep face clear */}
-                    <div className="lg:w-1/2 lg:ml-auto animate-fade-in-up md:text-right lg:text-left">
+                    {/* Content Area - Responsive Alignment */}
+                    <div className="lg:w-1/2 lg:ml-auto animate-fade-in-up text-center lg:text-left">
                         <div className="inline-block mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
                             StyleOS • Bordeaux • L'Élite
                         </div>
 
-                        <h1 className="text-[14vw] sm:text-7xl lg:text-[7.2rem] font-black leading-[0.85] text-white uppercase font-sans tracking-tighter mb-12">
+                        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] font-black leading-[0.85] text-white uppercase font-sans tracking-tighter mb-12">
                             Distinguez<br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer italic">VOUS.</span>
                         </h1>
 
-                        <div className="space-y-10">
-                            <h2 className="text-2xl md:text-3xl text-gray-200 font-bold tracking-tight">
+                        <div className="space-y-10 max-w-lg mx-auto lg:mx-0">
+                            <h2 className="text-xl md:text-3xl text-gray-200 font-bold tracking-tight">
                                 Coupez des cheveux, <span className="text-primary italic">pas des appels.</span>
                             </h2>
 
-                            <p className="text-lg text-gray-400 leading-relaxed font-medium opacity-80 max-w-lg">
+                            <p className="text-base md:text-lg text-gray-400 leading-relaxed font-medium opacity-80">
                                 Ne soyez plus un simple matricule Planity.
                                 Propulsez votre salon au rang de destination Tier 1 avec votre propre infrastructure digitale autonome.
                             </p>
