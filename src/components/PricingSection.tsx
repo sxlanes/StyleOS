@@ -145,28 +145,28 @@ const PricingSection = () => {
                             <div className="relative z-10 mb-6">
                                 <div className="flex items-baseline gap-2 mb-2">
                                     <div className="flex flex-col">
-                                        {plan.oldPrice && <span className="text-gray-600 text-sm line-through font-bold mb-1">{plan.oldPrice}</span>}
-                                        <span className="text-5xl font-black tracking-tighter text-white italic">{plan.price.split(' ')[0]}</span>
+                                        {plan.oldPrice && <span className="text-gray-600 text-[10px] line-through font-bold mb-0.5">{plan.oldPrice}</span>}
+                                        <span className="text-4xl font-black tracking-tighter text-white italic leading-none">{plan.price.split(' ')[0]}</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-primary font-bold text-lg leading-none">€</span>
-                                        <span className="text-gray-500 text-[10px] uppercase font-black tracking-widest">{plan.period.replace('/', '')}</span>
+                                        <span className="text-primary font-bold text-base leading-none">€</span>
+                                        <span className="text-gray-500 text-[8px] uppercase font-black tracking-widest">{plan.period.replace('/', '')}</span>
                                     </div>
                                 </div>
-                                <div className="inline-block px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-wider">
+                                <div className="inline-block px-2 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[8px] font-black uppercase tracking-wider">
                                     ROI: {plan.roi}
                                 </div>
                             </div>
 
-                            <ul className="relative z-10 space-y-4 mb-10 flex-1">
+                            <ul className="relative z-10 space-y-3 mb-8 flex-1">
                                 {plan.features.map((feature, idx) => (
-                                    <li key={idx} className={`flex items-start gap-3 text-[10px] transition-all duration-300 ${!feature.included ? 'opacity-20' : 'group-hover:translate-x-1'}`}>
+                                    <li key={idx} className={`flex items-start gap-2 text-[9px] transition-all duration-300 ${!feature.included ? 'opacity-20' : 'group-hover:translate-x-1'}`}>
                                         {feature.included ? (
                                             <div className={`p-0.5 rounded-full shrink-0 ${plan.highlight ? 'bg-primary/20 text-primary' : 'bg-white/10 text-gray-400'}`}>
-                                                <Check className="w-3 h-3" />
+                                                <Check className="w-2.5 h-2.5" />
                                             </div>
                                         ) : (
-                                            <div className="w-4 h-4 shrink-0" />
+                                            <div className="w-3 h-3 shrink-0" />
                                         )}
                                         <span className={`
                                             ${feature.bold ? 'font-black text-white uppercase tracking-wide' : 'text-gray-400 font-bold'}
@@ -181,7 +181,7 @@ const PricingSection = () => {
 
                             <button
                                 onClick={() => navigate(`/plan/${plan.id}`)}
-                                className={`relative z-10 w-full py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] transition-all duration-500
+                                className={`relative z-10 w-full py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[9px] transition-all duration-500
                                     ${plan.highlight
                                         ? 'bg-primary text-black hover:bg-white hover:scale-105 shadow-[0_15px_30px_rgba(212,175,55,0.2)]'
                                         : 'bg-white/5 text-white hover:bg-primary hover:text-black border border-white/10 hover:border-primary'

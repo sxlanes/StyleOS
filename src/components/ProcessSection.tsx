@@ -80,17 +80,6 @@ const ProcessSection = () => {
                     ))}
                 </div>
 
-                <div className="mt-24 text-center">
-                    <button
-                        onClick={() => {
-                            const el = document.getElementById('offer');
-                            el?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className="group relative px-10 py-5 bg-white text-black font-black uppercase tracking-[0.3em] text-[10px] rounded-full hover:bg-primary transition-all duration-500 hover:scale-105 shadow-xl shadow-white/5 active:scale-95"
-                    >
-                        Commencer ma Transformation
-                    </button>
-                </div>
             </div>
         </section>
     );

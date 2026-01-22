@@ -128,29 +128,29 @@ const PlanDetails = () => {
                                 <div className="inline-block mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em]">
                                     Configuration Du Système StyleOS
                                 </div>
-                                <h1 className="text-6xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none text-white mb-10">
+                                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white mb-6">
                                     {plan.name}<span className="text-primary italic">.</span>
                                 </h1>
-                                <p className="text-xl md:text-2xl text-gray-400 font-medium leading-relaxed max-w-xl opacity-80">
+                                <p className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed max-w-xl opacity-80">
                                     {plan.description}
                                 </p>
                             </div>
 
-                            <div className="flex flex-col items-start lg:items-end min-w-[300px]">
-                                <span className="text-primary text-[10px] font-black uppercase tracking-[0.4em] mb-4">Investissement Business</span>
+                            <div className="flex flex-col items-start lg:items-end min-w-[250px]">
+                                <span className="text-primary text-[9px] font-black uppercase tracking-[0.4em] mb-3">Investissement Business</span>
                                 <div className="flex items-start">
-                                    <div className="text-7xl md:text-[10rem] font-black text-white tracking-tighter leading-none">
+                                    <div className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">
                                         {plan.price.split(' ')[0]}
                                     </div>
-                                    <span className="text-3xl font-black text-primary mt-4 ml-2">€</span>
+                                    <span className="text-2xl font-black text-primary mt-2 ml-1">€</span>
                                 </div>
-                                <div className="text-[10px] text-gray-500 font-black uppercase tracking-[0.4em] mt-6 mb-10">Subscription de Service Mensuelle</div>
+                                <div className="text-[9px] text-gray-500 font-black uppercase tracking-[0.4em] mt-4 mb-8">Subscription de Service Mensuelle</div>
 
                                 {plan.setupFee && (
-                                    <div className="w-full py-6 px-10 bg-white/[0.03] border border-white/5 rounded-[2.5rem] flex flex-col items-start lg:items-end gap-1 hover:border-primary/20 transition-all duration-700 group/setup shadow-2xl">
-                                        <span className="text-[9px] text-gray-600 uppercase font-black tracking-[0.3em] mb-2 group-hover/setup:text-gray-400 transition-colors">Setup Initial de Création</span>
-                                        <span className="text-white font-black text-4xl uppercase italic group-hover/setup:text-primary transition-colors">{plan.setupFee.split(' ')[0]} €</span>
-                                        <span className="text-[8px] text-primary/40 uppercase font-black tracking-[0.2em] mt-2">Paiement Unique à l'ouverture</span>
+                                    <div className="w-full py-4 px-8 bg-white/[0.03] border border-white/5 rounded-[2rem] flex flex-col items-start lg:items-end gap-1 hover:border-primary/20 transition-all duration-700 group/setup shadow-2xl">
+                                        <span className="text-[8px] text-gray-600 uppercase font-black tracking-[0.3em] mb-1 group-hover/setup:text-gray-400 transition-colors">Setup Initial de Création</span>
+                                        <span className="text-white font-black text-3xl uppercase italic group-hover/setup:text-primary transition-colors">{plan.setupFee.split(' ')[0]} €</span>
+                                        <span className="text-[7px] text-primary/40 uppercase font-black tracking-[0.2em] mt-1">Paiement Unique à l'ouverture</span>
                                     </div>
                                 )}
                             </div>

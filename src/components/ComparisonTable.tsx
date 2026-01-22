@@ -65,13 +65,13 @@ const ComparisonTable = () => {
                 <div className="grid md:grid-cols-[1.5fr_1fr_1fr] md:border md:border-white/10 md:rounded-[2.5rem] md:overflow-hidden md:bg-black/40 md:backdrop-blur-xl relative shadow-2xl">
                     {/* Header Row - Desktop Only */}
                     <div className="hidden md:contents">
-                        <div className="p-10 bg-white/5 border-b border-white/5 font-black text-gray-500 uppercase tracking-[0.3em] text-[10px]">
+                        <div className="p-12 bg-white/5 border-b border-white/5 font-black text-gray-400 uppercase tracking-[0.4em] text-xs">
                             Analyse Stratégique
                         </div>
-                        <div className="p-10 flex items-center justify-center bg-white/5 border-b border-l border-white/5 font-black text-gray-600 uppercase tracking-[0.3em] text-[10px] text-center">
+                        <div className="p-12 flex items-center justify-center bg-white/5 border-b border-l border-white/5 font-black text-gray-500 uppercase tracking-[0.4em] text-xs text-center">
                             Modèle Planity
                         </div>
-                        <div className="p-10 flex items-center justify-center bg-primary/10 border-b border-l border-primary/20 font-black text-primary uppercase tracking-[0.3em] text-[10px] text-center relative rounded-tr-[2.5rem]">
+                        <div className="p-12 flex items-center justify-center bg-primary/10 border-b border-l border-primary/20 font-black text-primary uppercase tracking-[0.4em] text-xs text-center relative rounded-tr-[2.5rem]">
                             <div className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-bl"></div>
                             VOTRE EMPIRE STYLEOS
                         </div>
