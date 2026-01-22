@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight, X as CloseIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ComparisonTable from './components/ComparisonTable';
@@ -13,6 +13,26 @@ import ProcessSection from './components/ProcessSection';
 
 function LandingPage() {
     const [isDemoOpen, setIsDemoOpen] = useState(false);
+    const [showNavbar, setShowNavbar] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Show navbar when scrolling up and not at the very top
+            if (currentScrollY > 100 && currentScrollY < lastScrollY) {
+                setShowNavbar(true);
+            } else {
+                setShowNavbar(false);
+            }
+
+            setLastScrollY(currentScrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
@@ -30,8 +50,8 @@ function LandingPage() {
     return (
         <div className="min-h-screen bg-background text-text-main selection:bg-primary selection:text-black">
 
-            {/* Navigation */}
-            <nav className="fixed w-full top-0 z-50 bg-black/50 backdrop-blur-lg border-b border-glass-border">
+            {/* Navigation - Dynamic Visibility */}
+            <nav className={`fixed w-full top-0 z-[100] bg-black/80 backdrop-blur-xl border-b border-white/5 transition-all duration-500 transform ${showNavbar ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="text-2xl font-bold tracking-tighter">StyleOS<span className="text-primary">.</span></div>
                     <div className="hidden md:flex gap-8 text-sm font-medium text-text-muted">
@@ -47,26 +67,26 @@ function LandingPage() {
                 </div>
             </nav>
 
-            {/* Hero Section - Split Layout: Face Left, Content Right */}
-            <header className="relative min-h-screen flex flex-col lg:flex-row pt-20 overflow-hidden bg-black">
-                {/* Left Side: The Face (No text over it) */}
-                <div className="w-full lg:w-1/2 relative h-[50vh] lg:h-auto overflow-hidden order-1">
+            {/* Hero Section - Integrated Full Screen Layout */}
+            <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
+                {/* Background Image - Integrated */}
+                <div className="absolute inset-0 z-0">
                     <img
                         src="hero-model.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-[25%_center] lg:object-center opacity-80 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
+                        className="w-full h-full object-cover object-[25%_center] opacity-80 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
-                    {/* Cinematic Gradients for blending */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/0 via-transparent to-black hidden lg:block"></div>
+                    {/* Multi-layered Gradients for Integration */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-black/60 to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
-                    {/* Decorative Vertical Accent */}
-                    <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden lg:block"></div>
+                    {/* Extra mobile gradient */}
+                    <div className="absolute inset-0 bg-black/40 lg:hidden"></div>
                 </div>
 
-                {/* Right Side: The Content Area */}
-                <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 lg:py-0 relative z-10 order-2">
-                    <div className="max-w-2xl animate-fade-in-up">
+                <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+                    {/* Content Area - Positioned to the right to keep face clear */}
+                    <div className="lg:w-1/2 lg:ml-auto animate-fade-in-up">
                         <div className="inline-block mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
                             StyleOS • Bordeaux • L'Élite
                         </div>
@@ -93,7 +113,7 @@ function LandingPage() {
                                 >
                                     <div className="absolute inset-0 w-0 bg-gradient-to-r from-primary/20 to-transparent transition-all duration-700 ease-out group-hover:w-full"></div>
                                     <span className="relative text-white font-black uppercase tracking-[0.3em] text-[11px] flex items-center gap-4">
-                                        Prendre Rendez-vous
+                                        Explorer
                                         <ArrowRight className="w-5 h-5 group-hover:translate-x-2 group-hover:text-primary transition-all duration-300" />
                                     </span>
                                 </button>
