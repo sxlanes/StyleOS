@@ -114,10 +114,11 @@ const PricingSection = () => {
                     {plans.map((plan, index) => (
                         <div
                             key={index}
-                            className={`relative p-8 rounded-[2.5rem] border transition-all duration-500 group hover:-translate-y-4 flex flex-col overflow-hidden
+                            onClick={() => navigate(`/plan/${plan.id}`)}
+                            className={`relative p-6 md:p-8 rounded-[2rem] border transition-all duration-500 group hover:-translate-y-2 flex flex-col overflow-hidden cursor-pointer
                                 ${plan.highlight
-                                    ? 'bg-gradient-to-br from-white/15 via-black to-black border-primary/50 shadow-[0_30px_60px_-15px_rgba(212,175,55,0.15)] hover:shadow-[0_50px_80px_-20px_rgba(212,175,55,0.25)]'
-                                    : 'bg-surface/30 border-white/10 hover:border-white/30 backdrop-blur-xl shadow-2xl hover:bg-white/[0.02]'
+                                    ? 'bg-gradient-to-br from-white/15 via-black to-black border-primary/50 shadow-[0_20px_40px_-10px_rgba(212,175,55,0.15)] hover:shadow-[0_40px_60px_-15px_rgba(212,175,55,0.25)]'
+                                    : 'bg-surface/30 border-white/10 hover:border-white/30 backdrop-blur-xl shadow-xl hover:bg-white/[0.02]'
                                 }
                             `}
                         >
@@ -125,42 +126,42 @@ const PricingSection = () => {
                             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></div>
 
                             {plan.badge && (
-                                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-[0.2em] shadow-lg whitespace-nowrap z-20 
+                                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.2em] shadow-lg whitespace-nowrap z-20 
                                     ${plan.id === 'empire' ? 'bg-red-500 text-white animate-pulse' : 'bg-primary text-black'}`}>
                                     {plan.badge}
                                 </div>
                             )}
 
-                            <div className="relative z-10 mb-8">
-                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3
+                            <div className="relative z-10 mb-6">
+                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-3
                                     ${plan.highlight ? 'bg-primary text-black shadow-[0_0_20px_rgba(212,175,55,0.4)]' : 'bg-white/5 text-white group-hover:bg-primary/20 group-hover:text-primary'}
                                 `}>
                                     <plan.icon className="w-6 h-6" />
                                 </div>
 
-                                <h3 className="text-2xl font-black mb-2 uppercase tracking-tighter text-white">{plan.name}</h3>
-                                <p className="text-gray-400 text-[10px] font-bold leading-relaxed min-h-[40px] uppercase tracking-wider">{plan.description}</p>
+                                <h3 className="text-3xl font-black mb-2 uppercase tracking-tighter text-white">{plan.name}</h3>
+                                <p className="text-gray-400 text-xs font-bold leading-relaxed min-h-[40px] uppercase tracking-wider">{plan.description}</p>
                             </div>
 
                             <div className="relative z-10 mb-6">
                                 <div className="flex items-baseline gap-2 mb-2">
                                     <div className="flex flex-col">
-                                        {plan.oldPrice && <span className="text-gray-600 text-[10px] line-through font-bold mb-0.5">{plan.oldPrice}</span>}
-                                        <span className="text-4xl font-black tracking-tighter text-white italic leading-none">{plan.price.split(' ')[0]}</span>
+                                        {plan.oldPrice && <span className="text-gray-600 text-xs line-through font-bold mb-0.5">{plan.oldPrice}</span>}
+                                        <span className="text-5xl font-black tracking-tighter text-white italic leading-none">{plan.price.split(' ')[0]}</span>
                                     </div>
                                     <div className="flex flex-col">
-                                        <span className="text-primary font-bold text-base leading-none">€</span>
-                                        <span className="text-gray-500 text-[8px] uppercase font-black tracking-widest">{plan.period.replace('/', '')}</span>
+                                        <span className="text-primary font-bold text-lg leading-none">€</span>
+                                        <span className="text-gray-500 text-[9px] uppercase font-black tracking-widest">{plan.period.replace('/', '')}</span>
                                     </div>
                                 </div>
-                                <div className="inline-block px-2 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[8px] font-black uppercase tracking-wider">
+                                <div className="inline-block px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-[9px] font-black uppercase tracking-wider">
                                     ROI: {plan.roi}
                                 </div>
                             </div>
 
-                            <ul className="relative z-10 space-y-3 mb-8 flex-1">
+                            <ul className="relative z-10 space-y-2 mb-6 flex-1">
                                 {plan.features.map((feature, idx) => (
-                                    <li key={idx} className={`flex items-start gap-2 text-[9px] transition-all duration-300 ${!feature.included ? 'opacity-20' : 'group-hover:translate-x-1'}`}>
+                                    <li key={idx} className={`flex items-start gap-3 text-xs transition-all duration-300 ${!feature.included ? 'opacity-30' : 'group-hover:translate-x-1'}`}>
                                         {feature.included ? (
                                             <div className={`p-0.5 rounded-full shrink-0 ${plan.highlight ? 'bg-primary/20 text-primary' : 'bg-white/10 text-gray-400'}`}>
                                                 <Check className="w-2.5 h-2.5" />
@@ -173,22 +174,21 @@ const PricingSection = () => {
                                             ${!feature.included ? 'line-through' : ''}
                                             ${feature.text === 'Pilotage Compta IA Complet' ? 'text-primary' : ''}
                                         `}>
-                                            {feature.text}
+                                            {feature.text === 'Paiement Nom de Domaine' ? 'Nom de domaine inclus' : feature.text}
                                         </span>
                                     </li>
                                 ))}
                             </ul>
 
                             <button
-                                onClick={() => navigate(`/plan/${plan.id}`)}
-                                className={`relative z-10 w-full py-4 rounded-xl font-black uppercase tracking-[0.2em] text-[9px] transition-all duration-500
+                                className={`relative z-10 w-full py-3 rounded-xl font-black uppercase tracking-[0.2em] text-[10px] transition-all duration-500 flex items-center justify-center gap-2
                                     ${plan.highlight
-                                        ? 'bg-primary text-black hover:bg-white hover:scale-105 shadow-[0_15px_30px_rgba(212,175,55,0.2)]'
-                                        : 'bg-white/5 text-white hover:bg-primary hover:text-black border border-white/10 hover:border-primary'
+                                        ? 'bg-primary text-black group-hover:bg-white group-hover:scale-105 shadow-[0_10px_20px_rgba(212,175,55,0.15)]'
+                                        : 'bg-white/5 text-white group-hover:bg-primary group-hover:text-black border border-white/10 group-hover:border-primary'
                                     }
                                 `}
                             >
-                                {plan.cta}
+                                {plan.cta} <TrendingUp className="w-3 h-3 ml-1" />
                             </button>
                         </div>
                     ))}

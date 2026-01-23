@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, X, Zap, Globe, Phone, Database, Star } from 'lucide-react';
+import { Check, X, Zap, Globe, Phone, Database, Star, ChevronDown, Plus } from 'lucide-react';
 
 const ComparisonTable = () => {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -94,10 +94,14 @@ const ComparisonTable = () => {
                                 </div>
                                 <div className="flex-1">
                                     <span className="font-black text-white text-lg block uppercase tracking-tight">{item.name}</span>
-                                    <div className={`flex items-center gap-2 mt-1 transition-opacity duration-300 ${expandedIndex === index ? 'opacity-0' : 'opacity-100'}`}>
-                                        <span className="text-[9px] font-bold text-gray-600 uppercase tracking-widest italic">+ d'information</span>
+                                    <div className={`flex items-center gap-2 mt-2 transition-all duration-300 group-hover:translate-x-2 ${expandedIndex === index ? 'opacity-50' : 'opacity-100'}`}>
+                                        <span className="text-[10px] font-bold text-primary uppercase tracking-widest flex items-center gap-1">
+                                            <Plus className="w-3 h-3" /> Info
+                                        </span>
                                     </div>
                                 </div>
+                                {/* Chevron Indicator */}
+                                <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 transform ml-4 ${expandedIndex === index ? 'rotate-180 text-primary' : ''}`} />
                             </div>
 
                             {/* Competitor */}

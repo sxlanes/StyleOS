@@ -56,22 +56,22 @@ function LandingPage() {
     return (
         <div className="min-h-screen bg-background text-text-main selection:bg-primary selection:text-black">
 
-            {/* Navigation - Smart Scroll */}
-            <nav className={`fixed w-full top-0 z-[100] transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isAtTop ? 'bg-transparent py-6' : 'bg-black/80 backdrop-blur-md py-4 shadow-2xl border-b border-white/5'}`}>
+            {/* Navigation - Smart Scroll - Floating Titles Style */}
+            <nav className={`fixed w-full top-0 z-[100] transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isAtTop ? 'bg-transparent py-8' : 'bg-black/90 backdrop-blur-md py-4'}`}>
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                     <div className="text-2xl font-bold tracking-tighter text-white drop-shadow-md">
                         StyleOS<span className="text-primary">.</span>
                     </div>
 
                     <div className="hidden md:flex items-center gap-12">
-                        <div className="flex gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-gray-300">
-                            <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Fonctionnalités</button>
-                            <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Comparatif</button>
-                            <button onClick={() => scrollToSection('process')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Process</button>
-                            <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Tarifs</button>
+                        <div className="flex gap-10 text-sm font-black uppercase tracking-[0.2em] text-gray-500">
+                            <button onClick={() => scrollToSection('features')} className="hover:text-white hover:scale-105 transition-all duration-300">Fonctionnalités</button>
+                            <button onClick={() => scrollToSection('comparison')} className="hover:text-white hover:scale-105 transition-all duration-300">Comparatif</button>
+                            <button onClick={() => scrollToSection('process')} className="hover:text-white hover:scale-105 transition-all duration-300">Process</button>
+                            <button onClick={() => scrollToSection('pricing')} className="hover:text-white hover:scale-105 transition-all duration-300">Tarifs</button>
                         </div>
 
-                        <Link to="/login" className="bg-white/10 border border-white/20 hover:bg-white text-white hover:text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 hover:scale-105 shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                        <Link to="/login" className="bg-white text-black px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:bg-primary hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]">
                             Connexion
                         </Link>
                     </div>
