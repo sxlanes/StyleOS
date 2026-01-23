@@ -13,17 +13,32 @@ import ProcessSection from './components/ProcessSection';
 
 function LandingPage() {
     const [isDemoOpen, setIsDemoOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const [isAtTop, setIsAtTop] = useState(true);
 
     useEffect(() => {
-        const handleScroll = () => {
-            // Navbar appears only after navigating down the page
-            setIsScrolled(window.scrollY > 300);
+        const controlNavbar = () => {
+            if (typeof window !== 'undefined') {
+                const currentScrollY = window.scrollY;
+
+                // Show if scrolling up OR at the very top
+                // Hide if scrolling down AND not at the top
+                if (currentScrollY < lastScrollY || currentScrollY < 50) {
+                    setIsVisible(true);
+                } else {
+                    setIsVisible(false);
+                }
+
+                setIsAtTop(currentScrollY < 20);
+                setLastScrollY(currentScrollY);
+            }
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        window.addEventListener('scroll', controlNavbar);
+        return () => window.removeEventListener('scroll', controlNavbar);
+    }, [lastScrollY]);
+
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
@@ -41,43 +56,43 @@ function LandingPage() {
     return (
         <div className="min-h-screen bg-background text-text-main selection:bg-primary selection:text-black">
 
-            {/* Navigation - Appears after content scroll */}
-            <nav className={`fixed w-full top-0 z-[100] bg-black/80 backdrop-blur-xl border-b border-white/5 transition-all duration-1000 transform ${isScrolled ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="text-2xl font-bold tracking-tighter">StyleOS<span className="text-primary">.</span></div>
-                    <div className="hidden md:flex gap-8 text-sm font-medium text-text-muted">
-                        <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button>
-                        <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors">Comparatif</button>
-                        <button onClick={() => scrollToSection('process')} className="hover:text-white transition-colors">Process</button>
-                        <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button>
-                        <Link to="/demos" className="hover:text-primary transition-colors font-bold ml-4 text-[10px] tracking-widest uppercase">Nos Démos</Link>
+            {/* Navigation - Smart Scroll */}
+            <nav className={`fixed w-full top-0 z-[100] transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} ${isAtTop ? 'bg-transparent py-6' : 'bg-black/80 backdrop-blur-md py-4 shadow-2xl border-b border-white/5'}`}>
+                <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+                    <div className="text-2xl font-bold tracking-tighter text-white drop-shadow-md">
+                        StyleOS<span className="text-primary">.</span>
                     </div>
-                    <Link to="/login" className="bg-surface border border-glass-border hover:border-white/20 text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all">
-                        Connexion
-                    </Link>
+
+                    <div className="hidden md:flex items-center gap-12">
+                        <div className="flex gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-gray-300">
+                            <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Fonctionnalités</button>
+                            <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Comparatif</button>
+                            <button onClick={() => scrollToSection('process')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Process</button>
+                            <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors hover:shadow-[0_0_20px_white]">Tarifs</button>
+                        </div>
+
+                        <Link to="/login" className="bg-white/10 border border-white/20 hover:bg-white text-white hover:text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-500 hover:scale-105 shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                            Connexion
+                        </Link>
+                    </div>
                 </div>
             </nav>
 
             {/* Hero Section - Integrated Cinematic Layout */}
-            <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
-                {/* Background Image - Firmly on the left */}
+            <header className="relative min-h-screen flex items-center overflow-hidden bg-black">
+                {/* Background Image - Removed as requested, keeping atmosphere */}
                 <div className="absolute inset-0 z-0 h-full w-full bg-black">
-                    <img
-                        src="hero-model-v3.png"
-                        alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-left opacity-30 lg:opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
-                    />
-                    {/* Cinematic Gradients - Stronger blend on mobile, professional shift on desktop */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-black hidden lg:block"></div>
+                    {/* Cinematic Gradients - Kept for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                     {/* Enhanced Mobile/Tablet Overlay */}
-                    <div className="absolute inset-0 bg-black/95 lg:hidden text-center"></div>
+                    <div className="absolute inset-0 bg-black/60 lg:hidden text-center"></div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+                <div className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-20">
                     {/* Content Area - Responsive Alignment */}
-                    <div className="lg:w-1/2 lg:ml-auto animate-fade-in-up text-center lg:text-left">
+                    <div className="lg:w-1/2 lg:ml-auto animate-fade-in text-center lg:text-left">
                         <div className="inline-block mb-8 lg:mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">
                             StyleOS • Bordeaux • L'Élite
                         </div>

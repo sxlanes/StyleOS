@@ -117,100 +117,99 @@ const PlanDetails = () => {
                     </button>
                 </div>
 
-                <div className="w-full bg-surface/30 border border-white/5 rounded-[4rem] p-10 md:p-24 backdrop-blur-3xl relative overflow-hidden shadow-2xl animate-fade-in-up">
-                    <div className="absolute top-0 right-0 p-12 opacity-10">
-                        <Icon className="w-48 h-48 text-white rotate-12" />
+                <div className="w-full bg-surface/30 border border-white/5 rounded-[3rem] p-8 md:p-12 backdrop-blur-3xl relative overflow-hidden shadow-2xl animate-fade-in-up">
+                    <div className="absolute top-0 right-0 p-8 opacity-10">
+                        <Icon className="w-32 h-32 text-white rotate-12" />
                     </div>
 
                     <div className="relative z-10">
-                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 pb-20 border-b border-white/5">
+                        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 pb-10 border-b border-white/5">
                             <div className="max-w-2xl">
-                                <div className="inline-block mb-10 px-6 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.5em]">
-                                    Configuration Du Système StyleOS
+                                <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-[0.4em]">
+                                    Configuration Du Système
                                 </div>
-                                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-none text-white mb-6">
+                                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none text-white mb-4">
                                     {plan.name}<span className="text-primary italic">.</span>
                                 </h1>
-                                <p className="text-lg md:text-xl text-gray-400 font-medium leading-relaxed max-w-xl opacity-80">
+                                <p className="text-sm md:text-base text-gray-400 font-medium leading-relaxed max-w-xl opacity-80">
                                     {plan.description}
                                 </p>
                             </div>
 
-                            <div className="flex flex-col items-start lg:items-end min-w-[250px]">
-                                <span className="text-primary text-[9px] font-black uppercase tracking-[0.4em] mb-3">Investissement Business</span>
+                            <div className="flex flex-col items-start lg:items-end min-w-[200px]">
+                                <span className="text-primary text-[8px] font-black uppercase tracking-[0.3em] mb-2">Investissement Business</span>
                                 <div className="flex items-start">
-                                    <div className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">
+                                    <div className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none">
                                         {plan.price.split(' ')[0]}
                                     </div>
-                                    <span className="text-2xl font-black text-primary mt-2 ml-1">€</span>
+                                    <span className="text-xl font-black text-primary mt-1 ml-1">€</span>
                                 </div>
-                                <div className="text-[9px] text-gray-500 font-black uppercase tracking-[0.4em] mt-4 mb-8">Subscription de Service Mensuelle</div>
+                                <div className="text-[8px] text-gray-500 font-black uppercase tracking-[0.3em] mt-2 mb-4">/ mois • Sans Engagement</div>
 
                                 {plan.setupFee && (
-                                    <div className="w-full py-4 px-8 bg-white/[0.03] border border-white/5 rounded-[2rem] flex flex-col items-start lg:items-end gap-1 hover:border-primary/20 transition-all duration-700 group/setup shadow-2xl">
-                                        <span className="text-[8px] text-gray-600 uppercase font-black tracking-[0.3em] mb-1 group-hover/setup:text-gray-400 transition-colors">Setup Initial de Création</span>
-                                        <span className="text-white font-black text-3xl uppercase italic group-hover/setup:text-primary transition-colors">{plan.setupFee.split(' ')[0]} €</span>
-                                        <span className="text-[7px] text-primary/40 uppercase font-black tracking-[0.2em] mt-1">Paiement Unique à l'ouverture</span>
+                                    <div className="w-full py-2 px-4 bg-white/[0.03] border border-white/5 rounded-xl flex flex-col items-start lg:items-end gap-0.5 hover:border-primary/20 transition-all duration-700 group/setup shadow-lg">
+                                        <span className="text-[7px] text-gray-600 uppercase font-black tracking-[0.2em] group-hover/setup:text-gray-400 transition-colors">Setup Initial</span>
+                                        <span className="text-white font-black text-lg uppercase italic group-hover/setup:text-primary transition-colors">{plan.setupFee.split(' ')[0]} €</span>
                                     </div>
                                 )}
                             </div>
                         </div>
 
-                        <div className="grid lg:grid-cols-2 gap-20 lg:gap-32">
+                        <div className="grid lg:grid-cols-2 gap-10 lg:gap-20">
                             {/* Features Column */}
-                            <div className="space-y-12">
-                                <div className="flex items-center gap-6 mb-12">
+                            <div className="space-y-8">
+                                <div className="flex items-center gap-4 mb-6">
                                     <div className="h-px bg-primary/30 flex-1"></div>
-                                    <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-primary whitespace-nowrap">L'Expérience Elite</h3>
+                                    <h3 className="text-[9px] font-black uppercase tracking-[0.4em] text-primary whitespace-nowrap">L'Expérience Elite</h3>
                                 </div>
-                                <div className="grid gap-10">
+                                <div className="grid gap-4">
                                     {plan.features.map((feature, i) => (
-                                        <div key={i} className="flex items-start gap-6 group">
-                                            <div className="mt-1 bg-primary/10 p-2.5 rounded-full ring-4 ring-primary/5 group-hover:bg-primary group-hover:ring-primary/40 transition-all duration-500">
-                                                <Check className="w-3.5 h-3.5 text-primary group-hover:text-black transition-colors" />
+                                        <div key={i} className="flex items-start gap-4 group">
+                                            <div className="mt-0.5 bg-primary/10 p-1.5 rounded-full ring-2 ring-primary/5 group-hover:bg-primary group-hover:ring-primary/40 transition-all duration-500">
+                                                <Check className="w-3 h-3 text-primary group-hover:text-black transition-colors" />
                                             </div>
-                                            <span className="text-xl md:text-2xl font-bold text-gray-300 leading-tight group-hover:text-white transition-colors duration-500">{feature}</span>
+                                            <span className="text-base font-bold text-gray-300 leading-tight group-hover:text-white transition-colors duration-500">{feature}</span>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
                             {/* Additional Info Column */}
-                            <div className="flex flex-col justify-between gap-16">
+                            <div className="flex flex-col justify-between gap-10">
                                 {plan.notIncluded.length > 0 && (
-                                    <div className="space-y-12">
-                                        <div className="flex items-center gap-6 mb-12">
-                                            <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-600 whitespace-nowrap">Potentiel Supérieur</h3>
+                                    <div className="space-y-6">
+                                        <div className="flex items-center gap-4 mb-6">
+                                            <h3 className="text-[9px] font-black uppercase tracking-[0.4em] text-gray-600 whitespace-nowrap">Potentiel Supérieur</h3>
                                             <div className="h-px bg-white/5 flex-1"></div>
                                         </div>
-                                        <div className="grid gap-8">
+                                        <div className="grid gap-3">
                                             {plan.notIncluded.map((item, i) => (
-                                                <div key={i} className="flex items-center gap-5 opacity-20 hover:opacity-100 transition-all duration-700 cursor-default group">
-                                                    <div className="w-2 h-2 rounded-full bg-gray-600 group-hover:bg-primary transition-colors"></div>
-                                                    <span className="text-sm font-black text-gray-500 uppercase tracking-[0.4em] group-hover:text-white transition-colors">{item}</span>
+                                                <div key={i} className="flex items-center gap-3 opacity-30 hover:opacity-100 transition-all duration-700 cursor-default group">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-primary transition-colors"></div>
+                                                    <span className="text-xs font-black text-gray-500 uppercase tracking-[0.3em] group-hover:text-white transition-colors">{item}</span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
                                 )}
 
-                                <div className="space-y-12">
-                                    <div className="p-12 rounded-[3rem] bg-black/40 border border-white/5 relative group overflow-hidden shadow-2xl">
+                                <div className="space-y-6">
+                                    <div className="p-6 rounded-[2rem] bg-black/40 border border-white/5 relative group overflow-hidden shadow-lg">
                                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                                        <div className="relative z-10">
-                                            <div className="flex items-center gap-5 mb-8">
-                                                <ShieldCheck className="w-8 h-8 text-primary shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
-                                                <span className="text-[11px] font-black uppercase tracking-[0.4em] text-white">Garantie StyleOS Elite</span>
+                                        <div className="relative z-10 flex items-center gap-4">
+                                            <ShieldCheck className="w-6 h-6 text-primary shadow-[0_0_20px_rgba(212,175,55,0.4)]" />
+                                            <div>
+                                                <div className="text-[9px] font-black uppercase tracking-[0.3em] text-white/80 mb-1">Garantie StyleOS</div>
+                                                <p className="text-[10px] text-gray-500 font-bold leading-tight">
+                                                    Déploiement 72h • Propriété 100% • Liberté Totale
+                                                </p>
                                             </div>
-                                            <p className="text-xs text-gray-500 font-bold leading-relaxed tracking-wide">
-                                                Déploiement en 72h. Sans engagement de durée. Annulation simplifiée. Propriété totale de votre base de données et de votre identité digitale.
-                                            </p>
                                         </div>
                                     </div>
 
-                                    <button className="group relative w-full py-10 bg-primary rounded-[2rem] overflow-hidden transition-all duration-700 hover:scale-[1.02] active:scale-[0.98] shadow-[0_20px_80px_rgba(212,175,55,0.3)]">
+                                    <button className="group relative w-full py-6 bg-primary rounded-[1.5rem] overflow-hidden transition-all duration-700 hover:scale-[1.01] active:scale-[0.98] shadow-[0_10px_40px_rgba(212,175,55,0.2)]">
                                         <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                                        <span className="relative text-black font-black uppercase tracking-[0.5em] text-base">
+                                        <span className="relative text-black font-black uppercase tracking-[0.4em] text-xs">
                                             Confirmer Le Plan {plan.name}
                                         </span>
                                     </button>
@@ -221,11 +220,11 @@ const PlanDetails = () => {
                 </div>
 
                 {/* Brand Footer */}
-                <div className="w-full mt-32 pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black uppercase tracking-[0.5em] text-gray-700">
-                    <div className="hover:text-gray-400 transition-colors">StyleOS &copy; {new Date().getFullYear()} • Bordeaux • France</div>
-                    <div className="flex gap-12">
-                        <Link to="/legal" className="hover:text-primary transition-colors">Mentions Légales</Link>
-                        <Link to="/terms" className="hover:text-primary transition-colors">CGV & CGU</Link>
+                <div className="w-full mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] font-black uppercase tracking-[0.4em] text-gray-700">
+                    <div className="hover:text-gray-400 transition-colors">StyleOS &copy; {new Date().getFullYear()}</div>
+                    <div className="flex gap-8">
+                        <Link to="/legal" className="hover:text-primary transition-colors">Légal</Link>
+                        <Link to="/terms" className="hover:text-primary transition-colors">CGV</Link>
                     </div>
                 </div>
             </div>
