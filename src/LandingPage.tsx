@@ -63,16 +63,16 @@ function LandingPage() {
                 {/* Background Image - Firmly on the left */}
                 <div className="absolute inset-0 z-0 h-full w-full bg-black">
                     <img
-                        src="hero-model-v2.png"
+                        src="hero-model-v3.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-[0%_center] lg:object-[15%_center] opacity-40 lg:opacity-75 grayscale hover:grayscale-0 transition-all duration-1000"
+                        className="w-full h-full object-cover object-left opacity-30 lg:opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
                     {/* Cinematic Gradients - Stronger blend on mobile, professional shift on desktop */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black hidden lg:block"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                     {/* Enhanced Mobile/Tablet Overlay */}
-                    <div className="absolute inset-0 bg-black/80 lg:hidden text-center"></div>
+                    <div className="absolute inset-0 bg-black/95 lg:hidden text-center"></div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
