@@ -8,7 +8,7 @@ import ROICalculator from './components/ROICalculator';
 import FinancialComparison from './components/FinancialComparison';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
-import SuccessStories from './components/SuccessStories';
+import GuaranteeSection from './components/GuaranteeSection';
 import ProcessSection from './components/ProcessSection';
 
 function LandingPage() {
@@ -65,7 +65,7 @@ function LandingPage() {
                     <img
                         src="hero-model.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-[20%_center] lg:object-left opacity-60 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
+                        className="w-full h-full object-cover object-[10%_center] lg:object-[5%_center] opacity-60 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
                     {/* Cinematic Gradients - Stronger blend on mobile, professional shift on desktop */}
                     <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/60 to-black hidden lg:block"></div>
@@ -123,7 +123,7 @@ function LandingPage() {
             <SolutionStack />
 
             <ComparisonTable />
-            <SuccessStories />
+            <GuaranteeSection />
 
             <AudioDemo />
             <ROICalculator />
