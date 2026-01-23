@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { Monitor, Calculator, Cpu, TrendingUp, Check, ArrowRight, Star } from 'lucide-react';
+import { Monitor, Calculator, Cpu, Star, ShieldCheck, Check, ArrowRight } from 'lucide-react';
 
 const features = [
     {
         id: 'web',
         icon: Monitor,
-        title: "Dominance Digitale",
-        subtitle: "Votre image, votre autorité.",
-        description: "Votre salon est une destination, pas une commodité. Nous érigeons un bastion digital sur-mesure qui impose votre style dès le premier clic. C'est l'expérience Blue-Chip, sans compromis.",
+        title: "Création Web sur Mesure",
+        subtitle: "Votre bastion digital élite.",
+        description: "Nous érigeons un écosystème digital sur-mesure qui impose votre autorité. Un design 'Dark Luxury' conçu pour transformer chaque visiteur en client fidèle. Vous n'êtes plus un simple matricule, vous êtes la destination.",
         details: [
-            "Branding 'Dark Luxury' Sur-Mesure",
+            "Branding Haute Couture",
             "SEO Local de Haute Précision",
-            "Entonnoirs de Réservation Haute-Vitesse",
-            "Propriété Totale (Zéro Commission)"
+            "Expérience Utilisateur Fluide",
+            "Propriété Totale des Données"
         ],
         gradient: "from-blue-500/20 to-purple-500/20",
         color: "text-blue-400"
@@ -22,12 +22,12 @@ const features = [
         icon: Calculator,
         title: "Pilotage Financier",
         subtitle: "La clarté absolue sur vos profits.",
-        description: "Arrêtez de piloter à l'aveugle. StyleOS digère vos factures, calcule vos marges en temps réel et libère 4 HEURES de gestion administrative par semaine.",
+        description: "Prenez le contrôle total de vos finances. Notre tableau de bord analyse vos marges, suit vos d épenses et libère des heures de gestion administrative. La gestion d'élite, simplifiée.",
         details: [
-            "Dashboard de Bénéfice Net (Réel)",
-            "Scan de Factures IA (4h gagnées/sem)",
-            "Catégorisation Automatique des Dépenses",
-            "Export Comptable en 1 Clic"
+            "Analyse de Rentabilité Réelle",
+            "Suivi des Marges en Temps-Réel",
+            "Optimización de la Trésorerie",
+            "Rapports Financiers Automatisés"
         ],
         gradient: "from-green-500/20 to-emerald-500/20",
         color: "text-emerald-400"
@@ -36,46 +36,46 @@ const features = [
         id: 'ai',
         icon: Cpu,
         title: "Sarah IA",
-        subtitle: "Dominance Opérationnelle Tier 1.",
-        description: "Pendant que vous créez, Sarah domine votre accueil. Elle gère les flux entrants, filtre les opportunités, et sécurise votre agenda. C'est votre rempart contre les interruptions, votre moteur de croissance.",
+        subtitle: "L'employée parfaite, 24h/24.",
+        description: "Sarah domine votre accueil. Elle répond aux appels en voix naturelle, gère les prises de rendez-vous sur WhatsApp et sécurise votre agenda pendant que vous vous concentrez sur votre art.",
         details: [
-            "Réponse Téléphonique Instantanée",
-            "Full WhatsApp Automation AI",
-            "Voix Humaine & Naturelle (Elite)",
-            "Gestion Intelligente des Agendas"
+            "Voix Humaine & Naturelle",
+            "Réservation WhatsApp Automatisée",
+            "Gestion Intelligente des Agendas",
+            "Zéro Appel Manqué, Jamais"
         ],
         gradient: "from-[#D4AF37]/20 to-orange-500/20",
         color: "text-[#D4AF37]"
     },
     {
-        id: 'growth',
-        icon: TrendingUp,
-        title: "Croissance Sarah IA",
-        subtitle: "Elle attire les clients pour vous.",
-        description: "Sarah IA ne se contente pas de gérer vos rendez-vous. Elle analyse les tendances pour piloter votre stratégie de contenu et transformer vos followers en clients fidèles et à haut panier moyen.",
-        details: [
-            "Stratégie de Contenu Pilotée par IA",
-            "Montage Vidéo & Design Automatisé",
-            "Croissance d'Audience Ciblée",
-            "Veille Concurrentielle Temps-Réel"
-        ],
-        gradient: "from-pink-500/20 to-rose-500/20",
-        color: "text-pink-400"
-    },
-    {
         id: 'reviews',
         icon: Star,
-        title: "Réputation by Sarah",
-        subtitle: "Elle protège votre image 24h/7.",
-        description: "Transformez chaque client satisfait en ambassadeur. Sarah IA sollicite, filtre et répond à vos avis Google automatiquement pour vous placer en pole position sur les recherches locales.",
+        title: "Automatisation d'Avis",
+        subtitle: "Votre réputation en pilote automatique.",
+        description: "Transformez chaque client satisfait en un moteur de croissance. Sarah IA sollicite et gère vos avis Google automatiquement pour vous propulser en tête des recherches locales.",
         details: [
-            "Sollicitation Automatique Sarah",
-            "Filtrage Anti-Avis Négatifs",
+            "Boost SEO Maps Automatique",
+            "Filtrage Intelligent des Retours",
             "Réponses IA Personnalisées",
-            "Boost SEO Google Maps Natif"
+            "Croissance Organique de l'Autorité"
         ],
-        gradient: "from-yellow-500/20 to-amber-500/20",
+        gradient: "from-amber-500/20 to-yellow-500/20",
         color: "text-amber-400"
+    },
+    {
+        id: 'guarantee',
+        icon: ShieldCheck,
+        title: "Garantie StyleOS",
+        subtitle: "Le succès sans aucun risque.",
+        description: "Notre succès est indexé sur le vôtre. Si vous n'êtes pas absolument bluffé par les résultats et l'automatisation de Sarah sous 30 jours, nous vous remboursons intégralement. Notre parole est notre engagement.",
+        details: [
+            "Garantie Satisfait o Remboursé",
+            "Contrat de Succès Garanti",
+            "Zéro Engagement Long Terme",
+            "Support Élite Prioritaire"
+        ],
+        gradient: "from-red-500/20 to-rose-500/20",
+        color: "text-red-400"
     }
 ];
 

@@ -61,18 +61,18 @@ function LandingPage() {
             {/* Hero Section - Integrated Cinematic Layout */}
             <header className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-black">
                 {/* Background Image - Firmly on the left */}
-                <div className="absolute inset-0 z-0 h-full w-full">
+                <div className="absolute inset-0 z-0 h-full w-full bg-[#1a1a1a]">
                     <img
-                        src="hero-model.png"
+                        src="hero-model-v2.png"
                         alt="StyleOS Atmosphere"
-                        className="w-full h-full object-cover object-[10%_center] lg:object-[5%_center] opacity-60 lg:opacity-100 grayscale hover:grayscale-0 transition-all duration-1000"
+                        className="w-full h-full object-cover object-[30%_center] lg:object-[25%_center] opacity-50 lg:opacity-75 grayscale hover:grayscale-0 transition-all duration-1000"
                     />
                     {/* Cinematic Gradients - Stronger blend on mobile, professional shift on desktop */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/60 to-black hidden lg:block"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black hidden lg:block"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                     {/* Enhanced Mobile/Tablet Overlay */}
-                    <div className="absolute inset-0 bg-black/70 lg:hidden text-center"></div>
+                    <div className="absolute inset-0 bg-black/60 lg:hidden text-center"></div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
