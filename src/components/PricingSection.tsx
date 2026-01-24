@@ -48,7 +48,7 @@ const PricingSection = () => {
                 </div>
             </div>
 
-            {/* 4 REFLECTIVE CARDS */}
+            {/* 4 REFLECTIVE CARDS - LINKED TO DETAILS PAGES */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch relative z-10">
 
                 {/* 1. BASIC (50€) */}
@@ -105,7 +105,7 @@ const PricingSection = () => {
                                 <CheckCircle className="w-4 h-4 text-gray-600 shrink-0" /> <span>Support Prioritaire</span>
                             </div>
                         </div>
-                        <button onClick={() => navigate('/plan/performance')} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                        <button onClick={() => navigate('/plan/pro')} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
                             Voir Détails
                         </button>
                     </div>
@@ -143,7 +143,7 @@ const PricingSection = () => {
                                 <CheckCircle className="w-4 h-4 text-primary/50 shrink-0" /> <span>Tout du plan Performance</span>
                             </div>
                         </div>
-                        <button onClick={() => navigate('/plan/dominance')} className="w-full py-5 rounded-xl bg-primary text-black text-[11px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
+                        <button onClick={() => navigate('/plan/elite')} className="w-full py-5 rounded-xl bg-primary text-black text-[11px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
                             Voir Détails <ArrowRight className="w-4 h-4" />
                         </button>
                     </div>

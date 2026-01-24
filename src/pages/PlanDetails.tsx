@@ -23,7 +23,7 @@ const plans = {
         ]
     },
     pro: {
-        name: "Pro",
+        name: "Performance",
         price: "109 €",
         setupFee: null,
         description: "Automatisation totale de vos appels.",
@@ -42,8 +42,8 @@ const plans = {
         ]
     },
     elite: {
-        name: "Elite",
-        price: "199 €",
+        name: "Dominance",
+        price: "189 €",
         setupFee: null,
         description: "Gestion financière et réputation automatique.",
         icon: Crown,
