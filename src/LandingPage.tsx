@@ -149,7 +149,23 @@ const SocialMock = () => (
             </div>
         </div>
     </div>
-)
+);
+
+const IntegrationMock = () => (
+    <div className="w-full h-full bg-[#111] rounded-xl border border-white/10 flex items-center justify-center relative overflow-hidden group">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 to-transparent opacity-50" />
+        <div className="relative z-10 text-center">
+            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:bg-primary/20 transition-colors">
+                <Server className="w-10 h-10 text-white group-hover:text-primary transition-colors" />
+            </div>
+            <div className="flex items-center gap-4 text-xs font-mono text-gray-500">
+                <span>Planity</span>
+                <ArrowRight size={12} />
+                <span className="text-primary font-bold">StyleOS</span>
+            </div>
+        </div>
+    </div>
+);
 
 /* --- FEATURE ROW --- */
 const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, visual }: any) => {
@@ -352,7 +368,7 @@ function LandingPage() {
 
             <DemosSection />
 
-            <div className="relative z-10 bg-black pt-12"><ScrollReveal><div className="max-w-7xl mx-auto px-6"><FeatureRow title="Migration Sans Friction" description="Nous récupérons l'intégralité de votre historique Planity ou Booksy. Fichiers clients, RDV à venir. Transition invisible en 24h." icon={Server} align="left" visual={{/* Simple Icon/Text or use IntegrationMock */ }} /></div></ScrollReveal></div>
+            <div className="relative z-10 bg-black pt-12"><ScrollReveal><div className="max-w-7xl mx-auto px-6"><FeatureRow title="Migration Sans Friction" description="Nous récupérons l'intégralité de votre historique Planity ou Booksy. Fichiers clients, RDV à venir. Transition invisible en 24h." icon={Server} align="left" visual={<IntegrationMock />} /></div></ScrollReveal></div>
 
             <div id="comparison" className="relative z-10 bg-black pb-24 border-t border-white/5 pt-32"><div className="max-w-7xl mx-auto px-6"><ScrollReveal><div className="text-center mb-20 relative inline-block w-full"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div><h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3></div></ScrollReveal><ScrollReveal delay={0.2}><ComparisonTable /></ScrollReveal></div></div>
 
@@ -371,7 +387,7 @@ function LandingPage() {
                         <div className="absolute top-12 left-0 w-full text-center z-50">
                             <div className="relative inline-block"><div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div><h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white relative">Votre Parcours <span className="text-primary">Vers le Sommet</span></h2></div>
                         </div>
-                        <StickyFeatureRow style={{ opacity: op1, scale: scale1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} image={<ExternalLink className="w-20 h-20 text-white/20" />} /* Fixed Visual Prop */ visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Search className="w-20 h-20 text-primary" /></div>} />
+                        <StickyFeatureRow style={{ opacity: op1, scale: scale1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Search className="w-20 h-20 text-primary" /></div>} />
                         <StickyFeatureRow style={{ opacity: op2, scale: scale2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Zap className="w-20 h-20 text-primary" /></div>} />
                         <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Rocket className="w-20 h-20 text-primary" /></div>} />
                     </div>
