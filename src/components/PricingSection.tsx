@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Star, Globe, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Check, ShieldCheck, Globe, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
@@ -23,7 +23,7 @@ const PricingSection = () => {
                     <div className="inline-block px-3 py-1 bg-primary/20 text-primary uppercase text-[10px] font-black tracking-widest rounded mb-3 border border-primary/20">Pack Démarrage</div>
                     <h3 className="text-2xl md:text-3xl font-black uppercase text-white mb-2">Création Site Web "Élite"</h3>
                     <p className="text-gray-400 text-sm max-w-xl">
-                        Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus.
+                        Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus (Offre de lancement).
                     </p>
                 </div>
                 <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">

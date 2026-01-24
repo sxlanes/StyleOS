@@ -9,7 +9,7 @@ import AudioDemo from './components/AudioDemo';
 import RevenueSimulator from './components/RevenueSimulator';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
-import GuaranteeSection from './components/GuaranteeSection'; // IMPORT GUARANTEE SECTION
+import GuaranteeSection from './components/GuaranteeSection';
 
 // --- ANIMATION WRAPPER ---
 const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }: any) => {
@@ -42,7 +42,6 @@ const WebEliteMock = () => (
                 <div className="w-8 h-[1px] bg-[#D4AF37] mx-auto"></div>
             </div>
         </div>
-        {/* Live Demo Badge */}
         <div className="absolute bottom-4 right-4 bg-red-600 text-white text-[8px] font-bold px-3 py-1 rounded-full uppercase tracking-widest z-20 flex items-center gap-2 shadow-lg animate-pulse">
             <span className="w-1.5 h-1.5 bg-white rounded-full"></span> Live Demo
         </div>
@@ -222,7 +221,7 @@ const DemosSection = () => (
                     <div className="group cursor-pointer">
                         <div className="aspect-video relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-6">
                             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500 z-10" />
-                            <WebEliteMock /> {/* Using the new Mock */}
+                            <WebEliteMock />
                             <div className="absolute bottom-6 left-6 z-20">
                                 <div className="text-2xl font-black text-white italic mb-1">Barber 253</div>
                                 <div className="text-[10px] bg-primary text-black px-2 py-1 font-bold uppercase tracking-widest inline-block">Dark / Gold Theme</div>
@@ -234,7 +233,7 @@ const DemosSection = () => (
                     <div className="group cursor-pointer">
                         <div className="aspect-video relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-6">
                             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500 z-10" />
-                            <CarolAnnMock /> {/* Carol Ann Mock */}
+                            <CarolAnnMock />
                             <div className="absolute bottom-6 left-6 z-20">
                                 <div className="text-2xl font-black text-white italic mb-1">Maison Carol Ann</div>
                                 <div className="text-[10px] bg-white text-black px-2 py-1 font-bold uppercase tracking-widest inline-block">Minimalist / Chic</div>
@@ -298,7 +297,7 @@ function LandingPage() {
                     <div className="text-2xl font-bold tracking-tighter text-white drop-shadow-md cursor-pointer" onClick={() => window.scrollTo(0, 0)}>StyleOS<span className="text-primary">.</span></div>
                     <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-10 text-xs font-black uppercase tracking-[0.2em] text-gray-400">
                         <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button>
-                        <button onClick={() => scrollToSection('demos')} className="hover:text-white transition-colors">Nos Démos</button>
+                        <button onClick={() => scrollToSection('demos')} className="hover:text-primary transition-colors text-white font-bold">Nos Démos</button>
                         <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors">Comparatif</button>
                         <button onClick={() => scrollToSection('process')} className="hover:text-white transition-colors">Process</button>
                         <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button>
@@ -351,10 +350,9 @@ function LandingPage() {
                 </div>
             </div>
 
-            {/* RESTORED DEMOS SECTION */}
             <DemosSection />
 
-            <div className="relative z-10 bg-black pt-12"><ScrollReveal><div className="max-w-7xl mx-auto px-6"><FeatureRow title="Migration Sans Friction" description="Nous récupérons l'intégralité de votre historique Planity ou Booksy. Fichiers clients, RDV à venir, préférences. Transition invisible en 24h." icon={Server} align="left" visual={<IntegrationMock />} /></div></ScrollReveal></div>
+            <div className="relative z-10 bg-black pt-12"><ScrollReveal><div className="max-w-7xl mx-auto px-6"><FeatureRow title="Migration Sans Friction" description="Nous récupérons l'intégralité de votre historique Planity ou Booksy. Fichiers clients, RDV à venir. Transition invisible en 24h." icon={Server} align="left" visual={{/* Simple Icon/Text or use IntegrationMock */ }} /></div></ScrollReveal></div>
 
             <div id="comparison" className="relative z-10 bg-black pb-24 border-t border-white/5 pt-32"><div className="max-w-7xl mx-auto px-6"><ScrollReveal><div className="text-center mb-20 relative inline-block w-full"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div><h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3></div></ScrollReveal><ScrollReveal delay={0.2}><ComparisonTable /></ScrollReveal></div></div>
 
@@ -363,7 +361,7 @@ function LandingPage() {
             <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5"><ScrollReveal><div className="text-center mb-12 relative"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary/20 blur-[60px] w-1/3 h-full rounded-full pointer-events-none"></div><h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white relative">Découvrez <span className="text-primary">Sarah IA</span></h3></div><div className="max-w-6xl mx-auto"><AudioDemo /></div></ScrollReveal></div>
 
             <div className="relative z-10 bg-black border-t border-white/5 py-24"><ScrollReveal><div className="max-w-7xl mx-auto px-6">
-                {/* USE IMPORTED GUARANTEE SECTION */}
+                <div className="text-center mb-12"><h2 className="text-3xl font-black uppercase text-white">Nos <span className="text-primary">Garanties</span></h2></div>
                 <GuaranteeSection />
             </div></ScrollReveal></div>
 
@@ -373,9 +371,9 @@ function LandingPage() {
                         <div className="absolute top-12 left-0 w-full text-center z-50">
                             <div className="relative inline-block"><div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div><h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white relative">Votre Parcours <span className="text-primary">Vers le Sommet</span></h2></div>
                         </div>
-                        <StickyFeatureRow style={{ opacity: op1, scale: scale1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} visual={<ProcessAuditMock />} />
-                        <StickyFeatureRow style={{ opacity: op2, scale: scale2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap} visual={<ProcessTrainingMock />} />
-                        <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<ProcessGrowthMock />} />
+                        <StickyFeatureRow style={{ opacity: op1, scale: scale1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} image={<ExternalLink className="w-20 h-20 text-white/20" />} /* Fixed Visual Prop */ visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Search className="w-20 h-20 text-primary" /></div>} />
+                        <StickyFeatureRow style={{ opacity: op2, scale: scale2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Zap className="w-20 h-20 text-primary" /></div>} />
+                        <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Rocket className="w-20 h-20 text-primary" /></div>} />
                     </div>
                 </div>
             </div>
@@ -391,10 +389,8 @@ function LandingPage() {
                         <li><button onClick={() => scrollToSection('demos')} className="hover:text-white transition-colors">Démos</button></li>
                         <li><button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button></li>
                     </ul></div>
-                    <div><ul className="space-y-2 text-xs text-gray-500"><li><Link to="/legal" className="hover:text-white transition-colors">Mentions Légales</Link></li><li><Link to="/privacy" className="hover:text-white transition-colors">Confidentialité</Link></li><li><Link to="/terms" className="hover:text-white transition-colors">Conditions Générales</Link></li></ul></div>
-                    <div><ul className="space-y-2 text-xs text-gray-500"><li>bordeaux@styleos.fr</li><li className="pt-2"><Link to="/login" className="text-primary hover:text-white transition-colors">Espace Client</Link></li></ul></div>
+                    <div><ul className="space-y-2 text-xs text-gray-500"><li><Link to="/legal" className="hover:text-white transition-colors">Mentions Légales</Link></li><li><Link to="/privacy" className="hover:text-white transition-colors">Confidentialité</Link></li></ul></div>
                 </div>
-                <div className="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-white/5 text-center text-[10px] text-gray-600 uppercase tracking-widest">&copy; 2026 StyleOS. Tous droits réservés.</div>
             </footer>
         </div>
     );

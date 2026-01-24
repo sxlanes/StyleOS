@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
-import { Play, Pause, Mic, Phone, CalendarCheck, Check, CheckCheck, MoreVertical } from 'lucide-react';
+import { Play, Pause, Mic, Phone, CalendarCheck, CheckCheck } from 'lucide-react';
 
 const AudioDemo = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    // Audio file path (Same as before as requested)
+    // Audio file path
     const audioSrc = "https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3";
 
     // Fake visualizer bars
@@ -56,7 +56,7 @@ const AudioDemo = () => {
                     </div>
                 </div>
 
-                {/* Right: Call CTA & Calendar Info */}
+                {/* Right: CTA & Calendar Feature */}
                 <div className="bg-[#050505] p-8 md:p-12 relative flex flex-col items-center justify-center text-center h-[450px]">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 to-transparent pointer-events-none" />
 
@@ -65,12 +65,21 @@ const AudioDemo = () => {
                         <Phone className="w-8 h-8 text-white relative z-10" />
                     </div>
 
-                    <h3 className="text-2xl font-black uppercase tracking-tighter text-white mb-2">Testez Sarah <span className="text-primary">En Direct</span></h3>
-                    <p className="text-sm text-gray-400 mb-6 max-w-xs leading-relaxed">Appelez pour une conversation réelle.</p>
-                    <div className="bg-white text-black px-8 py-3 rounded-xl font-black text-lg tracking-widest shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-transform cursor-pointer border-2 border-transparent hover:border-primary mb-8">01 89 71 33 55</div>
+                    <h3 className="text-2xl font-black uppercase tracking-tighter text-white mb-2">
+                        Testez Sarah <span className="text-primary">En Direct</span>
+                    </h3>
+                    <p className="text-sm text-gray-400 mb-6 max-w-xs leading-relaxed">
+                        Appelez pour une conversation réelle.
+                    </p>
+                    <div className="bg-white text-black px-8 py-3 rounded-xl font-black text-lg tracking-widest shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-transform cursor-pointer border-2 border-transparent hover:border-primary mb-8">
+                        01 89 71 33 55
+                    </div>
 
+                    {/* CALENDAR CAPABILITY BADGE */}
                     <div className="bg-white/5 border border-white/10 rounded-xl p-4 w-full max-w-xs flex items-center gap-4 text-left">
-                        <div className="w-10 h-10 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center shrink-0"><CalendarCheck size={20} /></div>
+                        <div className="w-10 h-10 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center shrink-0">
+                            <CalendarCheck size={20} />
+                        </div>
                         <div>
                             <div className="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Fonction Clé</div>
                             <div className="text-xs font-bold text-white">Gestion d'Agenda Autonome</div>
@@ -80,74 +89,49 @@ const AudioDemo = () => {
                 </div>
             </div>
 
-            {/* WHATSAPP STYLE TRANSCRIPT BOX */}
-            <div className="w-full max-w-md mx-auto relative mt-12">
-                <div className="bg-[#0b141a] rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl font-sans">
-                    {/* Header */}
-                    <div className="bg-[#202c33] p-4 flex items-center gap-3 border-b border-[#2a3942]">
-                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold">S</div>
-                        <div className="flex-1">
-                            <div className="text-white font-medium text-sm">Sarah IA (StyleOS)</div>
-                            <div className="text-xs text-gray-400">En ligne</div>
-                        </div>
-                        <div className="flex gap-4 text-gray-400"><Phone size={20} /><MoreVertical size={20} /></div>
-                    </div>
+            {/* Conversation WhatsApp Style */}
+            <div className="w-full max-w-3xl mx-auto">
+                <div className="bg-[#0b141a] border border-white/10 rounded-2xl p-6 relative overflow-hidden bg-[url('https://camo.githubusercontent.com/854a93c27d64274c4f8c5a0b6ec34ce1bed9dd84/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131303234303838396634342e706e67')] bg-repeat">
+                    <h4 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-6 flex items-center gap-2 bg-[#202c33] w-fit px-3 py-1 rounded-full mx-auto shadow-lg">
+                        <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Transcription Live
+                    </h4>
 
-                    {/* Chat Area */}
-                    <div className="bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-opacity-10 p-4 space-y-4 min-h-[300px]">
-
-                        {/* Sarah Message */}
+                    <div className="space-y-4 font-sans text-sm">
+                        {/* Received (Client) */}
                         <div className="flex justify-start">
-                            <div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[85%] text-sm relative shadow-sm">
-                                <div className="text-[#d1d7db]">Bonjour, ici le salon Barber Club. Je suis Sarah. Comment puis-je vous aider ?</div>
-                                <div className="text-[10px] text-gray-500 text-right mt-1">10:42</div>
+                            <div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] shadow-md relative">
+                                <div>Bonjour, je voudrais prendre RDV pour une coupe.</div>
+                                <div className="text-[10px] text-gray-400 text-right mt-1">10:42</div>
                             </div>
                         </div>
 
-                        {/* Client Message */}
+                        {/* Sent (Sarah) */}
                         <div className="flex justify-end">
-                            <div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[85%] text-sm relative shadow-sm">
-                                <div className="text-[#e9edef]">Je voudrais réserver pour une coupe dégradée jeudi matin.</div>
-                                <div className="flex items-center justify-end gap-1 mt-1">
-                                    <div className="text-[10px] text-[#8696a0]">10:42</div>
-                                    <CheckCheck size={14} className="text-[#53bdeb]" />
+                            <div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] shadow-md relative">
+                                <div>Bonjour ! C'est Sarah du Barber Club. Enchantée. Quel jour vous conviendrait le mieux ?</div>
+                                <div className="text-[10px] text-white/60 text-right mt-1 flex items-center justify-end gap-1">
+                                    10:42 <CheckCheck size={12} className="text-blue-400" />
                                 </div>
                             </div>
                         </div>
 
-                        {/* Sarah Message */}
+                        {/* Received */}
                         <div className="flex justify-start">
-                            <div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[85%] text-sm relative shadow-sm">
-                                <div className="text-[#d1d7db]">J'ai une disponibilité à 10h15 avec Marc. Cela vous convient-il ?</div>
-                                <div className="text-[10px] text-gray-500 text-right mt-1">10:43</div>
+                            <div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] shadow-md relative">
+                                <div>Jeudi matin si possible.</div>
+                                <div className="text-[10px] text-gray-400 text-right mt-1">10:43</div>
                             </div>
                         </div>
 
-                        {/* Client Message */}
+                        {/* Sent */}
                         <div className="flex justify-end">
-                            <div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[85%] text-sm relative shadow-sm">
-                                <div className="text-[#e9edef]">C'est parfait.</div>
-                                <div className="flex items-center justify-end gap-1 mt-1">
-                                    <div className="text-[10px] text-[#8696a0]">10:43</div>
-                                    <CheckCheck size={14} className="text-[#53bdeb]" />
+                            <div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] shadow-md relative">
+                                <div>J'ai un créneau disponible à 10h15 avec Marc. Je vous le bloque ?</div>
+                                <div className="text-[10px] text-white/60 text-right mt-1 flex items-center justify-end gap-1">
+                                    10:43 <CheckCheck size={12} className="text-blue-400" />
                                 </div>
                             </div>
                         </div>
-
-                        {/* System Message */}
-                        <div className="flex justify-center">
-                            <div className="bg-[#182229] px-3 py-1 rounded-lg text-[10px] text-[#8696a0] font-bold uppercase tracking-wider shadow-sm border border-[#2a3942]">
-                                📅 RDV Confirmé • Planity
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {/* Input Area (Fake) */}
-                    <div className="bg-[#202c33] p-3 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#2a3942] flex items-center justify-center text-gray-400">+</div>
-                        <div className="flex-1 bg-[#2a3942] rounded-lg h-10 px-4 flex items-center text-gray-500 text-sm">Écrire un message...</div>
-                        <div className="w-10 h-10 rounded-full bg-[#005c4b] flex items-center justify-center text-white"><Mic size={20} /></div>
                     </div>
                 </div>
             </div>
