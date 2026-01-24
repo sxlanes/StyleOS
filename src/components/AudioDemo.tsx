@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { Play, Pause, Mic, Phone, CalendarCheck, CheckCheck } from 'lucide-react';
+import { Play, Pause, Mic, Phone, CalendarCheck, Check } from 'lucide-react';
 
 const AudioDemo = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -110,7 +110,7 @@ const AudioDemo = () => {
                             <div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] shadow-md relative">
                                 <div>Bonjour ! C'est Sarah du Barber Club. Enchantée. Quel jour vous conviendrait le mieux ?</div>
                                 <div className="text-[10px] text-white/60 text-right mt-1 flex items-center justify-end gap-1">
-                                    10:42 <CheckCheck size={12} className="text-blue-400" />
+                                    10:42 <Check size={12} className="text-blue-400" />
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ const AudioDemo = () => {
                             <div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] shadow-md relative">
                                 <div>J'ai un créneau disponible à 10h15 avec Marc. Je vous le bloque ?</div>
                                 <div className="text-[10px] text-white/60 text-right mt-1 flex items-center justify-end gap-1">
-                                    10:43 <CheckCheck size={12} className="text-blue-400" />
+                                    10:43 <Check size={12} className="text-blue-400" />
                                 </div>
                             </div>
                         </div>
