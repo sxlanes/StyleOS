@@ -9,7 +9,7 @@ const ROICalculator = () => {
     const annualLost = missedCalls * price * 5 * 52;
 
     return (
-        <section className="py-32 bg-background relative overflow-hidden">
+        <section className="bg-black relative overflow-hidden py-12">
             <style>{`
                 input[type=range] {
                     -webkit-appearance: none; 
@@ -52,7 +52,7 @@ const ROICalculator = () => {
                     </p>
                 </div>
 
-                <div className="bg-surface/30 p-8 md:p-12 rounded-[2.5rem] border border-white/5 backdrop-blur-3xl shadow-2xl animate-fade-in-up">
+                <div className="bg-black p-8 md:p-12 rounded-[2.5rem] border border-white/10 shadow-2xl">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div className="space-y-10">
                             <div className="transition-all duration-500 hover:translate-x-2">
@@ -88,7 +88,7 @@ const ROICalculator = () => {
                             {/* Inner Circle Glow */}
                             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
 
-                            <div className="relative bg-black/60 p-8 md:p-12 rounded-[2rem] border border-primary/20 text-center transition-all duration-700 hover:scale-[1.02] hover:border-primary/50 group">
+                            <div className="relative bg-black p-8 md:p-12 rounded-[2rem] border border-primary/20 text-center transition-all duration-700 hover:scale-[1.02] hover:border-primary/50 group">
                                 <div className="text-gray-500 text-[10px] font-black uppercase tracking-[0.4em] mb-4">Manque à Gagner Annuel</div>
                                 <div className="text-5xl md:text-7xl font-black text-white tracking-tighter mb-6 group-hover:text-primary transition-colors duration-500 whitespace-nowrap overflow-hidden text-ellipsis">
                                     €{annualLost.toLocaleString()}

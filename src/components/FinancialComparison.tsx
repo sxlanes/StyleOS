@@ -2,26 +2,14 @@ import { Zap, TrendingUp, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const FinancialComparison = () => {
     return (
-        <section id="comparison" className="py-16 md:py-20 bg-black relative overflow-hidden h-auto lg:h-screen lg:min-h-[600px] flex items-center">
-            {/* Background elements */}
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(212,175,55,0.05),transparent_70%)] pointer-events-none"></div>
-
+        <section className="bg-black relative overflow-hidden py-12">
             <div className="max-w-6xl mx-auto px-6 relative z-10 w-full">
-                <div className="text-center mb-10">
-                    <div className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] font-black uppercase tracking-[0.3em]">
-                        ANALYSE DE RENTABILITÉ
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter text-white leading-none">
-                        VOTRE <span className="text-primary italic">MACHINE À CASH.</span>
-                    </h2>
-                    <p className="text-gray-400 max-w-xl mx-auto text-sm font-medium">
-                        Arrêtez de payer pour être locataire de votre base client.
-                    </p>
-                </div>
+
+                {/* Headers Removed - Handled by LandingPage */}
 
                 <div className="grid lg:grid-cols-2 gap-6 items-stretch">
                     {/* Current Method: Planity/Manual */}
-                    <div className="relative p-5 rounded-3xl border border-white/5 bg-surface/5 backdrop-blur-sm flex flex-col justify-between group overflow-hidden transition-all duration-700 hover:bg-surface/10 min-h-[500px]">
+                    <div className="relative p-5 rounded-3xl border border-white/5 bg-black backdrop-blur-sm flex flex-col justify-between group overflow-hidden transition-all duration-700 hover:bg-white/[0.02] min-h-[500px]">
                         <div className="absolute -top-12 -right-12 w-24 h-24 bg-red-500/5 rounded-full blur-2xl group-hover:bg-red-500/10 transition-colors"></div>
 
                         <div>
@@ -56,7 +44,7 @@ const FinancialComparison = () => {
                     </div>
 
                     {/* StyleOS Ownership */}
-                    <div className="relative p-5 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 via-black to-black backdrop-blur-xl flex flex-col justify-between group shadow-[0_0_50px_rgba(212,175,55,0.1)] transition-all duration-700 hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] hover:border-primary/50 min-h-[500px]">
+                    <div className="relative p-5 rounded-3xl border border-primary/30 bg-black backdrop-blur-xl flex flex-col justify-between group shadow-[0_0_50px_rgba(212,175,55,0.1)] transition-all duration-700 hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] hover:border-primary/50 min-h-[500px]">
                         <div className="absolute top-5 right-5">
                             <Zap className="w-5 h-5 text-primary animate-pulse opacity-70" />
                         </div>
@@ -111,4 +99,3 @@ const FinancialComparison = () => {
 };
 
 export default FinancialComparison;
-

@@ -1,4 +1,3 @@
-
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './LandingPage';
 import Demo253 from './pages/Demo253';
@@ -11,6 +10,7 @@ import DemosPage from './pages/DemosPage';
 import PlanDetails from './pages/PlanDetails';
 import LegalMentions from './pages/LegalMentions';
 import TermsOfService from './pages/TermsOfService';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
     return (
@@ -24,8 +24,11 @@ function App() {
                 <Route path="/demo/carol-ann" element={<DemoCarolAnn />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/plan/:planId" element={<PlanDetails />} />
+
+                {/* Legal Routes */}
                 <Route path="/legal" element={<LegalMentions />} />
                 <Route path="/terms" element={<TermsOfService />} />
+                <Route path="/privacy" element={<PrivacyPolicy />} />
             </Routes>
         </Router>
     );

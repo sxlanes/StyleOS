@@ -48,21 +48,11 @@ const ComparisonTable = () => {
     };
 
     return (
-        <section id="comparison" className="py-24 bg-background relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-gray-900/30 via-background to-background opacity-50 z-0"></div>
-
+        <section className="bg-black relative overflow-hidden">
             <div className="max-w-6xl mx-auto px-6 relative z-10">
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase mb-6">
-                        PLANITY <span className="text-text-muted text-2xl mx-4">VS</span> <span className="text-primary italic">STYLEOS</span>
-                    </h2>
-                    <p className="text-text-muted max-w-2xl mx-auto text-lg font-light">
-                        Ne soyez plus un simple choix dans une liste. Devenez la référence Blue-Chip.
-                    </p>
-                </div>
+                {/* Header is handled by LandingPage wrapper */}
 
-                <div className="grid md:grid-cols-[1.5fr_1fr_1fr] md:border md:border-white/10 md:rounded-[2.5rem] md:overflow-hidden md:bg-black/40 md:backdrop-blur-xl relative shadow-2xl">
+                <div className="grid md:grid-cols-[1.5fr_1fr_1fr] md:border md:border-white/10 md:rounded-[2.5rem] md:overflow-hidden bg-black relative shadow-2xl">
                     {/* Header Row - Desktop Only */}
                     <div className="hidden md:contents">
                         <div className="p-12 bg-white/5 border-b border-white/5 font-black text-gray-400 uppercase tracking-[0.4em] text-xs">
@@ -87,7 +77,7 @@ const ComparisonTable = () => {
                             onClick={() => toggleExpand(index)}
                         >
                             {/* Feature Name */}
-                            <div className={`p-8 md:p-10 flex items-center bg-white/5 md:bg-transparent border border-white/10 md:border-0 md:border-b md:border-white/5 rounded-t-3xl md:rounded-none transition-all duration-300 relative
+                            <div className={`p-8 md:p-10 flex items-center bg-black border border-white/10 md:border-0 md:border-b md:border-white/5 rounded-t-3xl md:rounded-none transition-all duration-300 relative
                                 ${hoveredIndex === index || expandedIndex === index ? 'md:bg-white/[0.08]' : ''}`}>
                                 <div className={`p-2 rounded-xl mr-5 transition-colors duration-300 ${hoveredIndex === index || expandedIndex === index ? 'bg-primary/20' : 'bg-white/5'}`}>
                                     <item.icon className={`w-6 h-6 transition-colors duration-300 ${hoveredIndex === index || expandedIndex === index ? 'text-primary' : 'text-gray-500'}`} />
@@ -105,7 +95,7 @@ const ComparisonTable = () => {
                             </div>
 
                             {/* Competitor */}
-                            <div className={`p-8 md:p-10 flex items-center md:justify-center bg-black/40 md:bg-black/20 border-x border-white/10 md:border-0 md:border-b md:border-l md:border-white/5 transition-colors duration-300
+                            <div className={`p-8 md:p-10 flex items-center md:justify-center bg-black border-x border-white/10 md:border-0 md:border-b md:border-l md:border-white/5 transition-colors duration-300
                                 ${hoveredIndex === index || expandedIndex === index ? 'md:bg-white/[0.04]' : 'opacity-60'}`}>
                                 <X className="w-5 h-5 text-red-500/30 md:hidden mr-4" />
                                 <span className={`text-base font-medium transition-colors duration-300 ${hoveredIndex === index || expandedIndex === index ? 'text-gray-300' : 'text-gray-500'}`}>{item.competitor}</span>
@@ -121,7 +111,7 @@ const ComparisonTable = () => {
                                 <span className={`text-lg font-black tracking-tight text-white transition-colors duration-300 ${hoveredIndex === index || expandedIndex === index ? 'text-primary' : ''}`}>{item.us}</span>
                             </div>
 
-                            {/* Expanded Explanation (Desktop & Mobile) - Accionable below the rows */}
+                            {/* Expanded Explanation */}
                             {expandedIndex === index && (
                                 <div className="col-span-1 md:col-span-3 bg-primary/10 border-b border-primary/20 p-8 md:p-12 animate-in slide-in-from-top-4 duration-500 overflow-hidden">
                                     <div className="max-w-4xl mx-auto flex items-start gap-8">
