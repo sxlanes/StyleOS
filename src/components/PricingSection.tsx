@@ -1,144 +1,177 @@
-import { ArrowRight, Check, ShieldCheck, Globe, Star } from 'lucide-react';
+import { ArrowRight, Check, Shield, Zap, Crown, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
     const navigate = useNavigate();
 
+    const plans = [
+        {
+            name: "BASIC",
+            subtitle: "PROPULSEZ VOTRE IDENTITÉ VISUELLE.",
+            price: "50",
+            icon: Shield,
+            roi: "ROI: IMAGE DE MARQUE ELITE",
+            features: [
+                { text: "CRÉATION SITE WEB (SETUP INITIAL)", bold: true },
+                { text: "Système de Réservation", bold: false },
+                { text: "Maintenance & Hébergement", bold: false },
+                { text: "Nom de domaine inclus", bold: false },
+                { text: "Sarah IA", bold: false, strike: true },
+            ],
+            button: "DÉMARRER EN BASIC",
+            highlight: false
+        },
+        {
+            name: "PRO",
+            subtitle: "SARAH IA À VOTRE SERVICE 24H/24.",
+            price: "109",
+            icon: Zap,
+            roi: "ROI: ~450€ / MOIS ÉCONOMISÉS",
+            features: [
+                { text: "Tout du Pack Basic", bold: false },
+                { text: "SARAH IA ILLIMITÉE", bold: true },
+                { text: "Support Technique 24/7", bold: false },
+                { text: "Maintenance Premium", bold: false },
+                { text: "Pilotage Compta IA", bold: false, strike: true },
+            ],
+            button: "DÉMARRER EN PRO",
+            highlight: false
+        },
+        {
+            name: "ELITE",
+            subtitle: "DOMINATION TOTALE ET GESTION AUTOMATISÉE.",
+            price: "199",
+            icon: Crown,
+            roi: "ROI: ~1200€ / MOIS ÉCONOMISÉS",
+            badge: "PLUS POPULAIRE",
+            features: [
+                { text: "Tout du Pack Pro", bold: false },
+                { text: "PILOTAGE COMPTA IA COMPLET", bold: true },
+                { text: "AUTOMATISATION DES AVIS", bold: true },
+                { text: "GESTION DE RÉPUTATION AUTO", bold: true },
+                { text: "Support Dédié", bold: false },
+            ],
+            button: "DEVENIR ELITE",
+            highlight: true
+        },
+        {
+            name: "EMPIRE",
+            subtitle: "POUR LES VISIONNAIRES MULTI-ÉTABLISSEMENTS.",
+            price: "279",
+            originalPrice: "399€",
+            icon: TrendingUp,
+            roi: "ROI: ROI ILLIMITÉ / MULTI-SIÈGE",
+            badge: "-30% OFF TEMPORAIRE",
+            badgeColor: "bg-red-600 text-white",
+            features: [
+                { text: "TOUT DU PACK ELITE", bold: true },
+                { text: "GESTION DE RÉSEAUX SOCIAUX", bold: true },
+                { text: "STRATÉGIE MARKETING DÉDIÉE", bold: true },
+                { text: "SUPPORT 24/7 VIP", bold: true },
+                { text: "Rapports Multi-sièges", bold: false },
+            ],
+            button: "BÂTIR L'EMPIRE",
+            highlight: false
+        }
+    ];
+
     return (
-        <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center mb-16 relative">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div>
-                <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 text-white relative z-10">
-                    Investissez <span className="text-primary italic">Mieux.</span>
+        <div className="max-w-7xl mx-auto px-6 py-12">
+            <div className="text-center mb-12">
+                <h2 className="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white">
+                    INVESTISSEZ DANS VOTRE <span className="text-[#D4AF37] italic">LIBERTÉ</span>
                 </h2>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto font-light relative z-10">
-                    Une structure de coûts pensée pour la rentabilité immédiate.
+                <p className="text-gray-400 text-lg max-w-3xl mx-auto font-light">
+                    Reprenez le contrôle de votre temps et de votre croissance avec nos plans partenaires Blue-Chip.
                 </p>
             </div>
 
-            {/* SETUP FEE BANNER */}
-            <div className="relative mb-16 bg-gradient-to-r from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] rounded-2xl border border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_40px_rgba(212,175,55,0.1)] overflow-hidden">
-                <div className="absolute top-0 right-0 p-4 opacity-10"><Globe size={120} /></div>
-                <div className="relative z-10 flex-1 text-center md:text-left mb-6 md:mb-0">
-                    <div className="inline-block px-3 py-1 bg-primary/20 text-primary uppercase text-[10px] font-black tracking-widest rounded mb-3 border border-primary/20">Pack Démarrage</div>
-                    <h3 className="text-2xl md:text-3xl font-black uppercase text-white mb-2">Création Site Web "Élite"</h3>
-                    <p className="text-gray-400 text-sm max-w-xl">
-                        Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus (Offre de lancement).
-                    </p>
-                </div>
-                <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">
-                    <div className="text-4xl font-black text-white tracking-tighter">289€</div>
-                    <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest">Paiement Unique</div>
-                    <div className="mt-2 flex items-center gap-1 text-[10px] text-green-500 font-bold uppercase">
-                        <Check size={12} /> Satisfait ou Refait
-                    </div>
+            {/* STRATEGIC NOTE BANNER */}
+            <div className="flex justify-center mb-16">
+                <div className="bg-[#111] border border-white/10 rounded-full px-8 py-3 flex items-center gap-3 text-sm text-gray-400 max-w-2xl text-center md:text-left">
+                    <Zap className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]" />
+                    <span>
+                        <span className="font-bold text-white uppercase tracking-wider text-xs mr-2">NOTE STRATÉGIQUE :</span>
+                        Un setup initial de <span className="text-white font-bold">289€</span> est requis pour la création sur-mesure de votre infrastructure digitale.
+                    </span>
                 </div>
             </div>
 
-            {/* 4 PLANS GRID */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch relative z-10">
-                {/* 1. BASIC */}
-                <div className="bg-[#0A0A0A] border border-white/10 rounded-[1.5rem] p-6 flex flex-col hover:border-white/20 transition-all duration-300 group">
-                    <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-3">Basic</div>
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-3xl font-black text-white">50€</span>
-                            <span className="text-xs font-bold text-gray-500">/mois</span>
-                        </div>
-                    </div>
-                    <ul className="space-y-3 mb-6 flex-1">
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Site Web "Template"
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Réservation en ligne
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Dashboard Basique
-                        </li>
-                    </ul>
-                    <button onClick={() => navigate('/signup')} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Choisir</button>
-                </div>
+            {/* PLANS GRID */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {plans.map((plan, index) => (
+                    <div
+                        key={index}
+                        className={`relative rounded-[2rem] p-8 flex flex-col h-full border transition-all duration-300 group
+                            ${plan.highlight
+                                ? 'bg-black border-[#D4AF37] shadow-[0_0_50px_rgba(212,175,55,0.15)] scale-105 z-10'
+                                : 'bg-[#080808] border-white/10 hover:border-white/20'
+                            }`}
+                    >
+                        {/* Highlights/Badges */}
+                        {plan.badge && (
+                            <div className={`absolute -top-3 right-6 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest
+                                ${plan.badgeColor ? plan.badgeColor : 'bg-[#D4AF37] text-black'}
+                            `}>
+                                {plan.badge}
+                            </div>
+                        )}
 
-                {/* 2. PERFORMANCE/GROWTH */}
-                <div className="bg-[#0A0A0A] border border-white/10 rounded-[1.5rem] p-6 flex flex-col hover:border-white/20 transition-all duration-300 group">
-                    <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-3">Performance</div>
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-3xl font-black text-white">109€</span>
-                            <span className="text-xs font-bold text-gray-500">/mois</span>
-                        </div>
-                    </div>
-                    <ul className="space-y-3 mb-6 flex-1">
-                        <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Check className="w-3 h-3 text-blue-400 shrink-0 mt-0.5" /> Marketing Automatisé
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-gray-500 shrink-0 mt-0.5" /> Tout du plan Basic
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-gray-500 shrink-0 mt-0.5" /> Support 24/7
-                        </li>
-                    </ul>
-                    <button onClick={() => navigate('/signup')} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Choisir</button>
-                </div>
+                        {/* Header */}
+                        <div className="mb-8">
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 border
+                                ${plan.highlight ? 'bg-[#D4AF37]/10 border-[#D4AF37]/20 text-[#D4AF37]' : 'bg-white/5 border-white/10 text-white'}
+                            `}>
+                                <plan.icon size={24} />
+                            </div>
+                            <h3 className="text-4xl font-black text-white uppercase tracking-tighter mb-2">{plan.name}</h3>
+                            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest leading-relaxed mb-6 h-8">
+                                {plan.subtitle}
+                            </p>
 
-                {/* 3. PRO/DOMINANCE (Highlighted) */}
-                <div className="bg-black border border-primary/50 rounded-[1.5rem] p-6 flex flex-col shadow-[0_0_30px_rgba(212,175,55,0.15)] relative scale-105 z-20">
-                    <div className="absolute top-0 right-0 bg-primary text-black px-2 py-1 rounded-bl-lg text-[8px] font-black uppercase tracking-widest">
-                        Recommandé
-                    </div>
-                    <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-3">Dominance</div>
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-black text-white">189€</span>
-                            <span className="text-xs font-bold text-gray-500">/mois</span>
-                        </div>
-                    </div>
-                    <ul className="space-y-3 mb-8 flex-1">
-                        <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Sarah IA (Illimité)
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Site Web Sur-Mesure
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Zero Commission
-                        </li>
-                    </ul>
-                    <button onClick={() => navigate('/signup')} className="w-full py-4 rounded-lg bg-primary text-black font-black uppercase tracking-widest text-[10px] hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
-                        Essai Gratuit <ArrowRight className="w-3 h-3" />
-                    </button>
-                </div>
+                            {/* Price */}
+                            <div className="flex items-baseline gap-1">
+                                {plan.originalPrice && <span className="text-sm text-gray-500 line-through font-bold mr-2">{plan.originalPrice}</span>}
+                                <span className="text-5xl font-black text-white">{plan.price}€</span>
+                            </div>
+                            <div className="text-[10px] font-bold text-gray-600 uppercase tracking-widest mt-1">Mois</div>
 
-                {/* 4. FRANCHISE */}
-                <div className="bg-[#0A0A0A] border border-white/10 rounded-[1.5rem] p-6 flex flex-col hover:border-white/20 transition-all duration-300 group">
-                    <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-3">Franchise</div>
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-2xl font-black text-white">Sur Devis</span>
+                            {/* ROI Badge */}
+                            <div className="mt-6 bg-[#002b1d] border border-[#009e60]/30 rounded-lg px-3 py-2 text-[9px] font-black text-[#00d682] uppercase tracking-widest text-center">
+                                {plan.roi}
+                            </div>
                         </div>
-                    </div>
-                    <ul className="space-y-3 mb-6 flex-1">
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Multi-comptes
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> API Dédiée
-                        </li>
-                        <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Marque Blanche
-                        </li>
-                    </ul>
-                    <button onClick={() => window.location.href = 'mailto:bordeaux@styleos.fr'} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Contacter</button>
-                </div>
-            </div>
 
-            <div className="mt-12 text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 rounded-full border border-white/10">
-                    <ShieldCheck className="w-4 h-4 text-primary" />
-                    <span className="text-[10px] text-gray-400 uppercase tracking-widest">Garantie 30 Jours Satisfait ou Remboursé sur tous les plans</span>
-                </div>
+                        {/* Features */}
+                        <ul className="space-y-4 mb-8 flex-1">
+                            {plan.features.map((feature, i) => (
+                                <li key={i} className={`flex items-start gap-3 text-xs ${feature.strike ? 'opacity-30' : ''}`}>
+                                    <div className={`mt-0.5 w-4 h-4 rounded-full flex items-center justify-center shrink-0 
+                                        ${feature.strike ? 'bg-gray-800 text-gray-500' : 'bg-white text-black'}
+                                    `}>
+                                        <Check size={10} strokeWidth={4} />
+                                    </div>
+                                    <span className={`${feature.bold ? 'font-bold text-white' : 'text-gray-400'} ${feature.strike ? 'line-through' : ''}`}>
+                                        {feature.text}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {/* Button */}
+                        <button
+                            onClick={() => navigate('/signup')}
+                            className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 transition-all
+                                ${plan.highlight
+                                    ? 'bg-[#D4AF37] text-black hover:bg-white'
+                                    : 'bg-white/5 text-white border border-white/10 hover:bg-white hover:text-black'
+                                }
+                            `}
+                        >
+                            {plan.button} <ArrowRight size={12} />
+                        </button>
+                    </div>
+                ))}
             </div>
         </div>
     );
