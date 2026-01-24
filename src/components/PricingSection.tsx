@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ShieldCheck, Globe, Star } from 'lucide-react';
+import { ArrowRight, Check, ShieldCheck, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
@@ -35,7 +35,7 @@ const PricingSection = () => {
                 </div>
             </div>
 
-            {/* 4 PLANS GRID - SANS SHIMMER (Clean Style) */}
+            {/* 4 PLANS GRID */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch relative z-10">
 
                 {/* 1. BASIC (50€) */}
@@ -98,13 +98,13 @@ const PricingSection = () => {
                     </div>
                     <ul className="space-y-3 mb-8 flex-1">
                         <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Star className="w-3 h-3 text-primary shrink-0 mt-0.5 fill-current" /> Sarah IA (Illimité)
+                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Sarah IA (Illimité)
                         </li>
                         <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Star className="w-3 h-3 text-primary shrink-0 mt-0.5 fill-current" /> Site Web Sur-Mesure
+                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Site Web Sur-Mesure
                         </li>
                         <li className="flex items-start gap-2 text-xs text-white font-bold">
-                            <Star className="w-3 h-3 text-primary shrink-0 mt-0.5 fill-current" /> Zero Commission
+                            <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Zero Commission
                         </li>
                     </ul>
                     <button onClick={() => navigate('/plan/elite')} className="w-full py-4 rounded-lg bg-primary text-black font-black uppercase tracking-widest text-[10px] hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
