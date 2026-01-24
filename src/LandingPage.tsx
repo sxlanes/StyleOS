@@ -219,7 +219,7 @@ const DemosSection = () => (
 
             <div className="grid md:grid-cols-2 gap-12">
                 <ScrollReveal delay={0.1}>
-                    <div className="group cursor-pointer">
+                    <Link to="/demo/253-barber-club" className="group cursor-pointer block">
                         <div className="aspect-video relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-6">
                             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500 z-10" />
                             <WebEliteMock /> {/* Using the new Mock */}
@@ -228,10 +228,10 @@ const DemosSection = () => (
                                 <div className="text-[10px] bg-primary text-black px-2 py-1 font-bold uppercase tracking-widest inline-block">Dark / Gold Theme</div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2}>
-                    <div className="group cursor-pointer">
+                    <Link to="/demo/carol-ann" className="group cursor-pointer block">
                         <div className="aspect-video relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-6">
                             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500 z-10" />
                             <CarolAnnMock /> {/* Carol Ann Mock */}
@@ -240,7 +240,7 @@ const DemosSection = () => (
                                 <div className="text-[10px] bg-white text-black px-2 py-1 font-bold uppercase tracking-widest inline-block">Minimalist / Chic</div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </ScrollReveal>
             </div>
         </div>
