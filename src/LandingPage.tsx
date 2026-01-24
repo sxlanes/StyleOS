@@ -11,6 +11,8 @@ import AudioDemo from './components/AudioDemo';
 import RevenueSimulator from './components/RevenueSimulator';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
+import GuaranteeSection from './components/GuaranteeSection';
+import MissedCallsCalculator from './components/MissedCallsCalculator';
 
 // --- ANIMATION WRAPPER ---
 const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }: any) => {
@@ -41,45 +43,52 @@ const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }:
     );
 };
 
-/* --- MOCK COMPONENTS (UNCHANGED VISUALS, JUST HELPERS) --- */
+/* --- MOCK COMPONENTS --- */
+// Updated WebEliteMock to be a specific Barber 253 Demo Mock
 const WebEliteMock = () => (
-    <div className="w-full h-full bg-black flex flex-col rounded-xl border border-white/10 overflow-hidden relative shadow-2xl group">
-        <div className="h-6 bg-white/5 border-b border-white/5 flex items-center px-4 gap-2">
-            <div className="w-2 h-2 rounded-full bg-red-500/50" />
-            <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
-            <div className="w-2 h-2 rounded-full bg-green-500/50" />
-            <div className="ml-4 w-32 h-3 bg-white/5 rounded-full text-[6px] flex items-center px-2 text-gray-600">styleos.salon/elite</div>
+    <div className="w-full h-full bg-[#1a1a1a] flex flex-col rounded-xl border border-white/10 overflow-hidden relative shadow-2xl group font-serif">
+        {/* Navbar */}
+        <div className="h-12 border-b border-[#D4AF37]/20 bg-[#0F0F0F] flex justify-between items-center px-6">
+            <div className="text-[10px] text-[#D4AF37] font-bold tracking-[0.2em] uppercase">Barber Club 253</div>
+            <div className="bg-[#D4AF37] text-black text-[8px] font-bold px-3 py-1 uppercase tracking-widest">Réserver</div>
         </div>
-        <div className="flex-1 relative bg-black flex flex-col">
-            <div className="h-10 border-b border-white/5 flex justify-between items-center px-4">
-                <div className="w-20 h-3 bg-white/20 rounded-sm" />
-                <div className="flex gap-2">
-                    <div className="w-12 h-4 bg-primary text-black text-[6px] font-bold flex items-center justify-center rounded-sm uppercase">Réserver</div>
-                </div>
-            </div>
-            <div className="h-48 relative border-b border-white/5 p-6 flex flex-col justify-center items-center text-center">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gray-800/50 to-transparent opacity-50" />
-                <h2 className="text-2xl font-serif italic text-white mb-2 relative z-10">L'Art de la Coupe</h2>
-                <button className="px-4 py-2 bg-white text-black text-[8px] uppercase tracking-widest font-bold hover:bg-primary transition-colors relative z-10">Prendre Rendez-vous</button>
+
+        {/* Hero Content */}
+        <div className="flex-1 relative flex flex-col items-center justify-center p-8 text-center bg-[url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80&w=2074')] bg-cover bg-center">
+            <div className="absolute inset-0 bg-black/70"></div>
+            <div className="relative z-10 border border-[#D4AF37]/30 p-6 bg-black/40 backdrop-blur-sm">
+                <h2 className="text-2xl text-white italic mb-2">L'Excellence Masculine</h2>
+                <p className="text-[8px] text-[#D4AF37] uppercase tracking-widest mb-4">Coupe • Barbe • Soin</p>
+                <div className="w-8 h-[1px] bg-[#D4AF37] mx-auto"></div>
             </div>
         </div>
+
+        {/* Tag */}
+        <div className="absolute top-2 right-2 bg-red-600 text-white text-[6px] font-bold px-2 py-0.5 rounded uppercase tracking-widest z-20">Live Demo</div>
     </div>
 );
 
 const ChatMock = () => (
-    <div className="w-3/4 mx-auto h-full bg-black flex flex-col rounded-[2rem] border border-white/10 overflow-hidden relative shadow-2xl">
+    <div className="w-full md:w-3/4 mx-auto h-full bg-black flex flex-col rounded-[2rem] border border-white/10 overflow-hidden relative shadow-2xl">
         <div className="h-14 bg-white/5 border-b border-white/5 flex items-center px-6 gap-4">
             <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary relative">
                 <Bot size={16} />
             </div>
-            <div><div className="text-xs font-bold text-white">Sarah AI</div></div>
+            <div>
+                <div className="text-xs font-bold text-white">Sarah AI</div>
+                <div className="text-[8px] text-green-500 font-mono">En ligne</div>
+            </div>
         </div>
-        <div className="flex-1 p-4 space-y-3 font-sans text-[10px] bg-black relative">
+        <div className="flex-1 p-4 space-y-4 font-sans text-[10px] bg-black relative">
             <div className="flex gap-2 relative z-10">
-                <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Bonjour, une dispo demain ?</div>
+                <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">
+                    Est-ce que vous faites aussi la taille de barbe à l'ancienne ?
+                </div>
             </div>
             <div className="flex gap-2 justify-end relative z-10">
-                <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Oui, 14h00 ?</div>
+                <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">
+                    Oui absolument ! Notre forfait "Rituel Barbier" à 35€ inclut la taille, le soin à la serviette chaude et l'application d'huile. Je vous réserve un créneau ?
+                </div>
             </div>
         </div>
     </div>
@@ -89,16 +98,21 @@ const DashboardMock = () => (
     <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group">
         <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
+            <LayoutDashboard className="w-5 h-5 text-white/80" />
         </div>
         <div className="flex-1 p-6 flex flex-col bg-black relative">
             <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">CA</div>
+                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
                     <div className="text-lg font-black text-white">12,450€</div>
+                </div>
+                <div className="p-3 bg-white/5 rounded-lg border border-white/5">
+                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Panier Moyen</div>
+                    <div className="text-lg font-black text-white">65€</div>
                 </div>
             </div>
             <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
-                {[40, 65, 55, 85].map((h, i) => <div key={i} className="flex-1 bg-white/10 rounded-t-sm" style={{ height: `${h}%` }}></div>)}
+                {[40, 65, 55, 85, 60, 45, 90].map((h, i) => <div key={i} className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors" style={{ height: `${h}%` }}></div>)}
             </div>
         </div>
     </div>
@@ -107,31 +121,32 @@ const DashboardMock = () => (
 const SocialMock = () => (
     <div className="w-full h-full flex flex-col bg-black border border-white/10 rounded-xl overflow-hidden shadow-2xl relative group">
         <div className="h-8 bg-white/5 flex items-center px-4 justify-between border-b border-white/5">
-            <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <div className="text-[8px] uppercase font-bold text-gray-400 tracking-widest">Campagnes Actives</div>
+            <div className="text-[8px] uppercase font-bold text-gray-400 tracking-widest flex items-center gap-2"><Megaphone size={10} /> Ads Manager</div>
+        </div>
+        <div className="flex-1 p-4 flex flex-col gap-3 relative">
+            {/* Ad 1 */}
+            <div className="bg-white/5 rounded-lg p-3 border border-white/5 flex gap-3 items-center group-hover:border-primary/30 transition-colors">
+                <div className="w-8 h-8 rounded bg-gradient-to-tr from-purple-500 to-pink-500 shrink-0" />
+                <div className="flex-1 min-w-0">
+                    <div className="text-[9px] font-bold text-white truncate">Campagne Instagram "Summer"</div>
+                    <div className="text-[7px] text-gray-500">12,500 vues • 3.2% CTR</div>
+                </div>
+                <div className="text-[10px] font-black text-green-400">+450€</div>
+            </div>
+            {/* Ad 2 */}
+            <div className="bg-white/5 rounded-lg p-3 border border-white/5 flex gap-3 items-center group-hover:border-primary/30 transition-colors">
+                <div className="w-8 h-8 rounded bg-blue-500 shrink-0" />
+                <div className="flex-1 min-w-0">
+                    <div className="text-[9px] font-bold text-white truncate">Google Ads Local</div>
+                    <div className="text-[7px] text-gray-500">Top 1 sur "Coiffeur Bordeaux"</div>
+                </div>
+                <div className="text-[10px] font-black text-green-400">+820€</div>
+            </div>
+            {/* Chart mini */}
+            <div className="mt-auto h-8 flex items-end gap-1 opacity-50">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(i => <div key={i} className="flex-1 bg-white/20 rounded-t-sm" style={{ height: `${Math.random() * 100}%` }} />)}
             </div>
         </div>
-        <div className="flex-1 p-4 grid grid-cols-2 gap-3 relative">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-purple-500/10 to-transparent pointer-events-none" />
-            <div className="bg-white/5 rounded-lg p-2 border border-white/5 flex flex-col gap-2 relative overflow-hidden group-hover:border-primary/30 transition-colors">
-                <div className="flex items-center gap-2">
-                    <span className="text-[8px] font-bold text-white">Story_Offer</span>
-                </div>
-                <div className="flex-1 bg-gray-800/50 rounded overflow-hidden relative">
-                    <div className="absolute bottom-1 left-1 bg-white text-black text-[6px] font-bold px-1 rounded">SPONSO</div>
-                </div>
-            </div>
-            <div className="bg-white/5 rounded-lg p-2 border border-white/5 flex flex-col gap-2 relative overflow-hidden group-hover:border-primary/30 transition-colors">
-                <div className="flex items-center gap-2">
-                    <span className="text-[8px] font-bold text-white">Search_Local</span>
-                </div>
-                <div className="flex-1 space-y-1 py-1">
-                    <div className="h-1.5 w-3/4 bg-white/10 rounded animate-pulse" />
-                </div>
-            </div>
-        </div>
-        <MousePointer2 className="absolute bottom-4 right-10 text-white fill-black w-4 h-4 drop-shadow-lg animate-[bounce_2s_infinite]" />
     </div>
 )
 
@@ -156,17 +171,6 @@ const IntegrationMock = () => (
                 </div>
                 <div className="text-sm font-black text-white uppercase tracking-[0.2em]">StyleOS</div>
             </div>
-        </div>
-    </div>
-)
-
-const GuaranteeMock = () => (
-    <div className="w-full h-full bg-black rounded-xl border border-white/10 flex flex-col items-center justify-center relative overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] group">
-        <div className="w-40 h-40 rounded-full border border-primary/20 flex items-center justify-center shadow-[0_0_80px_rgba(212,175,55,0.1)] group-hover:shadow-[0_0_120px_rgba(212,175,55,0.2)] transition-shadow duration-700 bg-black relative z-10">
-            <ShieldCheck className="w-20 h-20 text-primary group-hover:scale-110 transition-transform duration-500" />
-        </div>
-        <div className="mt-8 px-6 py-2 bg-primary/10 rounded-full text-primary text-xs font-black uppercase tracking-[0.2em] border border-primary/20 relative z-10">
-            Satisfait ou Remboursé
         </div>
     </div>
 )
@@ -232,7 +236,6 @@ const StickyFeatureRow = ({ title, description, icon: Icon, visual, style }: any
                     {visual}
                 </div>
                 <div className="w-full order-1 md:order-2 text-left">
-                    {/* Title Wrapper with glow */}
                     <div className="relative inline-block mb-6">
                         <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full pointer-events-none"></div>
                         <div className="inline-flex items-center gap-2 mb-6 relative">
@@ -254,38 +257,53 @@ const StickyFeatureRow = ({ title, description, icon: Icon, visual, style }: any
     );
 };
 
-// Feature Item Standard
+// Feature Item Standard - Modified again for clear delay
 const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, visual }: any) => {
-    // using ScrollReveal wrapper now instead of internal motion to ensure global consistency
-    return (
-        <ScrollReveal direction={align === 'right' ? 'left' : 'right'}>
-            <div className="py-32 flex flex-col md:flex-row items-center gap-12 md:gap-24 relative z-10 min-h-[60vh]">
-                <div className={`w-full md:w-1/2 ${align === 'right' ? 'md:order-1' : 'md:order-2'}`}>
-                    <div className="relative w-full aspect-[4/3] max-w-lg mx-auto">
-                        {visual}
-                    </div>
-                </div>
-                <div className={`w-full md:w-1/2 ${align === 'right' ? 'md:order-2 text-left md:text-right' : 'md:order-1 text-left'}`}>
-                    <div className={`relative inline-block ${align === 'right' ? 'md:flex md:flex-col md:items-end' : ''}`}>
-                        <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full pointer-events-none opacity-50"></div>
-                        <div className={`inline-flex items-center gap-2 mb-6 relative ${align === 'right' ? 'md:flex-row-reverse' : ''}`}>
-                            <div className="p-2 rounded-full bg-primary/10 text-primary border border-primary/20">
-                                <Icon className="w-5 h-5" />
-                            </div>
-                            <span className="text-primary text-xs font-bold uppercase tracking-[0.2em]">{title}</span>
-                        </div>
-                    </div>
+    // We want the TITLE to appear first, THEN the visual/content.
+    // Implementing explicit delayed components
 
-                    <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none text-white relative z-10">
-                        {title}
-                    </h3>
-                    <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-8 relative z-10">
-                        {description}
-                    </p>
-                    {action}
+    return (
+        <div className="py-32 relative z-10 min-h-[60vh]">
+            <div className="flex flex-col md:flex-row items-center gap-12 md:gap-24">
+
+                {/* Visual Side */}
+                <div className={`w-full md:w-1/2 ${align === 'right' ? 'md:order-1' : 'md:order-2'}`}>
+                    <ScrollReveal delay={0.6} direction="up"> {/* DELAYED Visual significantly */}
+                        <div className="relative w-full aspect-[4/3] max-w-lg mx-auto">
+                            {visual}
+                        </div>
+                    </ScrollReveal>
+                </div>
+
+                {/* Text Side */}
+                <div className={`w-full md:w-1/2 ${align === 'right' ? 'md:order-2 text-left md:text-right' : 'md:order-1 text-left'}`}>
+
+                    {/* Title Block - Appears FIRST */}
+                    <ScrollReveal delay={0}>
+                        <div className={`relative inline-block ${align === 'right' ? 'md:flex md:flex-col md:items-end' : ''}`}>
+                            <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full pointer-events-none opacity-50"></div>
+                            <div className={`inline-flex items-center gap-2 mb-6 relative ${align === 'right' ? 'md:flex-row-reverse' : ''}`}>
+                                <div className="p-2 rounded-full bg-primary/10 text-primary border border-primary/20">
+                                    <Icon className="w-5 h-5" />
+                                </div>
+                                <span className="text-primary text-xs font-bold uppercase tracking-[0.2em]">{title}</span>
+                            </div>
+                        </div>
+                        <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none text-white relative z-10">
+                            {title}
+                        </h3>
+                    </ScrollReveal>
+
+                    {/* Description - Appears WITH Visual */}
+                    <ScrollReveal delay={0.6}>
+                        <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-8 relative z-10">
+                            {description}
+                        </p>
+                        {action}
+                    </ScrollReveal>
                 </div>
             </div>
-        </ScrollReveal>
+        </div>
     );
 };
 
@@ -300,29 +318,21 @@ function LandingPage() {
     const heroScale = useTransform(heroProgress, [0, 1], [1, 1.2]);
     const heroOpacity = useTransform(heroProgress, [0, 0.2], [1, 0]);
 
-    // Sticky Process Scroll Logic (REFINED FOR SMOOTHNESS WITH GAPS)
+    // Sticky Process Scroll Logic (500vh for even slower smoothness)
     const processRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress: processProgress } = useScroll({
         target: processRef,
         offset: ["start start", "end end"]
     });
 
-    // Total Height: 400vh -> slower scroll
-    // Ranges:
-    // Step 1: 0.05 -> 0.25 (Visible). 0.25 -> 0.35 (Fade Out).
-    const op1 = useTransform(processProgress, [0.05, 0.25, 0.35], [1, 1, 0]);
-    const scale1 = useTransform(processProgress, [0.25, 0.35], [1, 0.9]);
+    // Ranges with clear gaps
+    const op1 = useTransform(processProgress, [0.05, 0.2, 0.3], [1, 1, 0]);
+    const scale1 = useTransform(processProgress, [0.2, 0.3], [1, 0.9]);
 
-    // ZOOM GAP: 0.35 -> 0.45 (Darkness)
+    const op2 = useTransform(processProgress, [0.35, 0.5, 0.6], [0, 1, 0]);
+    const scale2 = useTransform(processProgress, [0.5, 0.6], [1, 0.9]);
 
-    // Step 2: 0.45 (Fade In) -> 0.55 (Visible) -> 0.65 (Fade Out)
-    const op2 = useTransform(processProgress, [0.45, 0.55, 0.65], [0, 1, 0]); // Note: stays visible longer
-    const scale2 = useTransform(processProgress, [0.65, 0.75], [1, 0.9]);
-
-    // ZOOM GAP: 0.65 -> 0.75 (Darkness)
-
-    // Step 3: 0.75 (Fade In) -> 0.85 (Visible)
-    const op3 = useTransform(processProgress, [0.75, 0.85], [0, 1]);
+    const op3 = useTransform(processProgress, [0.65, 0.8], [0, 1]);
 
     useEffect(() => {
         const controlNavbar = () => {
@@ -426,7 +436,7 @@ function LandingPage() {
                     </div>
                     <FeatureRow title="Sarah IA" description="Réceptionniste virtuelle active 24/7. Elle répond au téléphone, filtre les demandes, qualifie les prospects et ajoute les RDV directement dans votre agenda." icon={Bot} align="right" visual={<ChatMock />} />
                     <FeatureRow title="Pilotage Financier" description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel. La donnée brute transformée en stratégie claire." icon={BarChart3} align="left" visual={<DashboardMock />} />
-                    <FeatureRow title="Marketing & Visibilité" description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus." icon={Megaphone} align="right" visual={<SocialMock />} action={<Link to="/signup" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>} />
+                    <FeatureRow title="Marketing & Visibilité" description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré." icon={Megaphone} align="right" visual={<SocialMock />} action={<Link to="/signup" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>} />
                 </div>
             </div>
 
@@ -472,7 +482,7 @@ function LandingPage() {
             </section>
 
             {/* DEMO (Larger Space & Animated) */}
-            <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5">
+            <div id="demo" className="relative z-10 bg-black pt-48 pb-12 border-t border-white/5">
                 <ScrollReveal>
                     <div className="text-center mb-12 relative">
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary/20 blur-[60px] w-1/3 h-full rounded-full pointer-events-none"></div>
@@ -484,17 +494,22 @@ function LandingPage() {
                 </ScrollReveal>
             </div>
 
-            {/* GUARANTEE (Animated) */}
-            <div className="relative z-10 bg-black border-t border-white/5 py-24">
+            {/* MISSED CALLS CALCULATOR (New) */}
+            <div className="relative z-10 bg-black pt-12 pb-24">
                 <ScrollReveal>
-                    <div className="max-w-7xl mx-auto px-6">
-                        <FeatureRow title="Garantie Élite" description="Risque Zéro. Si StyleOS ne finance pas son propre coût dès le premier mois grâce aux économies de commissions et au gain de productivité, nous vous remboursons." icon={ShieldCheck} align="right" visual={<GuaranteeMock />} />
-                    </div>
+                    <MissedCallsCalculator />
                 </ScrollReveal>
             </div>
 
-            {/* PROCESS (Increased Height for Smoothness, 400vh) */}
-            <div id="process" ref={processRef} className="relative z-10 bg-black h-[400vh]">
+            {/* GUARANTEE (Updated) */}
+            <div className="relative bg-black border-t border-white/5">
+                <ScrollReveal>
+                    <GuaranteeSection />
+                </ScrollReveal>
+            </div>
+
+            {/* PROCESS (Increased Height for Smoothness, 500vh) */}
+            <div id="process" ref={processRef} className="relative z-10 bg-black h-[500vh]">
                 <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
                     <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
                         <div className="absolute top-12 left-0 w-full text-center z-50">
@@ -517,7 +532,6 @@ function LandingPage() {
                 <ScrollReveal>
                     <div className="relative inline-block w-full text-center mb-4">
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div>
-                        {/* Title built into PricingSection, adding wrapper glow if needed or just relying on internal. */}
                     </div>
                     <PricingSection />
                 </ScrollReveal>
@@ -532,7 +546,6 @@ function LandingPage() {
 
             {/* FOOTER (Unchanged) */}
             <footer className="bg-black py-12 border-t border-white/5 text-center md:text-left">
-                {/* ... (Footer content same as before) ... */}
                 <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
                     <div>
                         <div className="text-2xl font-bold tracking-tighter text-white mb-4">StyleOS<span className="text-primary">.</span></div>
@@ -560,6 +573,15 @@ function LandingPage() {
                 </div>
                 <div className="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-white/5 text-center text-[10px] text-gray-600 uppercase tracking-widest">&copy; 2026 StyleOS. Tous droits réservés.</div>
             </footer>
+            {/* Live Demo Video Modal */}
+            {isDemoOpen && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-500">
+                    <div className="absolute inset-0 bg-black/95 backdrop-blur-2xl" onClick={() => setIsDemoOpen(false)}></div>
+                    <div className="relative w-full max-w-6xl aspect-video bg-black rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(212,175,55,0.2)] animate-in zoom-in-95 duration-500">
+                        <button onClick={() => setIsDemoOpen(false)} className="absolute top-6 right-6 z-20 text-white"><CloseIcon /></button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

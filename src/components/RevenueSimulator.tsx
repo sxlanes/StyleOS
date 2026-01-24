@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TrendingUp, AlertCircle, CheckCircle2, DollarSign, Calculator, Users } from 'lucide-react';
+import { TrendingUp, AlertCircle, CheckCircle2, DollarSign, Calculator, Users, HelpCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const RevenueSimulator = () => {
@@ -34,7 +34,9 @@ const RevenueSimulator = () => {
                     {/* Revenue Slider */}
                     <div>
                         <div className="flex justify-between items-end mb-4">
-                            <span className="text-sm font-bold text-gray-400 uppercase tracking-wider">Chiffre d'Affaire Réservations</span>
+                            <span className="text-sm font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
+                                Chiffre d'Affaire Réservations <HelpCircle size={14} />
+                            </span>
                             <div className="text-right">
                                 <div className="text-3xl font-black text-white tracking-tighter mb-1">{revenue.toLocaleString()} €</div>
                                 <div className="text-xs font-bold text-primary flex items-center justify-end gap-1">
@@ -42,15 +44,45 @@ const RevenueSimulator = () => {
                                 </div>
                             </div>
                         </div>
-                        <input
-                            type="range"
-                            min="2000"
-                            max="50000"
-                            step="500"
-                            value={revenue}
-                            onChange={(e) => setRevenue(Number(e.target.value))}
-                            className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer accent-primary hover:accent-primary/80 transition-all"
-                        />
+
+                        <div className="relative group">
+                            {/* Custom CSS for slider thumb visibility */}
+                            <style>{`
+                                input[type=range]::-webkit-slider-thumb {
+                                    -webkit-appearance: none;
+                                    height: 24px;
+                                    width: 24px;
+                                    border-radius: 50%;
+                                    background: #D4AF37; /* Primary Gold */
+                                    cursor: pointer;
+                                    margin-top: -10px;
+                                    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+                                    border: 2px solid white;
+                                }
+                                input[type=range]::-moz-range-thumb {
+                                    height: 24px;
+                                    width: 24px;
+                                    border-radius: 50%;
+                                    background: #D4AF37;
+                                    cursor: pointer;
+                                    border: 2px solid white;
+                                    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+                                }
+                             `}</style>
+                            <input
+                                type="range"
+                                min="2000"
+                                max="50000"
+                                step="500"
+                                value={revenue}
+                                onChange={(e) => setRevenue(Number(e.target.value))}
+                                className="w-full h-1 bg-gray-700/50 rounded-lg appearance-none cursor-pointer focus:outline-none"
+                            />
+                            <div className="absolute -bottom-6 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity text-[10px] text-primary font-bold uppercase tracking-widest pointer-events-none">
+                                Glissez pour ajuster
+                            </div>
+                        </div>
+
                         <div className="flex justify-between mt-2 text-[10px] text-gray-600 font-bold uppercase tracking-widest">
                             <span>2k€</span>
                             <span>50k€</span>
