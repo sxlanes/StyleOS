@@ -1,7 +1,9 @@
-import { ArrowRight, Check, ShieldCheck, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, Check, Star, Globe, ShieldCheck } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16 relative">
@@ -55,7 +57,7 @@ const PricingSection = () => {
                             <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Dashboard Basique
                         </li>
                     </ul>
-                    <Link to="/signup" className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all block text-center">Choisir</Link>
+                    <button onClick={() => navigate('/signup')} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Choisir</button>
                 </div>
 
                 {/* 2. GROWTH */}
@@ -78,7 +80,7 @@ const PricingSection = () => {
                             <Check className="w-3 h-3 text-gray-500 shrink-0 mt-0.5" /> Support 24/7
                         </li>
                     </ul>
-                    <Link to="/signup" className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all block text-center">Choisir</Link>
+                    <button onClick={() => navigate('/signup')} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Choisir</button>
                 </div>
 
                 {/* 3. PRO (Highlighted) */}
@@ -104,9 +106,9 @@ const PricingSection = () => {
                             <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Zero Commission
                         </li>
                     </ul>
-                    <Link to="/signup" className="w-full py-4 rounded-lg bg-primary text-black font-black uppercase tracking-widest text-[10px] hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
+                    <button onClick={() => navigate('/signup')} className="w-full py-4 rounded-lg bg-primary text-black font-black uppercase tracking-widest text-[10px] hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
                         Essai Gratuit <ArrowRight className="w-3 h-3" />
-                    </Link>
+                    </button>
                 </div>
 
                 {/* 4. ELITE/FRANCHISE */}
@@ -128,7 +130,7 @@ const PricingSection = () => {
                             <Check className="w-3 h-3 text-primary shrink-0 mt-0.5" /> Marque Blanche
                         </li>
                     </ul>
-                    <a href="mailto:bordeaux@styleos.fr" className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all block text-center">Contacter</a>
+                    <button onClick={() => window.location.href = 'mailto:bordeaux@styleos.fr'} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Contacter</button>
                 </div>
             </div>
 
