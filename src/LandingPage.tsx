@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket } from 'lucide-react';
+import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket, Check, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -167,6 +167,63 @@ const IntegrationMock = () => (
     </div>
 );
 
+/* --- PROCESS VISUALS --- */
+const ProcessVisual1 = () => (
+    <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex flex-col items-center justify-center shadow-2xl">
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(212,175,55,0.05),transparent)] animate-[scan_3s_infinite] pointer-events-none" />
+        <div className="w-full max-w-xs space-y-6 relative z-10">
+            <div className="flex items-center justify-between text-[10px] text-gray-500 uppercase tracking-widest">
+                <span>System Initialization</span>
+                <span className="text-primary animate-pulse">Running...</span>
+            </div>
+            <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-full bg-primary w-[85%] shadow-[0_0_10px_#D4AF37]" />
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-[10px] text-gray-400 font-mono">
+                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> DNS Config</div>
+                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> Data Import</div>
+                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> SSL Secure</div>
+                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" /> Deploying</div>
+            </div>
+        </div>
+    </div>
+);
+
+const ProcessVisual2 = () => (
+    <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex items-center justify-center shadow-2xl">
+        <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+        <div className="text-center relative z-10 scale-110">
+            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary/40 text-primary shadow-[0_0_40px_rgba(212,175,55,0.2)]">
+                <Bot size={40} />
+            </div>
+            <div className="text-sm font-black uppercase tracking-widest text-white mb-2">Sarah Is Online</div>
+            <div className="text-[10px] text-gray-400 font-mono flex items-center justify-center gap-2">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Listening to calls
+            </div>
+        </div>
+    </div>
+);
+
+const ProcessVisual3 = () => (
+    <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex flex-col items-center justify-center shadow-2xl">
+        <div className="flex items-end gap-3 h-40 w-full max-w-xs opacity-90 mb-4 px-4 border-b border-white/5 pb-4">
+            {[30, 45, 40, 60, 55, 75, 70, 95, 85, 100].map((h, i) => (
+                <motion.div
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${h}%` }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    key={i}
+                    className="flex-1 bg-gradient-to-t from-primary/5 to-primary rounded-t-sm shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+                />
+            ))}
+        </div>
+        <div className="flex items-center gap-3 text-lg font-black text-white">
+            <TrendingUp className="text-green-500 animate-bounce" size={24} />
+            <span>+324% Revenu</span>
+        </div>
+    </div>
+);
+
 /* --- FEATURE ROW --- */
 const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, visual }: any) => {
     return (
@@ -201,19 +258,37 @@ const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, vi
 /* --- STICKY FEATURE --- */
 const StickyFeatureRow = ({ title, description, icon: Icon, visual, style }: any) => {
     return (
-        <motion.div style={style} className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-                <div className="w-full order-2 md:order-1 relative aspect-[4/3] max-w-lg mx-auto">{visual}</div>
+        <motion.div style={style} className="absolute top-0 left-0 w-full h-full flex items-center justify-center perspective-[1000px]">
+            {/* Background glow for smoother transition */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none opacity-50" />
+
+            <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
+                <div className="w-full order-2 md:order-1 relative aspect-[4/3] max-w-lg mx-auto transform hover:scale-[1.02] transition-transform duration-500">
+                    {visual}
+                </div>
                 <div className="w-full order-1 md:order-2 text-left">
                     <div className="relative inline-block mb-6">
                         <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full pointer-events-none"></div>
                         <div className="inline-flex items-center gap-2 mb-6 relative">
-                            <div className="p-2 rounded-full bg-primary/10 text-primary border border-primary/20"><Icon className="w-5 h-5" /></div>
+                            <div className="p-2 rounded-full bg-primary/10 text-primary border border-primary/20 shadow-[0_0_20px_rgba(212,175,55,0.2)]"><Icon className="w-5 h-5" /></div>
                             <span className="text-primary text-xs font-bold uppercase tracking-[0.2em]">{title}</span>
                         </div>
                     </div>
-                    <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none text-white">{title}</h3>
-                    <p className="text-xl text-gray-400 leading-relaxed mb-8 font-light">{description}</p>
+                    <motion.h3
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none text-white drop-shadow-lg"
+                    >
+                        {title}
+                    </motion.h3>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        className="text-xl text-gray-400 leading-relaxed mb-8 font-light"
+                    >
+                        {description}
+                    </motion.p>
                 </div>
             </div>
         </motion.div>
@@ -276,9 +351,15 @@ function LandingPage() {
     const { scrollYProgress: processProgress } = useScroll({ target: processRef, offset: ["start start", "end end"] });
     const op1 = useTransform(processProgress, [0.05, 0.2, 0.3, 0.4], [0, 1, 1, 0]);
     const scale1 = useTransform(processProgress, [0.3, 0.4], [1, 0.9]);
+    const y1 = useTransform(processProgress, [0.3, 0.4], ["0%", "10%"]);
+
     const op2 = useTransform(processProgress, [0.45, 0.55, 0.65, 0.75], [0, 1, 1, 0]);
     const scale2 = useTransform(processProgress, [0.65, 0.75], [1, 0.9]);
+    const y2 = useTransform(processProgress, [0.65, 0.75], ["0%", "10%"]);
+
     const op3 = useTransform(processProgress, [0.8, 0.9], [0, 1]);
+    // Vertical line progress
+    const lineProgress = useTransform(processProgress, [0.1, 0.9], ["0%", "100%"]);
 
     useEffect(() => {
         const controlNavbar = () => {
@@ -387,9 +468,17 @@ function LandingPage() {
                         <div className="absolute top-12 left-0 w-full text-center z-50">
                             <div className="relative inline-block"><div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div><h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white relative">Votre Parcours <span className="text-primary">Vers le Sommet</span></h2></div>
                         </div>
-                        <StickyFeatureRow style={{ opacity: op1, scale: scale1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Search className="w-20 h-20 text-primary" /></div>} />
-                        <StickyFeatureRow style={{ opacity: op2, scale: scale2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Zap className="w-20 h-20 text-primary" /></div>} />
-                        <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<div className="bg-black border border-white/10 p-12 rounded-xl"><Rocket className="w-20 h-20 text-primary" /></div>} />
+
+                        {/* Progress Line */}
+                        <div className="absolute left-4 md:left-12 top-0 bottom-0 w-[2px] bg-white/5 hidden md:block">
+                            <motion.div style={{ height: lineProgress }} className="w-full bg-primary shadow-[0_0_10px_#D4AF37] relative">
+                                <div className="absolute bottom-0 -left-1 w-2.5 h-2.5 bg-primary rounded-full shadow-[0_0_15px_#D4AF37]" />
+                            </motion.div>
+                        </div>
+
+                        <StickyFeatureRow style={{ opacity: op1, scale: scale1, y: y1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} visual={<ProcessVisual1 />} />
+                        <StickyFeatureRow style={{ opacity: op2, scale: scale2, y: y2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap} visual={<ProcessVisual2 />} />
+                        <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<ProcessVisual3 />} />
                     </div>
                 </div>
             </div>

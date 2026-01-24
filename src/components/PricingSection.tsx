@@ -1,4 +1,4 @@
-import { ArrowRight, Check, ShieldCheck, Globe, CheckCircle2, Star } from 'lucide-react';
+import { ArrowRight, Check, ShieldCheck, Globe, CheckCircle, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
@@ -26,10 +26,10 @@ const PricingSection = () => {
                 </p>
             </div>
 
-            {/* SETUP FEE BANNER (Keep as requested) */}
+            {/* SETUP FEE BANNER */}
             <div className="relative mb-20 bg-gradient-to-r from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a] rounded-2xl border border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_40px_rgba(212,175,55,0.1)] overflow-hidden group">
                 <div className="absolute top-0 right-0 p-4 opacity-10"><Globe size={120} /></div>
-                {/* Shimmer effect on Banner too */}
+                {/* Shimmer effect on Banner */}
                 <div className="absolute inset-0 -translate-x-full group-hover:animate-shimmer-card bg-gradient-to-r from-transparent via-white/5 to-transparent z-0 pointer-events-none" />
 
                 <div className="relative z-10 flex-1 text-center md:text-left mb-6 md:mb-0">
@@ -66,17 +66,17 @@ const PricingSection = () => {
                         </div>
                         <div className="space-y-4 mb-8 flex-1">
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-white shrink-0" /> <span>Site Web "Template"</span>
+                                <CheckCircle className="w-4 h-4 text-white shrink-0" /> <span>Site Web "Template"</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-white shrink-0" /> <span>Réservation en ligne</span>
+                                <CheckCircle className="w-4 h-4 text-white shrink-0" /> <span>Réservation en ligne</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-white shrink-0" /> <span>Dashboard Basique</span>
+                                <CheckCircle className="w-4 h-4 text-white shrink-0" /> <span>Dashboard Basique</span>
                             </div>
                         </div>
-                        <button onClick={() => navigate('/signup')} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-                            Choisir
+                        <button onClick={() => navigate('/plan/basic')} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                            Voir Détails
                         </button>
                     </div>
                 </div>
@@ -96,22 +96,22 @@ const PricingSection = () => {
                         </div>
                         <div className="space-y-4 mb-8 flex-1">
                             <div className="flex gap-3 text-xs text-gray-300 font-bold">
-                                <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" /> <span>Marketing Automatisé</span>
+                                <CheckCircle className="w-4 h-4 text-blue-400 shrink-0" /> <span>Marketing Automatisé</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-gray-600 shrink-0" /> <span>Tout du plan Basic</span>
+                                <CheckCircle className="w-4 h-4 text-gray-600 shrink-0" /> <span>Tout du plan Basic</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-gray-600 shrink-0" /> <span>Support Prioritaire</span>
+                                <CheckCircle className="w-4 h-4 text-gray-600 shrink-0" /> <span>Support Prioritaire</span>
                             </div>
                         </div>
-                        <button onClick={() => navigate('/signup')} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-                            Choisir
+                        <button onClick={() => navigate('/plan/performance')} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
+                            Voir Détails
                         </button>
                     </div>
                 </div>
 
-                {/* 3. DOMINANCE / PRO (189€) - GOLD */}
+                {/* 3. DOMINANCE (189€) - GOLD */}
                 <div className="relative group rounded-[2rem] bg-[#050505] border border-primary/40 overflow-hidden scale-105 shadow-[0_0_40px_rgba(212,175,55,0.15)] hover:shadow-[0_0_60px_rgba(212,175,55,0.3)] transition-all duration-500 z-20 flex flex-col">
                     <div className="absolute top-0 right-0 bg-primary text-black px-3 py-1.5 rounded-bl-xl text-[9px] font-black uppercase tracking-widest z-30">
                         Populaire
@@ -140,11 +140,11 @@ const PricingSection = () => {
                                 <Star className="w-4 h-4 text-primary shrink-0 fill-current" /> <span>Zero Commission</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-primary/50 shrink-0" /> <span>Tout du plan Performance</span>
+                                <CheckCircle className="w-4 h-4 text-primary/50 shrink-0" /> <span>Tout du plan Performance</span>
                             </div>
                         </div>
-                        <button onClick={() => navigate('/signup')} className="w-full py-5 rounded-xl bg-primary text-black text-[11px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
-                            Essai Gratuit <ArrowRight className="w-4 h-4" />
+                        <button onClick={() => navigate('/plan/dominance')} className="w-full py-5 rounded-xl bg-primary text-black text-[11px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg hover:shadow-primary/20 flex items-center justify-center gap-2">
+                            Voir Détails <ArrowRight className="w-4 h-4" />
                         </button>
                     </div>
                 </div>
@@ -163,13 +163,13 @@ const PricingSection = () => {
                         </div>
                         <div className="space-y-4 mb-8 flex-1">
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-white shrink-0" /> <span>Multi-comptes</span>
+                                <CheckCircle className="w-4 h-4 text-white shrink-0" /> <span>Multi-comptes</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-white shrink-0" /> <span>API Dédiée</span>
+                                <CheckCircle className="w-4 h-4 text-white shrink-0" /> <span>API Dédiée</span>
                             </div>
                             <div className="flex gap-3 text-xs text-gray-400">
-                                <CheckCircle2 className="w-4 h-4 text-white shrink-0" /> <span>Marque Blanche</span>
+                                <CheckCircle className="w-4 h-4 text-white shrink-0" /> <span>Marque Blanche</span>
                             </div>
                         </div>
                         <button onClick={() => window.location.href = 'mailto:bordeaux@styleos.fr'} className="w-full py-4 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all">
