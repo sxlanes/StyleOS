@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X as CloseIcon, ArrowRight, Monitor, Bot, BarChart3, TrendingUp, Megaphone, CheckCircle2, MoveRight, Globe, Search, Rocket, ShieldCheck, Zap, Server, LayoutDashboard, Calendar, Users, Wallet, MousePointer2, ExternalLink } from 'lucide-react';
+import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
@@ -29,13 +29,13 @@ const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }:
 /* --- MOCKS --- */
 // Barber 253 Mock (CSS Only)
 const WebEliteMock = () => (
-    <div className="w-full h-full bg-[#1a1a1a] flex flex-col rounded-xl border border-white/10 overflow-hidden relative shadow-2xl group font-serif">
+    <div className="w-full h-full bg-[#1a1a1a] flex flex-col rounded-xl border border-white/10 overflow-hidden relative shadow-2xl group font-serif transition-transform duration-500 group-hover:scale-[1.02]">
         <div className="h-12 border-b border-[#D4AF37]/20 bg-[#0F0F0F] flex justify-between items-center px-6">
             <div className="text-[10px] text-[#D4AF37] font-bold tracking-[0.2em] uppercase">Barber Club 253</div>
             <div className="bg-[#D4AF37] text-black text-[8px] font-bold px-3 py-1 uppercase tracking-widest">Réserver</div>
         </div>
         <div className="flex-1 relative flex flex-col items-center justify-center p-8 text-center bg-[url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&q=80&w=2074')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-black/70"></div>
+            <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors duration-500"></div>
             <div className="relative z-10 border border-[#D4AF37]/30 p-6 bg-black/40 backdrop-blur-sm">
                 <h2 className="text-2xl text-white italic mb-2">L'Excellence Masculine</h2>
                 <p className="text-[8px] text-[#D4AF37] uppercase tracking-widest mb-4">Coupe • Barbe • Soin</p>
@@ -50,13 +50,13 @@ const WebEliteMock = () => (
 
 // Carol Ann Mock (White/Elegant)
 const CarolAnnMock = () => (
-    <div className="w-full h-full bg-[#fdfaf5] flex flex-col rounded-xl border border-white/10 overflow-hidden relative shadow-2xl group font-sans text-black">
+    <div className="w-full h-full bg-[#fdfaf5] flex flex-col rounded-xl border border-white/10 overflow-hidden relative shadow-2xl group font-sans text-black transition-transform duration-500 group-hover:scale-[1.02]">
         <div className="h-12 border-b border-black/5 flex justify-between items-center px-6 bg-white">
             <div className="text-[10px] text-black font-light tracking-[0.2em] uppercase">Maison Carol Ann</div>
             <div className="bg-black text-white text-[8px] font-bold px-3 py-1 uppercase tracking-widest">Book</div>
         </div>
         <div className="flex-1 relative flex flex-col items-center justify-center p-8 text-center bg-[url('https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&q=80&w=2074')] bg-cover bg-center">
-            <div className="absolute inset-0 bg-white/40"></div>
+            <div className="absolute inset-0 bg-white/40 group-hover:bg-white/20 transition-colors duration-500"></div>
             <div className="relative z-10 p-6 bg-white/80 backdrop-blur-md shadow-xl max-w-xs">
                 <h2 className="text-xl text-black font-light mb-2">Haute Coiffure</h2>
                 <p className="text-[8px] text-gray-600 uppercase tracking-widest mb-4">Paris • Le Marais</p>
@@ -234,7 +234,7 @@ const DemosSection = () => (
 
             <div className="grid md:grid-cols-2 gap-12">
                 <ScrollReveal delay={0.1}>
-                    <div className="group cursor-pointer">
+                    <Link to="/demo/253-barber-club" className="group cursor-pointer block">
                         <div className="aspect-video relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-6">
                             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500 z-10" />
                             <WebEliteMock />
@@ -243,10 +243,10 @@ const DemosSection = () => (
                                 <div className="text-[10px] bg-primary text-black px-2 py-1 font-bold uppercase tracking-widest inline-block">Dark / Gold Theme</div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2}>
-                    <div className="group cursor-pointer">
+                    <Link to="/demo/carol-ann" className="group cursor-pointer block">
                         <div className="aspect-video relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl mb-6">
                             <div className="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition-all duration-500 z-10" />
                             <CarolAnnMock />
@@ -255,7 +255,7 @@ const DemosSection = () => (
                                 <div className="text-[10px] bg-white text-black px-2 py-1 font-bold uppercase tracking-widest inline-block">Minimalist / Chic</div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </ScrollReveal>
             </div>
         </div>

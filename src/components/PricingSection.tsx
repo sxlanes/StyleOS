@@ -37,12 +37,12 @@ const PricingSection = () => {
 
             {/* 4 PLANS GRID */}
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch relative z-10">
-                {/* 1. STARTER */}
+                {/* 1. BASIC */}
                 <div className="bg-[#0A0A0A] border border-white/10 rounded-[1.5rem] p-6 flex flex-col hover:border-white/20 transition-all duration-300 group">
                     <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-3">Starter</div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-3">Basic</div>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-3xl font-black text-white">89€</span>
+                            <span className="text-3xl font-black text-white">50€</span>
                             <span className="text-xs font-bold text-gray-500">/mois</span>
                         </div>
                     </div>
@@ -60,12 +60,12 @@ const PricingSection = () => {
                     <button onClick={() => navigate('/signup')} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Choisir</button>
                 </div>
 
-                {/* 2. GROWTH */}
+                {/* 2. PERFORMANCE/GROWTH */}
                 <div className="bg-[#0A0A0A] border border-white/10 rounded-[1.5rem] p-6 flex flex-col hover:border-white/20 transition-all duration-300 group">
                     <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-3">Growth</div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-3">Performance</div>
                         <div className="flex items-baseline gap-1">
-                            <span className="text-3xl font-black text-white">129€</span>
+                            <span className="text-3xl font-black text-white">109€</span>
                             <span className="text-xs font-bold text-gray-500">/mois</span>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ const PricingSection = () => {
                             <Check className="w-3 h-3 text-blue-400 shrink-0 mt-0.5" /> Marketing Automatisé
                         </li>
                         <li className="flex items-start gap-2 text-xs text-gray-300">
-                            <Check className="w-3 h-3 text-gray-500 shrink-0 mt-0.5" /> Tout du plan Starter
+                            <Check className="w-3 h-3 text-gray-500 shrink-0 mt-0.5" /> Tout du plan Basic
                         </li>
                         <li className="flex items-start gap-2 text-xs text-gray-300">
                             <Check className="w-3 h-3 text-gray-500 shrink-0 mt-0.5" /> Support 24/7
@@ -83,13 +83,13 @@ const PricingSection = () => {
                     <button onClick={() => navigate('/signup')} className="w-full py-3 rounded-lg bg-white/5 border border-white/10 text-white font-bold uppercase tracking-widest text-[10px] hover:bg-white hover:text-black transition-all">Choisir</button>
                 </div>
 
-                {/* 3. PRO (Highlighted) */}
+                {/* 3. PRO/DOMINANCE (Highlighted) */}
                 <div className="bg-black border border-primary/50 rounded-[1.5rem] p-6 flex flex-col shadow-[0_0_30px_rgba(212,175,55,0.15)] relative scale-105 z-20">
                     <div className="absolute top-0 right-0 bg-primary text-black px-2 py-1 rounded-bl-lg text-[8px] font-black uppercase tracking-widest">
-                        Populaire
+                        Recommandé
                     </div>
                     <div className="mb-6">
-                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-3">Pro StyleOS</div>
+                        <div className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-3">Dominance</div>
                         <div className="flex items-baseline gap-1">
                             <span className="text-4xl font-black text-white">189€</span>
                             <span className="text-xs font-bold text-gray-500">/mois</span>
@@ -111,7 +111,7 @@ const PricingSection = () => {
                     </button>
                 </div>
 
-                {/* 4. ELITE/FRANCHISE */}
+                {/* 4. FRANCHISE */}
                 <div className="bg-[#0A0A0A] border border-white/10 rounded-[1.5rem] p-6 flex flex-col hover:border-white/20 transition-all duration-300 group">
                     <div className="mb-6">
                         <div className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-3">Franchise</div>
