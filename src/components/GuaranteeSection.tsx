@@ -2,59 +2,53 @@ import { ShieldCheck, TrendingUp, Lock } from 'lucide-react';
 
 const GuaranteeSection = () => {
     return (
-        <div className="grid md:grid-cols-3 gap-8">
-            {/* Box 1: Satisfied or Refunded */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 relative group hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div className="grid md:grid-cols-3 gap-8 p-12">
+            {/* CARD 1: ROI */}
+            <div className="group relative bg-[#0a0a0a] rounded-3xl p-8 border border-white/10 overflow-hidden hover:-translate-y-2 transition-transform duration-500 hover:shadow-[0_0_40px_rgba(212,175,55,0.15)]">
+                {/* Shiny Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[length:200%_200%] animate-shimmer pointer-events-none"></div>
 
-                <div className="relative z-10">
-                    <div className="mb-8 w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:bg-primary/20 transition-colors shadow-[0_0_20px_rgba(212,175,55,0.1)]">
-                        <ShieldCheck className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-4">Satisfait ou Remboursé</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                        Nous prenons le risque pour vous. Déployez StyleOS dans votre salon pendant 30 jours complets.
-                    </p>
-                    <p className="text-gray-500 text-xs leading-relaxed border-t border-white/5 pt-4">
-                        Si vous ne constatez pas une augmentation de vos réservations ou un gain de temps significatif, nous vous remboursons intégralement, sans poser de questions. C'est écrit dans le contrat.
-                    </p>
+                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-primary/20 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                    <TrendingUp size={28} />
                 </div>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-primary transition-colors relative z-10">
+                    ROI Positif ou Remboursé
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed relative z-10">
+                    Si StyleOS ne génère pas plus de valeur qu'il ne coûte après 90 jours, nous vous remboursons l'intégralité de vos mensualités. Zéro risque, 100% Performance.
+                </p>
             </div>
 
-            {/* Box 2: Auto-Financing */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 relative group hover:border-green-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(74,222,128,0.15)] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {/* CARD 2: LIBERTÉ */}
+            <div className="group relative bg-[#0a0a0a] rounded-3xl p-8 border border-white/10 overflow-hidden hover:-translate-y-2 transition-transform duration-500 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+                {/* Shiny Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[length:200%_200%] animate-shimmer pointer-events-none"></div>
 
-                <div className="relative z-10">
-                    <div className="mb-8 w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center border border-green-500/20 group-hover:bg-green-500/20 transition-colors shadow-[0_0_20px_rgba(74,222,128,0.1)]">
-                        <TrendingUp className="w-8 h-8 text-green-500" />
-                    </div>
-                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-4">Rentabilité Garantie</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                        StyleOS n'est pas une dépense, c'est un investissement à rendement immédiat.
-                    </p>
-                    <p className="text-gray-500 text-xs leading-relaxed border-t border-white/5 pt-4">
-                        Il suffit de 3 rendez-vous supplémentaires par mois ou d'une seule heure de gestion gagnée pour couvrir 100% du coût de l'abonnement. Tout le reste, c'est du profit net pour votre structure.
-                    </p>
+                <div className="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-blue-500/20 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+                    <Lock size={28} />
                 </div>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-blue-500 transition-colors relative z-10">
+                    Liberté Totale & Données
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed relative z-10">
+                    Vos données vous appartiennent. Votre fichier client est exportable à tout moment. Pas d'engagement long terme : vous restez parce que vous gagnez, pas parce que vous êtes bloqué.
+                </p>
             </div>
 
-            {/* Box 3: No Commitment */}
-            <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl p-8 relative group hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {/* CARD 3: AUDIT */}
+            <div className="group relative bg-[#0a0a0a] rounded-3xl p-8 border border-white/10 overflow-hidden hover:-translate-y-2 transition-transform duration-500 hover:shadow-[0_0_40px_rgba(74,222,128,0.15)]">
+                {/* Shiny Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[length:200%_200%] animate-shimmer pointer-events-none"></div>
 
-                <div className="relative z-10">
-                    <div className="mb-8 w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500/20 transition-colors shadow-[0_0_20px_rgba(59,130,246,0.1)]">
-                        <Lock className="w-8 h-8 text-blue-500" />
-                    </div>
-                    <h3 className="text-2xl font-black text-white uppercase tracking-tighter mb-4">Liberté Totale</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                        Vos données vous appartiennent. Votre fichier client est exportable à tout moment en un clic.
-                    </p>
-                    <p className="text-gray-500 text-xs leading-relaxed border-t border-white/5 pt-4">
-                        Aucun engagement long terme. Vous restez chez StyleOS parce que votre entreprise performe mieux avec nous, pas parce que vous êtes bloqué juridiquement. Résiliation simple et immédiate.
-                    </p>
+                <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 mb-6 group-hover:scale-110 transition-transform duration-500 relative z-10 border border-green-500/20 shadow-[0_0_20px_rgba(74,222,128,0.2)]">
+                    <ShieldCheck size={28} />
                 </div>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-4 group-hover:text-green-500 transition-colors relative z-10">
+                    Audit de Transition
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed relative z-10">
+                    Nous auditons votre situation actuelle gratuitement. Si nous ne trouvons pas au moins 20% de revenus cachés à récupérer, nous ne vous proposons pas nos services.
+                </p>
             </div>
         </div>
     );

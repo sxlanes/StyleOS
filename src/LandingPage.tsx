@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket, Check, TrendingUp } from 'lucide-react';
+import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket, Check, TrendingUp, Star, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
 import { StickyCanvas } from './components/StickyCanvas';
 import ComparisonTable from './components/ComparisonTable';
@@ -65,62 +65,64 @@ const CarolAnnMock = () => (
     </div>
 );
 
-const ChatMock = () => (
-    <div className="w-full md:w-3/4 mx-auto h-full bg-black flex flex-col rounded-[2rem] border border-white/10 overflow-hidden relative shadow-2xl">
-        <div className="h-14 bg-white/5 border-b border-white/5 flex items-center px-6 gap-4">
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary relative"><Bot size={16} /></div>
-            <div>
-                <div className="text-xs font-bold text-white">Sarah IA</div>
-                <div className="text-[8px] text-green-500 font-mono">En ligne</div>
-            </div>
-        </div>
-        <div className="flex-1 p-4 space-y-4 font-sans text-[10px] bg-black relative flex flex-col justify-end pb-8">
-            <div className="flex gap-2 relative z-10 opacity-50">
-                <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Bonjour, c'est ouvert lundi ?</div>
-            </div>
-            <div className="flex gap-2 justify-end relative z-10 opacity-50">
-                <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Oui, de 10h à 19h.</div>
-            </div>
-            <div className="flex gap-2 relative z-10">
-                <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Top. Est-ce que vous faites la taille de barbe à l'ancienne avec serviette ?</div>
-            </div>
-            <div className="flex gap-2 justify-end relative z-10">
-                <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Absolument ! Notre forfait "Rituel" à 35€ inclut le soin complet. Je vous réserve un créneau pour ce lundi ?</div>
-            </div>
-            <div className="w-full text-center text-[8px] text-gray-600 mt-2">Sarah gère la conversation et l'agenda en temps réel.</div>
-        </div>
-    </div>
-);
+const ChatMock = () => {
+    const [isExpanded, setIsExpanded] = useState(false);
 
-const DashboardMock = () => (
-    <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group">
-        <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
-            <LayoutDashboard className="w-5 h-5 text-white/80" />
-            <Users className="w-5 h-5 text-gray-600" />
-            <Calendar className="w-5 h-5 text-gray-600" />
-            <Wallet className="w-5 h-5 text-gray-600" />
-        </div>
-        <div className="flex-1 p-6 flex flex-col bg-black relative">
-            <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
-                <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
-                    <div className="text-xl font-black text-white">12,450€</div>
-                    <div className="text-[8px] text-green-500 font-bold">+15% vs M-1</div>
+    return (
+        <>
+            <div onClick={() => setIsExpanded(true)} className="w-full md:w-3/4 mx-auto h-full bg-black flex flex-col rounded-[2rem] border border-white/10 overflow-hidden relative shadow-2xl cursor-pointer hover:border-primary/50 transition-colors group">
+                <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="h-14 bg-white/5 border-b border-white/5 flex items-center px-6 gap-4 relative z-10">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary relative"><Bot size={16} /></div>
+                    <div>
+                        <div className="text-xs font-bold text-white">Sarah IA</div>
+                        <div className="text-[8px] text-green-500 font-mono">En ligne</div>
+                    </div>
+                    <div className="ml-auto text-[8px] uppercase font-bold text-gray-500 bg-white/5 px-2 py-1 rounded border border-white/5 group-hover:bg-primary group-hover:text-black transition-colors">Agrandir</div>
                 </div>
-                <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
-                    <div className="text-xl font-black text-white">65€</div>
-                    <div className="text-[8px] text-green-500 font-bold">+4€ vs M-1</div>
+                <div className="flex-1 p-4 space-y-4 font-sans text-[10px] bg-black relative flex flex-col justify-end pb-8 z-10">
+                    <div className="flex gap-2 relative z-10 opacity-50">
+                        <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Bonjour, c'est ouvert lundi ?</div>
+                    </div>
+                    <div className="flex gap-2 justify-end relative z-10 opacity-50">
+                        <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Oui, de 10h à 19h.</div>
+                    </div>
+                    <div className="flex gap-2 relative z-10">
+                        <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Top. Est-ce que vous faites la taille de barbe à l'ancienne avec serviette ?</div>
+                    </div>
+                    <div className="flex gap-2 justify-end relative z-10">
+                        <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Absolument ! Notre forfait "Rituel" à 35€ inclut le soin complet. Je vous réserve un créneau pour ce lundi ?</div>
+                    </div>
                 </div>
             </div>
-            <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
-            <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
-                {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => <div key={i} className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors" style={{ height: `${h}%` }}></div>)}
-            </div>
-        </div>
-    </div>
-);
+
+            {/* Expanded Modal */}
+            <AnimatePresence>
+                {isExpanded && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-xl flex items-center justify-center p-6" onClick={() => setIsExpanded(false)}>
+                        <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }} className="w-full max-w-lg bg-black rounded-[2rem] border border-white/10 overflow-hidden shadow-2xl relative" onClick={e => e.stopPropagation()}>
+                            <div className="h-16 bg-[#202c33] flex items-center px-6 gap-4 border-b border-white/5">
+                                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold relative text-lg">S</div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">Sarah IA</div>
+                                    <div className="text-xs text-green-500">En ligne • Répond instantanément</div>
+                                </div>
+                                <button onClick={() => setIsExpanded(false)} className="ml-auto p-2 hover:bg-white/10 rounded-full text-white"><ArrowRight className="rotate-45" /></button>
+                            </div>
+                            <div className="p-6 h-[500px] overflow-y-auto bg-[url('https://camo.githubusercontent.com/854a93c27d64274c4f8c5a0b6ec34ce1bed9dd84/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131303234303838396634342e706e67')] bg-repeat space-y-4">
+                                <div className="flex justify-start"><div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] text-sm">Bonjour, vous avez de la place demain ?</div></div>
+                                <div className="flex justify-end"><div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] text-sm">Bonjour ! Pour une coupe homme ? J'ai un créneau à 14h30 ou 16h00.</div></div>
+                                <div className="flex justify-start"><div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] text-sm">16h00 c'est parfait. Avec Mathieu si possible ?</div></div>
+                                <div className="flex justify-end"><div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] text-sm">Mathieu est disponible. Je note ça : Coupe Homme, demain 16h00. Vous recevrez un SMS de confirmation !</div></div>
+                                <div className="flex justify-center text-xs text-gray-500 my-4 bg-[#111] py-1 px-3 rounded-full w-fit mx-auto border border-white/5">RDV Ajouté automatiquement à l'agenda Planity</div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </>
+    );
+}
 
 const SocialMock = () => (
     <div className="w-full h-full flex flex-col bg-black border border-white/10 rounded-xl overflow-hidden shadow-2xl relative group">
@@ -151,17 +153,30 @@ const SocialMock = () => (
     </div>
 );
 
-const IntegrationMock = () => (
-    <div className="w-full h-full bg-[#111] rounded-xl border border-white/10 flex items-center justify-center relative overflow-hidden group">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 to-transparent opacity-50" />
-        <div className="relative z-10 text-center">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:bg-primary/20 transition-colors">
-                <Server className="w-10 h-10 text-white group-hover:text-primary transition-colors" />
+const ReviewsMock = () => (
+    <div className="w-full h-full flex flex-col bg-black border border-white/10 rounded-xl overflow-hidden shadow-2xl relative group">
+        <div className="h-8 bg-white/5 flex items-center px-4 justify-between border-b border-white/5">
+            <div className="text-[8px] uppercase font-bold text-gray-400 tracking-widest flex items-center gap-2"><Star size={10} /> Reputation Manager</div>
+        </div>
+        <div className="flex-1 p-6 relative flex flex-col items-center justify-center">
+            <div className="bg-white/5 p-4 rounded-2xl border border-white/5 w-full mb-4 group-hover:border-primary/30 transition-colors relative">
+                <div className="absolute -top-2 -right-2 bg-green-500 text-black text-[8px] font-black px-2 py-1 rounded-full uppercase">Publié</div>
+                <div className="flex items-center gap-2 mb-2">
+                    <div className="flex text-yellow-500"><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /><Star size={12} fill="currentColor" /></div>
+                    <div className="text-[9px] text-gray-400 font-bold">Thomas L.</div>
+                </div>
+                <div className="text-[10px] text-gray-300 italic">"Expérience incroyable, le système de réservation est super fluide."</div>
             </div>
-            <div className="flex items-center gap-4 text-xs font-mono text-gray-500">
-                <span>Planity</span>
-                <ArrowRight size={12} />
-                <span className="text-primary font-bold">StyleOS</span>
+
+            <div className="flex items-center gap-3 w-full">
+                <div className="h-[1px] bg-white/10 flex-1"></div>
+                <div className="text-[8px] text-gray-500 uppercase tracking-widest">Réponse Auto IA</div>
+                <div className="h-[1px] bg-white/10 flex-1"></div>
+            </div>
+
+            <div className="bg-primary/5 p-3 rounded-xl border border-primary/10 w-[90%] mt-4 self-end relative">
+                <Bot size={12} className="absolute -left-6 top-1/2 -translate-y-1/2 text-primary" />
+                <div className="text-[9px] text-gray-400 italic">"Merci Thomas ! Ravi que l'expérience digitale vous plaise autant que la coupe..."</div>
             </div>
         </div>
     </div>
@@ -184,21 +199,6 @@ const ProcessVisual1 = () => (
                 <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> Data Import</div>
                 <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> SSL Secure</div>
                 <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" /> Deploying</div>
-            </div>
-        </div>
-    </div>
-);
-
-const ProcessVisual2 = () => (
-    <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex items-center justify-center shadow-2xl">
-        <div className="absolute inset-0 bg-primary/5 animate-pulse" />
-        <div className="text-center relative z-10 scale-110">
-            <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary/40 text-primary shadow-[0_0_40px_rgba(212,175,55,0.2)]">
-                <Bot size={40} />
-            </div>
-            <div className="text-sm font-black uppercase tracking-widest text-white mb-2">Sarah Is Online</div>
-            <div className="text-[10px] text-gray-400 font-mono flex items-center justify-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Listening to calls
             </div>
         </div>
     </div>
@@ -297,13 +297,14 @@ const StickyFeatureRow = ({ title, description, icon: Icon, visual, style }: any
 
 /* --- DEMOS SECTION --- */
 const DemosSection = () => (
-    <div id="demos" className="py-24 border-b border-white/5 bg-[#050505] relative">
+    <div id="demos" className="py-24 border-b border-white/5 bg-black relative">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gray-900 via-black to-black opacity-50" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <ScrollReveal>
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white mb-4">Nos <span className="text-primary">Réalisations</span></h2>
-                    <p className="text-gray-400 text-sm uppercase tracking-widest">L'Art du Digital</p>
+                <div className="text-center mb-16 relative">
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-1/3 h-full rounded-full pointer-events-none"></div>
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white mb-4 relative z-10">Nos <span className="text-primary">Réalisations</span></h2>
+                    <p className="text-gray-400 text-sm uppercase tracking-widest relative z-10">L'Art du Digital</p>
                 </div>
             </ScrollReveal>
 
@@ -441,7 +442,15 @@ function LandingPage() {
                             action={<a href="#demos" onClick={(e) => { e.preventDefault(); scrollToSection('demos'); }} className="flex items-center gap-3 text-primary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors group cursor-pointer inline-block mt-4">Voir les réalisations <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></a>}
                         />
                     </div>
-                    <FeatureRow title="Sarah IA" description="Réceptionniste virtuelle active 24/7. Elle répond au téléphone, filtre les demandes, qualifie les prospects et ajoute les RDV directement dans votre agenda." icon={Bot} align="right" visual={<ChatMock />} />
+
+                    <FeatureRow
+                        title="Sarah IA"
+                        description="Réceptionniste virtuelle active 24/7. Elle répond au téléphone, filtre les demandes, qualifie les prospects et ajoute les RDV directement dans votre agenda."
+                        icon={Bot}
+                        align="right"
+                        visual={<ChatMock />}
+                    />
+
                     <FeatureRow
                         title="Pilotage Financier"
                         description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs."
@@ -491,9 +500,25 @@ function LandingPage() {
                                 </div>
                             </div>
                         }
-                        action={<Link to="/" className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Explorer le Dashboard <ArrowRight className="w-3 h-3" /></Link>}
+                        action={<Link to="/dashboard-demo" className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Explorer le Dashboard <ArrowRight className="w-3 h-3" /></Link>}
                     />
-                    <FeatureRow title="Marketing & Visibilité" description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré." icon={Megaphone} align="right" visual={<SocialMock />} action={<Link to="/signup" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>} />
+
+                    <FeatureRow
+                        title="Marketing & Visibilité"
+                        description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
+                        icon={Megaphone}
+                        align="right"
+                        visual={<SocialMock />}
+                        action={<Link to="/signup" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>}
+                    />
+
+                    <FeatureRow
+                        title="Automatisation des Avis"
+                        description="Ne laissez plus vos clients partir sans laisser 5 étoiles. Notre IA détecte les clients satisfaits et sollicite un avis automatiquement via SMS. Bloque les avis négatifs en les redirigeant vers un formulaire privé."
+                        icon={Star}
+                        align="left"
+                        visual={<ReviewsMock />}
+                    />
                 </div>
             </div>
 
@@ -506,36 +531,34 @@ function LandingPage() {
                             icon={Server}
                             align="left"
                             visual={
-                                <div className="w-full h-full bg-[#111] rounded-xl border border-white/10 flex items-center justify-center relative overflow-hidden group hover:border-primary/30 transition-all">
+                                <div className="w-full h-full bg-[#111] rounded-xl border border-white/10 flex items-center justify-center relative overflow-hidden group hover:border-primary/30 transition-all p-8">
                                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 to-transparent opacity-50" />
-                                    {/* Moving Particles */}
-                                    {[...Array(10)].map((_, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className="absolute w-1 h-1 bg-primary rounded-full"
-                                            initial={{ x: -100, y: Math.random() * 200, opacity: 0 }}
-                                            animate={{ x: 400, opacity: [0, 1, 0] }}
-                                            transition={{ duration: 2 + Math.random(), repeat: Infinity, delay: Math.random() * 2 }}
-                                        />
-                                    ))}
-                                    <div className="relative z-10 text-center w-full px-12">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex flex-col items-center gap-2">
-                                                <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 grayscale opacity-50"><Server size={24} /></div>
-                                                <div className="text-[10px] text-gray-600 font-mono">Legacy</div>
+
+                                    <div className="flex items-center justify-center gap-8 md:gap-16 w-full max-w-lg">
+                                        {/* Legacy Node */}
+                                        <div className="flex flex-col items-center gap-4">
+                                            <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 grayscale opacity-80">
+                                                <Server size={32} className="text-gray-500" />
                                             </div>
-                                            <div className="flex-1 px-4 relative">
-                                                <div className="h-[1px] w-full bg-white/10 relative overflow-hidden">
-                                                    <div className="absolute inset-0 bg-primary w-1/2 animate-[scan_2s_infinite]" />
+                                            <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Legacy</div>
+                                        </div>
+
+                                        {/* Flow Animation */}
+                                        <div className="flex-1 h-[2px] bg-white/10 relative overflow-hidden">
+                                            <div className="absolute inset-0 bg-primary w-1/2 animate-[scan_1.5s_infinite]" />
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-4 text-[9px] text-primary uppercase tracking-widest bg-black px-2 font-bold animate-pulse">Transfert</div>
+                                            <ArrowRight size={16} className="absolute right-0 top-1/2 -translate-y-1/2 text-primary" />
+                                        </div>
+
+                                        {/* StyleOS Node */}
+                                        <div className="flex flex-col items-center gap-4">
+                                            <div className="w-28 h-28 rounded-full bg-primary/10 border border-primary/50 flex items-center justify-center relative z-10 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
+                                                <Bot size={40} className="text-primary" />
+                                                <div className="absolute top-0 right-0 w-8 h-8 bg-green-500 rounded-full border-4 border-[#111] flex items-center justify-center">
+                                                    <Check size={14} className="text-black" />
                                                 </div>
-                                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black px-2 text-[8px] text-primary uppercase tracking-widest animate-pulse">
-                                                    Transfert en cours
-                                                </div>
                                             </div>
-                                            <div className="flex flex-col items-center gap-2">
-                                                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center border border-primary/40 text-primary shadow-[0_0_20px_rgba(212,175,55,0.2)] scale-110"><Bot size={32} /></div>
-                                                <div className="text-[10px] text-white font-bold font-mono">StyleOS</div>
-                                            </div>
+                                            <div className="text-sm font-black text-white uppercase tracking-widest">StyleOS</div>
                                         </div>
                                     </div>
                                 </div>
@@ -545,9 +568,31 @@ function LandingPage() {
                 </ScrollReveal>
             </div>
 
-            <div id="comparison" className="relative z-10 bg-black pb-24 border-t border-white/5 pt-32"><div className="max-w-7xl mx-auto px-6"><ScrollReveal><div className="text-center mb-20 relative inline-block w-full"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div><h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3></div></ScrollReveal><ScrollReveal delay={0.2}><ComparisonTable /></ScrollReveal></div></div>
+            <div id="comparison" className="relative z-10 bg-black pb-24 border-t border-white/5 pt-32">
+                <div className="max-w-7xl mx-auto px-6">
+                    <ScrollReveal>
+                        <div className="text-center mb-20 relative inline-block w-full">
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/10 blur-[120px] w-2/3 h-full rounded-full pointer-events-none"></div>
+                            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3>
+                        </div>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.2}><ComparisonTable /></ScrollReveal>
+                </div>
+            </div>
 
-            <section className="relative z-10 bg-black py-24 md:py-32 border-t border-white/5"><div className="max-w-7xl mx-auto px-6"><ScrollReveal><div className="text-center mb-16 relative"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-1/2 h-full rounded-full pointer-events-none"></div><div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] relative z-10">Performance</div><h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white relative z-10">Votre <span className="text-primary italic">Machine à Cash</span></h2><p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed relative z-10">Optimisation mathématique de chaque siège.</p></div></ScrollReveal><ScrollReveal delay={0.2}><RevenueSimulator /></ScrollReveal></div></section>
+            <section className="relative z-10 bg-black py-24 md:py-32 border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-6">
+                    <ScrollReveal>
+                        <div className="text-center mb-16 relative">
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-1/2 h-full rounded-full pointer-events-none"></div>
+                            <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] relative z-10">Performance</div>
+                            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white relative z-10">Votre <span className="text-primary italic">Machine à Cash</span></h2>
+                            <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed relative z-10">Optimisation mathématique de chaque siège.</p>
+                        </div>
+                    </ScrollReveal>
+                    <ScrollReveal delay={0.2}><RevenueSimulator /></ScrollReveal>
+                </div>
+            </section>
 
             <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5">
                 <ScrollReveal>
@@ -563,16 +608,26 @@ function LandingPage() {
                 </ScrollReveal>
             </div>
 
-            <div className="relative z-10 bg-black border-t border-white/5 py-24"><ScrollReveal><div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-12"><h2 className="text-4xl md:text-6xl font-black uppercase text-white mb-6">Nos <span className="text-primary italic">Garanties</span></h2></div>
-                <GuaranteeSection />
-            </div></ScrollReveal></div>
+            <div className="relative z-10 bg-black border-t border-white/5 py-24">
+                <ScrollReveal>
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="text-center mb-24 relative">
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/10 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div>
+                            <h2 className="text-4xl md:text-6xl font-black uppercase text-white mb-6 relative z-10">Nos <span className="text-primary italic">Garanties</span></h2>
+                        </div>
+                        <GuaranteeSection />
+                    </div>
+                </ScrollReveal>
+            </div>
 
             <div id="process" ref={processRef} className="relative z-10 bg-black h-[500vh]">
                 <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
                     <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
                         <div className="absolute top-12 left-0 w-full text-center z-50">
-                            <div className="relative inline-block"><div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div><h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white relative">Votre Parcours <span className="text-primary">Vers le Sommet</span></h2></div>
+                            <div className="relative inline-block">
+                                <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
+                                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white relative">Votre Parcours <span className="text-primary">Vers le Sommet</span></h2>
+                            </div>
                         </div>
 
                         {/* Progress Line */}

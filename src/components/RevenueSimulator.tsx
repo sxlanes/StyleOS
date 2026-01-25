@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { TrendingUp, AlertCircle, CheckCircle2, DollarSign, Calculator, Users, Scissors } from 'lucide-react';
+import { TrendingUp, AlertCircle, CheckCircle2, DollarSign, Calculator, Users, Scissors, PhoneMissed } from 'lucide-react';
 
 const RevenueSimulator = () => {
     const [clients, setClients] = useState(250);
     const [ticketPrice, setTicketPrice] = useState(45);
+    const [missedCalls, setMissedCalls] = useState(2); // Per day
 
     // Constants
     const commissionRate = 2.5; // Average competitor fee per appointment/transaction
@@ -12,8 +13,17 @@ const RevenueSimulator = () => {
     // Calculations
     const monthlyRevenue = clients * ticketPrice;
     const competitorCost = Math.round(monthlyRevenue * (commissionRate / 100));
+
+    // Missed Opportunity: calls * ticket * working days (approx 22) * 12 months
+    // Assuming 1 call = 1 potential appointment
+    const monthlyMissedRevenue = missedCalls * ticketPrice * 22;
+    const yearlyMissedRevenue = monthlyMissedRevenue * 12;
+
     const monthlySavings = competitorCost - styleOSCost;
     const yearlySavings = monthlySavings * 12;
+
+    // Total potential gain (Savings + Recovered Revenue)
+    const totalPotentialGain = yearlySavings + yearlyMissedRevenue;
 
     return (
         <div className="w-full max-w-6xl mx-auto rounded-[3rem] border border-white/10 bg-[#0A0A0A] overflow-hidden shadow-2xl relative group hover:border-white/20 transition-all duration-500">
@@ -27,14 +37,14 @@ const RevenueSimulator = () => {
                     </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-16 md:px-12">
+                <div className="grid md:grid-cols-3 gap-12 md:px-6">
                     {/* Slider 1: Clients */}
                     <div>
                         <div className="flex justify-between items-end mb-6">
                             <label className="text-xs font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-2">
                                 <Users size={14} /> Clients / Mois
                             </label>
-                            <div className="text-4xl font-black text-white tracking-tighter tabular-nums">{clients}</div>
+                            <div className="text-3xl font-black text-white tracking-tighter tabular-nums">{clients}</div>
                         </div>
                         <style>{`
                             input[type=range]::-webkit-slider-thumb {
@@ -74,7 +84,7 @@ const RevenueSimulator = () => {
                             <label className="text-xs font-black uppercase tracking-[0.2em] text-gray-500 flex items-center gap-2">
                                 <Scissors size={14} /> Prix Moyen
                             </label>
-                            <div className="text-4xl font-black text-white tracking-tighter tabular-nums">{ticketPrice}€</div>
+                            <div className="text-3xl font-black text-white tracking-tighter tabular-nums">{ticketPrice}€</div>
                         </div>
                         <input
                             type="range"
@@ -90,27 +100,55 @@ const RevenueSimulator = () => {
                             <span>150€+</span>
                         </div>
                     </div>
+
+                    {/* Slider 3: Missed Calls */}
+                    <div className="relative">
+                        <div className="absolute inset-0 bg-red-500/5 blur-xl -z-10 rounded-full opacity-50"></div>
+                        <div className="flex justify-between items-end mb-6">
+                            <label className="text-xs font-black uppercase tracking-[0.2em] text-red-400 flex items-center gap-2">
+                                <PhoneMissed size={14} /> Appels Perdus / Jour
+                            </label>
+                            <div className="text-3xl font-black text-white tracking-tighter tabular-nums">{missedCalls}</div>
+                        </div>
+                        <input
+                            type="range"
+                            min="0"
+                            max="20"
+                            step="1"
+                            value={missedCalls}
+                            onChange={(e) => setMissedCalls(Number(e.target.value))}
+                            className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer focus:outline-none accent-red-500"
+                            style={{ accentColor: '#ef4444' }}
+                        />
+                        <div className="flex justify-between mt-3 text-[10px] text-gray-600 font-bold uppercase tracking-widest">
+                            <span>0</span>
+                            <span>20+</span>
+                        </div>
+                        <div className="mt-4 text-[10px] text-red-400/80 font-bold text-center bg-red-500/10 py-1 px-2 rounded border border-red-500/20">
+                            Perte: -{monthlyMissedRevenue.toLocaleString()}€ / mois
+                        </div>
+                    </div>
                 </div>
             </div>
 
             {/* 3 Info Boxes */}
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-black/40">
 
-                {/* Box 1: Competitors */}
+                {/* Box 1: Competitors Cost */}
                 <div className="p-8 md:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group/box1">
                     <div className="flex items-center gap-2 mb-4 opacity-70 group-hover/box1:opacity-100 transition-opacity">
                         <AlertCircle className="w-4 h-4 text-red-500" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Coût Commissions (2.5%)</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Coût Commissions</span>
                     </div>
                     <div>
                         <div className="text-3xl font-black text-red-500/80 tracking-tighter mb-1 tabular-nums group-hover/box1:text-red-500 transition-colors">
                             {competitorCost}€
                         </div>
-                        <div className="text-[9px] text-gray-600 uppercase tracking-widest font-bold">Payé aux plateformes / mois</div>
+                        <div className="text-[9px] text-gray-600 uppercase tracking-widest font-bold">Frais Plateforme / mois</div>
                     </div>
                 </div>
 
-                {/* Box 2: StyleOS */}
+                {/* Box 2: StyleOS Cost */}
                 <div className="p-8 md:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors relative overflow-hidden group/box2">
                     <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 blur-xl rounded-full"></div>
                     <div className="flex items-center gap-2 mb-4 group-hover/box2:scale-105 transition-transform origin-left">
@@ -125,18 +163,20 @@ const RevenueSimulator = () => {
                     </div>
                 </div>
 
-                {/* Box 3: Savings */}
+                {/* Box 3: Total Potential Gain */}
                 <div className="p-8 md:p-10 flex flex-col justify-between bg-gradient-to-br from-primary/10 via-black to-black relative group/savings overflow-hidden">
                     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover/savings:opacity-100 transition-opacity pointer-events-none"></div>
                     <div className="flex items-center gap-2 mb-4 relative z-10">
                         <TrendingUp className="w-4 h-4 text-green-400 animate-pulse" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-green-400">Économies Annuelles</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-green-400">Gain Potentiel Total</span>
                     </div>
                     <div className="relative z-10">
                         <div className="text-4xl font-black text-green-400 tracking-tighter mb-1 tabular-nums drop-shadow-[0_0_15px_rgba(74,222,128,0.2)]">
-                            +{(yearlySavings > 0 ? yearlySavings : 0).toLocaleString()}€
+                            +{(totalPotentialGain > 0 ? totalPotentialGain : 0).toLocaleString()}€
                         </div>
-                        <div className="text-[9px] text-primary/60 uppercase tracking-widest font-bold">Gain net immédiat</div>
+                        <div className="text-[9px] text-primary/60 uppercase tracking-widest font-bold">
+                            Économies + Revenus Récupérés / An
+                        </div>
                     </div>
                 </div>
             </div>
