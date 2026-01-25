@@ -46,7 +46,7 @@ const PricingSection = () => {
 
                     <div className="mb-2">
                         <h3 className="text-lg font-bold text-white uppercase tracking-wider">Basic</h3>
-                        <p className="text-xs text-gray-400 mt-1 h-8">Enfocada en identidad visual.</p>
+                        <p className="text-xs text-gray-400 mt-1 h-8">Axé sur l'identité visuelle.</p>
                     </div>
 
                     <div className="flex items-baseline gap-1 mb-6">
@@ -155,7 +155,7 @@ const PricingSection = () => {
 
                     <div className="mb-2">
                         <h3 className="text-lg font-bold text-white uppercase tracking-wider">Empire</h3>
-                        <p className="text-xs text-gray-400 mt-1 h-8">Pour multi-structures.</p>
+                        <p className="text-xs text-gray-400 mt-1 h-8">Idéal pour le multi-site.</p>
                     </div>
 
                     <div className="flex items-baseline gap-1 mb-2">
