@@ -578,22 +578,21 @@ function LandingPage() {
                                             <div className="text-xs font-bold text-gray-500 uppercase tracking-widest group-hover/node:text-[#004bad] transition-colors">Planity</div>
                                         </div>
 
-                                        {/* Flow Animation - Left to Right Arrow */}
+                                        {/* Flow Animation - Particles Only (No Arrow) */}
                                         <div className="flex-1 mx-4 md:mx-12 h-[2px] bg-white/10 relative">
                                             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-full overflow-hidden">
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-1/2 animate-[scan_1.5s_infinite] translate-x-[-100%]" />
                                             </div>
 
-                                            {/* Flying Data Particles */}
+                                            {/* Flying Data Particles - More of them */}
                                             <div className="absolute top-1/2 left-0 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0s' }} />
                                             <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.2s' }} />
                                             <div className="absolute top-1/2 left-0 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.4s' }} />
+                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-blue-400 rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.6s' }} />
+                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-primary rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.8s' }} />
+                                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '1s' }} />
 
                                             <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 text-[10px] text-primary uppercase tracking-[0.3em] font-black animate-pulse bg-black px-2">Transfert</div>
-
-                                            <div className="absolute right-0 top-1/2 -translate-y-1/2 text-primary">
-                                                <ArrowRight size={24} className="drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]" />
-                                            </div>
                                         </div>
 
                                         {/* StyleOS Node */}
@@ -647,25 +646,52 @@ function LandingPage() {
                     <div className="grid lg:grid-cols-2 gap-16 items-center">
                         <div>
                             <ScrollReveal>
-                                <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.4em]">Sarah AI Demo</div>
-                                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white">L'IA qui <span className="text-primary italic">parle</span> mieux que vous.</h2>
-                                <p className="text-lg text-gray-400 leading-relaxed mb-8">
+                                <div className="inline-block mb-8 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.4em]">Sarah AI Demo</div>
+                                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter mb-8 text-white leading-none">
+                                    SARAH <span className="text-primary italic">IA</span> DEMO
+                                </h2>
+                                <p className="text-xl text-gray-400 leading-relaxed mb-10 font-light">
                                     Sarah gère les accents, les hésitations et les demandes complexes. Elle est polie, efficace et ne rate jamais une vente.
                                 </p>
-                                <ul className="space-y-4 mb-8">
-                                    <li className="flex items-center gap-3 text-sm text-gray-300">
-                                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><Check size={12} strokeWidth={3} /></div>
-                                        <span>Réponse en <strong className="text-white">0.4 secondes</strong> (Latence humaine)</span>
-                                    </li>
-                                    <li className="flex items-center gap-3 text-sm text-gray-300">
-                                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><Check size={12} strokeWidth={3} /></div>
-                                        <span>Synchronisation agenda temps réel</span>
-                                    </li>
-                                    <li className="flex items-center gap-3 text-sm text-gray-300">
-                                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><Check size={12} strokeWidth={3} /></div>
-                                        <span>Disponible 24h/24 et 7j/7</span>
-                                    </li>
-                                </ul>
+
+                                {/* Improved Info Boxes */}
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                                    <div className="bg-gradient-to-br from-green-500/10 to-transparent border border-green-500/20 rounded-2xl p-5 hover:border-green-500/40 transition-all group">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center text-green-400 shrink-0 group-hover:scale-110 transition-transform">
+                                                <Check size={20} strokeWidth={3} />
+                                            </div>
+                                            <div>
+                                                <div className="text-2xl font-black text-white mb-1">0.4s</div>
+                                                <div className="text-xs text-gray-400 font-medium">Temps de réponse</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-br from-blue-500/10 to-transparent border border-blue-500/20 rounded-2xl p-5 hover:border-blue-500/40 transition-all group">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 group-hover:scale-110 transition-transform">
+                                                <Check size={20} strokeWidth={3} />
+                                            </div>
+                                            <div>
+                                                <div className="text-2xl font-black text-white mb-1">100%</div>
+                                                <div className="text-xs text-gray-400 font-medium">Sync temps réel</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 rounded-2xl p-5 hover:border-primary/40 transition-all group">
+                                        <div className="flex items-start gap-3">
+                                            <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
+                                                <Check size={20} strokeWidth={3} />
+                                            </div>
+                                            <div>
+                                                <div className="text-2xl font-black text-white mb-1">24/7</div>
+                                                <div className="text-xs text-gray-400 font-medium">Disponibilité</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </ScrollReveal>
                         </div>
                         <ScrollReveal delay={0.2}>
