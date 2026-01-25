@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket, Check, TrendingUp, Star } from 'lucide-react';
+import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Check, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
@@ -10,6 +10,7 @@ import RevenueSimulator from './components/RevenueSimulator';
 import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
 import GuaranteeSection from './components/GuaranteeSection';
+import ProcessSection from './components/ProcessSection';
 
 // --- ANIMATION WRAPPER ---
 const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }: any) => {
@@ -626,12 +627,18 @@ function LandingPage() {
                 </div>
             </section>
 
+            {/* PROCESS SECTION (Restored) */}
+            <ProcessSection />
+
             <div id="pricing" className="relative z-10 bg-black py-24 border-t border-white/5">
                 <PricingSection />
             </div>
 
-            <OfferSection />
+            {/* Guarantee Section moved here as requested */}
             <GuaranteeSection />
+
+            {/* Offer / CTA at the end */}
+            <OfferSection />
 
             <footer className="bg-black py-12 border-t border-white/10 relative z-10">
                 <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">

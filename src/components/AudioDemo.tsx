@@ -57,25 +57,25 @@ const AudioDemo = () => {
 
                 {/* Header */}
                 <div className="p-6 border-b border-white/5 flex justify-between items-center relative z-10 glass-effect">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-                            <Mic size={18} className="text-primary" />
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+                            <Mic size={20} className="text-primary" />
                         </div>
                         <div>
-                            <div className="text-sm font-bold text-white uppercase tracking-widest">Sarah IA</div>
-                            <div className="text-[10px] text-green-500 font-mono flex items-center gap-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                            <div className="text-base font-black text-white uppercase tracking-widest">Sarah IA</div>
+                            <div className="text-xs text-green-400 font-mono flex items-center gap-2 font-bold">
+                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                                 Online • 24/7
                             </div>
                         </div>
                     </div>
-                    <div className="text-xs font-bold text-white/30 tracking-widest bg-white/5 px-3 py-1 rounded-full">v2.4.0</div>
+                    <div className="text-[10px] font-black text-white/50 tracking-widest bg-white/5 px-4 py-1.5 rounded-full border border-white/5">v2.4.0</div>
                 </div>
 
                 {/* Main Visualizer Area */}
                 <div className="flex-1 flex flex-col items-center justify-center p-8 relative z-10">
                     {/* Circle Visualizer */}
-                    <div className="relative w-48 h-48 mb-8 cursor-pointer" onClick={handlePlay}>
+                    <div className="relative w-48 h-48 mb-8 cursor-pointer group/play" onClick={handlePlay}>
                         {/* Ripples */}
                         <AnimatePresence>
                             {isPlaying && (
@@ -87,23 +87,23 @@ const AudioDemo = () => {
                         </AnimatePresence>
 
                         {/* Main Button */}
-                        <div className={`w-full h-full rounded-full bg-black border-2 flex items-center justify-center transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.5)] ${isPlaying ? 'border-primary shadow-[0_0_50px_rgba(212,175,55,0.2)]' : 'border-white/10 hover:border-white/30'}`}>
-                            {isPlaying ? <Pause size={48} className="text-primary" /> : <Play size={48} className="text-white ml-2" />}
+                        <div className={`w-full h-full rounded-full bg-black border-2 flex items-center justify-center transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.5)] ${isPlaying ? 'border-primary shadow-[0_0_50px_rgba(212,175,55,0.2)]' : 'border-white/10 group-hover/play:border-primary/50 group-hover/play:scale-105'}`}>
+                            {isPlaying ? <Pause size={48} className="text-primary" /> : <Play size={48} className="text-white ml-2 group-hover/play:text-primary transition-colors" />}
                         </div>
                     </div>
 
                     {/* Fake Number Display */}
-                    <div className="mb-6 flex flex-col items-center">
-                        <div className="text-[10px] text-gray-500 uppercase tracking-widest mb-2 font-bold">Numéro Dédié</div>
-                        <div className="text-2xl font-mono text-white tracking-widest bg-white/5 px-6 py-2 rounded-lg border border-white/5 select-all">
+                    <div className="mb-8 flex flex-col items-center">
+                        <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3 font-bold">Numéro Dédié</div>
+                        <div className="text-3xl font-mono text-white tracking-widest bg-white/5 px-8 py-3 rounded-xl border border-white/10 select-all shadow-inner font-bold">
                             01 44 23 12 99
                         </div>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full max-w-xs bg-white/10 h-1 rounded-full overflow-hidden">
+                    <div className="w-full max-w-sm bg-white/5 h-1.5 rounded-full overflow-hidden">
                         <motion.div
-                            className="h-full bg-primary"
+                            className="h-full bg-primary box-shadow-[0_0_10px_#D4AF37]"
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
                             transition={{ ease: "linear" }}
@@ -116,12 +116,12 @@ const AudioDemo = () => {
                     <button
                         onClick={handleCall}
                         disabled={isCalling}
-                        className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all ${isCalling ? 'bg-green-600 text-white' : 'bg-white text-black hover:bg-primary'}`}
+                        className={`w-full py-5 rounded-xl font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-3 transition-all transform active:scale-95 ${isCalling ? 'bg-green-600 text-white shadow-[0_0_30px_rgba(22,163,74,0.3)]' : 'bg-white text-black hover:bg-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]'}`}
                     >
                         {isCalling ? (
-                            <><Loader2 className="animate-spin" size={16} /> Connexion en cours...</>
+                            <><Loader2 className="animate-spin" size={18} /> Connexion...</>
                         ) : (
-                            <><Phone size={16} /> Simuler un appel entrant</>
+                            <><Phone size={18} /> Simuler un appel entrant</>
                         )}
                     </button>
                 </div>
@@ -130,52 +130,51 @@ const AudioDemo = () => {
             {/* Right: Context / Chat Log */}
             <div className="w-full md:w-1/2 flex flex-col gap-4">
                 {/* Status Card */}
-                <div className="bg-[#111] border border-white/10 rounded-2xl p-6 flex flex-col justify-between h-1/3 group hover:border-white/20 transition-colors">
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <div className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-1">Contexte</div>
-                            <div className="text-lg font-bold text-white">Prise de RDV Complexe</div>
-                        </div>
-                        <div className="p-2 bg-white/5 rounded-lg text-gray-400"><Volume2 size={16} /></div>
+                <div className="bg-[#111] border border-white/10 rounded-3xl p-8 flex flex-col justify-center h-1/3 group hover:border-primary/30 transition-colors relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-6 opacity-20"><Volume2 size={40} /></div>
+
+                    <div className="relative z-10">
+                        <div className="text-xs text-primary uppercase tracking-widest font-black mb-2">Contexte de la démo</div>
+                        <div className="text-2xl font-bold text-white mb-3">Prise de RDV Complexe</div>
+                        <p className="text-sm text-gray-400 leading-relaxed font-medium">
+                            Sarah gère un client qui demande un créneau "Samedi fin d'aprem" et pose des questions techniques sur la "Taille barbe".
+                        </p>
                     </div>
-                    <p className="text-xs text-gray-400 leading-relaxed">
-                        Le client demande un créneau spécifique (Samedi fin d'aprem) et pose une question sur la "Taille barbe à l'ancienne". Sarah vérifie l'agenda en temps réel.
-                    </p>
                 </div>
 
                 {/* Action Log */}
-                <div className="bg-[#111] border border-white/10 rounded-2xl p-6 flex-1 overflow-hidden relative">
-                    <div className="absolute top-0 right-0 p-4">
-                        <div className="flex items-center gap-2 text-[9px] uppercase font-bold text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">
-                            <Loader2 size={10} className="animate-spin" /> Analyse en cours
+                <div className="bg-[#111] border border-white/10 rounded-3xl p-8 flex-1 overflow-hidden relative">
+                    <div className="absolute top-6 right-6">
+                        <div className="flex items-center gap-2 text-[10px] uppercase font-black text-primary bg-primary/10 px-3 py-1.5 rounded border border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                            <Loader2 size={12} className="animate-spin" /> Live Brain
                         </div>
                     </div>
-                    <div className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-4">Journal d'actions</div>
+                    <div className="text-xs text-gray-500 uppercase tracking-widest font-black mb-6">Journal d'actions</div>
 
-                    <div className="space-y-4 relative z-10 h-full overflow-y-auto">
-                        <div className="flex gap-3 items-start opacity-50">
-                            <div className="w-1 h-full bg-gray-800 absolute left-[11px] top-2 -z-10"></div>
-                            <div className="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center shrink-0 border border-white/10 text-[10px] text-white">01</div>
+                    <div className="space-y-6 relative z-10 h-full overflow-y-auto pr-2">
+                        <div className="flex gap-4 items-start opacity-60">
+                            <div className="w-0.5 h-full bg-gray-800 absolute left-[15px] top-3 -z-10"></div>
+                            <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 border border-white/10 text-xs text-white font-bold">01</div>
                             <div>
-                                <div className="text-xs text-gray-300 font-bold">Appel Entrant</div>
-                                <div className="text-[10px] text-gray-600 font-mono mt-0.5">+33 6 12 34 ** **</div>
+                                <div className="text-sm text-gray-300 font-bold">Appel Entrant</div>
+                                <div className="text-xs text-gray-500 font-mono mt-1">+33 6 12 34 ** **</div>
                             </div>
                         </div>
-                        <div className="flex gap-3 items-start">
-                            <div className="w-1 h-full bg-primary/20 absolute left-[11px] top-2 -z-10"></div>
-                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0 text-[10px] text-black font-bold">02</div>
+                        <div className="flex gap-4 items-start">
+                            <div className="w-0.5 h-full bg-primary/20 absolute left-[15px] top-3 -z-10"></div>
+                            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-xs text-black font-black shadow-[0_0_15px_rgba(212,175,55,0.4)]">02</div>
                             <div>
-                                <div className="text-xs text-white font-bold">Détection d'intention</div>
-                                <div className="text-[10px] text-primary mt-1 bg-primary/10 px-2 py-1 rounded border border-primary/10 w-fit">Intent: BOOK_APPOINTMENT</div>
+                                <div className="text-sm text-white font-bold">Détection d'intention</div>
+                                <div className="text-[10px] text-primary mt-2 bg-primary/10 px-3 py-1.5 rounded border border-primary/20 w-fit font-mono font-bold tracking-wide">Intent: BOOK_APPOINTMENT</div>
                             </div>
                         </div>
-                        <div className="flex gap-3 items-start">
-                            <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/10 text-[10px] text-white">03</div>
-                            <div className="flex-1">
-                                <div className="text-xs text-gray-300 font-bold mb-1">Vérification Planity</div>
-                                <div className="w-full h-8 bg-black rounded border border-white/10 relative overflow-hidden">
-                                    <div className="absolute top-1/2 left-2 -translate-y-1/2 w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                                    <div className="absolute top-1/2 left-6 -translate-y-1/2 text-[9px] text-gray-500 font-mono">Checking slots... Found: 16:30</div>
+                        <div className="flex gap-4 items-start">
+                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-xs text-white font-bold opacity-50">03</div>
+                            <div className="flex-1 opacity-80">
+                                <div className="text-sm text-gray-300 font-bold mb-2">Vérification Planity</div>
+                                <div className="w-full h-10 bg-black rounded-lg border border-white/10 relative overflow-hidden flex items-center px-3 gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse box-shadow-[0_0_8px_limegreen]"></div>
+                                    <div className="text-[10px] text-gray-400 font-mono">Checking slots... Found: 16:30</div>
                                 </div>
                             </div>
                         </div>
