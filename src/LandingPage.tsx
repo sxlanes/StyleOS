@@ -314,6 +314,9 @@ function LandingPage() {
     const ecosystemRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress: ecoProgress } = useScroll({ target: ecosystemRef, offset: ["start start", "end end"] });
 
+    // Progress bar height transformation
+    const ecoProgressHeight = useTransform(ecoProgress, [0, 1], ["0%", "100%"]);
+
     // 5 Stages for Ecosystem
     // Eco 1
     const ecoOp1 = useTransform(ecoProgress, [0.05, 0.15, 0.20, 0.25], [0, 1, 1, 0]);
@@ -434,7 +437,7 @@ function LandingPage() {
                     <div className="absolute left-8 top-1/2 -translate-y-1/2 h-64 w-1 bg-white/10 rounded-full hidden md:block z-50">
                         <motion.div
                             className="w-full bg-primary rounded-full shadow-[0_0_15px_#D4AF37]"
-                            style={{ height: ecoProgress }}
+                            style={{ height: ecoProgressHeight }}
                         />
                     </div>
 
