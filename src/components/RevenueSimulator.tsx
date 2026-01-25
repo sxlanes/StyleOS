@@ -3,96 +3,84 @@ import { TrendingUp, AlertCircle, CheckCircle2, DollarSign, Calculator, Users, H
 import { motion } from 'framer-motion';
 
 const RevenueSimulator = () => {
-    const [revenue, setRevenue] = useState(15000);
-    const [commissionRate, setCommissionRate] = useState(2.5); // Standard booking fee
+    const [clients, setClients] = useState(150);
+    const averageTicket = 45;
+    const revenue = clients * averageTicket;
+    const commissionRate = 2.5;
 
     // Calculations
     const currentCommissions = Math.round(revenue * (commissionRate / 100));
-    const styleOSCost = 109; // Fixed
+    const styleOSCost = 109;
     const savings = currentCommissions - styleOSCost;
     const yearlySavings = savings * 12;
-    // Approximating reservations based on 45€ average ticket
-    const reservations = Math.round(revenue / 45);
 
     // ROI Multiplier
     const roiMultiplier = (yearlySavings / (styleOSCost * 12)).toFixed(1);
 
     return (
         <div className="w-full max-w-5xl mx-auto rounded-[3rem] border border-white/10 bg-[#0A0A0A] overflow-hidden shadow-2xl relative">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
-
-            {/* Header / Input Section */}
-            <div className="p-8 md:p-12 border-b border-white/5 relative z-10">
-                <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2 bg-primary/10 rounded-lg text-primary border border-primary/20">
-                        <Calculator className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-xl font-black text-white uppercase tracking-wider">Simulateur de Profit</h3>
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
+            
+            <div className="p-8 md:p-16 border-b border-white/5 relative z-10 text-center">
+                <div className="inline-flex items-center gap-3 mb-12 px-6 py-2 bg-primary/10 rounded-full border border-primary/20">
+                    <Users className="w-5 h-5 text-primary" />
+                    <span className="text-xs font-black text-primary uppercase tracking-[0.3em]">Ajustez votre volume</span>
                 </div>
 
-                <div className="space-y-8">
-                    {/* Revenue Slider */}
-                    <div>
-                        <div className="flex justify-between items-end mb-4">
-                            <span className="text-sm font-bold text-gray-400 uppercase tracking-wider flex items-center gap-2">
-                                Chiffre d'Affaire Réservations <HelpCircle size={14} />
-                            </span>
-                            <div className="text-right">
-                                <div className="text-3xl font-black text-white tracking-tighter mb-1">{revenue.toLocaleString()} €</div>
-                                <div className="text-xs font-bold text-primary flex items-center justify-end gap-1">
-                                    <Users size={12} /> ~{reservations} rendez-vous / mois
-                                </div>
-                            </div>
+                <div className="mb-16">
+                    <h4 className="text-gray-500 text-xs font-black uppercase tracking-[0.4em] mb-4">Clients par mois</h4>
+                    <div className="text-7xl md:text-9xl font-black text-white tracking-tighter mb-8 tabular-nums">
+                        {clients}
+                    </div>
+                    
+                    <div className="relative max-w-2xl mx-auto px-4">
+                        <style>{`
+                            input[type=range]::-webkit-slider-thumb {
+                                -webkit-appearance: none;
+                                height: 40px;
+                                width: 40px;
+                                border-radius: 50%;
+                                background: #D4AF37;
+                                cursor: pointer;
+                                border: 4px solid white;
+                                shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+                                transition: all 0.2s ease;
+                            }
+                            input[type=range]::-webkit-slider-thumb:hover {
+                                scale: 1.1;
+                                box-shadow: 0 0 40px rgba(212, 175, 55, 1);
+                            }
+                        `}</style>
+                        <input
+                            type="range"
+                            min="20"
+                            max="1000"
+                            step="10"
+                            value={clients}
+                            onChange={(e) => setClients(Number(e.target.value))}
+                            className="w-full h-2 bg-white/10 rounded-lg appearance-none cursor-pointer focus:outline-none"
+                        />
+                        <div className="flex justify-between mt-6 text-[10px] text-gray-500 font-black uppercase tracking-widest">
+                            <span>20 clients</span>
+                            <span>1000+ clients</span>
                         </div>
+                    </div>
+                </div>
 
-                        <div className="relative group">
-                            {/* Custom CSS for slider thumb visibility */}
-                            <style>{`
-                                input[type=range]::-webkit-slider-thumb {
-                                    -webkit-appearance: none;
-                                    height: 24px;
-                                    width: 24px;
-                                    border-radius: 50%;
-                                    background: #D4AF37; /* Primary Gold */
-                                    cursor: pointer;
-                                    margin-top: -10px;
-                                    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-                                    border: 2px solid white;
-                                }
-                                input[type=range]::-moz-range-thumb {
-                                    height: 24px;
-                                    width: 24px;
-                                    border-radius: 50%;
-                                    background: #D4AF37;
-                                    cursor: pointer;
-                                    border: 2px solid white;
-                                    box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-                                }
-                             `}</style>
-                            <input
-                                type="range"
-                                min="2000"
-                                max="50000"
-                                step="500"
-                                value={revenue}
-                                onChange={(e) => setRevenue(Number(e.target.value))}
-                                className="w-full h-1 bg-gray-700/50 rounded-lg appearance-none cursor-pointer focus:outline-none"
-                            />
-                            <div className="absolute -bottom-6 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity text-[10px] text-primary font-bold uppercase tracking-widest pointer-events-none">
-                                Glissez pour ajuster
-                            </div>
-                        </div>
-
-                        <div className="flex justify-between mt-2 text-[10px] text-gray-600 font-bold uppercase tracking-widest">
-                            <span>2k€</span>
-                            <span>50k€</span>
-                        </div>
+                <div className="flex flex-wrap justify-center gap-8 opacity-60">
+                    <div className="flex items-center gap-2">
+                        <DollarSign size={16} className="text-primary" />
+                        <span className="text-sm font-bold">CA Estimé: {revenue.toLocaleString()}€/mois</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Calculator size={16} className="text-primary" />
+                        <span className="text-sm font-bold">Ticket Moyen: {averageTicket}€</span>
                     </div>
                 </div>
             </div>
 
-            {/* Results / Comparison Split */}
             <div className="grid grid-cols-1 md:grid-cols-2 relative z-10">
+
 
                 {/* Left: The OLD Way */}
                 <div className="p-8 md:p-12 bg-black/40 border-r border-white/5 flex flex-col justify-between group">
