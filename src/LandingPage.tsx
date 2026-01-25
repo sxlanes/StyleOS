@@ -678,6 +678,9 @@ function LandingPage() {
             {/* PROCESS SECTION (Restored) */}
             <ProcessSection />
 
+            {/* DEMOS SECTION - Barber 253 & Carol Ann */}
+            <DemosSection />
+
             <div id="pricing" className="relative z-10 bg-black py-24 border-t border-white/5">
                 <PricingSection />
             </div>
