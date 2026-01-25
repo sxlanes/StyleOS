@@ -8,6 +8,9 @@ const ComparisonTable = () => {
     const features = [
         {
             icon: Globe,
+            iconColor: "text-blue-400",
+            iconBg: "bg-blue-500/10",
+            iconBgHover: "bg-blue-500/20",
             name: "Positionnement Menu",
             competitor: "Ligne Grise sur Annuaire",
             us: "Bastion Digital Autonome",
@@ -15,6 +18,9 @@ const ComparisonTable = () => {
         },
         {
             icon: Phone,
+            iconColor: "text-green-400",
+            iconBg: "bg-green-500/10",
+            iconBgHover: "bg-green-500/20",
             name: "Gestion Appels",
             competitor: "Standard délaissé",
             us: "Sarah IA (Réception Elite)",
@@ -22,6 +28,9 @@ const ComparisonTable = () => {
         },
         {
             icon: Database,
+            iconColor: "text-purple-400",
+            iconBg: "bg-purple-500/10",
+            iconBgHover: "bg-purple-500/20",
             name: "Propriété Données",
             competitor: "Otage du Système",
             us: "Contrôle Total & Légal",
@@ -29,6 +38,9 @@ const ComparisonTable = () => {
         },
         {
             icon: Star,
+            iconColor: "text-yellow-400",
+            iconBg: "bg-yellow-500/10",
+            iconBgHover: "bg-yellow-500/20",
             name: "Automatisation Avis",
             competitor: "Gestion Manuelle",
             us: "Propulseur de Réputation IA",
@@ -36,6 +48,9 @@ const ComparisonTable = () => {
         },
         {
             icon: Zap,
+            iconColor: "text-primary",
+            iconBg: "bg-primary/10",
+            iconBgHover: "bg-primary/20",
             name: "Perception Client",
             competitor: "Commodité de quartier",
             us: "Marque de Luxe (Tier 1)",
@@ -79,8 +94,8 @@ const ComparisonTable = () => {
                             {/* Feature Name */}
                             <div className={`p-8 md:p-10 flex items-center bg-black border border-white/10 md:border-0 md:border-b md:border-white/5 rounded-t-3xl md:rounded-none transition-all duration-300 relative
                                 ${hoveredIndex === index || expandedIndex === index ? 'md:bg-white/[0.08]' : ''}`}>
-                                <div className={`p-2 rounded-xl mr-5 transition-colors duration-300 ${hoveredIndex === index || expandedIndex === index ? 'bg-primary/20' : 'bg-white/5'}`}>
-                                    <item.icon className={`w-8 h-8 transition-colors duration-300 ${hoveredIndex === index || expandedIndex === index ? 'text-primary' : 'text-gray-500'}`} />
+                                <div className={`p-3 rounded-xl mr-5 transition-all duration-300 ${hoveredIndex === index || expandedIndex === index ? item.iconBgHover : item.iconBg} shadow-md`}>
+                                    <item.icon className={`w-7 h-7 transition-colors duration-300 ${item.iconColor}`} />
                                 </div>
                                 <div className="flex-1">
                                     <span className="font-black text-white text-xl block uppercase tracking-tight">{item.name}</span>

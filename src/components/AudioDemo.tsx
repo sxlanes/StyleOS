@@ -94,8 +94,8 @@ const AudioDemo = () => {
 
                     {/* Fake Number Display */}
                     <div className="mb-8 flex flex-col items-center">
-                        <div className="text-xs text-gray-400 uppercase tracking-[0.2em] mb-3 font-bold">Numéro Dédié</div>
-                        <div className="text-3xl font-mono text-white tracking-widest bg-white/5 px-8 py-3 rounded-xl border border-white/10 select-all shadow-inner font-bold">
+                        <div className="text-sm text-gray-300 uppercase tracking-[0.2em] mb-4 font-black">Numéro Dédié</div>
+                        <div className="text-4xl md:text-5xl font-mono text-white tracking-wider bg-gradient-to-br from-white/10 to-white/5 px-10 py-5 rounded-2xl border-2 border-white/20 select-all shadow-2xl font-black backdrop-blur-sm hover:border-primary/40 transition-colors">
                             01 44 23 12 99
                         </div>
                     </div>
@@ -142,39 +142,39 @@ const AudioDemo = () => {
                     </div>
                 </div>
 
-                {/* Action Log */}
+                {/* Action Log - IMPROVED READABILITY */}
                 <div className="bg-[#111] border border-white/10 rounded-3xl p-8 flex-1 overflow-hidden relative">
                     <div className="absolute top-6 right-6">
                         <div className="flex items-center gap-2 text-[10px] uppercase font-black text-primary bg-primary/10 px-3 py-1.5 rounded border border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
                             <Loader2 size={12} className="animate-spin" /> Live Brain
                         </div>
                     </div>
-                    <div className="text-xs text-gray-500 uppercase tracking-widest font-black mb-6">Journal d'actions</div>
+                    <div className="text-sm text-gray-400 uppercase tracking-widest font-black mb-6">Journal d'actions</div>
 
-                    <div className="space-y-6 relative z-10 h-full overflow-y-auto pr-2">
-                        <div className="flex gap-4 items-start opacity-60">
-                            <div className="w-0.5 h-full bg-gray-800 absolute left-[15px] top-3 -z-10"></div>
-                            <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 border border-white/10 text-xs text-white font-bold">01</div>
+                    <div className="space-y-8 relative z-10 h-full overflow-y-auto pr-2">
+                        <div className="flex gap-5 items-start opacity-70 hover:opacity-100 transition-opacity">
+                            <div className="w-0.5 h-full bg-gray-700 absolute left-[19px] top-3 -z-10"></div>
+                            <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center shrink-0 border-2 border-white/20 text-sm text-white font-black shadow-lg">01</div>
                             <div>
-                                <div className="text-sm text-gray-300 font-bold">Appel Entrant</div>
-                                <div className="text-xs text-gray-500 font-mono mt-1">+33 6 12 34 ** **</div>
+                                <div className="text-base text-white font-black mb-1">Appel Entrant</div>
+                                <div className="text-sm text-gray-400 font-mono mt-1">+33 6 12 34 ** **</div>
                             </div>
                         </div>
-                        <div className="flex gap-4 items-start">
-                            <div className="w-0.5 h-full bg-primary/20 absolute left-[15px] top-3 -z-10"></div>
-                            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 text-xs text-black font-black shadow-[0_0_15px_rgba(212,175,55,0.4)]">02</div>
+                        <div className="flex gap-5 items-start hover:scale-[1.02] transition-transform">
+                            <div className="w-0.5 h-full bg-primary/30 absolute left-[19px] top-3 -z-10"></div>
+                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 text-sm text-black font-black shadow-[0_0_20px_rgba(212,175,55,0.5)] border-2 border-primary">02</div>
                             <div>
-                                <div className="text-sm text-white font-bold">Détection d'intention</div>
-                                <div className="text-[10px] text-primary mt-2 bg-primary/10 px-3 py-1.5 rounded border border-primary/20 w-fit font-mono font-bold tracking-wide">Intent: BOOK_APPOINTMENT</div>
+                                <div className="text-base text-white font-black mb-2">Détection d'intention</div>
+                                <div className="text-xs text-primary mt-2 bg-primary/10 px-4 py-2 rounded-lg border border-primary/20 w-fit font-mono font-bold tracking-wide shadow-inner">Intent: BOOK_APPOINTMENT</div>
                             </div>
                         </div>
-                        <div className="flex gap-4 items-start">
-                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-xs text-white font-bold opacity-50">03</div>
-                            <div className="flex-1 opacity-80">
-                                <div className="text-sm text-gray-300 font-bold mb-2">Vérification Planity</div>
-                                <div className="w-full h-10 bg-black rounded-lg border border-white/10 relative overflow-hidden flex items-center px-3 gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse box-shadow-[0_0_8px_limegreen]"></div>
-                                    <div className="text-[10px] text-gray-400 font-mono">Checking slots... Found: 16:30</div>
+                        <div className="flex gap-5 items-start opacity-80 hover:opacity-100 transition-opacity">
+                            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 border-2 border-white/20 text-sm text-white font-black shadow-md">03</div>
+                            <div className="flex-1">
+                                <div className="text-base text-white font-black mb-3">Vérification Planity</div>
+                                <div className="w-full h-12 bg-black/80 rounded-xl border-2 border-white/20 relative overflow-hidden flex items-center px-4 gap-3 shadow-inner">
+                                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_limegreen]"></div>
+                                    <div className="text-xs text-gray-300 font-mono font-bold">Checking slots... Found: 16:30</div>
                                 </div>
                             </div>
                         </div>
