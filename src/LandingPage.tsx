@@ -215,26 +215,29 @@ const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, vi
 };
 
 /* --- STICKY FEATURE --- */
-const StickyFeatureRow = ({ title, description, icon: Icon, visual, style }: any) => {
+const StickyFeatureRow = ({ title, description, icon: Icon, visual, style, align = 'left' }: any) => {
     return (
         <motion.div style={style} className="absolute top-0 left-0 w-full h-full flex items-center justify-center perspective-[1000px]">
             {/* Background glow for smoother transition */}
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black pointer-events-none opacity-50" />
 
             <div className="w-full max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center relative z-10">
-                <div className="w-full order-2 md:order-1 relative aspect-[4/3] max-w-lg mx-auto transform hover:scale-[1.02] transition-transform duration-500">
+                {/* Visual Side */}
+                <div className={`w-full relative aspect-[4/3] max-w-lg mx-auto transform hover:scale-[1.02] transition-transform duration-500 ${align === 'right' ? 'order-2 md:order-2' : 'order-2 md:order-1'}`}>
                     {visual}
                 </div>
-                <div className="w-full order-1 md:order-2 text-left">
-                    <div className="relative inline-block mb-6">
+
+                {/* Text Side */}
+                <div className={`w-full text-left ${align === 'right' ? 'order-1 md:order-1 md:text-right' : 'order-1 md:order-2'}`}>
+                    <div className={`relative inline-block mb-6 ${align === 'right' ? 'md:flex md:flex-col md:items-end' : ''}`}>
                         <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full pointer-events-none"></div>
-                        <div className="inline-flex items-center gap-2 mb-6 relative">
+                        <div className={`inline-flex items-center gap-2 mb-6 relative ${align === 'right' ? 'md:flex-row-reverse' : ''}`}>
                             <div className="p-2 rounded-full bg-primary/10 text-primary border border-primary/20 shadow-[0_0_20px_rgba(212,175,55,0.2)]"><Icon className="w-5 h-5" /></div>
                             <span className="text-primary text-xs font-bold uppercase tracking-[0.2em]">{title}</span>
                         </div>
                     </div>
                     <motion.h3
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: align === 'right' ? -20 : 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none text-white drop-shadow-lg"
                     >
@@ -419,7 +422,7 @@ function LandingPage() {
                 <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
 
                     {/* Floating Title - Less Sticky feeling, more "Header" */}
-                    <div className="absolute top-8 left-0 w-full text-center z-50 pointer-events-none transition-opacity duration-500" style={{ opacity: 1 }}> {/* Logic could be added to fade this out if needed */}
+                    <div className="absolute top-48 left-0 w-full text-center z-50 pointer-events-none transition-opacity duration-500" style={{ opacity: 1 }}> {/* Logic could be added to fade this out if needed */}
                         <div className="relative inline-block">
                             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
                             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white relative drop-shadow-2xl">L'Écosystème <span className="text-primary">StyleOS</span></h2>
