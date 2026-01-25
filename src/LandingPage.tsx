@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket, Check, TrendingUp, Star, MessageSquare } from 'lucide-react';
+import { Bot, BarChart3, Megaphone, Server, LayoutDashboard, Calendar, Users, Wallet, Monitor, ArrowRight, Search, Zap, Rocket, Check, TrendingUp, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
@@ -298,7 +298,8 @@ const StickyFeatureRow = ({ title, description, icon: Icon, visual, style }: any
 /* --- DEMOS SECTION --- */
 const DemosSection = () => (
     <div id="demos" className="py-24 border-b border-white/5 bg-black relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gray-900 via-black to-black opacity-50" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-black via-[#0F0F0F] to-black opacity-100" />
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/5 to-transparent opacity-50 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <ScrollReveal>
                 <div className="text-center mb-16 relative">
@@ -445,7 +446,7 @@ function LandingPage() {
 
                     <FeatureRow
                         title="Sarah IA"
-                        description="Réceptionniste virtuelle active 24/7. Elle répond au téléphone, filtre les demandes, qualifie les prospects et ajoute les RDV directement dans votre agenda."
+                        description="Ne parez plus vos coupes pour répondre. Sarah gère 100% des appels, remplit votre agenda en temps réel, et vous fait gagner des dizaines d'heures. Plus de coupes, plus de revenus."
                         icon={Bot}
                         align="right"
                         visual={<ChatMock />}
@@ -457,48 +458,50 @@ function LandingPage() {
                         icon={BarChart3}
                         align="left"
                         visual={
-                            <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group hover:border-primary/30 transition-colors">
-                                <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
-                                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
-                                    <LayoutDashboard className="w-5 h-5 text-white/80" />
-                                    <Users className="w-5 h-5 text-gray-600" />
-                                    <Calendar className="w-5 h-5 text-gray-600" />
-                                    <Wallet className="w-5 h-5 text-gray-600" />
-                                </div>
-                                <div className="flex-1 p-6 flex flex-col bg-black relative">
-                                    <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
-                                        <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                            <Link to="/dashboard-demo" className="block w-full h-full">
+                                <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group hover:border-primary/30 transition-colors cursor-pointer">
+                                    <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
+                                        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
+                                        <LayoutDashboard className="w-5 h-5 text-white/80" />
+                                        <Users className="w-5 h-5 text-gray-600" />
+                                        <Calendar className="w-5 h-5 text-gray-600" />
+                                        <Wallet className="w-5 h-5 text-gray-600" />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
-                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                            <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
-                                            <div className="text-xl font-black text-white">12,450€</div>
-                                            <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                    <div className="flex-1 p-6 flex flex-col bg-black relative">
+                                        <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
+                                            <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
                                         </div>
-                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                            <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
-                                            <div className="text-xl font-black text-white">65€</div>
-                                            <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                        <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
+                                            <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
+                                                <div className="text-xl font-black text-white">12,450€</div>
+                                                <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                            </div>
+                                            <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
+                                                <div className="text-xl font-black text-white">65€</div>
+                                                <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                            </div>
+                                        </div>
+                                        <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
+                                        <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
+                                            {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    initial={{ height: 0 }}
+                                                    whileInView={{ height: `${h}%` }}
+                                                    transition={{ duration: 0.5, delay: i * 0.05 }}
+                                                    className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
+                                                />
+                                            ))}
+                                        </div>
+                                        {/* Interaction Hint */}
+                                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
+                                            <div className="text-[10px] text-primary font-bold uppercase tracking-widest border border-primary/50 px-4 py-2 rounded-full">Explorez les Données</div>
                                         </div>
                                     </div>
-                                    <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
-                                    <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
-                                        {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
-                                            <motion.div
-                                                key={i}
-                                                initial={{ height: 0 }}
-                                                whileInView={{ height: `${h}%` }}
-                                                transition={{ duration: 0.5, delay: i * 0.05 }}
-                                                className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
-                                            />
-                                        ))}
-                                    </div>
-                                    {/* Interaction Hint */}
-                                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
-                                        <div className="text-[10px] text-primary font-bold uppercase tracking-widest border border-primary/50 px-4 py-2 rounded-full">Explorez les Données</div>
-                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         }
                         action={<Link to="/dashboard-demo" className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Explorer le Dashboard <ArrowRight className="w-3 h-3" /></Link>}
                     />
@@ -509,7 +512,7 @@ function LandingPage() {
                         icon={Megaphone}
                         align="right"
                         visual={<SocialMock />}
-                        action={<Link to="/signup" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>}
+                        action={<Link to="/marketing-demo" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>}
                     />
 
                     <FeatureRow
@@ -596,7 +599,7 @@ function LandingPage() {
 
             <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5">
                 <ScrollReveal>
-                    <div className="text-center mb-16 relative">
+                    <div className="text-center mb-32 relative">
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary/20 blur-[60px] w-1/3 h-full rounded-full pointer-events-none"></div>
                         <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] relative z-10">Intelligence</div>
                         <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white relative z-10">
@@ -604,11 +607,13 @@ function LandingPage() {
                         </h2>
                         <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed relative z-10">Écoutez la différence dès maintenant.</p>
                     </div>
-                    <div className="max-w-6xl mx-auto"><AudioDemo /></div>
+                </ScrollReveal>
+                <ScrollReveal delay={0.2}>
+                    <div className="max-w-7xl mx-auto px-6"><AudioDemo /></div>
                 </ScrollReveal>
             </div>
 
-            <div className="relative z-10 bg-black border-t border-white/5 py-24">
+            <div className="relative z-10 bg-black border-t border-white/5 py-48">
                 <ScrollReveal>
                     <div className="max-w-7xl mx-auto px-6">
                         <div className="text-center mb-24 relative">

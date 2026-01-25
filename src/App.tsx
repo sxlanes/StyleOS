@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import DashboardDemoPage from './pages/DashboardDemoPage';
+import MarketingDashboardDemoPage from './pages/MarketingDashboardDemoPage';
 import DemosPage from './pages/DemosPage';
 import PlanDetails from './pages/PlanDetails';
 import LegalMentions from './pages/LegalMentions';
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/demo/carol-ann" element={<DemoCarolAnn />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/dashboard-demo" element={<DashboardDemoPage />} />
+                <Route path="/marketing-demo" element={<MarketingDashboardDemoPage />} />
                 <Route path="/plan/:planId" element={<PlanDetails />} />
 
                 {/* Legal Routes */}
