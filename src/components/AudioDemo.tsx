@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Phone, Loader2, Volume2, Mic } from 'lucide-react';
+import { Play, Pause, Phone, Volume2, Calendar, MessageSquare, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AudioDemo = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [isCalling, setIsCalling] = useState(false);
+    const [showWhatsApp, setShowWhatsApp] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     // Using a reliable sample URL for a professional female voice
@@ -39,148 +39,172 @@ const AudioDemo = () => {
         setIsPlaying(!isPlaying);
     };
 
-    const handleCall = () => {
-        setIsCalling(true);
-        // Simulate call hook
-        setTimeout(() => {
-            if (!isPlaying) handlePlay();
-            setIsCalling(false);
-        }, 1500);
-    };
-
     return (
-        <div className="w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-stretch h-[600px] md:h-[500px]">
-            {/* Left: Interactive Player / Phone */}
-            <div className="w-full md:w-1/2 bg-[#111] rounded-3xl border border-white/10 relative overflow-hidden flex flex-col shadow-2xl group">
-                {/* Background Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-[80px] group-hover:bg-primary/10 transition-colors duration-1000"></div>
+        <div className="w-full max-w-7xl mx-auto">
+            {/* Main Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-                {/* Header */}
-                <div className="p-6 border-b border-white/5 flex justify-between items-center relative z-10 glass-effect">
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-                            <Mic size={20} className="text-primary" />
-                        </div>
-                        <div>
-                            <div className="text-base font-black text-white uppercase tracking-widest">Sarah IA</div>
-                            <div className="text-xs text-green-400 font-mono flex items-center gap-2 font-bold">
-                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                Online • 24/7
-                            </div>
-                        </div>
-                    </div>
-                    <div className="text-[10px] font-black text-white/50 tracking-widest bg-white/5 px-4 py-1.5 rounded-full border border-white/5">v2.4.0</div>
-                </div>
-
-                {/* Main Visualizer Area */}
-                <div className="flex-1 flex flex-col items-center justify-center p-8 relative z-10">
-                    {/* Circle Visualizer */}
-                    <div className="relative w-48 h-48 mb-8 cursor-pointer group/play" onClick={handlePlay}>
-                        {/* Ripples */}
-                        <AnimatePresence>
-                            {isPlaying && (
-                                <>
-                                    <motion.div initial={{ scale: 1, opacity: 0.5 }} animate={{ scale: 1.5, opacity: 0 }} transition={{ repeat: Infinity, duration: 2, ease: "easeOut" }} className="absolute inset-0 rounded-full border border-primary/30" />
-                                    <motion.div initial={{ scale: 1, opacity: 0.3 }} animate={{ scale: 1.8, opacity: 0 }} transition={{ repeat: Infinity, duration: 2, ease: "easeOut", delay: 0.5 }} className="absolute inset-0 rounded-full border border-primary/20" />
-                                </>
-                            )}
-                        </AnimatePresence>
-
-                        {/* Main Button */}
-                        <div className={`w-full h-full rounded-full bg-black border-2 flex items-center justify-center transition-all duration-300 shadow-[0_0_30px_rgba(0,0,0,0.5)] ${isPlaying ? 'border-primary shadow-[0_0_50px_rgba(212,175,55,0.2)]' : 'border-white/10 group-hover/play:border-primary/50 group-hover/play:scale-105'}`}>
-                            {isPlaying ? <Pause size={48} className="text-primary" /> : <Play size={48} className="text-white ml-2 group-hover/play:text-primary transition-colors" />}
-                        </div>
-                    </div>
-
-                    {/* Fake Number Display */}
-                    <div className="mb-8 flex flex-col items-center">
-                        <div className="text-sm text-gray-300 uppercase tracking-[0.2em] mb-4 font-black">Numéro Dédié</div>
-                        <div className="text-4xl md:text-5xl font-mono text-white tracking-wider bg-gradient-to-br from-white/10 to-white/5 px-10 py-5 rounded-2xl border-2 border-white/20 select-all shadow-2xl font-black backdrop-blur-sm hover:border-primary/40 transition-colors">
-                            01 44 23 12 99
-                        </div>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="w-full max-w-sm bg-white/5 h-1.5 rounded-full overflow-hidden">
-                        <motion.div
-                            className="h-full bg-primary box-shadow-[0_0_10px_#D4AF37]"
-                            initial={{ width: 0 }}
-                            animate={{ width: `${progress}%` }}
-                            transition={{ ease: "linear" }}
-                        />
-                    </div>
-                </div>
-
-                {/* Footer Actions */}
-                <div className="p-6 border-t border-white/5 bg-black/50 glass-effect relative z-10">
-                    <button
-                        onClick={handleCall}
-                        disabled={isCalling}
-                        className={`w-full py-5 rounded-xl font-black uppercase tracking-[0.2em] text-sm flex items-center justify-center gap-3 transition-all transform active:scale-95 ${isCalling ? 'bg-green-600 text-white shadow-[0_0_30px_rgba(22,163,74,0.3)]' : 'bg-white text-black hover:bg-primary hover:shadow-[0_0_30px_rgba(212,175,55,0.4)]'}`}
-                    >
-                        {isCalling ? (
-                            <><Loader2 className="animate-spin" size={18} /> Connexion...</>
-                        ) : (
-                            <><Phone size={18} /> Simuler un appel entrant</>
-                        )}
-                    </button>
-                </div>
-            </div>
-
-            {/* Right: Context / Chat Log */}
-            <div className="w-full md:w-1/2 flex flex-col gap-4">
-                {/* Status Card */}
-                <div className="bg-[#111] border border-white/10 rounded-3xl p-8 flex flex-col justify-center h-1/3 group hover:border-primary/30 transition-colors relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-6 opacity-20"><Volume2 size={40} /></div>
+                {/* Col 1: Audio Player */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-primary/30 transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
 
                     <div className="relative z-10">
-                        <div className="text-xs text-primary uppercase tracking-widest font-black mb-2">Contexte de la démo</div>
-                        <div className="text-2xl font-bold text-white mb-3">Prise de RDV Complexe</div>
-                        <p className="text-sm text-gray-400 leading-relaxed font-medium">
-                            Sarah gère un client qui demande un créneau "Samedi fin d'aprem" et pose des questions techniques sur la "Taille barbe".
-                        </p>
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+                                <Volume2 size={18} className="text-primary" />
+                            </div>
+                            <div>
+                                <div className="text-sm font-bold text-white">Écouter Sarah</div>
+                                <div className="text-xs text-gray-400">Démonstration vocale</div>
+                            </div>
+                        </div>
+
+                        {/* Play Button */}
+                        <div className="flex justify-center mb-6">
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={handlePlay}
+                                className={`w-20 h-20 rounded-full flex items-center justify-center transition-all ${isPlaying ? 'bg-primary shadow-[0_0_30px_rgba(212,175,55,0.4)]' : 'bg-white/10 hover:bg-white/20'} border-2 ${isPlaying ? 'border-primary' : 'border-white/20'}`}
+                            >
+                                {isPlaying ? <Pause size={32} className="text-black" /> : <Play size={32} className="text-white ml-1" />}
+                            </motion.button>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                            <motion.div
+                                className="h-full bg-primary"
+                                initial={{ width: 0 }}
+                                animate={{ width: `${progress}%` }}
+                                transition={{ ease: "linear" }}
+                            />
+                        </div>
                     </div>
                 </div>
 
-                {/* Action Log - IMPROVED READABILITY */}
-                <div className="bg-[#111] border border-white/10 rounded-3xl p-8 flex-1 overflow-hidden relative">
-                    <div className="absolute top-6 right-6">
-                        <div className="flex items-center gap-2 text-[10px] uppercase font-black text-primary bg-primary/10 px-3 py-1.5 rounded border border-primary/20 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
-                            <Loader2 size={12} className="animate-spin" /> Live Brain
+                {/* Col 2: Phone Number */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-green-500/30 transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-full blur-3xl group-hover:bg-green-500/10 transition-colors"></div>
+
+                    <div className="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20">
+                                    <Phone size={18} className="text-green-400" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">Appeler Sarah</div>
+                                    <div className="text-xs text-gray-400">Numéro de démonstration</div>
+                                </div>
+                            </div>
+
+                            <a
+                                href="tel:+33144231299"
+                                className="block text-center text-2xl md:text-3xl font-mono font-black text-white bg-white/5 px-6 py-4 rounded-xl border border-white/10 hover:border-green-500/40 hover:bg-white/10 transition-all mb-4"
+                            >
+                                +33 1 44 23 12 99
+                            </a>
+                        </div>
+
+                        <div className="text-xs text-gray-500 text-center">
+                            Testez Sarah en direct 24/7
                         </div>
                     </div>
-                    <div className="text-sm text-gray-400 uppercase tracking-widest font-black mb-6">Journal d'actions</div>
+                </div>
 
-                    <div className="space-y-8 relative z-10 h-full overflow-y-auto pr-2">
-                        <div className="flex gap-5 items-start opacity-70 hover:opacity-100 transition-opacity">
-                            <div className="w-0.5 h-full bg-gray-700 absolute left-[19px] top-3 -z-10"></div>
-                            <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center shrink-0 border-2 border-white/20 text-sm text-white font-black shadow-lg">01</div>
-                            <div>
-                                <div className="text-base text-white font-black mb-1">Appel Entrant</div>
-                                <div className="text-sm text-gray-400 font-mono mt-1">+33 6 12 34 ** **</div>
-                            </div>
-                        </div>
-                        <div className="flex gap-5 items-start hover:scale-[1.02] transition-transform">
-                            <div className="w-0.5 h-full bg-primary/30 absolute left-[19px] top-3 -z-10"></div>
-                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 text-sm text-black font-black shadow-[0_0_20px_rgba(212,175,55,0.5)] border-2 border-primary">02</div>
-                            <div>
-                                <div className="text-base text-white font-black mb-2">Détection d'intention</div>
-                                <div className="text-xs text-primary mt-2 bg-primary/10 px-4 py-2 rounded-lg border border-primary/20 w-fit font-mono font-bold tracking-wide shadow-inner">Intent: BOOK_APPOINTMENT</div>
-                            </div>
-                        </div>
-                        <div className="flex gap-5 items-start opacity-80 hover:opacity-100 transition-opacity">
-                            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 border-2 border-white/20 text-sm text-white font-black shadow-md">03</div>
-                            <div className="flex-1">
-                                <div className="text-base text-white font-black mb-3">Vérification Planity</div>
-                                <div className="w-full h-12 bg-black/80 rounded-xl border-2 border-white/20 relative overflow-hidden flex items-center px-4 gap-3 shadow-inner">
-                                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_limegreen]"></div>
-                                    <div className="text-xs text-gray-300 font-mono font-bold">Checking slots... Found: 16:30</div>
+                {/* Col 3: WhatsApp */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-blue-500/30 transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
+
+                    <div className="relative z-10 flex flex-col justify-between h-full">
+                        <div>
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
+                                    <MessageSquare size={18} className="text-blue-400" />
+                                </div>
+                                <div>
+                                    <div className="text-sm font-bold text-white">Conversation</div>
+                                    <div className="text-xs text-gray-400">Exemple WhatsApp</div>
                                 </div>
                             </div>
                         </div>
+
+                        <button
+                            onClick={() => setShowWhatsApp(!showWhatsApp)}
+                            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-500 hover:to-blue-400 transition-all flex items-center justify-center gap-2 shadow-lg"
+                        >
+                            Voir la conversation <ArrowRight size={16} />
+                        </button>
                     </div>
                 </div>
             </div>
+
+            {/* Calendar Control Explanation */}
+            <div className="mt-6 bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-primary/30 transition-all">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
+
+                <div className="relative z-10 flex flex-col md:flex-row items-start gap-8">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
+                        <Calendar size={24} className="text-primary" />
+                    </div>
+
+                    <div className="flex-1">
+                        <h3 className="text-xl font-black text-white uppercase mb-3">Contrôle Total du Calendrier</h3>
+                        <p className="text-sm text-gray-400 leading-relaxed">
+                            Sarah IA est directement connectée à votre agenda Planity. Elle vérifie en temps réel les disponibilités,
+                            réserve automatiquement les créneaux et envoie les confirmations par SMS. Pas d'intervention humaine,
+                            pas d'erreurs de double réservation. <span className="text-white font-bold">100% automatisé, 100% fiable.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* WhatsApp Modal */}
+            <AnimatePresence>
+                {showWhatsApp && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-xl flex items-center justify-center p-6"
+                        onClick={() => setShowWhatsApp(false)}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.9 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0.9 }}
+                            className="w-full max-w-md bg-[#0b141a] rounded-3xl overflow-hidden shadow-2xl relative border border-white/10"
+                            onClick={e => e.stopPropagation()}
+                        >
+                            {/* WhatsApp Header */}
+                            <div className="h-16 bg-[#202c33] flex items-center px-6 gap-4 border-b border-white/5">
+                                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black font-bold">S</div>
+                                <div className="flex-1">
+                                    <div className="text-sm font-bold text-white">Sarah IA</div>
+                                    <div className="text-xs text-green-400">En ligne • StyleOS</div>
+                                </div>
+                                <button onClick={() => setShowWhatsApp(false)} className="text-white/70 hover:text-white">✕</button>
+                            </div>
+
+                            {/* Messages */}
+                            <div className="p-6 h-[500px] overflow-y-auto bg-[url('https://camo.githubusercontent.com/854a93c27d64274c4f8c5a0b6ec34ce1bed9dd84/68747470733a2f2f7765622e77686174736170702e636f6d2f696d672f62672d636861742d74696c652d6461726b5f61346265353132653731393562366237333364393131303234303838396634342e706e67')] bg-repeat space-y-3">
+                                <div className="flex justify-start"><div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] text-sm">Bonjour, vous avez de la place samedi ?</div></div>
+                                <div className="flex justify-end"><div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] text-sm">Bonjour ! Oui, j'ai plusieurs créneaux disponibles samedi. Vous préférez le matin ou l'après-midi ?</div></div>
+                                <div className="flex justify-start"><div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] text-sm">Plutôt fin d'après-midi si possible</div></div>
+                                <div className="flex justify-end"><div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] text-sm">Parfait ! J'ai 17h00 ou 18h30 de disponible. Lequel vous convient ?</div></div>
+                                <div className="flex justify-start"><div className="bg-[#202c33] text-white p-3 rounded-lg rounded-tl-none max-w-[80%] text-sm">18h30 c'est bon. Avec Mathieu si possible</div></div>
+                                <div className="flex justify-end"><div className="bg-[#005c4b] text-white p-3 rounded-lg rounded-tr-none max-w-[80%] text-sm">Excellent ! Je vous confirme : Samedi 18h30 avec Mathieu pour une coupe. Vous recevrez un SMS de rappel 24h avant 📅</div></div>
+                                <div className="flex justify-center">
+                                    <div className="text-xs text-gray-400 bg-black/40 py-2 px-4 rounded-full border border-white/5">
+                                        ✓ RDV ajouté automatiquement au calendrier Planity
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
