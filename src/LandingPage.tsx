@@ -392,12 +392,12 @@ function LandingPage() {
             <nav className={`fixed w-full top-0 z-[100] transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} bg-black/95 backdrop-blur-md py-4 border-b border-white/5`}>
                 <div className="max-w-7xl mx-auto px-6 flex items-center justify-between relative">
                     <div className="text-2xl font-bold tracking-tighter text-white drop-shadow-md cursor-pointer" onClick={() => window.scrollTo(0, 0)}>StyleOS<span className="text-primary">.</span></div>
-                    <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 gap-10 text-xs font-black uppercase tracking-[0.2em] text-gray-400">
+                    <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-xs font-black uppercase tracking-[0.2em] text-gray-400">
                         <button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button>
-                        <button onClick={() => scrollToSection('demos')} className="hover:text-primary transition-colors text-white font-bold">Nos Démos</button>
                         <button onClick={() => scrollToSection('comparison')} className="hover:text-white transition-colors">Comparatif</button>
                         <button onClick={() => scrollToSection('process')} className="hover:text-white transition-colors">Process</button>
                         <button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button>
+                        <button onClick={() => scrollToSection('demos')} className="px-4 py-2 rounded-full border border-primary/30 text-primary hover:bg-primary hover:text-black transition-all shadow-[0_0_10px_rgba(212,175,55,0.1)]">Nos Démos</button>
                     </div>
                     <div className="hidden md:flex items-center gap-4 shrink-0">
                         <Link to="/login" className="text-white hover:text-primary transition-colors text-xs font-bold uppercase tracking-widest hidden lg:block">Connexion</Link>
@@ -442,23 +442,129 @@ function LandingPage() {
                         />
                     </div>
                     <FeatureRow title="Sarah IA" description="Réceptionniste virtuelle active 24/7. Elle répond au téléphone, filtre les demandes, qualifie les prospects et ajoute les RDV directement dans votre agenda." icon={Bot} align="right" visual={<ChatMock />} />
-                    <FeatureRow title="Pilotage Financier" description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs." icon={BarChart3} align="left" visual={<DashboardMock />} />
+                    <FeatureRow
+                        title="Pilotage Financier"
+                        description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs."
+                        icon={BarChart3}
+                        align="left"
+                        visual={
+                            <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group hover:border-primary/30 transition-colors">
+                                <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
+                                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
+                                    <LayoutDashboard className="w-5 h-5 text-white/80" />
+                                    <Users className="w-5 h-5 text-gray-600" />
+                                    <Calendar className="w-5 h-5 text-gray-600" />
+                                    <Wallet className="w-5 h-5 text-gray-600" />
+                                </div>
+                                <div className="flex-1 p-6 flex flex-col bg-black relative">
+                                    <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
+                                        <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
+                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                            <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
+                                            <div className="text-xl font-black text-white">12,450€</div>
+                                            <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                        </div>
+                                        <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                            <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
+                                            <div className="text-xl font-black text-white">65€</div>
+                                            <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                        </div>
+                                    </div>
+                                    <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
+                                    <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
+                                        {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ height: 0 }}
+                                                whileInView={{ height: `${h}%` }}
+                                                transition={{ duration: 0.5, delay: i * 0.05 }}
+                                                className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
+                                            />
+                                        ))}
+                                    </div>
+                                    {/* Interaction Hint */}
+                                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
+                                        <div className="text-[10px] text-primary font-bold uppercase tracking-widest border border-primary/50 px-4 py-2 rounded-full">Explorez les Données</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        action={<Link to="/" className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Explorer le Dashboard <ArrowRight className="w-3 h-3" /></Link>}
+                    />
                     <FeatureRow title="Marketing & Visibilité" description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré." icon={Megaphone} align="right" visual={<SocialMock />} action={<Link to="/signup" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>} />
                 </div>
             </div>
 
-            <DemosSection />
-
-            <div className="relative z-10 bg-black pt-12"><ScrollReveal><div className="max-w-7xl mx-auto px-6"><FeatureRow title="Migration Sans Friction" description="Nous récupérons l'intégralité de votre historique Planity ou Booksy. Fichiers clients, RDV à venir. Transition invisible en 24h." icon={Server} align="left" visual={<IntegrationMock />} /></div></ScrollReveal></div>
+            <div className="relative z-10 bg-black pt-12">
+                <ScrollReveal>
+                    <div className="max-w-7xl mx-auto px-6">
+                        <FeatureRow
+                            title="Migration Sans Friction"
+                            description="Nous récupérons l'intégralité de votre historique Planity ou Booksy. Fichiers clients, RDV à venir. Transition invisible en 24h."
+                            icon={Server}
+                            align="left"
+                            visual={
+                                <div className="w-full h-full bg-[#111] rounded-xl border border-white/10 flex items-center justify-center relative overflow-hidden group hover:border-primary/30 transition-all">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 to-transparent opacity-50" />
+                                    {/* Moving Particles */}
+                                    {[...Array(10)].map((_, i) => (
+                                        <motion.div
+                                            key={i}
+                                            className="absolute w-1 h-1 bg-primary rounded-full"
+                                            initial={{ x: -100, y: Math.random() * 200, opacity: 0 }}
+                                            animate={{ x: 400, opacity: [0, 1, 0] }}
+                                            transition={{ duration: 2 + Math.random(), repeat: Infinity, delay: Math.random() * 2 }}
+                                        />
+                                    ))}
+                                    <div className="relative z-10 text-center w-full px-12">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex flex-col items-center gap-2">
+                                                <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 grayscale opacity-50"><Server size={24} /></div>
+                                                <div className="text-[10px] text-gray-600 font-mono">Legacy</div>
+                                            </div>
+                                            <div className="flex-1 px-4 relative">
+                                                <div className="h-[1px] w-full bg-white/10 relative overflow-hidden">
+                                                    <div className="absolute inset-0 bg-primary w-1/2 animate-[scan_2s_infinite]" />
+                                                </div>
+                                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black px-2 text-[8px] text-primary uppercase tracking-widest animate-pulse">
+                                                    Transfert en cours
+                                                </div>
+                                            </div>
+                                            <div className="flex flex-col items-center gap-2">
+                                                <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center border border-primary/40 text-primary shadow-[0_0_20px_rgba(212,175,55,0.2)] scale-110"><Bot size={32} /></div>
+                                                <div className="text-[10px] text-white font-bold font-mono">StyleOS</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        />
+                    </div>
+                </ScrollReveal>
+            </div>
 
             <div id="comparison" className="relative z-10 bg-black pb-24 border-t border-white/5 pt-32"><div className="max-w-7xl mx-auto px-6"><ScrollReveal><div className="text-center mb-20 relative inline-block w-full"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div><h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3></div></ScrollReveal><ScrollReveal delay={0.2}><ComparisonTable /></ScrollReveal></div></div>
 
             <section className="relative z-10 bg-black py-24 md:py-32 border-t border-white/5"><div className="max-w-7xl mx-auto px-6"><ScrollReveal><div className="text-center mb-16 relative"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[100px] w-1/2 h-full rounded-full pointer-events-none"></div><div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] relative z-10">Performance</div><h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white relative z-10">Votre <span className="text-primary italic">Machine à Cash</span></h2><p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed relative z-10">Optimisation mathématique de chaque siège.</p></div></ScrollReveal><ScrollReveal delay={0.2}><RevenueSimulator /></ScrollReveal></div></section>
 
-            <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5"><ScrollReveal><div className="text-center mb-12 relative"><div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary/20 blur-[60px] w-1/3 h-full rounded-full pointer-events-none"></div><h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter text-white relative">Découvrez <span className="text-primary">Sarah IA</span></h3></div><div className="max-w-6xl mx-auto"><AudioDemo /></div></ScrollReveal></div>
+            <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5">
+                <ScrollReveal>
+                    <div className="text-center mb-16 relative">
+                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary/20 blur-[60px] w-1/3 h-full rounded-full pointer-events-none"></div>
+                        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] relative z-10">Intelligence</div>
+                        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white relative z-10">
+                            Découvrez <span className="text-primary italic">Sarah IA</span>
+                        </h2>
+                        <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed relative z-10">Écoutez la différence dès maintenant.</p>
+                    </div>
+                    <div className="max-w-6xl mx-auto"><AudioDemo /></div>
+                </ScrollReveal>
+            </div>
 
             <div className="relative z-10 bg-black border-t border-white/5 py-24"><ScrollReveal><div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-12"><h2 className="text-3xl font-black uppercase text-white">Nos <span className="text-primary">Garanties</span></h2></div>
+                <div className="text-center mb-12"><h2 className="text-4xl md:text-6xl font-black uppercase text-white mb-6">Nos <span className="text-primary italic">Garanties</span></h2></div>
                 <GuaranteeSection />
             </div></ScrollReveal></div>
 
@@ -470,20 +576,44 @@ function LandingPage() {
                         </div>
 
                         {/* Progress Line */}
-                        <div className="absolute left-4 md:left-12 top-0 bottom-0 w-[2px] bg-white/5 hidden md:block">
+                        <div className="absolute left-4 md:left-0 top-0 bottom-0 w-[2px] bg-white/5 hidden md:block">
                             <motion.div style={{ height: lineProgress }} className="w-full bg-primary shadow-[0_0_10px_#D4AF37] relative">
                                 <div className="absolute bottom-0 -left-1 w-2.5 h-2.5 bg-primary rounded-full shadow-[0_0_15px_#D4AF37]" />
                             </motion.div>
                         </div>
 
                         <StickyFeatureRow style={{ opacity: op1, scale: scale1, y: y1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} visual={<ProcessVisual1 />} />
-                        <StickyFeatureRow style={{ opacity: op2, scale: scale2, y: y2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap} visual={<ProcessVisual2 />} />
+                        <StickyFeatureRow style={{ opacity: op2, scale: scale2, y: y2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap}
+                            visual={
+                                <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex items-center justify-center shadow-2xl group">
+                                    <div className="absolute inset-0 bg-primary/5 animate-pulse" />
+                                    {/* Animated Circles */}
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-40 h-40 border border-primary/20 rounded-full animate-[ping_3s_linear_infinite]" />
+                                        <div className="w-60 h-60 border border-primary/10 rounded-full animate-[ping_3s_linear_infinite] delay-1000" />
+                                    </div>
+                                    <div className="text-center relative z-10 scale-110">
+                                        <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary/40 text-primary shadow-[0_0_40px_rgba(212,175,55,0.2)] relative">
+                                            <Bot size={48} className="animate-bounce" />
+                                            <div className="absolute top-0 right-0 w-6 h-6 bg-green-500 rounded-full border-2 border-black flex items-center justify-center z-20">
+                                                <Check size={12} className="text-black" />
+                                            </div>
+                                        </div>
+                                        <div className="text-base font-black uppercase tracking-widest text-white mb-2">Sarah Is Online</div>
+                                        <div className="text-[10px] text-gray-400 font-mono flex items-center justify-center gap-2 bg-black/50 px-3 py-1 rounded-full border border-white/5">
+                                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Listening to calls...
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        />
                         <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<ProcessVisual3 />} />
                     </div>
                 </div>
             </div>
 
-            <div id="pricing" className="relative z-10 bg-black pb-32 border-t border-white/5 pt-24"><ScrollReveal><PricingSection /></ScrollReveal></div>
+            <DemosSection />
+            <div id="pricing" className="relative z-10 bg-black pb-32 pt-24"><ScrollReveal><PricingSection /></ScrollReveal></div>
             <ScrollReveal><div className="relative inline-block w-full text-center"><div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div><OfferSection /></div></ScrollReveal>
 
             <footer className="bg-black py-12 border-t border-white/5 text-center md:text-left">
