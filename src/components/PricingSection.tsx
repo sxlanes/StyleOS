@@ -20,8 +20,8 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateXValue = ((y - centerY) / centerY) * -15; // Increased from -10
-        const rotateYValue = ((x - centerX) / centerX) * 15; // Increased from 10
+        const rotateXValue = ((y - centerY) / centerY) * -8; // Reduced from -15 for subtler effect
+        const rotateYValue = ((x - centerX) / centerX) * 8; // Reduced from 15 for subtler effect
 
         setRotateX(rotateXValue);
         setRotateY(rotateYValue);
