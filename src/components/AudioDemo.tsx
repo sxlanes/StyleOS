@@ -8,7 +8,6 @@ const AudioDemo = () => {
     const [showWhatsApp, setShowWhatsApp] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    // Using a reliable sample URL for a professional female voice
     const AUDIO_URL = "https://cdn.pixabay.com/audio/2022/03/24/audio_c8c8a7346b.mp3";
 
     useEffect(() => {
@@ -41,40 +40,35 @@ const AudioDemo = () => {
 
     return (
         <div className="w-full max-w-7xl mx-auto">
-            {/* Main Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Main Grid - 2 rows x 2 cols */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
-                {/* Col 1: Audio Player */}
-                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-primary/30 transition-all">
+                {/* Row 1, Col 1: Audio Player */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border border-white/10 p-10 relative overflow-hidden group hover:border-primary/30 transition-all">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors"></div>
 
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-                                <Volume2 size={18} className="text-primary" />
-                            </div>
-                            <div>
-                                <div className="text-sm font-bold text-white">Écouter Sarah</div>
-                                <div className="text-xs text-gray-400">Démonstration vocale</div>
-                            </div>
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-6">
+                            <Volume2 size={28} className="text-primary" />
                         </div>
+
+                        <div className="text-sm font-bold text-white mb-2">Écouter Sarah</div>
+                        <div className="text-xs text-gray-500 mb-8">Démonstration vocale</div>
 
                         {/* Play Button */}
-                        <div className="flex justify-center mb-6">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={handlePlay}
-                                className={`w-20 h-20 rounded-full flex items-center justify-center transition-all ${isPlaying ? 'bg-primary shadow-[0_0_30px_rgba(212,175,55,0.4)]' : 'bg-white/10 hover:bg-white/20'} border-2 ${isPlaying ? 'border-primary' : 'border-white/20'}`}
-                            >
-                                {isPlaying ? <Pause size={32} className="text-black" /> : <Play size={32} className="text-white ml-1" />}
-                            </motion.button>
-                        </div>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={handlePlay}
+                            className={`w-24 h-24 rounded-full flex items-center justify-center transition-all mb-6 ${isPlaying ? 'bg-primary shadow-[0_0_30px_rgba(212,175,55,0.4)]' : 'bg-white/10 hover:bg-white/20'} border-2 ${isPlaying ? 'border-primary' : 'border-white/20'}`}
+                        >
+                            {isPlaying ? <Pause size={40} className="text-black" /> : <Play size={40} className="text-white ml-1" />}
+                        </motion.button>
 
                         {/* Progress Bar */}
-                        <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+                        <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden">
                             <motion.div
-                                className="h-full bg-primary"
+                                className="h-full bg-primary rounded-full"
                                 initial={{ width: 0 }}
                                 animate={{ width: `${progress}%` }}
                                 transition={{ ease: "linear" }}
@@ -83,79 +77,76 @@ const AudioDemo = () => {
                     </div>
                 </div>
 
-                {/* Col 2: Phone Number */}
-                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-green-500/30 transition-all">
+                {/* Row 1, Col 2: Phone Number */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border border-white/10 p-10 relative overflow-hidden group hover:border-green-500/30 transition-all">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-full blur-3xl group-hover:bg-green-500/10 transition-colors"></div>
 
-                    <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center h-full justify-between">
                         <div>
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/20">
-                                    <Phone size={18} className="text-green-400" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-bold text-white">Appeler Sarah</div>
-                                    <div className="text-xs text-gray-400">Numéro de démonstration</div>
-                                </div>
+                            <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center border border-green-500/20 mb-6 mx-auto">
+                                <Phone size={28} className="text-green-400" />
                             </div>
+
+                            <div className="text-sm font-bold text-white mb-2">Appeler Sarah</div>
+                            <div className="text-xs text-gray-500 mb-6">Numéro de démonstration</div>
 
                             <a
                                 href="tel:+33144231299"
-                                className="block text-center text-2xl md:text-3xl font-mono font-black text-white bg-white/5 px-6 py-4 rounded-xl border border-white/10 hover:border-green-500/40 hover:bg-white/10 transition-all mb-4"
+                                className="block text-center text-3xl font-mono font-black text-white bg-white/5 px-6 py-5 rounded-2xl border border-white/10 hover:border-green-500/40 hover:bg-white/10 transition-all"
                             >
                                 +33 1 44 23 12 99
                             </a>
                         </div>
 
-                        <div className="text-xs text-gray-500 text-center">
+                        <div className="text-xs text-gray-500 text-center mt-4">
                             Testez Sarah en direct 24/7
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Col 3: WhatsApp */}
-                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-blue-500/30 transition-all">
+            {/* Row 2 - Full Width Items */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* WhatsApp */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border border-white/10 p-10 relative overflow-hidden group hover:border-blue-500/30 transition-all">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
 
-                    <div className="relative z-10 flex flex-col justify-between h-full">
+                    <div className="relative z-10 flex flex-col items-center text-center h-full justify-between">
                         <div>
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
-                                    <MessageSquare size={18} className="text-blue-400" />
-                                </div>
-                                <div>
-                                    <div className="text-sm font-bold text-white">Conversation</div>
-                                    <div className="text-xs text-gray-400">Exemple WhatsApp</div>
-                                </div>
+                            <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-6 mx-auto">
+                                <MessageSquare size={28} className="text-blue-400" />
                             </div>
+
+                            <div className="text-sm font-bold text-white mb-2">Conversation</div>
+                            <div className="text-xs text-gray-500 mb-6">Exemple WhatsApp</div>
                         </div>
 
                         <button
                             onClick={() => setShowWhatsApp(!showWhatsApp)}
-                            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-3 px-6 rounded-xl hover:from-blue-500 hover:to-blue-400 transition-all flex items-center justify-center gap-2 shadow-lg"
+                            className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold py-4 px-6 rounded-2xl hover:from-blue-500 hover:to-blue-400 transition-all flex items-center justify-center gap-2 shadow-lg"
                         >
-                            Voir la conversation <ArrowRight size={16} />
+                            Voir la conversation <ArrowRight size={18} />
                         </button>
                     </div>
                 </div>
-            </div>
 
-            {/* Calendar Control Explanation */}
-            <div className="mt-6 bg-gradient-to-br from-[#0a0a0a] to-black rounded-2xl border border-white/10 p-8 relative overflow-hidden group hover:border-primary/30 transition-all">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px]"></div>
+                {/* Calendar Control Explanation */}
+                <div className="bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border border-white/10 p-10 relative overflow-hidden group hover:border-primary/30 transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
 
-                <div className="relative z-10 flex flex-col md:flex-row items-start gap-8">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
-                        <Calendar size={24} className="text-primary" />
-                    </div>
+                    <div className="relative z-10 flex items-start gap-6">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 shrink-0">
+                            <Calendar size={28} className="text-primary" />
+                        </div>
 
-                    <div className="flex-1">
-                        <h3 className="text-xl font-black text-white uppercase mb-3">Contrôle Total du Calendrier</h3>
-                        <p className="text-sm text-gray-400 leading-relaxed">
-                            Sarah IA est directement connectée à votre agenda Planity. Elle vérifie en temps réel les disponibilités,
-                            réserve automatiquement les créneaux et envoie les confirmations par SMS. Pas d'intervention humaine,
-                            pas d'erreurs de double réservation. <span className="text-white font-bold">100% automatisé, 100% fiable.</span>
-                        </p>
+                        <div className="flex-1">
+                            <h3 className="text-base font-black text-white uppercase mb-3">Contrôle Total du Calendrier</h3>
+                            <p className="text-sm text-gray-400 leading-relaxed">
+                                Sarah IA est directement connectée à votre agenda Planity. Elle vérifie en temps réel les disponibilités,
+                                réserve automatiquement les créneaux et envoie les confirmations par SMS. <span className="text-white font-bold">100% automatisé, 100% fiable.</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

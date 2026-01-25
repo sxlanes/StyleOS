@@ -259,8 +259,8 @@ const StickyFeatureRow = ({ title, description, icon: Icon, visual, style, align
 
 /* --- DEMOS SECTION --- */
 const DemosSection = () => (
-    <div id="demos" className="py-24 border-b border-white/5 bg-black relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-black via-[#0F0F0F] to-black opacity-100" />
+    <div id="demos" className="py-32 my-16 border-y border-white/5 bg-black relative">
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-100" />
         <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/5 to-transparent opacity-50 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <ScrollReveal>
@@ -583,17 +583,17 @@ function LandingPage() {
 
                                         {/* Flow Animation - Particles Only (No Arrow) */}
                                         <div className="flex-1 mx-4 md:mx-12 h-[2px] bg-white/10 relative">
-                                            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-full overflow-hidden">
+                                            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-full overflow-visible">
                                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-1/2 animate-[scan_1.5s_infinite] translate-x-[-100%]" />
                                             </div>
 
-                                            {/* Flying Data Particles - More of them */}
-                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0s' }} />
-                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.2s' }} />
-                                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.4s' }} />
-                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-blue-400 rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.6s' }} />
-                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-primary rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.8s' }} />
-                                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '1s' }} />
+                                            {/* Flying Data Particles - Start from Planity bubble */}
+                                            <div className="absolute top-1/2 -left-8 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0s' }} />
+                                            <div className="absolute top-1/2 -left-8 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.2s' }} />
+                                            <div className="absolute top-1/2 -left-8 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.4s' }} />
+                                            <div className="absolute top-1/2 -left-8 w-2 h-2 bg-blue-400 rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.6s' }} />
+                                            <div className="absolute top-1/2 -left-8 w-1.5 h-1.5 bg-primary rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.8s' }} />
+                                            <div className="absolute top-1/2 -left-8 w-1 h-1 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '1s' }} />
 
                                             <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 text-[10px] text-primary uppercase tracking-[0.3em] font-black animate-pulse bg-black px-2">Transfert</div>
                                         </div>

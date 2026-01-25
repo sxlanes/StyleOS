@@ -159,6 +159,33 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
 const PricingSection = () => {
     const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
 
+    // 3D Effect for Setup Banner
+    const bannerRef = useRef<HTMLDivElement>(null);
+    const [bannerRotateX, setBannerRotateX] = useState(0);
+    const [bannerRotateY, setBannerRotateY] = useState(0);
+
+    const handleBannerMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+        if (!bannerRef.current) return;
+
+        const rect = bannerRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateXValue = ((y - centerY) / centerY) * -8;
+        const rotateYValue = ((x - centerX) / centerX) * 8;
+
+        setBannerRotateX(rotateXValue);
+        setBannerRotateY(rotateYValue);
+    };
+
+    const handleBannerMouseLeave = () => {
+        setBannerRotateX(0);
+        setBannerRotateY(0);
+    };
+
     return (
         <div className="max-w-[1400px] mx-auto px-6">
             <div className="text-center mb-16 relative">
@@ -172,7 +199,39 @@ const PricingSection = () => {
                     Reprenez le contrôle de votre temps et de votre croissance avec nos plans partenaires Blue-Chip.
                 </p>
 
-                {/* Billing Toggle */}
+                {/* SETUP FEE BANNER WITH 3D EFFECT */}
+                <div
+                    ref={bannerRef}
+                    onMouseMove={handleBannerMouseMove}
+                    onMouseLeave={handleBannerMouseLeave}
+                    className="relative mb-12 perspective-1000"
+                    style={{
+                        transform: `perspective(1000px) rotateX(${bannerRotateX}deg) rotateY(${bannerRotateY}deg)`,
+                        transition: 'transform 0.1s ease-out',
+                    }}
+                >
+                    <div className="relative bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border-2 border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden hover:border-primary/50 hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] transition-all duration-500 group max-w-5xl mx-auto">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                        <div className="absolute top-0 right-0 p-4 opacity-5 transition-all group-hover:opacity-10 group-hover:scale-110 duration-700"><Globe size={140} /></div>
+
+                        <div className="relative z-10 flex-1 text-center md:text-left mb-6 md:mb-0">
+                            <div className="inline-block px-4 py-2 bg-primary/20 text-primary uppercase text-[10px] font-black tracking-widest rounded-full mb-4 border border-primary/30">Pack Démarrage</div>
+                            <h3 className="text-3xl md:text-4xl font-black uppercase text-white mb-3 group-hover:text-primary transition-colors">Création Site Web "Élite"</h3>
+                            <p className="text-gray-400 text-sm max-w-xl">
+                                Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus (Offre de lancement).
+                            </p>
+                        </div>
+                        <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">
+                            <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-primary tracking-tighter group-hover:scale-110 transition-transform">289€</div>
+                            <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mt-1">Paiement Unique</div>
+                            <div className="mt-3 flex items-center gap-2 text-xs text-emerald-400 font-bold uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+                                <Check size={14} /> Satisfait ou Refait
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Billing Toggle - MOVED HERE */}
                 <div className="inline-flex items-center gap-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl mb-12 relative z-10">
                     <button
                         onClick={() => setBillingPeriod('monthly')}
@@ -191,27 +250,6 @@ const PricingSection = () => {
                             </span>
                         )}
                     </button>
-                </div>
-
-                {/* SETUP FEE BANNER */}
-                <div className="relative mb-20 bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border-2 border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden hover:border-primary/50 hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] transition-all duration-500 group max-w-5xl mx-auto">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    <div className="absolute top-0 right-0 p-4 opacity-5 transition-all group-hover:opacity-10 group-hover:scale-110 duration-700"><Globe size={140} /></div>
-
-                    <div className="relative z-10 flex-1 text-center md:text-left mb-6 md:mb-0">
-                        <div className="inline-block px-4 py-2 bg-primary/20 text-primary uppercase text-[10px] font-black tracking-widest rounded-full mb-4 border border-primary/30">Pack Démarrage</div>
-                        <h3 className="text-3xl md:text-4xl font-black uppercase text-white mb-3 group-hover:text-primary transition-colors">Création Site Web "Élite"</h3>
-                        <p className="text-gray-400 text-sm max-w-xl">
-                            Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus (Offre de lancement).
-                        </p>
-                    </div>
-                    <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">
-                        <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-primary tracking-tighter group-hover:scale-110 transition-transform">289€</div>
-                        <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mt-1">Paiement Unique</div>
-                        <div className="mt-3 flex items-center gap-2 text-xs text-emerald-400 font-bold uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
-                            <Check size={14} /> Satisfait ou Refait
-                        </div>
-                    </div>
                 </div>
             </div>
 

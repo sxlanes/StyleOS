@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
-import { Database, BarChart3, Bot, CheckCircle, Sparkles, TrendingUp } from 'lucide-react';
+import { Database, BarChart3, Bot, CheckCircle, Sparkles, TrendingUp, Search, FileText } from 'lucide-react';
 
 const ProcessSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -13,77 +13,103 @@ const ProcessSection = () => {
     // Progress bar animation
     const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-    // Individual step animations (5 steps total)
-    const step1Opacity = useTransform(scrollYProgress, [0, 0.15, 0.25], [0, 1, 0]);
-    const step1Scale = useTransform(scrollYProgress, [0, 0.15, 0.25], [0.8, 1, 0.95]);
+    // Individual step animations (7 steps total instead of 5)
+    const step1Opacity = useTransform(scrollYProgress, [0, 0.12, 0.20], [0, 1, 0]);
+    const step1Scale = useTransform(scrollYProgress, [0, 0.12, 0.20], [0.8, 1, 0.95]);
 
-    const step2Opacity = useTransform(scrollYProgress, [0.2, 0.35, 0.45], [0, 1, 0]);
-    const step2Scale = useTransform(scrollYProgress, [0.2, 0.35, 0.45], [0.8, 1, 0.95]);
+    const step2Opacity = useTransform(scrollYProgress, [0.18, 0.28, 0.36], [0, 1, 0]);
+    const step2Scale = useTransform(scrollYProgress, [0.18, 0.28, 0.36], [0.8, 1, 0.95]);
 
-    const step3Opacity = useTransform(scrollYProgress, [0.4, 0.55, 0.65], [0, 1, 0]);
-    const step3Scale = useTransform(scrollYProgress, [0.4, 0.55, 0.65], [0.8, 1, 0.95]);
+    const step3Opacity = useTransform(scrollYProgress, [0.34, 0.44, 0.52], [0, 1, 0]);
+    const step3Scale = useTransform(scrollYProgress, [0.34, 0.44, 0.52], [0.8, 1, 0.95]);
 
-    const step4Opacity = useTransform(scrollYProgress, [0.6, 0.75, 0.85], [0, 1, 0]);
-    const step4Scale = useTransform(scrollYProgress, [0.6, 0.75, 0.85], [0.8, 1, 0.95]);
+    const step4Opacity = useTransform(scrollYProgress, [0.50, 0.60, 0.68], [0, 1, 0]);
+    const step4Scale = useTransform(scrollYProgress, [0.50, 0.60, 0.68], [0.8, 1, 0.95]);
 
-    const step5Opacity = useTransform(scrollYProgress, [0.8, 0.9, 1], [0, 1, 1]);
-    const step5Scale = useTransform(scrollYProgress, [0.8, 0.9, 1], [0.8, 1, 1]);
+    const step5Opacity = useTransform(scrollYProgress, [0.66, 0.76, 0.84], [0, 1, 0]);
+    const step5Scale = useTransform(scrollYProgress, [0.66, 0.76, 0.84], [0.8, 1, 0.95]);
+
+    const step6Opacity = useTransform(scrollYProgress, [0.82, 0.88, 0.94], [0, 1, 0]);
+    const step6Scale = useTransform(scrollYProgress, [0.82, 0.88, 0.94], [0.8, 1, 0.95]);
+
+    const step7Opacity = useTransform(scrollYProgress, [0.92, 0.96, 1], [0, 1, 1]);
+    const step7Scale = useTransform(scrollYProgress, [0.92, 0.96, 1], [0.8, 1, 1]);
 
     const steps = [
         {
             opacity: step1Opacity,
             scale: step1Scale,
-            icon: Database,
+            icon: Search,
             number: "01",
-            title: "Migration de Données",
-            description: "Nous récupérons l'intégralité de votre historique Planity/Booksy. Fichiers clients, historique de RDV, préférences. Transition invisible en 24h.",
-            color: "text-blue-400",
-            bgGradient: "from-blue-500/10 to-transparent"
+            title: "Audit Complet de Votre Marque",
+            description: "Analyse approfondie de votre identité visuelle, positionnement marché, et présence digitale actuelle. Nous identifions vos forces et opportunités de croissance cachées.",
+            color: "text-cyan-400",
+            bgGradient: "from-cyan-500/10 to-transparent"
         },
         {
             opacity: step2Opacity,
             scale: step2Scale,
-            icon: Sparkles,
+            icon: Database,
             number: "02",
-            title: "Création Site Web Elite",
-            description: "Design sur-mesure, shooting photo professionnel, intégration de votre identité visuelle. Configuration SEO local. Votre nouveau bastion digital.",
-            color: "text-purple-400",
-            bgGradient: "from-purple-500/10 to-transparent"
+            title: "Migration de Données",
+            description: "Récupération sécurisée de votre historique Planity/Booksy. Fichiers clients, historique de RDV, préférences. Transition invisible en 24h sans perte de données.",
+            color: "text-blue-400",
+            bgGradient: "from-blue-500/10 to-transparent"
         },
         {
             opacity: step3Opacity,
             scale: step3Scale,
-            icon: Bot,
+            icon: Sparkles,
             number: "03",
-            title: "Activation Sarah IA",
-            description: "Sarah prend les commandes. Configuration vocale, synchronisation agenda en temps réel. Elle gère 100% de vos appels entrants dès maintenant.",
-            color: "text-primary",
-            bgGradient: "from-primary/10 to-transparent"
+            title: "Création Site Web Elite",
+            description: "Design sur-mesure, shooting photo professionnel, intégration de votre identité visuelle. Configuration SEO local optimisée. Votre nouveau bastion digital premium.",
+            color: "text-purple-400",
+            bgGradient: "from-purple-500/10 to-transparent"
         },
         {
             opacity: step4Opacity,
             scale: step4Scale,
-            icon: BarChart3,
+            icon: FileText,
             number: "04",
-            title: "Dashboard Financier Live",
-            description: "Pilotage en temps réel de votre CA, marges, taux d'occupation. Analytics prédictifs et rapports automatisés pour prendre les bonnes décisions.",
-            color: "text-emerald-400",
-            bgGradient: "from-emerald-500/10 to-transparent"
+            title: "Configuration Infrastructure",
+            description: "Mise en place de tous les systèmes: paiement, facturation automatique, sauvegarde cloud, analytics. Tout est prêt pour le lancement.",
+            color: "text-orange-400",
+            bgGradient: "from-orange-500/10 to-transparent"
         },
         {
             opacity: step5Opacity,
             scale: step5Scale,
-            icon: TrendingUp,
+            icon: Bot,
             number: "05",
+            title: "Activation Sarah IA",
+            description: "Sarah prend les commandes. Configuration vocale personnalisée, synchronisation agenda en temps réel. Elle gère 100% de vos appels entrants dès maintenant.",
+            color: "text-primary",
+            bgGradient: "from-primary/10 to-transparent"
+        },
+        {
+            opacity: step6Opacity,
+            scale: step6Scale,
+            icon: BarChart3,
+            number: "06",
+            title: "Dashboard Financier Live",
+            description: "Pilotage en temps réel de votre CA, marges, taux d'occupation. Analytics prédictifs et rapports automatisés. Prenez les bonnes décisions, au bon moment.",
+            color: "text-emerald-400",
+            bgGradient: "from-emerald-500/10 to-transparent"
+        },
+        {
+            opacity: step7Opacity,
+            scale: step7Scale,
+            icon: TrendingUp,
+            number: "07",
             title: "Boucle de Croissance Infinie",
-            description: "Automatisation des avis 5 étoiles, boost SEO permanent, acquisition client automatique. La machine ne s'arrête jamais. Vous êtes libre.",
+            description: "Automatisation des avis 5 étoiles, boost SEO permanent, acquisition client automatique. La machine ne s'arrête jamais. Vous êtes officiellement libre.",
             color: "text-green-400",
             bgGradient: "from-green-500/10 to-transparent"
         }
     ];
 
     return (
-        <div ref={sectionRef} className="relative z-10 bg-black h-[500vh]">
+        <div ref={sectionRef} className="relative z-10 bg-black h-[700vh]">
             <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
 
                 {/* Floating Title - Higher position */}
