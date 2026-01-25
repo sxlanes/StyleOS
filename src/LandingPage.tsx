@@ -401,7 +401,7 @@ function LandingPage() {
                                 Distinguez<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer italic">VOUS.</span>
                             </h1>
                             <div className="max-w-3xl mx-auto space-y-6">
-                                <h2 className="text-xl md:text-3xl text-white font-black uppercase tracking-widest mb-4">Conviértete en una Marca.</h2>
+                                <h2 className="text-xl md:text-3xl text-white font-black uppercase tracking-widest mb-4">Devenez une Marque.</h2>
                                 <p className="text-lg text-gray-400 font-light">Vous méritez quelque chose de <span className="text-white font-bold">mieux que Planity</span>.</p>
                             </div>
 
@@ -421,8 +421,8 @@ function LandingPage() {
             <div id="features" ref={ecosystemRef} className="relative z-10 bg-black h-[1000vh]"> {/* Increased height for smoother scroll */}
                 <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
 
-                    {/* Floating Title - Less Sticky feeling, more "Header" */}
-                    <div className="absolute top-48 left-0 w-full text-center z-50 pointer-events-none transition-opacity duration-500" style={{ opacity: 1 }}> {/* Logic could be added to fade this out if needed */}
+                    {/* Floating Title - Higher position for more space */}
+                    <div className="absolute top-16 left-0 w-full text-center z-50 pointer-events-none transition-opacity duration-500" style={{ opacity: 1 }}>
                         <div className="relative inline-block">
                             <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
                             <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white relative drop-shadow-2xl">L'Écosystème <span className="text-primary">StyleOS</span></h2>
@@ -430,11 +430,11 @@ function LandingPage() {
                         </div>
                     </div>
 
-                    {/* Progress Bar Indicator */}
-                    <div className="absolute right-8 top-1/2 -translate-y-1/2 h-64 w-1 bg-white/10 rounded-full hidden md:block z-50">
+                    {/* Progress Bar Indicator - LEFT SIDE */}
+                    <div className="absolute left-8 top-1/2 -translate-y-1/2 h-64 w-1 bg-white/10 rounded-full hidden md:block z-50">
                         <motion.div
                             className="w-full bg-primary rounded-full shadow-[0_0_15px_#D4AF37]"
-                            style={{ height: ecoProgress, scaleY: useTransform(ecoProgress, [0, 1], [0, 1]) }} /* Simple scale based on scroll */
+                            style={{ height: ecoProgress }}
                         />
                     </div>
 
@@ -519,13 +519,26 @@ function LandingPage() {
                             }
                         />
 
-                        {/* 4. Marketing - Right Aligned */}
+                        {/* 4. Marketing - Right Aligned + Button */}
                         <StickyFeatureRow
                             style={{ opacity: ecoOp4, scale: ecoScale4, display: ecoDisplay4 }}
                             title="Marketing & Visibilité"
                             description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
                             icon={Megaphone}
-                            visual={<SocialMock />}
+                            visual={
+                                <div className="relative group">
+                                    <Link to="/marketing-demo" className="block w-full h-full">
+                                        <SocialMock />
+                                    </Link>
+
+                                    {/* Marketing Explorer Button */}
+                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                        <Link to="/marketing-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
+                                            Explorer Marketing <ArrowRight size={14} />
+                                        </Link>
+                                    </div>
+                                </div>
+                            }
                             align="right"
                         />
 
