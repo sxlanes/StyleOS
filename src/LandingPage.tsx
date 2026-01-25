@@ -393,115 +393,147 @@ function LandingPage() {
                     <StickyCanvas scale={heroScale} rotate={heroScale} opacity={heroOpacity} />
                     <motion.div className="absolute inset-0 flex items-center justify-center text-center px-4" style={{ opacity: heroOpacity }}>
                         <div className="max-w-5xl mx-auto z-10 mt-20">
-                            <div className="inline-block mb-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">StyleOS • Bordeaux</div>
-                            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-12">
+                            <div className="inline-block mb-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">StyleOS</div>
+                            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
                                 Distinguez<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer italic">VOUS.</span>
                             </h1>
                             <div className="max-w-3xl mx-auto space-y-6">
-                                <h2 className="text-xl md:text-2xl text-white font-bold tracking-tight">Vous méritez mieux qu'une page Planity standard. <span className="text-primary italic">Devenez une marque.</span></h2>
+                                <h2 className="text-xl md:text-3xl text-white font-black uppercase tracking-widest mb-4">Conviértete en una Marca.</h2>
+                                <p className="text-lg text-gray-400 font-light">Vous méritez quelque chose de <span className="text-white font-bold">mieux que Planity</span>.</p>
                             </div>
-                            <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] mt-24 animate-pulse">Ne perdez plus votre temps avec les appels.</p>
+
+                            {/* Explore Icon */}
+                            <div className="mt-24 flex flex-col items-center gap-4 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={() => scrollToSection('features')}>
+                                <div className="text-[10px] uppercase tracking-[0.3em] text-white font-bold">Explorer</div>
+                                <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1">
+                                    <div className="w-1 h-3 bg-white rounded-full animate-scroll-down" />
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
             </div>
 
             {/* --- ECOSYSTEM STICKY SECTION --- */}
-            <div id="features" ref={ecosystemRef} className="relative z-10 bg-black h-[600vh]">
+            <div id="features" ref={ecosystemRef} className="relative z-10 bg-black h-[1000vh]"> {/* Increased height for smoother scroll */}
                 <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
-                    <div className="absolute top-8 md:top-12 left-0 w-full text-center z-50 pointer-events-none">
+
+                    {/* Floating Title - Less Sticky feeling, more "Header" */}
+                    <div className="absolute top-8 left-0 w-full text-center z-50 pointer-events-none transition-opacity duration-500" style={{ opacity: 1 }}> {/* Logic could be added to fade this out if needed */}
                         <div className="relative inline-block">
-                            <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
-                            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white relative">L'Écosystème <span className="text-primary">StyleOS</span></h2>
-                            <p className="text-gray-500 uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold bg-black/50 backdrop-blur-md py-2 rounded-full inline-block px-4 border border-white/5">L'excellence opérationnelle en 5 dimensions</p>
+                            <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
+                            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white relative drop-shadow-2xl">L'Écosystème <span className="text-primary">StyleOS</span></h2>
+                            <p className="text-gray-500 uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold bg-black/80 backdrop-blur-md py-2 rounded-full inline-block px-6 border border-white/10 shadow-2xl">L'excellence opérationnelle en 5 dimensions</p>
                         </div>
                     </div>
 
-                    <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center mt-20 md:mt-0">
-                        {/* 1. Web Elite */}
+                    {/* Progress Bar Indicator */}
+                    <div className="absolute right-8 top-1/2 -translate-y-1/2 h-64 w-1 bg-white/10 rounded-full hidden md:block z-50">
+                        <motion.div
+                            className="w-full bg-primary rounded-full shadow-[0_0_15px_#D4AF37]"
+                            style={{ height: ecoProgress, scaleY: useTransform(ecoProgress, [0, 1], [0, 1]) }} /* Simple scale based on scroll */
+                        />
+                    </div>
+
+                    <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center mt-24">
+                        {/* 1. Web Elite - Left Aligned */}
                         <StickyFeatureRow
                             style={{ opacity: ecoOp1, scale: ecoScale1, display: ecoDisplay1 }}
                             title="Web Elite"
                             description='Design "Dark Luxury" sur-mesure ou Templates Premium. SEO Local dominant. Votre présence digitale devient votre meilleur atout.'
                             icon={Monitor}
                             visual={<WebEliteMock />}
+                            align="left"
                         />
 
-                        {/* 2. Sarah IA */}
+                        {/* 2. Sarah IA - Right Aligned */}
                         <StickyFeatureRow
                             style={{ opacity: ecoOp2, scale: ecoScale2, display: ecoDisplay2 }}
                             title="Sarah IA"
                             description="Ne parez plus vos coupes pour répondre. Sarah gère 100% des appels, remplit votre agenda en temps réel, et vous fait gagner des dizaines d'heures."
                             icon={Bot}
                             visual={<ChatMock />}
+                            align="right"
                         />
 
-                        {/* 3. Pilotage Financier */}
+                        {/* 3. Pilotage Financier - Left Aligned + Button */}
                         <StickyFeatureRow
                             style={{ opacity: ecoOp3, scale: ecoScale3, display: ecoDisplay3 }}
                             title="Pilotage Financier"
                             description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs."
                             icon={BarChart3}
+                            align="left"
                             visual={
-                                <Link to="/dashboard-demo" className="block w-full h-full max-w-lg mx-auto transform transition-transform hover:scale-[1.02]">
-                                    <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group hover:border-primary/30 transition-colors cursor-pointer">
-                                        <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
-                                            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
-                                            <LayoutDashboard className="w-5 h-5 text-white/80" />
-                                            <Users className="w-5 h-5 text-gray-600" />
-                                            <Calendar className="w-5 h-5 text-gray-600" />
-                                            <Wallet className="w-5 h-5 text-gray-600" />
-                                        </div>
-                                        <div className="flex-1 p-6 flex flex-col bg-black relative">
-                                            <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
-                                                <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                                <div className="relative group">
+                                    <Link to="/dashboard-demo" className="block w-full h-full max-w-lg mx-auto transform transition-transform hover:scale-[1.02]">
+                                        <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group-hover:border-primary/30 transition-colors cursor-pointer">
+                                            <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
+                                                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
+                                                <LayoutDashboard className="w-5 h-5 text-white/80" />
+                                                <Users className="w-5 h-5 text-gray-600" />
+                                                <Calendar className="w-5 h-5 text-gray-600" />
+                                                <Wallet className="w-5 h-5 text-gray-600" />
                                             </div>
-                                            <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
-                                                <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
-                                                    <div className="text-xl font-black text-white">12,450€</div>
-                                                    <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                            <div className="flex-1 p-6 flex flex-col bg-black relative">
+                                                <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
+                                                    <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
                                                 </div>
-                                                <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
-                                                    <div className="text-xl font-black text-white">65€</div>
-                                                    <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                                <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
+                                                    <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                        <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
+                                                        <div className="text-xl font-black text-white">12,450€</div>
+                                                        <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                                    </div>
+                                                    <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                        <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
+                                                        <div className="text-xl font-black text-white">65€</div>
+                                                        <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
+                                                <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
+                                                    {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
+                                                        <motion.div
+                                                            key={i}
+                                                            initial={{ height: 0 }}
+                                                            whileInView={{ height: `${h}%` }}
+                                                            transition={{ duration: 0.5, delay: i * 0.05 }}
+                                                            className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
+                                                        />
+                                                    ))}
                                                 </div>
                                             </div>
-                                            <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
-                                            <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
-                                                {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
-                                                    <motion.div
-                                                        key={i}
-                                                        initial={{ height: 0 }}
-                                                        whileInView={{ height: `${h}%` }}
-                                                        transition={{ duration: 0.5, delay: i * 0.05 }}
-                                                        className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
-                                                    />
-                                                ))}
-                                            </div>
                                         </div>
+                                    </Link>
+
+                                    {/* Dashboard Button */}
+                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                        <Link to="/dashboard-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
+                                            Explorer le Dashboard <ArrowRight size={14} />
+                                        </Link>
                                     </div>
-                                </Link>
+                                </div>
                             }
                         />
 
-                        {/* 4. Marketing */}
+                        {/* 4. Marketing - Right Aligned */}
                         <StickyFeatureRow
                             style={{ opacity: ecoOp4, scale: ecoScale4, display: ecoDisplay4 }}
                             title="Marketing & Visibilité"
                             description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
                             icon={Megaphone}
                             visual={<SocialMock />}
+                            align="right"
                         />
 
-                        {/* 5. Avis */}
+                        {/* 5. Avis - Left Aligned */}
                         <StickyFeatureRow
                             style={{ opacity: ecoOp5, scale: ecoScale5 }}
                             title="Automatisation des Avis"
                             description="Ne laissez plus vos clients partir sans laisser 5 étoiles. Notre IA détecte les clients satisfaits et sollicite un avis automatiquement via SMS."
                             icon={Star}
                             visual={<ReviewsMock />}
+                            align="left"
                         />
                     </div>
                 </div>
@@ -570,8 +602,8 @@ function LandingPage() {
                 <div className="max-w-7xl mx-auto px-6">
                     <ScrollReveal>
                         <div className="text-center mb-20 relative inline-block w-full">
-                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/10 blur-[120px] w-2/3 h-full rounded-full pointer-events-none"></div>
-                            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3>
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[120px] w-2/3 h-full rounded-full pointer-events-none"></div>
+                            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white relative z-10 drop-shadow-2xl">Pourquoi <span className="text-primary italic">StyleOS</span> ?</h3>
                         </div>
                     </ScrollReveal>
                     <ScrollReveal delay={0.2}><ComparisonTable /></ScrollReveal>

@@ -23,47 +23,47 @@ const PricingCard = ({ title, price, description, icon: Icon, features, isPopula
         <div
             ref={cardRef}
             onMouseMove={handleMouseMove}
-            className={`relative rounded-3xl p-[1px] bg-white/5 transition-transform duration-300 hover:scale-[1.01] group h-full flex flex-col ${isElite ? 'bg-gradient-to-b from-[#D4AF37] to-[#D4AF37]/20 shadow-[0_0_30px_rgba(212,175,55,0.1)]' : ''}`}
+            className={`relative rounded-3xl p-[1px] transition-all duration-500 hover:scale-[1.02] group h-full flex flex-col backdrop-blur-xl ${isElite ? 'bg-gradient-to-b from-[#D4AF37] to-[#D4AF37]/20 shadow-[0_0_40px_rgba(212,175,55,0.15)]' : 'bg-gradient-to-b from-white/10 to-transparent hover:border-white/20'}`}
         >
-            {/* Spotlight Effect for non-elite cards */}
-            {!isElite && (
-                <div
-                    className="absolute inset-0 rounded-3xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                        background: `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.1), transparent 40%)`
-                    }}
-                />
-            )}
+            {/* Glass Shine Effect */}
+            <div
+                className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl z-30"
+                style={{
+                    background: `background: radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,0.15) 0%, transparent 60%)`
+                }}
+            />
+            {/* Glossy Overlay */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-50 pointer-events-none transition-opacity duration-500 z-20" />
 
-            <div className="h-full bg-[#0A0A0A] rounded-[23px] p-6 flex flex-col relative overflow-hidden">
+            <div className={`h-full rounded-[23px] p-6 flex flex-col relative overflow-hidden backdrop-blur-xl ${isElite ? 'bg-black/80' : 'bg-black/40'}`}>
                 {/* Popular Badge */}
                 {isPopular && (
                     <div className="absolute top-4 right-4 z-20">
-                        <span className="bg-[#D4AF37] text-black text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-md">Plus Populaire</span>
+                        <span className="bg-[#D4AF37] text-black text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-md shadow-[0_0_15px_rgba(212,175,55,0.4)]">Plus Populaire</span>
                     </div>
                 )}
                 {/* Discount Badge */}
                 {isDiscounted && (
                     <div className="absolute top-4 right-4 z-20">
-                        <span className="bg-[#ef4444] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-md">-30% OFF TEMPORAIRE</span>
+                        <span className="bg-[#ef4444] text-white text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-md shadow-[0_0_15px_rgba(239,68,68,0.4)]">-30% OFF TEMPORAIRE</span>
                     </div>
                 )}
 
                 {/* Header Section */}
-                <div className="mb-8">
-                    <div className={`w-14 h-14 rounded-xl border flex items-center justify-center mb-6 text-white ${isElite ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37]' : 'border-white/10 bg-white/5'}`}>
+                <div className="mb-8 relative z-10">
+                    <div className={`w-14 h-14 rounded-xl border flex items-center justify-center mb-6 text-white backdrop-blur-sm ${isElite ? 'border-[#D4AF37] bg-[#D4AF37]/10 text-[#D4AF37] shadow-[0_0_20px_rgba(212,175,55,0.2)]' : 'border-white/10 bg-white/5 group-hover:bg-white/10 transition-colors'}`}>
                         <Icon size={24} strokeWidth={1.5} />
                     </div>
 
-                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-2">{title}</h3>
+                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-2 drop-shadow-lg">{title}</h3>
                     <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest leading-relaxed h-8">{description}</p>
                 </div>
 
                 {/* Price Section */}
-                <div className="mb-8">
+                <div className="mb-8 relative z-10">
                     <div className="flex items-end gap-1 leading-none mb-4">
                         {isDiscounted && <span className="text-lg text-gray-600 line-through font-bold mb-1 mr-2">{oldPrice}€</span>}
-                        <span className="text-6xl font-black text-white tracking-tighter">{price}</span>
+                        <span className="text-6xl font-black text-white tracking-tighter drop-shadow-xl">{price}</span>
                         <div className="flex flex-col pb-1">
                             <span className="text-xl font-bold text-[#D4AF37]">€</span>
                             <span className="text-[8px] font-bold text-gray-500 uppercase tracking-wider">Mois</span>
@@ -72,7 +72,7 @@ const PricingCard = ({ title, price, description, icon: Icon, features, isPopula
 
                     {/* ROI Pill */}
                     {roiText && (
-                        <div className="inline-block bg-[#064E3B] border border-[#059669]/30 rounded px-3 py-1.5">
+                        <div className="inline-block bg-[#064E3B]/80 backdrop-blur-md border border-[#059669]/30 rounded px-3 py-1.5 shadow-lg">
                             <span className="text-[9px] font-black text-[#34D399] uppercase tracking-widest">
                                 {roiText}
                             </span>
@@ -80,18 +80,18 @@ const PricingCard = ({ title, price, description, icon: Icon, features, isPopula
                     )}
                 </div>
 
-                <div className="h-px w-full bg-white/5 mb-8"></div>
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
 
                 {/* Features */}
-                <ul className="space-y-4 mb-10 flex-1">
+                <ul className="space-y-4 mb-10 flex-1 relative z-10">
                     {features.map((feature: any, i: number) => {
                         const isBold = feature.includes('SARAH') || feature.includes('SITE WEB') || feature.includes('COMPTA');
                         return (
-                            <li key={i} className="flex items-start gap-3 text-xs text-gray-300 font-medium">
-                                <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${isElite ? 'bg-[#D4AF37] text-black' : 'bg-white/20 text-black'}`}>
+                            <li key={i} className="flex items-start gap-3 text-xs text-gray-300 font-medium group/item hover:text-white transition-colors">
+                                <div className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm ${isElite ? 'bg-[#D4AF37] text-black' : 'bg-white/20 text-black group-hover/item:bg-white transition-colors'}`}>
                                     <Check size={10} strokeWidth={4} />
                                 </div>
-                                <span className={isBold ? 'text-white font-bold uppercase' : ''}>{feature}</span>
+                                <span className={isBold ? 'text-white font-bold uppercase drop-shadow-md' : ''}>{feature}</span>
                             </li>
                         );
                     })}
@@ -107,7 +107,7 @@ const PricingCard = ({ title, price, description, icon: Icon, features, isPopula
 
                 <button
                     onClick={() => navigate(`/plan/${planId}`)}
-                    className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 transition-all group-hover:translate-y-[-2px] ${isElite ? 'bg-[#D4AF37] text-black hover:bg-[#F3E5AB]' : 'bg-white/10 text-white hover:bg-white hover:text-black'}`}
+                    className={`w-full py-4 rounded-xl font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl group-hover:scale-[1.02] active:scale-95 ${isElite ? 'bg-[#D4AF37] text-black hover:bg-[#F3E5AB] shadow-[0_0_20px_rgba(212,175,55,0.3)]' : 'bg-white/10 text-white hover:bg-white hover:text-black backdrop-blur-md border border-white/10'}`}
                 >
                     {actionLabel} <ArrowUpRight size={14} />
                 </button>

@@ -41,8 +41,8 @@ const ProcessSection = () => {
                     <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-gray-500 text-[10px] font-black uppercase tracking-[0.4em]">
                         DÉPLOIEMENT HAUTE-VITESSE
                     </div>
-                    <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white mb-6 leading-none">
-                        L'INTÉGRATION <br /><span className="text-primary italic">SANS FRICTION.</span>
+                    <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white mb-6 leading-none">
+                        Votre Parcours <br /><span className="text-primary italic">Vers le Sommet.</span>
                     </h2>
                     <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light">
                         De la signature au pilotage automatique en moins de 10 jours.
