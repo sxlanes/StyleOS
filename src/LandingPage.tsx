@@ -182,48 +182,6 @@ const ReviewsMock = () => (
     </div>
 );
 
-/* --- PROCESS VISUALS --- */
-const ProcessVisual1 = () => (
-    <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex flex-col items-center justify-center shadow-2xl">
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(212,175,55,0.05),transparent)] animate-[scan_3s_infinite] pointer-events-none" />
-        <div className="w-full max-w-xs space-y-6 relative z-10">
-            <div className="flex items-center justify-between text-[10px] text-gray-500 uppercase tracking-widest">
-                <span>System Initialization</span>
-                <span className="text-primary animate-pulse">Running...</span>
-            </div>
-            <div className="h-1 bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-primary w-[85%] shadow-[0_0_10px_#D4AF37]" />
-            </div>
-            <div className="grid grid-cols-2 gap-3 text-[10px] text-gray-400 font-mono">
-                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> DNS Config</div>
-                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> Data Import</div>
-                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> SSL Secure</div>
-                <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" /> Deploying</div>
-            </div>
-        </div>
-    </div>
-);
-
-const ProcessVisual3 = () => (
-    <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex flex-col items-center justify-center shadow-2xl">
-        <div className="flex items-end gap-3 h-40 w-full max-w-xs opacity-90 mb-4 px-4 border-b border-white/5 pb-4">
-            {[30, 45, 40, 60, 55, 75, 70, 95, 85, 100].map((h, i) => (
-                <motion.div
-                    initial={{ height: 0 }}
-                    whileInView={{ height: `${h}%` }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                    key={i}
-                    className="flex-1 bg-gradient-to-t from-primary/5 to-primary rounded-t-sm shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-                />
-            ))}
-        </div>
-        <div className="flex items-center gap-3 text-lg font-black text-white">
-            <TrendingUp className="text-green-500 animate-bounce" size={24} />
-            <span>+324% Revenu</span>
-        </div>
-    </div>
-);
-
 /* --- FEATURE ROW --- */
 const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, visual }: any) => {
     return (
@@ -348,20 +306,35 @@ function LandingPage() {
     const heroScale = useTransform(heroProgress, [0, 1], [1, 1.2]);
     const heroOpacity = useTransform(heroProgress, [0, 0.2], [1, 0]);
 
-    // Sticky Process
-    const processRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress: processProgress } = useScroll({ target: processRef, offset: ["start start", "end end"] });
-    const op1 = useTransform(processProgress, [0.05, 0.2, 0.3, 0.4], [0, 1, 1, 0]);
-    const scale1 = useTransform(processProgress, [0.3, 0.4], [1, 0.9]);
-    const y1 = useTransform(processProgress, [0.3, 0.4], ["0%", "10%"]);
+    // Sticky Ecosystem (was 'Process' in original logic, but now applied to Features)
+    const ecosystemRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress: ecoProgress } = useScroll({ target: ecosystemRef, offset: ["start start", "end end"] });
 
-    const op2 = useTransform(processProgress, [0.45, 0.55, 0.65, 0.75], [0, 1, 1, 0]);
-    const scale2 = useTransform(processProgress, [0.65, 0.75], [1, 0.9]);
-    const y2 = useTransform(processProgress, [0.65, 0.75], ["0%", "10%"]);
+    // 5 Stages for Ecosystem
+    // Eco 1
+    const ecoOp1 = useTransform(ecoProgress, [0.05, 0.15, 0.20, 0.25], [0, 1, 1, 0]);
+    const ecoScale1 = useTransform(ecoProgress, [0.15, 0.25], [1, 0.9]);
+    const ecoDisplay1 = useTransform(ecoProgress, value => value > 0.25 ? 'none' : 'flex');
 
-    const op3 = useTransform(processProgress, [0.8, 0.9], [0, 1]);
-    // Vertical line progress
-    const lineProgress = useTransform(processProgress, [0.1, 0.9], ["0%", "100%"]);
+    // Eco 2
+    const ecoOp2 = useTransform(ecoProgress, [0.25, 0.35, 0.40, 0.45], [0, 1, 1, 0]);
+    const ecoScale2 = useTransform(ecoProgress, [0.35, 0.45], [1, 0.9]);
+    const ecoDisplay2 = useTransform(ecoProgress, value => (value < 0.25 || value > 0.45) ? 'none' : 'flex');
+
+    // Eco 3
+    const ecoOp3 = useTransform(ecoProgress, [0.45, 0.55, 0.60, 0.65], [0, 1, 1, 0]);
+    const ecoScale3 = useTransform(ecoProgress, [0.55, 0.65], [1, 0.9]);
+    const ecoDisplay3 = useTransform(ecoProgress, value => (value < 0.45 || value > 0.65) ? 'none' : 'flex');
+
+    // Eco 4
+    const ecoOp4 = useTransform(ecoProgress, [0.65, 0.75, 0.80, 0.85], [0, 1, 1, 0]);
+    const ecoScale4 = useTransform(ecoProgress, [0.75, 0.85], [1, 0.9]);
+    const ecoDisplay4 = useTransform(ecoProgress, value => (value < 0.65 || value > 0.85) ? 'none' : 'flex');
+
+    // Eco 5
+    const ecoOp5 = useTransform(ecoProgress, [0.85, 0.95], [0, 1]);
+    const ecoScale5 = useTransform(ecoProgress, [0.85, 1], [0.95, 1]);
+
 
     useEffect(() => {
         const controlNavbar = () => {
@@ -389,6 +362,12 @@ function LandingPage() {
             <style>{`
                 @keyframes scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
                 @keyframes growBar { from { height: 0; } to { height: 85%; } }
+                @keyframes fly { 
+                    0% { transform: translateX(0); opacity: 0; } 
+                    10% { opacity: 1; }
+                    90% { opacity: 1; }
+                    100% { transform: translateX(100px); opacity: 0; } 
+                }
             `}</style>
 
             <nav className={`fixed w-full top-0 z-[100] transition-all duration-500 transform ${isVisible ? 'translate-y-0' : '-translate-y-full'} bg-black/95 backdrop-blur-md py-4 border-b border-white/5`}>
@@ -418,114 +397,117 @@ function LandingPage() {
                                 Distinguez<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer italic">VOUS.</span>
                             </h1>
                             <div className="max-w-3xl mx-auto space-y-6">
-                                <h2 className="text-2xl md:text-3xl text-white font-bold tracking-tight">Coupez des cheveux, <span className="text-primary italic">pas des appels.</span></h2>
+                                <h2 className="text-xl md:text-2xl text-white font-bold tracking-tight">Vous méritez mieux qu'une page Planity standard. <span className="text-primary italic">Devenez une marque.</span></h2>
                             </div>
-                            <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] mt-24 animate-pulse">Scrollez pour découvrir l'expérience</p>
+                            <p className="text-gray-500 text-[10px] uppercase tracking-[0.3em] mt-24 animate-pulse">Ne perdez plus votre temps avec les appels.</p>
                         </div>
                     </motion.div>
                 </div>
             </div>
 
-            <div id="features" className="relative z-10 bg-black pt-24 pb-12 w-full -mt-[60vh]">
-                <div className="absolute top-0 left-0 w-full h-[60vh] bg-gradient-to-b from-transparent via-black/90 to-black pointer-events-none -translate-y-1/2"></div>
-                <div className="text-center px-6 mb-32 relative z-20 pt-[25vh]">
-                    <ScrollReveal>
+            {/* --- ECOSYSTEM STICKY SECTION --- */}
+            <div id="features" ref={ecosystemRef} className="relative z-10 bg-black h-[600vh]">
+                <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
+                    <div className="absolute top-8 md:top-12 left-0 w-full text-center z-50 pointer-events-none">
                         <div className="relative inline-block">
                             <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
-                            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 text-white relative">L'Écosystème <span className="text-primary">StyleOS</span></h2>
+                            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 text-white relative">L'Écosystème <span className="text-primary">StyleOS</span></h2>
+                            <p className="text-gray-500 uppercase tracking-[0.2em] text-[10px] md:text-xs font-bold bg-black/50 backdrop-blur-md py-2 rounded-full inline-block px-4 border border-white/5">L'excellence opérationnelle en 5 dimensions</p>
                         </div>
-                        <p className="text-gray-500 uppercase tracking-[0.2em] text-xs font-bold">L'excellence opérationnelle en 4 dimensions</p>
-                    </ScrollReveal>
-                </div>
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="mt-48">
-                        <FeatureRow title="Web Elite" description='Design "Dark Luxury" sur-mesure ou Templates Premium. SEO Local dominant. Votre présence digitale devient votre meilleur atout.' icon={Monitor} align="left" visual={<WebEliteMock />}
-                            action={<a href="#demos" onClick={(e) => { e.preventDefault(); scrollToSection('demos'); }} className="flex items-center gap-3 text-primary text-xs font-bold uppercase tracking-widest hover:text-white transition-colors group cursor-pointer inline-block mt-4">Voir les réalisations <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></a>}
-                        />
                     </div>
 
-                    <FeatureRow
-                        title="Sarah IA"
-                        description="Ne parez plus vos coupes pour répondre. Sarah gère 100% des appels, remplit votre agenda en temps réel, et vous fait gagner des dizaines d'heures. Plus de coupes, plus de revenus."
-                        icon={Bot}
-                        align="right"
-                        visual={<ChatMock />}
-                    />
+                    <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center mt-20 md:mt-0">
+                        {/* 1. Web Elite */}
+                        <StickyFeatureRow
+                            style={{ opacity: ecoOp1, scale: ecoScale1, display: ecoDisplay1 }}
+                            title="Web Elite"
+                            description='Design "Dark Luxury" sur-mesure ou Templates Premium. SEO Local dominant. Votre présence digitale devient votre meilleur atout.'
+                            icon={Monitor}
+                            visual={<WebEliteMock />}
+                        />
 
-                    <FeatureRow
-                        title="Pilotage Financier"
-                        description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs."
-                        icon={BarChart3}
-                        align="left"
-                        visual={
-                            <Link to="/dashboard-demo" className="block w-full h-full">
-                                <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group hover:border-primary/30 transition-colors cursor-pointer">
-                                    <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
-                                        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
-                                        <LayoutDashboard className="w-5 h-5 text-white/80" />
-                                        <Users className="w-5 h-5 text-gray-600" />
-                                        <Calendar className="w-5 h-5 text-gray-600" />
-                                        <Wallet className="w-5 h-5 text-gray-600" />
-                                    </div>
-                                    <div className="flex-1 p-6 flex flex-col bg-black relative">
-                                        <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
-                                            <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                        {/* 2. Sarah IA */}
+                        <StickyFeatureRow
+                            style={{ opacity: ecoOp2, scale: ecoScale2, display: ecoDisplay2 }}
+                            title="Sarah IA"
+                            description="Ne parez plus vos coupes pour répondre. Sarah gère 100% des appels, remplit votre agenda en temps réel, et vous fait gagner des dizaines d'heures."
+                            icon={Bot}
+                            visual={<ChatMock />}
+                        />
+
+                        {/* 3. Pilotage Financier */}
+                        <StickyFeatureRow
+                            style={{ opacity: ecoOp3, scale: ecoScale3, display: ecoDisplay3 }}
+                            title="Pilotage Financier"
+                            description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs."
+                            icon={BarChart3}
+                            visual={
+                                <Link to="/dashboard-demo" className="block w-full h-full max-w-lg mx-auto transform transition-transform hover:scale-[1.02]">
+                                    <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group hover:border-primary/30 transition-colors cursor-pointer">
+                                        <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
+                                            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
+                                            <LayoutDashboard className="w-5 h-5 text-white/80" />
+                                            <Users className="w-5 h-5 text-gray-600" />
+                                            <Calendar className="w-5 h-5 text-gray-600" />
+                                            <Wallet className="w-5 h-5 text-gray-600" />
                                         </div>
-                                        <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
-                                            <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                                <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
-                                                <div className="text-xl font-black text-white">12,450€</div>
-                                                <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                        <div className="flex-1 p-6 flex flex-col bg-black relative">
+                                            <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
+                                                <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
                                             </div>
-                                            <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                                <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
-                                                <div className="text-xl font-black text-white">65€</div>
-                                                <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                            <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
+                                                <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
+                                                    <div className="text-xl font-black text-white">12,450€</div>
+                                                    <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
+                                                </div>
+                                                <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
+                                                    <div className="text-xl font-black text-white">65€</div>
+                                                    <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
+                                                </div>
+                                            </div>
+                                            <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
+                                            <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
+                                                {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
+                                                    <motion.div
+                                                        key={i}
+                                                        initial={{ height: 0 }}
+                                                        whileInView={{ height: `${h}%` }}
+                                                        transition={{ duration: 0.5, delay: i * 0.05 }}
+                                                        className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
+                                                    />
+                                                ))}
                                             </div>
                                         </div>
-                                        <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
-                                        <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
-                                            {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
-                                                <motion.div
-                                                    key={i}
-                                                    initial={{ height: 0 }}
-                                                    whileInView={{ height: `${h}%` }}
-                                                    transition={{ duration: 0.5, delay: i * 0.05 }}
-                                                    className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
-                                                />
-                                            ))}
-                                        </div>
-                                        {/* Interaction Hint */}
-                                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px]">
-                                            <div className="text-[10px] text-primary font-bold uppercase tracking-widest border border-primary/50 px-4 py-2 rounded-full">Explorez les Données</div>
-                                        </div>
                                     </div>
-                                </div>
-                            </Link>
-                        }
-                        action={<Link to="/dashboard-demo" className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest hover:bg-primary hover:text-black transition-all">Explorer le Dashboard <ArrowRight className="w-3 h-3" /></Link>}
-                    />
+                                </Link>
+                            }
+                        />
 
-                    <FeatureRow
-                        title="Marketing & Visibilité"
-                        description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
-                        icon={Megaphone}
-                        align="right"
-                        visual={<SocialMock />}
-                        action={<Link to="/marketing-demo" className="inline-block mt-4 bg-white text-black px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all">Commencer</Link>}
-                    />
+                        {/* 4. Marketing */}
+                        <StickyFeatureRow
+                            style={{ opacity: ecoOp4, scale: ecoScale4, display: ecoDisplay4 }}
+                            title="Marketing & Visibilité"
+                            description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
+                            icon={Megaphone}
+                            visual={<SocialMock />}
+                        />
 
-                    <FeatureRow
-                        title="Automatisation des Avis"
-                        description="Ne laissez plus vos clients partir sans laisser 5 étoiles. Notre IA détecte les clients satisfaits et sollicite un avis automatiquement via SMS. Bloque les avis négatifs en les redirigeant vers un formulaire privé."
-                        icon={Star}
-                        align="left"
-                        visual={<ReviewsMock />}
-                    />
+                        {/* 5. Avis */}
+                        <StickyFeatureRow
+                            style={{ opacity: ecoOp5, scale: ecoScale5 }}
+                            title="Automatisation des Avis"
+                            description="Ne laissez plus vos clients partir sans laisser 5 étoiles. Notre IA détecte les clients satisfaits et sollicite un avis automatiquement via SMS."
+                            icon={Star}
+                            visual={<ReviewsMock />}
+                        />
+                    </div>
                 </div>
             </div>
 
-            <div className="relative z-10 bg-black pt-12">
+            {/* --- MIGRATION SECTION --- */}
+            <div className="relative z-10 bg-black pt-24 pb-32 border-b border-white/5">
                 <ScrollReveal>
                     <div className="max-w-7xl mx-auto px-6">
                         <FeatureRow
@@ -534,31 +516,43 @@ function LandingPage() {
                             icon={Server}
                             align="left"
                             visual={
-                                <div className="w-full h-full bg-[#111] rounded-xl border border-white/10 flex items-center justify-center relative overflow-hidden group hover:border-primary/30 transition-all p-8">
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 to-transparent opacity-50" />
+                                <div className="w-full h-full bg-[#111] rounded-[2.5rem] border border-white/10 flex items-center justify-center relative overflow-hidden group hover:border-primary/30 transition-all p-8 md:p-16 shadow-2xl">
+                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 to-transparent opacity-50" />
 
-                                    <div className="flex items-center justify-center gap-8 md:gap-16 w-full max-w-lg">
-                                        {/* Legacy Node */}
-                                        <div className="flex flex-col items-center gap-4">
-                                            <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 grayscale opacity-80">
-                                                <Server size={32} className="text-gray-500" />
+                                    <div className="flex items-center justify-between w-full max-w-2xl relative z-10">
+                                        {/* Planity Node */}
+                                        <div className="flex flex-col items-center gap-6 group/node">
+                                            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 grayscale opacity-60 group-hover/node:grayscale-0 group-hover/node:opacity-100 transition-all duration-500 bg-[#004bad]/10">
+                                                {/* Planity Logo Simulation */}
+                                                <div className="text-3xl font-black text-[#004bad] tracking-tighter">P.</div>
                                             </div>
-                                            <div className="text-xs font-bold text-gray-500 uppercase tracking-widest">Legacy</div>
+                                            <div className="text-xs font-bold text-gray-500 uppercase tracking-widest group-hover/node:text-[#004bad] transition-colors">Planity</div>
                                         </div>
 
-                                        {/* Flow Animation */}
-                                        <div className="flex-1 h-[2px] bg-white/10 relative overflow-hidden">
-                                            <div className="absolute inset-0 bg-primary w-1/2 animate-[scan_1.5s_infinite]" />
-                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-4 text-[9px] text-primary uppercase tracking-widest bg-black px-2 font-bold animate-pulse">Transfert</div>
-                                            <ArrowRight size={16} className="absolute right-0 top-1/2 -translate-y-1/2 text-primary" />
+                                        {/* Flow Animation - Left to Right Arrow */}
+                                        <div className="flex-1 mx-4 md:mx-12 h-[2px] bg-white/10 relative">
+                                            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-full overflow-hidden">
+                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-1/2 animate-[scan_1.5s_infinite] translate-x-[-100%]" />
+                                            </div>
+
+                                            {/* Flying Data Particles */}
+                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0s' }} />
+                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.2s' }} />
+                                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.4s' }} />
+
+                                            <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 text-[10px] text-primary uppercase tracking-[0.3em] font-black animate-pulse bg-black px-2">Transfert</div>
+
+                                            <div className="absolute right-0 top-1/2 -translate-y-1/2 text-primary">
+                                                <ArrowRight size={24} className="drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]" />
+                                            </div>
                                         </div>
 
                                         {/* StyleOS Node */}
-                                        <div className="flex flex-col items-center gap-4">
-                                            <div className="w-28 h-28 rounded-full bg-primary/10 border border-primary/50 flex items-center justify-center relative z-10 shadow-[0_0_50px_rgba(212,175,55,0.2)]">
-                                                <Bot size={40} className="text-primary" />
-                                                <div className="absolute top-0 right-0 w-8 h-8 bg-green-500 rounded-full border-4 border-[#111] flex items-center justify-center">
-                                                    <Check size={14} className="text-black" />
+                                        <div className="flex flex-col items-center gap-6">
+                                            <div className="w-28 h-28 md:w-40 md:h-40 rounded-full bg-primary/10 border border-primary/50 flex items-center justify-center relative z-10 shadow-[0_0_60px_rgba(212,175,55,0.3)] animate-[pulse_3s_infinite]">
+                                                <Bot size={50} className="text-primary" />
+                                                <div className="absolute top-2 right-2 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 bg-green-500 rounded-full border-4 border-[#111] flex items-center justify-center">
+                                                    <Check size={14} className="text-black stroke-[4]" />
                                                 </div>
                                             </div>
                                             <div className="text-sm font-black text-white uppercase tracking-widest">StyleOS</div>
@@ -597,94 +591,54 @@ function LandingPage() {
                 </div>
             </section>
 
-            <div id="demo" className="relative z-10 bg-black pt-48 pb-32 border-t border-white/5">
-                <ScrollReveal>
-                    <div className="text-center mb-32 relative">
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-secondary/20 blur-[60px] w-1/3 h-full rounded-full pointer-events-none"></div>
-                        <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase tracking-[0.4em] relative z-10">Intelligence</div>
-                        <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white relative z-10">
-                            Découvrez <span className="text-primary italic">Sarah IA</span>
-                        </h2>
-                        <p className="text-base text-gray-400 max-w-2xl mx-auto leading-relaxed relative z-10">Écoutez la différence dès maintenant.</p>
-                    </div>
-                </ScrollReveal>
-                <ScrollReveal delay={0.2}>
-                    <div className="max-w-7xl mx-auto px-6"><AudioDemo /></div>
-                </ScrollReveal>
-            </div>
-
-            <div className="relative z-10 bg-black border-t border-white/5 py-48">
-                <ScrollReveal>
-                    <div className="max-w-7xl mx-auto px-6">
-                        <div className="text-center mb-24 relative">
-                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/10 blur-[100px] w-2/3 h-full rounded-full pointer-events-none"></div>
-                            <h2 className="text-4xl md:text-6xl font-black uppercase text-white mb-6 relative z-10">Nos <span className="text-primary italic">Garanties</span></h2>
+            {/* AUDIO DEMO SECTION */}
+            <section className="relative z-10 bg-black py-24 md:py-32 border-t border-white/5 overflow-hidden">
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none" />
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <ScrollReveal>
+                                <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.4em]">Sarah AI Demo</div>
+                                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 text-white">L'IA qui <span className="text-primary italic">parle</span> mieux que vous.</h2>
+                                <p className="text-lg text-gray-400 leading-relaxed mb-8">
+                                    Sarah gère les accents, les hésitations et les demandes complexes. Elle est polie, efficace et ne rate jamais une vente.
+                                </p>
+                                <ul className="space-y-4 mb-8">
+                                    <li className="flex items-center gap-3 text-sm text-gray-300">
+                                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><Check size={12} strokeWidth={3} /></div>
+                                        <span>Réponse en <strong className="text-white">0.4 secondes</strong> (Latence humaine)</span>
+                                    </li>
+                                    <li className="flex items-center gap-3 text-sm text-gray-300">
+                                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><Check size={12} strokeWidth={3} /></div>
+                                        <span>Synchronisation agenda temps réel</span>
+                                    </li>
+                                    <li className="flex items-center gap-3 text-sm text-gray-300">
+                                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-500"><Check size={12} strokeWidth={3} /></div>
+                                        <span>Disponible 24h/24 et 7j/7</span>
+                                    </li>
+                                </ul>
+                            </ScrollReveal>
                         </div>
-                        <GuaranteeSection />
-                    </div>
-                </ScrollReveal>
-            </div>
-
-            <div id="process" ref={processRef} className="relative z-10 bg-black h-[500vh]">
-                <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
-                    <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center">
-                        <div className="absolute top-12 left-0 w-full text-center z-50">
-                            <div className="relative inline-block">
-                                <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full pointer-events-none"></div>
-                                <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter text-white relative">Votre Parcours <span className="text-primary">Vers le Sommet</span></h2>
-                            </div>
-                        </div>
-
-                        {/* Progress Line */}
-                        <div className="absolute left-4 md:left-0 top-0 bottom-0 w-[2px] bg-white/5 hidden md:block">
-                            <motion.div style={{ height: lineProgress }} className="w-full bg-primary shadow-[0_0_10px_#D4AF37] relative">
-                                <div className="absolute bottom-0 -left-1 w-2.5 h-2.5 bg-primary rounded-full shadow-[0_0_15px_#D4AF37]" />
-                            </motion.div>
-                        </div>
-
-                        <StickyFeatureRow style={{ opacity: op1, scale: scale1, y: y1 }} title="1. Audit & Setup" description="Analyse de votre marque 360°. Importation de la base client. Configuration des DNS. Votre salon, digitalisé en 24h." icon={Search} visual={<ProcessVisual1 />} />
-                        <StickyFeatureRow style={{ opacity: op2, scale: scale2, y: y2 }} title="2. Formation & Lancement" description="Session VIP pour votre équipe. Prise en main ultra-rapide. Sarah est déployée et commence à répondre aux appels dès la fin de la séance." icon={Zap}
-                            visual={
-                                <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-xl p-8 relative overflow-hidden h-full flex items-center justify-center shadow-2xl group">
-                                    <div className="absolute inset-0 bg-primary/5 animate-pulse" />
-                                    {/* Animated Circles */}
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <div className="w-40 h-40 border border-primary/20 rounded-full animate-[ping_3s_linear_infinite]" />
-                                        <div className="w-60 h-60 border border-primary/10 rounded-full animate-[ping_3s_linear_infinite] delay-1000" />
-                                    </div>
-                                    <div className="text-center relative z-10 scale-110">
-                                        <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 border border-primary/40 text-primary shadow-[0_0_40px_rgba(212,175,55,0.2)] relative">
-                                            <Bot size={48} className="animate-bounce" />
-                                            <div className="absolute top-0 right-0 w-6 h-6 bg-green-500 rounded-full border-2 border-black flex items-center justify-center z-20">
-                                                <Check size={12} className="text-black" />
-                                            </div>
-                                        </div>
-                                        <div className="text-base font-black uppercase tracking-widest text-white mb-2">Sarah Is Online</div>
-                                        <div className="text-[10px] text-gray-400 font-mono flex items-center justify-center gap-2 bg-black/50 px-3 py-1 rounded-full border border-white/5">
-                                            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" /> Listening to calls...
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        />
-                        <StickyFeatureRow style={{ opacity: op3 }} title="3. Accélération" description="Campagnes SMS & Emailing automatisées. Relances des clients dormants. Votre CA augmente mécaniquement chaque mois sans effort." icon={Rocket} visual={<ProcessVisual3 />} />
+                        <ScrollReveal delay={0.2}>
+                            <AudioDemo />
+                        </ScrollReveal>
                     </div>
                 </div>
+            </section>
+
+            <div id="pricing" className="relative z-10 bg-black py-24 border-t border-white/5">
+                <PricingSection />
             </div>
 
-            <DemosSection />
-            <div id="pricing" className="relative z-10 bg-black pb-32 pt-24"><ScrollReveal><PricingSection /></ScrollReveal></div>
-            <ScrollReveal><div className="relative inline-block w-full text-center"><div className="absolute inset-0 bg-primary/10 blur-[100px] rounded-full pointer-events-none"></div><OfferSection /></div></ScrollReveal>
+            <OfferSection />
+            <GuaranteeSection />
 
-            <footer className="bg-black py-12 border-t border-white/5 text-center md:text-left">
-                <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-                    <div><div className="text-2xl font-bold tracking-tighter text-white mb-4">StyleOS<span className="text-primary">.</span></div><p className="text-gray-500 text-xs">Infrastructure digitale pour salons de coiffure Tier 1.</p></div>
-                    <div><ul className="space-y-2 text-xs text-gray-500">
-                        <li><button onClick={() => scrollToSection('features')} className="hover:text-white transition-colors">Fonctionnalités</button></li>
-                        <li><button onClick={() => scrollToSection('demos')} className="hover:text-white transition-colors">Démos</button></li>
-                        <li><button onClick={() => scrollToSection('pricing')} className="hover:text-white transition-colors">Tarifs</button></li>
-                    </ul></div>
-                    <div><ul className="space-y-2 text-xs text-gray-500"><li><Link to="/legal" className="hover:text-white transition-colors">Mentions Légales</Link></li><li><Link to="/privacy" className="hover:text-white transition-colors">Confidentialité</Link></li></ul></div>
+            <footer className="bg-black py-12 border-t border-white/10 relative z-10">
+                <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="text-2xl font-bold tracking-tighter text-white">StyleOS<span className="text-primary">.</span></div>
+                    <div className="text-xs text-gray-600 font-mono">
+                        © 2024 StyleOS Inc. Bordeaux • Paris • London
+                    </div>
                 </div>
             </footer>
         </div>

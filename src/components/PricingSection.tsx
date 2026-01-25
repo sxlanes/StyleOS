@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Shield, Zap, Crown, TrendingUp, CheckCircle2, XCircle } from 'lucide-react';
+import { ArrowUpRight, Check, Shield, Zap, Crown, TrendingUp, Globe, CheckCircle2, XCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 
@@ -128,12 +128,24 @@ const PricingSection = () => {
                     Reprenez le contrôle de votre temps et de votre croissance avec nos plans partenaires Blue-Chip.
                 </p>
 
-                {/* Setup Fee Pill */}
-                <div className="inline-flex items-center gap-4 bg-[#111] border border-white/10 rounded-full px-6 py-3 relative z-10 mx-auto animate-fade-in group hover:border-[#D4AF37]/50 transition-colors cursor-help">
-                    <Zap className="text-[#D4AF37] w-4 h-4 fill-current animate-pulse" />
-                    <div className="text-[11px] uppercase tracking-wide text-gray-400">
-                        <span className="text-white font-bold mr-2">NOTE STRATÉGIQUE :</span>
-                        Un setup initial de <span className="text-white font-bold">289€</span> est requis pour la création sur-mesure de votre infrastructure digitale.
+                {/* SETUP FEE BANNER (Restored) */}
+                <div className="relative mb-20 bg-[#111] rounded-3xl border border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_40px_rgba(212,175,55,0.05)] overflow-hidden hover:border-primary/50 transition-colors duration-500 group max-w-5xl mx-auto">
+                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    <div className="absolute top-0 right-0 p-4 opacity-10 transition-transform group-hover:scale-110 duration-700"><Globe size={120} /></div>
+
+                    <div className="relative z-10 flex-1 text-center md:text-left mb-6 md:mb-0">
+                        <div className="inline-block px-3 py-1 bg-primary/20 text-primary uppercase text-[10px] font-black tracking-widest rounded mb-3 border border-primary/20">Pack Démarrage</div>
+                        <h3 className="text-2xl md:text-3xl font-black uppercase text-white mb-2">Création Site Web "Élite"</h3>
+                        <p className="text-gray-400 text-sm max-w-xl">
+                            Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus (Offre de lancement).
+                        </p>
+                    </div>
+                    <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">
+                        <div className="text-4xl font-black text-white tracking-tighter group-hover:text-primary transition-colors">289€</div>
+                        <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest">Paiement Unique</div>
+                        <div className="mt-2 flex items-center gap-1 text-[10px] text-green-500 font-bold uppercase">
+                            <Check size={12} /> Satisfait ou Refait
+                        </div>
                     </div>
                 </div>
             </div>
