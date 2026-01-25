@@ -512,8 +512,8 @@ function LandingPage() {
                                         </div>
                                     </Link>
 
-                                    {/* Dashboard Button */}
-                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                    {/* Dashboard Button - ALWAYS VISIBLE */}
+                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-100 transition-all duration-300">
                                         <Link to="/dashboard-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
                                             Explorer le Dashboard <ArrowRight size={14} />
                                         </Link>
@@ -534,8 +534,8 @@ function LandingPage() {
                                         <SocialMock />
                                     </Link>
 
-                                    {/* Marketing Explorer Button */}
-                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                    {/* Marketing Explorer Button - ALWAYS VISIBLE */}
+                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-100 transition-all duration-300">
                                         <Link to="/marketing-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
                                             Explorer Marketing <ArrowRight size={14} />
                                         </Link>
