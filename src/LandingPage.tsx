@@ -322,25 +322,30 @@ function LandingPage() {
     const ecoOp1 = useTransform(ecoProgress, [0.05, 0.15, 0.20, 0.25], [0, 1, 1, 0]);
     const ecoScale1 = useTransform(ecoProgress, [0.15, 0.25], [1, 0.9]);
     const ecoDisplay1 = useTransform(ecoProgress, value => value > 0.25 ? 'none' : 'flex');
+    const ecoPointerEvents1 = useTransform(ecoProgress, value => value > 0.25 ? 'none' : 'auto');
 
     // Eco 2
     const ecoOp2 = useTransform(ecoProgress, [0.25, 0.35, 0.40, 0.45], [0, 1, 1, 0]);
     const ecoScale2 = useTransform(ecoProgress, [0.35, 0.45], [1, 0.9]);
     const ecoDisplay2 = useTransform(ecoProgress, value => (value < 0.25 || value > 0.45) ? 'none' : 'flex');
+    const ecoPointerEvents2 = useTransform(ecoProgress, value => (value < 0.25 || value > 0.45) ? 'none' : 'auto');
 
     // Eco 3
     const ecoOp3 = useTransform(ecoProgress, [0.45, 0.55, 0.60, 0.65], [0, 1, 1, 0]);
     const ecoScale3 = useTransform(ecoProgress, [0.55, 0.65], [1, 0.9]);
     const ecoDisplay3 = useTransform(ecoProgress, value => (value < 0.45 || value > 0.65) ? 'none' : 'flex');
+    const ecoPointerEvents3 = useTransform(ecoProgress, value => (value < 0.45 || value > 0.65) ? 'none' : 'auto');
 
     // Eco 4
     const ecoOp4 = useTransform(ecoProgress, [0.65, 0.75, 0.80, 0.85], [0, 1, 1, 0]);
     const ecoScale4 = useTransform(ecoProgress, [0.75, 0.85], [1, 0.9]);
     const ecoDisplay4 = useTransform(ecoProgress, value => (value < 0.65 || value > 0.85) ? 'none' : 'flex');
+    const ecoPointerEvents4 = useTransform(ecoProgress, value => (value < 0.65 || value > 0.85) ? 'none' : 'auto');
 
     // Eco 5
     const ecoOp5 = useTransform(ecoProgress, [0.85, 0.95], [0, 1]);
     const ecoScale5 = useTransform(ecoProgress, [0.85, 1], [0.95, 1]);
+    const ecoPointerEvents5 = useTransform(ecoProgress, value => value < 0.85 ? 'none' : 'auto');
 
 
     useEffect(() => {
@@ -444,7 +449,7 @@ function LandingPage() {
                     <div className="relative w-full h-full max-w-7xl mx-auto px-6 flex items-center justify-center mt-24">
                         {/* 1. Web Elite - Left Aligned */}
                         <StickyFeatureRow
-                            style={{ opacity: ecoOp1, scale: ecoScale1, display: ecoDisplay1 }}
+                            style={{ opacity: ecoOp1, scale: ecoScale1, display: ecoDisplay1, pointerEvents: ecoPointerEvents1 }}
                             title="Web Elite"
                             description='Design "Dark Luxury" sur-mesure ou Templates Premium. SEO Local dominant. Votre présence digitale devient votre meilleur atout.'
                             icon={Monitor}
@@ -454,7 +459,7 @@ function LandingPage() {
 
                         {/* 2. Sarah IA - Right Aligned */}
                         <StickyFeatureRow
-                            style={{ opacity: ecoOp2, scale: ecoScale2, display: ecoDisplay2 }}
+                            style={{ opacity: ecoOp2, scale: ecoScale2, display: ecoDisplay2, pointerEvents: ecoPointerEvents2 }}
                             title="Sarah IA"
                             description="Ne parez plus vos coupes pour répondre. Sarah gère 100% des appels, remplit votre agenda en temps réel, et vous fait gagner des dizaines d'heures."
                             icon={Bot}
@@ -464,7 +469,7 @@ function LandingPage() {
 
                         {/* 3. Pilotage Financier - Left Aligned + Button */}
                         <StickyFeatureRow
-                            style={{ opacity: ecoOp3, scale: ecoScale3, display: ecoDisplay3 }}
+                            style={{ opacity: ecoOp3, scale: ecoScale3, display: ecoDisplay3, pointerEvents: ecoPointerEvents3 }}
                             title="Pilotage Financier"
                             description="Tableau de bord de direction. Suivez votre CA, vos marges et votre croissance en temps réel avec des indicateurs prédictifs."
                             icon={BarChart3}
@@ -524,7 +529,7 @@ function LandingPage() {
 
                         {/* 4. Marketing - Right Aligned + Button */}
                         <StickyFeatureRow
-                            style={{ opacity: ecoOp4, scale: ecoScale4, display: ecoDisplay4 }}
+                            style={{ opacity: ecoOp4, scale: ecoScale4, display: ecoDisplay4, pointerEvents: ecoPointerEvents4 }}
                             title="Marketing & Visibilité"
                             description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
                             icon={Megaphone}
@@ -547,7 +552,7 @@ function LandingPage() {
 
                         {/* 5. Avis - Left Aligned */}
                         <StickyFeatureRow
-                            style={{ opacity: ecoOp5, scale: ecoScale5 }}
+                            style={{ opacity: ecoOp5, scale: ecoScale5, pointerEvents: ecoPointerEvents5 }}
                             title="Automatisation des Avis"
                             description="Ne laissez plus vos clients partir sans laisser 5 étoiles. Notre IA détecte les clients satisfaits et sollicite un avis automatiquement via SMS."
                             icon={Star}
