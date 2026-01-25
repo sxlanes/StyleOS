@@ -513,8 +513,8 @@ function LandingPage() {
                                     </Link>
 
                                     {/* Dashboard Button - ALWAYS VISIBLE */}
-                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-100 transition-all duration-300">
-                                        <Link to="/dashboard-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
+                                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 opacity-100 transition-all duration-300 w-full flex justify-center pointer-events-none">
+                                        <Link to="/dashboard-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2 pointer-events-auto">
                                             Explorer le Dashboard <ArrowRight size={14} />
                                         </Link>
                                     </div>
@@ -535,8 +535,8 @@ function LandingPage() {
                                     </Link>
 
                                     {/* Marketing Explorer Button - ALWAYS VISIBLE */}
-                                    <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 opacity-100 transition-all duration-300">
-                                        <Link to="/marketing-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2">
+                                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 opacity-100 transition-all duration-300 w-full flex justify-center pointer-events-none">
+                                        <Link to="/marketing-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2 pointer-events-auto">
                                             Explorer Marketing <ArrowRight size={14} />
                                         </Link>
                                     </div>
