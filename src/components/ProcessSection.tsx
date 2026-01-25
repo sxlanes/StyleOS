@@ -1,6 +1,106 @@
-import { useRef } from 'react';
+import { useRef, useState, MouseEvent } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
-import { Database, BarChart3, Bot, CheckCircle, Sparkles, TrendingUp, Search, FileText } from 'lucide-react';
+import { Database, BarChart3, Bot, CheckCircle, Sparkles, TrendingUp, Search, Layers, ShieldCheck, Calendar, MessageCircle, Megaphone } from 'lucide-react';
+
+// Separate Card Component to handle 3D tilt individually
+const Process3DCard = ({ step }: any) => {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [rotateX, setRotateX] = useState(0);
+    const [rotateY, setRotateY] = useState(0);
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateXValue = ((y - centerY) / centerY) * -8;
+        const rotateYValue = ((x - centerX) / centerX) * 8;
+        setRotateX(rotateXValue);
+        setRotateY(rotateYValue);
+    };
+
+    const handleMouseLeave = () => {
+        setRotateX(0);
+        setRotateY(0);
+    };
+
+    return (
+        <motion.div
+            style={{ opacity: step.opacity, scale: step.scale }}
+            className="absolute inset-0 flex items-center justify-center p-6 pointer-events-none"
+        >
+            <div
+                ref={cardRef}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                className="w-full max-w-4xl perspective-1000 pointer-events-auto"
+            >
+                <motion.div
+                    className={`w-full bg-gradient-to-br ${step.bgGradient} backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-12 lg:p-16 shadow-2xl relative overflow-hidden transition-all duration-200`}
+                    style={{
+                        rotateX,
+                        rotateY,
+                        transformStyle: "preserve-3d"
+                    }}
+                >
+                    {/* Background glow */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent pointer-events-none z-0"></div>
+
+                    <div className="relative z-10 transform-style-3d">
+                        {/* Step Number Badge */}
+                        <div className="inline-flex items-center gap-4 mb-6 md:mb-8">
+                            <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-black/50 border-2 border-white/20 flex items-center justify-center ${step.color} shadow-lg`}>
+                                <step.icon size={32} strokeWidth={1.5} />
+                            </div>
+                            <div className={`text-6xl md:text-7xl font-black ${step.color} opacity-30`}>{step.number}</div>
+                        </div>
+
+                        {/* Content */}
+                        <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-tight drop-shadow-lg">
+                            {step.title}
+                        </h3>
+
+                        {/* Special Layout for Step 4 - Infrastructure */}
+                        {step.isInfrastructure ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                                {[
+                                    { icon: Calendar, label: "Système Calendrier & Réservations" },
+                                    { icon: Bot, label: "Activation Sarah IA" },
+                                    { icon: BarChart3, label: "Dashboard Financier Live" },
+                                    { icon: MessageCircle, label: "Système d'Avis Automatiques" },
+                                    { icon: Megaphone, label: "Marketing & Visibilité Online" }
+                                ].map((item, i) => (
+                                    <div key={i} className={`flex items-center gap-3 bg-black/40 p-3 rounded-xl border border-white/10 hover:border-${step.baseColor}-500/50 transition-colors group`}>
+                                        <div className={`w-8 h-8 rounded-lg bg-${step.baseColor}-500/20 flex items-center justify-center text-${step.baseColor}-400 group-hover:scale-110 transition-transform`}>
+                                            <item.icon size={16} />
+                                        </div>
+                                        <span className="text-sm font-bold text-gray-200">{item.label}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-8">
+                                {step.description}
+                            </p>
+                        )}
+
+                        {/* Completion Check */}
+                        <div className="mt-4 flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500/40 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                                <CheckCircle size={18} className="text-green-400" strokeWidth={3} />
+                            </div>
+                            <span className="text-sm text-green-400 font-bold uppercase tracking-widest">
+                                {step.number === "05" ? "Liberté Atteinte" : "Étape Complétée"}
+                            </span>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </motion.div>
+    );
+};
 
 const ProcessSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -13,27 +113,21 @@ const ProcessSection = () => {
     // Progress bar animation
     const progressHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-    // Individual step animations (7 steps total instead of 5)
-    const step1Opacity = useTransform(scrollYProgress, [0, 0.12, 0.20], [0, 1, 0]);
-    const step1Scale = useTransform(scrollYProgress, [0, 0.12, 0.20], [0.8, 1, 0.95]);
+    // Individual step animations (5 steps total)
+    const step1Opacity = useTransform(scrollYProgress, [0, 0.15, 0.25], [0, 1, 0]);
+    const step1Scale = useTransform(scrollYProgress, [0, 0.15, 0.25], [0.8, 1, 0.95]);
 
-    const step2Opacity = useTransform(scrollYProgress, [0.18, 0.28, 0.36], [0, 1, 0]);
-    const step2Scale = useTransform(scrollYProgress, [0.18, 0.28, 0.36], [0.8, 1, 0.95]);
+    const step2Opacity = useTransform(scrollYProgress, [0.2, 0.35, 0.45], [0, 1, 0]);
+    const step2Scale = useTransform(scrollYProgress, [0.2, 0.35, 0.45], [0.8, 1, 0.95]);
 
-    const step3Opacity = useTransform(scrollYProgress, [0.34, 0.44, 0.52], [0, 1, 0]);
-    const step3Scale = useTransform(scrollYProgress, [0.34, 0.44, 0.52], [0.8, 1, 0.95]);
+    const step3Opacity = useTransform(scrollYProgress, [0.4, 0.55, 0.65], [0, 1, 0]);
+    const step3Scale = useTransform(scrollYProgress, [0.4, 0.55, 0.65], [0.8, 1, 0.95]);
 
-    const step4Opacity = useTransform(scrollYProgress, [0.50, 0.60, 0.68], [0, 1, 0]);
-    const step4Scale = useTransform(scrollYProgress, [0.50, 0.60, 0.68], [0.8, 1, 0.95]);
+    const step4Opacity = useTransform(scrollYProgress, [0.6, 0.75, 0.85], [0, 1, 0]);
+    const step4Scale = useTransform(scrollYProgress, [0.6, 0.75, 0.85], [0.8, 1, 0.95]);
 
-    const step5Opacity = useTransform(scrollYProgress, [0.66, 0.76, 0.84], [0, 1, 0]);
-    const step5Scale = useTransform(scrollYProgress, [0.66, 0.76, 0.84], [0.8, 1, 0.95]);
-
-    const step6Opacity = useTransform(scrollYProgress, [0.82, 0.88, 0.94], [0, 1, 0]);
-    const step6Scale = useTransform(scrollYProgress, [0.82, 0.88, 0.94], [0.8, 1, 0.95]);
-
-    const step7Opacity = useTransform(scrollYProgress, [0.92, 0.96, 1], [0, 1, 1]);
-    const step7Scale = useTransform(scrollYProgress, [0.92, 0.96, 1], [0.8, 1, 1]);
+    const step5Opacity = useTransform(scrollYProgress, [0.8, 0.9, 1], [0, 1, 1]);
+    const step5Scale = useTransform(scrollYProgress, [0.8, 0.9, 1], [0.8, 1, 1]);
 
     const steps = [
         {
@@ -44,7 +138,8 @@ const ProcessSection = () => {
             title: "Audit Complet de Votre Marque",
             description: "Analyse approfondie de votre identité visuelle, positionnement marché, et présence digitale actuelle. Nous identifions vos forces et opportunités de croissance cachées.",
             color: "text-cyan-400",
-            bgGradient: "from-cyan-500/10 to-transparent"
+            bgGradient: "from-cyan-500/10 to-transparent",
+            baseColor: "cyan"
         },
         {
             opacity: step2Opacity,
@@ -54,7 +149,8 @@ const ProcessSection = () => {
             title: "Migration de Données",
             description: "Récupération sécurisée de votre historique Planity/Booksy. Fichiers clients, historique de RDV, préférences. Transition invisible en 24h sans perte de données.",
             color: "text-blue-400",
-            bgGradient: "from-blue-500/10 to-transparent"
+            bgGradient: "from-blue-500/10 to-transparent",
+            baseColor: "blue"
         },
         {
             opacity: step3Opacity,
@@ -64,55 +160,39 @@ const ProcessSection = () => {
             title: "Création Site Web Elite",
             description: "Design sur-mesure, shooting photo professionnel, intégration de votre identité visuelle. Configuration SEO local optimisée. Votre nouveau bastion digital premium.",
             color: "text-purple-400",
-            bgGradient: "from-purple-500/10 to-transparent"
+            bgGradient: "from-purple-500/10 to-transparent",
+            baseColor: "purple"
         },
         {
             opacity: step4Opacity,
             scale: step4Scale,
-            icon: FileText,
+            icon: Layers,
             number: "04",
-            title: "Configuration Infrastructure",
-            description: "Mise en place de tous les systèmes: paiement, facturation automatique, sauvegarde cloud, analytics. Tout est prêt pour le lancement.",
+            title: "Choix de l'Infrastructure",
+            description: "Configuration complète de votre écosystème.",
             color: "text-orange-400",
-            bgGradient: "from-orange-500/10 to-transparent"
+            bgGradient: "from-orange-500/10 to-transparent",
+            baseColor: "orange",
+            isInfrastructure: true
         },
         {
             opacity: step5Opacity,
             scale: step5Scale,
-            icon: Bot,
+            icon: ShieldCheck,
             number: "05",
-            title: "Activation Sarah IA",
-            description: "Sarah prend les commandes. Configuration vocale personnalisée, synchronisation agenda en temps réel. Elle gère 100% de vos appels entrants dès maintenant.",
-            color: "text-primary",
-            bgGradient: "from-primary/10 to-transparent"
-        },
-        {
-            opacity: step6Opacity,
-            scale: step6Scale,
-            icon: BarChart3,
-            number: "06",
-            title: "Dashboard Financier Live",
-            description: "Pilotage en temps réel de votre CA, marges, taux d'occupation. Analytics prédictifs et rapports automatisés. Prenez les bonnes décisions, au bon moment.",
-            color: "text-emerald-400",
-            bgGradient: "from-emerald-500/10 to-transparent"
-        },
-        {
-            opacity: step7Opacity,
-            scale: step7Scale,
-            icon: TrendingUp,
-            number: "07",
-            title: "Boucle de Croissance Infinie",
-            description: "Automatisation des avis 5 étoiles, boost SEO permanent, acquisition client automatique. La machine ne s'arrête jamais. Vous êtes officiellement libre.",
+            title: "Support VIP & Liberté",
+            description: "Tout est en place. Vous bénéficiez désormais d'un support prioritaire 24/7 pour toute question. Concentrez-vous sur votre art, StyleOS gère le reste. Bienvenue dans la cour des grands.",
             color: "text-green-400",
-            bgGradient: "from-green-500/10 to-transparent"
+            bgGradient: "from-green-500/10 to-transparent",
+            baseColor: "green"
         }
     ];
 
     return (
-        <div ref={sectionRef} className="relative z-10 bg-black h-[700vh]">
+        <div ref={sectionRef} className="relative z-10 bg-black h-[500vh]">
             <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center">
 
-                {/* Floating Title - Higher position */}
+                {/* Floating Title */}
                 <div className="absolute top-16 left-0 w-full text-center z-50 pointer-events-none transition-opacity duration-500" style={{ opacity: 1 }}>
                     <div className="relative inline-block">
                         <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full pointer-events-none"></div>
@@ -136,42 +216,7 @@ const ProcessSection = () => {
                 <div className="relative w-full h-full max-w-5xl mx-auto px-6 flex items-center justify-center mt-24">
                     {/* All Steps Overlapping */}
                     {steps.map((step, index) => (
-                        <motion.div
-                            key={index}
-                            style={{ opacity: step.opacity, scale: step.scale }}
-                            className="absolute inset-0 flex items-center justify-center p-6"
-                        >
-                            <div className={`w-full max-w-3xl bg-gradient-to-br ${step.bgGradient} backdrop-blur-xl border border-white/10 rounded-[3rem] p-12 md:p-16 shadow-2xl relative overflow-hidden`}>
-                                {/* Background glow */}
-                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent pointer-events-none"></div>
-
-                                <div className="relative z-10">
-                                    {/* Step Number Badge */}
-                                    <div className="inline-flex items-center gap-3 mb-8">
-                                        <div className={`w-16 h-16 rounded-2xl bg-black/50 border-2 border-white/20 flex items-center justify-center ${step.color} shadow-lg`}>
-                                            <step.icon size={32} strokeWidth={1.5} />
-                                        </div>
-                                        <div className={`text-7xl font-black ${step.color} opacity-30`}>{step.number}</div>
-                                    </div>
-
-                                    {/* Content */}
-                                    <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-tight">
-                                        {step.title}
-                                    </h3>
-                                    <p className="text-xl text-gray-300 leading-relaxed font-light">
-                                        {step.description}
-                                    </p>
-
-                                    {/* Completion Check */}
-                                    <div className="mt-8 flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500/40">
-                                            <CheckCircle size={18} className="text-green-400" strokeWidth={3} />
-                                        </div>
-                                        <span className="text-sm text-green-400 font-bold uppercase tracking-widest">Étape Complétée</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
+                        <Process3DCard key={index} step={step} />
                     ))}
                 </div>
             </div>

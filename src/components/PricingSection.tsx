@@ -40,12 +40,17 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
     const displayPrice = billingPeriod === 'annual' ? annualPrice : monthlyPrice;
     const savings = billingPeriod === 'annual' ? Math.round(monthlyPrice * 12 - annualPrice * 12) : 0;
 
+    const handleCardClick = () => {
+        navigate(`/plan/${planId}`);
+    };
+
     return (
         <div
             ref={cardRef}
+            onClick={handleCardClick}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative h-full perspective-1000"
+            className="relative h-full perspective-1000 cursor-pointer"
             style={{
                 transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
                 transition: 'transform 0.1s ease-out',
@@ -244,11 +249,9 @@ const PricingSection = () => {
                         className={`px-8 py-3 rounded-full font-black uppercase tracking-widest text-xs transition-all relative ${billingPeriod === 'annual' ? 'bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] text-black shadow-lg shadow-primary/50' : 'text-gray-400 hover:text-white'}`}
                     >
                         Annuel
-                        {billingPeriod === 'annual' && (
-                            <span className="absolute -top-2 -right-2 bg-emerald-500 text-black text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg">
-                                -20%
-                            </span>
-                        )}
+                        <span className="absolute -top-2 -right-2 bg-emerald-500 text-black text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg">
+                            -20%
+                        </span>
                     </button>
                 </div>
             </div>
