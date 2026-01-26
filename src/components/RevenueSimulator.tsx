@@ -131,23 +131,17 @@ const RevenueSimulator = () => {
                 </div>
             </div>
 
-            {/* 2 Info Boxes */}
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-black/40">
+            {/* 3 Info Boxes - Symmetrical Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-black/40">
 
-                {/* Box 1: Empty Placeholder or Adjusted Grid? - Removing the box completely and adjusting grid cols if needed, but for now just removing content or making it hidden/different? Better to just remove the specific "Missed Revenue" box logic and maybe keep others. */}
-                {/* Actually, if I remove Box 1, the grid is 3 cols. The user wants to remove the duplication. I will remove the first div and letting the others shift or I might need to adjust the grid. 
-                The grid is `grid-cols-1 md:grid-cols-3`. If I remove one, I have 2 boxes. I should probably adjust the grid to `md:grid-cols-2`.
-                */}
-
-
-                {/* Box 1.5 (Middle): Commission Cost */}
-                <div className="p-8 md:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group/box1 border-r border-white/5 md:border-r-0 md:border-b-0">
-                    <div className="flex items-center gap-2 mb-4 opacity-70 group-hover/box1:opacity-100 transition-opacity">
+                {/* Box 1: Commission Cost */}
+                <div className="p-6 md:p-8 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group/box1">
+                    <div className="flex items-center gap-2 mb-3 opacity-70 group-hover/box1:opacity-100 transition-opacity">
                         <AlertCircle className="w-4 h-4 text-red-500" />
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Coût Commissions</span>
                     </div>
                     <div>
-                        <div className="text-3xl font-black text-red-500/80 tracking-tighter mb-1 tabular-nums group-hover/box1:text-red-500 transition-colors">
+                        <div className="text-2xl md:text-3xl font-black text-red-500/80 tracking-tighter mb-1 tabular-nums group-hover/box1:text-red-500 transition-colors">
                             {competitorCost}€
                         </div>
                         <div className="text-[9px] text-gray-600 uppercase tracking-widest font-bold">Frais Plateforme / mois</div>
@@ -155,14 +149,14 @@ const RevenueSimulator = () => {
                 </div>
 
                 {/* Box 2: StyleOS Cost */}
-                <div className="p-8 md:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors relative overflow-hidden group/box2">
+                <div className="p-6 md:p-8 flex flex-col justify-between hover:bg-white/[0.02] transition-colors relative overflow-hidden group/box2">
                     <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 blur-xl rounded-full"></div>
-                    <div className="flex items-center gap-2 mb-4 group-hover/box2:scale-105 transition-transform origin-left">
+                    <div className="flex items-center gap-2 mb-3 group-hover/box2:scale-105 transition-transform origin-left">
                         <CheckCircle2 className="w-4 h-4 text-primary" />
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Coût StyleOS</span>
                     </div>
                     <div>
-                        <div className="text-3xl font-black text-white tracking-tighter mb-1 tabular-nums">
+                        <div className="text-2xl md:text-3xl font-black text-white tracking-tighter mb-1 tabular-nums">
                             {styleOSCost}€
                         </div>
                         <div className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">Forfait Fixe "Pro" / mois</div>
@@ -170,18 +164,18 @@ const RevenueSimulator = () => {
                 </div>
 
                 {/* Box 3: Total Potential Gain */}
-                <div className="p-8 md:p-10 flex flex-col justify-between bg-gradient-to-br from-primary/10 via-black to-black relative group/savings overflow-hidden">
+                <div className="p-6 md:p-8 flex flex-col justify-between bg-gradient-to-br from-primary/10 via-black to-black relative group/savings overflow-hidden">
                     <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover/savings:opacity-100 transition-opacity pointer-events-none"></div>
-                    <div className="flex items-center gap-2 mb-4 relative z-10">
+                    <div className="flex items-center gap-2 mb-3 relative z-10">
                         <TrendingUp className="w-4 h-4 text-green-400 animate-pulse" />
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-green-400">Gain Potentiel Total</span>
                     </div>
                     <div className="relative z-10">
-                        <div className="text-4xl font-black text-green-400 tracking-tighter mb-1 tabular-nums drop-shadow-[0_0_15px_rgba(74,222,128,0.2)]">
+                        <div className="text-3xl md:text-4xl font-black text-green-400 tracking-tighter mb-1 tabular-nums drop-shadow-[0_0_15px_rgba(74,222,128,0.2)]">
                             +{(totalPotentialGain > 0 ? totalPotentialGain : 0).toLocaleString()}€
                         </div>
                         <div className="text-[9px] text-primary/60 uppercase tracking-widest font-bold">
-                            Économies + Revenus Récupérés / An
+                            Économies + Revenus / An
                         </div>
                     </div>
                 </div>

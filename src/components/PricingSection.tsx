@@ -43,7 +43,7 @@ const getThemeStyles = (planId: string) => {
     }
 }
 
-const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, originalAnnualPrice, description, icon: Icon, features, isPopular, planId, actionLabel, roiText, disabledFeatures = [], billingPeriod }: any) => {
+const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, originalAnnualPrice, description, icon: Icon, features, isPopular, planId, roiText, disabledFeatures = [], billingPeriod }: any) => {
     const navigate = useNavigate();
     const cardRef = useRef<HTMLDivElement>(null);
     const [rotateX, setRotateX] = useState(0);
@@ -193,12 +193,12 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                         ))}
                     </ul>
 
-                    <button
-                        onClick={() => navigate(`/plan/${planId}`)}
-                        className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all shadow-2xl relative overflow-hidden group-hover:scale-[1.02] active:scale-95 ${theme.button}`}
-                    >
-                        {actionLabel} <ArrowUpRight size={16} />
-                    </button>
+                    {/* Click Hint instead of Button */}
+                    <div className="mt-auto pt-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <span className={`text-[10px] uppercase font-bold tracking-widest ${theme.text} flex items-center justify-center gap-2`}>
+                            Cliquez pour plus d'infos <ArrowUpRight size={12} />
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -333,10 +333,10 @@ const PricingSection = () => {
 
                 <PricingCard
                     title="Elite"
-                    monthlyPrice="199"
-                    originalMonthlyPrice="249"
-                    annualPrice="159"
-                    originalAnnualPrice="199"
+                    monthlyPrice="139" /* 30% off 199 ~ 139 */
+                    originalMonthlyPrice="199"
+                    annualPrice="111" /* 30% off 159 ~ 111 */
+                    originalAnnualPrice="159"
                     description="DOMINATION TOTALE ET GESTION AUTOMATISÉE."
                     icon={Crown}
                     roiText="~1200€ / MOIS ÉCONOMISÉS"
@@ -346,12 +346,15 @@ const PricingSection = () => {
                     actionLabel="DEVENIR ELITE"
                     isPopular={true}
                     billingPeriod={billingPeriod}
+                /* Adding discount visual logic or props could be complex, relying on originalPrice logic already present */
                 />
 
                 <PricingCard
                     title="Empire"
-                    monthlyPrice="279"
-                    annualPrice="223"
+                    monthlyPrice="195" /* 30% off 279 ~ 195 */
+                    originalMonthlyPrice="279"
+                    annualPrice="156" /* 30% off 223 ~ 156 */
+                    originalAnnualPrice="223"
                     description="POUR LES VISIONNAIRES MULTI-ÉTABLISSEMENTS."
                     icon={TrendingUp}
                     roiText="ROI ILLIMITÉ / MULTI-SIÈGE"

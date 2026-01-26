@@ -11,6 +11,7 @@ import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
 import GuaranteeSection from './components/GuaranteeSection';
 import ProcessSection from './components/ProcessSection';
+import LandingBackground from './components/LandingBackground';
 
 // --- ANIMATION WRAPPER ---
 const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }: any) => {
@@ -422,7 +423,8 @@ function LandingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-primary selection:text-black font-sans">
+        <div className="min-h-screen bg-black text-white selection:bg-primary selection:text-black font-sans relative">
+            <LandingBackground />
             <style>{`
                 @keyframes scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
                 @keyframes growBar { from { height: 0; } to { height: 85%; } }
@@ -634,66 +636,66 @@ function LandingPage() {
                             icon={Server}
                             align="left"
                             visual={
-                                <div className="w-full h-full min-h-[400px] rounded-[2.5rem] bg-black border border-white/10 relative overflow-hidden flex items-center justify-center group">
-                                    {/* Starry Background */}
-                                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 animate-pulse"></div>
+                                <div className="w-full h-full min-h-[400px] relative overflow-visible flex items-center justify-center group">
+                                    {/* Starry Background Container - Removed Borders */}
+                                    <div className="absolute inset-x-[-50vw] inset-y-[-50vh] opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 to-transparent pointer-events-none"></div>
 
-                                    <div className="relative w-full max-w-lg h-64 flex items-center justify-between px-8 md:px-16">
+                                    <div className="relative w-full max-w-lg h-64 flex items-center justify-between px-0 md:px-4">
 
                                         {/* Source Bubble: "Planet" (Old System) */}
                                         <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0">
                                             {/* Planet Visual */}
-                                            <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-900 to-black border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.2)] relative z-10 overflow-hidden flex items-center justify-center group-hover:scale-95 transition-transform duration-700">
+                                            <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-900 to-black border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.3)] relative z-10 overflow-hidden flex items-center justify-center group-hover:scale-95 transition-transform duration-700">
                                                 {/* Crutched Texture */}
                                                 <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-400/20 via-transparent to-transparent"></div>
-                                                <div className="font-bold text-blue-300/80 text-sm tracking-widest uppercase z-20">Ancien</div>
+                                                <div className="font-bold text-blue-300 text-base tracking-widest uppercase z-20 font-sans">Planity</div>
                                             </div>
                                             {/* Rings */}
-                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[30%] border border-blue-500/20 rounded-full -rotate-12 pointer-events-none"></div>
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[30%] border-[2px] border-blue-500/20 rounded-full -rotate-12 pointer-events-none"></div>
                                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[40%] border border-blue-500/10 rounded-full -rotate-45 pointer-events-none"></div>
                                         </div>
 
                                         {/* Particle Stream */}
-                                        <div className="flex-1 h-20 relative mx-4">
+                                        <div className="flex-1 h-24 relative mx-2">
                                             {/* Stream Container */}
-                                            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-blue-900/50 via-primary/50 to-primary/20 -translate-y-1/2 overflow-hidden">
+                                            <div className="absolute top-1/2 left-0 w-full h-[4px] bg-gradient-to-r from-blue-900/30 via-primary/30 to-primary/10 -translate-y-1/2 rounded-full overflow-hidden blur-[1px]">
                                                 <motion.div
-                                                    className="w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-50 block"
+                                                    className="w-full h-full bg-gradient-to-r from-transparent via-white/80 to-transparent opacity-70 block"
                                                     animate={{ x: ["-100%", "100%"] }}
-                                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                                                    transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
                                                 />
                                             </div>
 
-                                            {/* Floating Data Particles */}
-                                            {[...Array(6)].map((_, i) => (
+                                            {/* Floating Data Particles - Enhanced Visibility */}
+                                            {[...Array(8)].map((_, i) => (
                                                 <motion.div
                                                     key={i}
-                                                    className="absolute top-1/2 left-0 w-2 h-2 rounded-full"
-                                                    initial={{ x: 0, opacity: 0, y: (Math.random() - 0.5) * 40 }}
+                                                    className="absolute top-1/2 left-0"
+                                                    initial={{ x: 0, opacity: 0, y: (Math.random() - 0.5) * 60 }}
                                                     animate={{
                                                         x: "100%",
                                                         opacity: [0, 1, 1, 0],
-                                                        scale: [0.5, 1, 0.5]
+                                                        scale: [0.8, 1.2, 0.8]
                                                     }}
                                                     transition={{
-                                                        duration: 2 + Math.random(),
+                                                        duration: 1.5 + Math.random(),
                                                         repeat: Infinity,
-                                                        delay: i * 0.4,
+                                                        delay: i * 0.2,
                                                         ease: "easeInOut"
                                                     }}
                                                 >
-                                                    <div className={`w-full h-full rounded-full ${i % 2 === 0 ? 'bg-primary shadow-[0_0_10px_#D4AF37]' : 'bg-blue-400 shadow-[0_0_10px_#60A5FA]'}`}></div>
+                                                    <div className={`rounded-full blur-[0.5px] ${i % 2 === 0 ? 'w-3 h-3 bg-primary shadow-[0_0_15px_#D4AF37]' : 'w-2 h-2 bg-blue-400 shadow-[0_0_15px_#60A5FA]'}`}></div>
                                                 </motion.div>
                                             ))}
 
-                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[150%] text-[8px] uppercase tracking-[0.3em] text-primary/80 font-bold bg-black/80 px-2 py-1 border border-white/5 rounded backdrop-blur-sm animate-pulse">
-                                                Transfert Auto
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[200%] text-[10px] uppercase tracking-[0.3em] text-white font-black bg-black/60 px-3 py-1.5 border border-white/10 rounded-full backdrop-blur-md shadow-lg animate-pulse whitespace-nowrap">
+                                                Transfert <span className="text-primary">Auto</span>
                                             </div>
                                         </div>
 
                                         {/* Destination Bubble: StyleOS Sphere */}
                                         <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0">
-                                            <div className="w-full h-full rounded-full bg-black border border-primary/50 relative z-10 flex items-center justify-center shadow-[0_0_60px_rgba(212,175,55,0.2)] group-hover:shadow-[0_0_80px_rgba(212,175,55,0.4)] transition-all duration-700">
+                                            <div className="w-full h-full rounded-full bg-black border border-primary/60 relative z-10 flex items-center justify-center shadow-[0_0_80px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_100px_rgba(212,175,55,0.5)] transition-all duration-700">
                                                 {/* Liquid Gold Core */}
                                                 <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary/20 via-black to-black overflow-hidden">
                                                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
@@ -702,17 +704,17 @@ function LandingPage() {
 
                                                 {/* Core Icon */}
                                                 <div className="relative z-20 flex flex-col items-center">
-                                                    <Bot size={32} className="text-primary mb-1 drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]" />
-                                                    <span className="font-black text-white tracking-tighter text-lg">StyleOS</span>
+                                                    <Bot size={36} className="text-primary mb-1 drop-shadow-[0_0_15px_rgba(212,175,55,1)]" />
+                                                    <span className="font-black text-white tracking-tighter text-xl drops-shadow-md">StyleOS</span>
                                                 </div>
 
                                                 {/* Orbiting Satellite */}
                                                 <motion.div
-                                                    className="absolute inset-0 rounded-full border border-primary/10"
+                                                    className="absolute inset-0 rounded-full border border-primary/20"
                                                     animate={{ rotate: 360 }}
-                                                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                                                 >
-                                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_#D4AF37]"></div>
+                                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_#D4AF37] border-2 border-black"></div>
                                                 </motion.div>
                                             </div>
                                         </div>

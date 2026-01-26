@@ -73,9 +73,9 @@ const Process3DCard = ({ step }: any) => {
                                         </p>
                                         <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl h-48 group">
                                             {/* Generated Audit Image Reuse or Abstract */}
-                                            <div className="absolute inset-0 bg-purple-900/20 mix-blend-overlay z-10"></div>
+                                            <div className="absolute inset-0 bg-purple-900/10 mix-blend-overlay z-10"></div>
                                             {/* A smaller, elegant visual for the Web Elite card */}
-                                            <div className="absolute inset-0 bg-[url('/audit_visual.png')] bg-cover bg-center opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"></div>
+                                            <div className="absolute inset-0 bg-[url('/audit_real.png')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-all duration-700"></div>
                                             <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur px-4 py-2 rounded-full border border-white/10 z-20">
                                                 <span className="text-xs font-bold text-white uppercase tracking-widest">Score 98/100</span>
                                             </div>
@@ -195,7 +195,7 @@ const ProcessSection = () => {
             color: "text-cyan-400",
             bgGradient: "from-cyan-500/10 to-transparent",
             baseColor: "cyan",
-            image: "/audit_visual.png"
+            image: "/audit_real.png"
         },
         {
             opacity: step2Opacity,
@@ -207,7 +207,7 @@ const ProcessSection = () => {
             color: "text-blue-400",
             bgGradient: "from-blue-500/10 to-transparent",
             baseColor: "blue",
-            image: "/migration_visual.png"
+            image: "/migration_real.png"
         },
         {
             opacity: step3Opacity,
@@ -243,7 +243,7 @@ const ProcessSection = () => {
             color: "text-green-400",
             bgGradient: "from-green-500/10 to-transparent",
             baseColor: "green",
-            image: "/support_visual.png"
+            image: "/support_real.png"
         }
     ];
 
