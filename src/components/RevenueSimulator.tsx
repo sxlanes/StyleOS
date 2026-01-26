@@ -124,8 +124,8 @@ const RevenueSimulator = () => {
                             <span>0</span>
                             <span>20+</span>
                         </div>
-                        <div className="mt-4 text-[10px] text-red-400/80 font-bold text-center bg-red-500/10 py-1 px-2 rounded border border-red-500/20">
-                            Perte: -{monthlyMissedRevenue.toLocaleString()}€ / mois
+                        <div className="mt-4 text-sm text-red-500 font-black text-center bg-red-500/20 py-3 px-4 rounded-xl border-2 border-red-500/40 shadow-[0_0_20px_rgba(239,68,68,0.2)] animate-pulse">
+                            PERTE: -{monthlyMissedRevenue.toLocaleString()}€ / MOIS
                         </div>
                     </div>
                 </div>

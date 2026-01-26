@@ -2,7 +2,7 @@ import { ArrowUpRight, Check, Shield, Zap, Crown, TrendingUp, Globe, XCircle } f
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, type MouseEvent } from 'react';
 
-const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon, features, isPopular, planId, actionLabel, theme, roiText, disabledFeatures = [], billingPeriod }: any) => {
+const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, originalAnnualPrice, description, icon: Icon, features, isPopular, planId, actionLabel, theme, roiText, disabledFeatures = [], billingPeriod }: any) => {
     const navigate = useNavigate();
     const cardRef = useRef<HTMLDivElement>(null);
     const [rotateX, setRotateX] = useState(0);
@@ -20,8 +20,8 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateXValue = ((y - centerY) / centerY) * -8; // Reduced from -15 for subtler effect
-        const rotateYValue = ((x - centerX) / centerX) * 8; // Reduced from 15 for subtler effect
+        const rotateXValue = ((y - centerY) / centerY) * -8;
+        const rotateYValue = ((x - centerX) / centerX) * 8;
 
         setRotateX(rotateXValue);
         setRotateY(rotateYValue);
@@ -38,6 +38,10 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
 
     const isElite = theme === 'elite';
     const displayPrice = billingPeriod === 'annual' ? annualPrice : monthlyPrice;
+    const originalPrice = billingPeriod === 'annual' ? originalAnnualPrice : originalMonthlyPrice;
+
+    // Calculate savings based on annual discount vs monthly
+    // If annual, savings = (monthly * 12) - (annual * 12)
     const savings = billingPeriod === 'annual' ? Math.round(monthlyPrice * 12 - annualPrice * 12) : 0;
 
     const handleCardClick = () => {
@@ -102,9 +106,15 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
                     {/* Price Section */}
                     <div className="mb-8 relative z-10">
                         <div className="flex items-end gap-1 leading-none mb-4">
-                            {billingPeriod === 'annual' && (
-                                <span className="text-2xl text-gray-600 line-through font-bold mb-2 mr-2">{monthlyPrice}€</span>
-                            )}
+                            <div className="flex flex-col items-end mr-2 mb-1">
+                                {originalPrice && (
+                                    <span className="text-xl text-gray-500 line-through font-bold">{originalPrice}€</span>
+                                )}
+                                {billingPeriod === 'annual' && !originalPrice && (
+                                    <span className="text-2xl text-gray-600 line-through font-bold mb-2">{monthlyPrice}€</span>
+                                )}
+                            </div>
+
                             <span className={`text-7xl font-black tracking-tighter drop-shadow-2xl ${isElite ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] bg-[length:200%_auto] animate-shimmer' : 'text-white'}`}>
                                 {displayPrice}
                             </span>
@@ -140,11 +150,11 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, description, icon: Icon
                             );
                         })}
                         {disabledFeatures.map((feature: string, i: number) => (
-                            <li key={`disabled-${i}`} className="flex items-start gap-3 text-sm text-gray-700 font-medium opacity-40">
-                                <div className="w-5 h-5 rounded-full border-2 border-gray-800 flex items-center justify-center shrink-0 mt-0.5">
+                            <li key={`disabled-${i}`} className="flex items-start gap-3 text-sm text-gray-500 font-medium opacity-100">
+                                <div className="w-5 h-5 rounded-full border-2 border-white/10 flex items-center justify-center shrink-0 mt-0.5 text-gray-600 bg-white/5">
                                     <XCircle size={12} />
                                 </div>
-                                <span className="line-through">{feature}</span>
+                                <span className="line-through decoration-gray-700 text-gray-500">{feature}</span>
                             </li>
                         ))}
                     </ul>
@@ -227,6 +237,7 @@ const PricingSection = () => {
                             </p>
                         </div>
                         <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">
+                            <span className="text-xl text-gray-500 line-through font-bold mb-1">489€</span>
                             <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-primary tracking-tighter group-hover:scale-110 transition-transform">289€</div>
                             <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mt-1">Paiement Unique</div>
                             <div className="mt-3 flex items-center gap-2 text-xs text-emerald-400 font-bold uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
@@ -290,7 +301,9 @@ const PricingSection = () => {
                 <PricingCard
                     title="Elite"
                     monthlyPrice="199"
+                    originalMonthlyPrice="249"
                     annualPrice="159"
+                    originalAnnualPrice="199"
                     description="DOMINATION TOTALE ET GESTION AUTOMATISÉE."
                     icon={Crown}
                     roiText="~1200€ / MOIS ÉCONOMISÉS"

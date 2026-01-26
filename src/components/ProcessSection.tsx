@@ -62,21 +62,58 @@ const Process3DCard = ({ step }: any) => {
                             {step.title}
                         </h3>
 
-                        {/* Special Layout for Step 4 - Infrastructure */}
-                        {step.isInfrastructure ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                        {/* Special Layout for Step 3 - Web Elite */}
+                        {step.isWebElite ? (
+                            <div className="mb-8">
+                                <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-6">
+                                    {step.description}
+                                </p>
+                                <div className="relative rounded-xl overflow-hidden border border-white/10 group-hover:border-purple-500/30 transition-all shadow-2xl">
+                                    <div className="absolute inset-0 bg-purple-900/20 mix-blend-overlay z-10"></div>
+                                    <div className="grid grid-cols-2 gap-[1px] bg-white/5">
+                                        <div className="aspect-square bg-[#0a0a0a] flex items-center justify-center p-4">
+                                            <div className="w-full h-full border border-white/5 rounded-lg flex flex-col gap-2 p-2">
+                                                <div className="h-2 w-1/3 bg-white/10 rounded"></div>
+                                                <div className="h-16 w-full bg-white/5 rounded flex items-center justify-center">
+                                                    <div className="w-8 h-8 rounded-full bg-purple-500/20"></div>
+                                                </div>
+                                                <div className="flex-1 grid grid-cols-2 gap-2">
+                                                    <div className="bg-white/5 rounded"></div>
+                                                    <div className="bg-white/5 rounded"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="aspect-square bg-[#0a0a0a] flex items-center justify-center p-4">
+                                            <div className="text-center">
+                                                <div className="text-2xl font-black text-white mb-1">98/100</div>
+                                                <div className="text-[10px] text-gray-500 uppercase tracking-widest">Score Google</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                                </div>
+                            </div>
+                        ) : step.isInfrastructure ? (
+                            <div className="flex flex-wrap justify-center gap-4 mb-8 max-w-lg mx-auto relative perspective-500">
+                                {/* Central Node */}
+                                <div className="absolute inset-0 bg-orange-500/5 blur-3xl rounded-full z-0"></div>
+
+                                {/* Orbiting Satellites */}
+                                <div className="absolute inset-0 border border-orange-500/20 rounded-full animate-[spin_10s_linear_infinite] pointer-events-none opacity-30"></div>
+                                <div className="absolute inset-4 border border-orange-500/10 rounded-full animate-[spin_15s_linear_infinite_reverse] pointer-events-none opacity-20"></div>
+
                                 {[
-                                    { icon: Calendar, label: "Système Calendrier & Réservations" },
-                                    { icon: Bot, label: "Activation Sarah IA" },
-                                    { icon: BarChart3, label: "Dashboard Financier Live" },
-                                    { icon: MessageCircle, label: "Système d'Avis Automatiques" },
-                                    { icon: Megaphone, label: "Marketing & Visibilité Online" }
+                                    { icon: Calendar, label: "Booking" },
+                                    { icon: Bot, label: "Sarah IA" },
+                                    { icon: BarChart3, label: "Finance" },
+                                    { icon: MessageCircle, label: "Avis" },
+                                    { icon: Megaphone, label: "Marketing" }
                                 ].map((item, i) => (
-                                    <div key={i} className={`flex items-center gap-3 bg-black/40 p-3 rounded-xl border border-white/10 hover:border-${step.baseColor}-500/50 transition-colors group`}>
-                                        <div className={`w-8 h-8 rounded-lg bg-${step.baseColor}-500/20 flex items-center justify-center text-${step.baseColor}-400 group-hover:scale-110 transition-transform`}>
+                                    <div key={i} className={`flex flex-col items-center gap-2 p-3 w-24 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 hover:border-${step.baseColor}-500/50 transition-all group z-10 hover:scale-110 shadow-lg`}>
+                                        <div className={`w-8 h-8 rounded-lg bg-${step.baseColor}-500/20 flex items-center justify-center text-${step.baseColor}-400 group-hover:text-white transition-colors`}>
                                             <item.icon size={16} />
                                         </div>
-                                        <span className="text-sm font-bold text-gray-200">{item.label}</span>
+                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wide">{item.label}</span>
                                     </div>
                                 ))}
                             </div>
@@ -161,7 +198,8 @@ const ProcessSection = () => {
             description: "Design sur-mesure, shooting photo professionnel, intégration de votre identité visuelle. Configuration SEO local optimisée. Votre nouveau bastion digital premium.",
             color: "text-purple-400",
             bgGradient: "from-purple-500/10 to-transparent",
-            baseColor: "purple"
+            baseColor: "purple",
+            isWebElite: true
         },
         {
             opacity: step4Opacity,

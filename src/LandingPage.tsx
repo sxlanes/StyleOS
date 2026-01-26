@@ -215,7 +215,7 @@ const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, vi
 };
 
 /* --- STICKY FEATURE --- */
-const StickyFeatureRow = ({ title, description, icon: Icon, visual, style, align = 'left' }: any) => {
+const StickyFeatureRow = ({ title, description, icon: Icon, visual, style, align = 'left', action }: any) => {
     return (
         <motion.div style={style} className="absolute top-0 left-0 w-full h-full flex items-center justify-center perspective-[1000px]">
             {/* Background glow for smoother transition */}
@@ -251,6 +251,15 @@ const StickyFeatureRow = ({ title, description, icon: Icon, visual, style, align
                     >
                         {description}
                     </motion.p>
+                    {action && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                        >
+                            {action}
+                        </motion.div>
+                    )}
                 </div>
             </div>
         </motion.div>
@@ -453,7 +462,11 @@ function LandingPage() {
                             title="Web Elite"
                             description='Design "Dark Luxury" sur-mesure ou Templates Premium. SEO Local dominant. Votre présence digitale devient votre meilleur atout.'
                             icon={Monitor}
-                            visual={<WebEliteMock />}
+                            visual={
+                                <Link to="/demos" className="block w-full h-full cursor-pointer">
+                                    <WebEliteMock />
+                                </Link>
+                            }
                             align="left"
                         />
 
@@ -475,55 +488,51 @@ function LandingPage() {
                             icon={BarChart3}
                             align="left"
                             visual={
-                                <div className="relative group">
-                                    <Link to="/dashboard-demo" className="block w-full h-full max-w-lg mx-auto transform transition-transform hover:scale-[1.02]">
-                                        <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group-hover:border-primary/30 transition-colors cursor-pointer">
-                                            <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
-                                                <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
-                                                <LayoutDashboard className="w-5 h-5 text-white/80" />
-                                                <Users className="w-5 h-5 text-gray-600" />
-                                                <Calendar className="w-5 h-5 text-gray-600" />
-                                                <Wallet className="w-5 h-5 text-gray-600" />
+                                <Link to="/dashboard-demo" className="block w-full h-full max-w-lg mx-auto transform transition-transform hover:scale-[1.02]">
+                                    <div className="w-full h-full bg-[#09090b] flex rounded-xl border border-white/10 overflow-hidden relative shadow-2xl font-sans group-hover:border-primary/30 transition-colors cursor-pointer">
+                                        <div className="w-14 border-r border-white/10 flex flex-col items-center py-6 gap-6 bg-black z-20">
+                                            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-black font-bold">S</div>
+                                            <LayoutDashboard className="w-5 h-5 text-white/80" />
+                                            <Users className="w-5 h-5 text-gray-600" />
+                                            <Calendar className="w-5 h-5 text-gray-600" />
+                                            <Wallet className="w-5 h-5 text-gray-600" />
+                                        </div>
+                                        <div className="flex-1 p-6 flex flex-col bg-black relative">
+                                            <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
+                                                <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
                                             </div>
-                                            <div className="flex-1 p-6 flex flex-col bg-black relative">
-                                                <div className="absolute top-0 right-0 p-4 opacity-50 pointer-events-none select-none">
-                                                    <div className="w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+                                            <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
+                                                <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
+                                                    <div className="text-xl font-black text-white">12,450€</div>
+                                                    <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-3 mb-6 relative z-10">
-                                                    <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                                        <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Chiffre d'Affaire</div>
-                                                        <div className="text-xl font-black text-white">12,450€</div>
-                                                        <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +15% vs M-1</div>
-                                                    </div>
-                                                    <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
-                                                        <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
-                                                        <div className="text-xl font-black text-white">65€</div>
-                                                        <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
-                                                    </div>
+                                                <div className="p-3 bg-white/5 rounded-lg border border-white/5 group-hover:bg-white/10 transition-colors">
+                                                    <div className="text-[8px] text-gray-500 uppercase tracking-wider mb-2">Ticket Moyen</div>
+                                                    <div className="text-xl font-black text-white">65€</div>
+                                                    <div className="text-[8px] text-green-500 font-bold flex items-center gap-1"><ArrowRight className="w-2 h-2 -rotate-45" /> +4€ vs M-1</div>
                                                 </div>
-                                                <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
-                                                <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
-                                                    {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
-                                                        <motion.div
-                                                            key={i}
-                                                            initial={{ height: 0 }}
-                                                            whileInView={{ height: `${h}%` }}
-                                                            transition={{ duration: 0.5, delay: i * 0.05 }}
-                                                            className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
-                                                        />
-                                                    ))}
-                                                </div>
+                                            </div>
+                                            <div className="text-[8px] text-gray-500 uppercase tracking-widest mb-2">Occupation Hebdomadaire</div>
+                                            <div className="flex-1 bg-white/[0.02] rounded-lg border border-white/5 relative overflow-hidden flex items-end px-2 pt-2 gap-1 z-10">
+                                                {[40, 65, 55, 85, 60, 45, 90, 70, 80, 95, 50, 60].map((h, i) => (
+                                                    <motion.div
+                                                        key={i}
+                                                        initial={{ height: 0 }}
+                                                        whileInView={{ height: `${h}%` }}
+                                                        transition={{ duration: 0.5, delay: i * 0.05 }}
+                                                        className="flex-1 bg-white/10 rounded-t-sm group-hover:bg-primary/50 transition-colors hover:bg-primary"
+                                                    />
+                                                ))}
                                             </div>
                                         </div>
-                                    </Link>
-
-                                    {/* Dashboard Button - ALWAYS VISIBLE */}
-                                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 opacity-100 transition-all duration-300 w-full flex justify-center pointer-events-none">
-                                        <Link to="/dashboard-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2 pointer-events-auto">
-                                            Explorer le Dashboard <ArrowRight size={14} />
-                                        </Link>
                                     </div>
-                                </div>
+                                </Link>
+                            }
+                            action={
+                                <Link to="/dashboard-demo" className="inline-flex items-center gap-2 bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
+                                    Explorer le Dashboard <ArrowRight size={14} />
+                                </Link>
                             }
                         />
 
@@ -534,18 +543,14 @@ function LandingPage() {
                             description="Automatisation des campagnes. Fidélisation client. Transformez votre réputation en revenus grâce à notre gestionnaire de publicités intégré."
                             icon={Megaphone}
                             visual={
-                                <div className="relative group">
-                                    <Link to="/marketing-demo" className="block w-full h-full">
-                                        <SocialMock />
-                                    </Link>
-
-                                    {/* Marketing Explorer Button - ALWAYS VISIBLE */}
-                                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 opacity-100 transition-all duration-300 w-full flex justify-center pointer-events-none">
-                                        <Link to="/marketing-demo" className="bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform flex items-center gap-2 pointer-events-auto">
-                                            Explorer Marketing <ArrowRight size={14} />
-                                        </Link>
-                                    </div>
-                                </div>
+                                <Link to="/marketing-demo" className="block w-full h-full">
+                                    <SocialMock />
+                                </Link>
+                            }
+                            action={
+                                <Link to="/marketing-demo" className="inline-flex items-center gap-2 bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
+                                    Explorer Marketing <ArrowRight size={14} />
+                                </Link>
                             }
                             align="right"
                         />
@@ -557,6 +562,11 @@ function LandingPage() {
                             description="Ne laissez plus vos clients partir sans laisser 5 étoiles. Notre IA détecte les clients satisfaits et sollicite un avis automatiquement via SMS."
                             icon={Star}
                             visual={<ReviewsMock />}
+                            action={
+                                <Link to="/demos" className="inline-flex items-center gap-2 bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
+                                    Voir la Démo <ArrowRight size={14} />
+                                </Link>
+                            }
                             align="left"
                         />
                     </div>
@@ -581,24 +591,30 @@ function LandingPage() {
                                         <div className="flex flex-col items-center gap-6 group/node">
                                             <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 grayscale opacity-60 group-hover/node:grayscale-0 group-hover/node:opacity-100 transition-all duration-500 bg-[#004bad]/10">
                                                 {/* Planity Logo Simulation */}
-                                                <div className="text-3xl font-black text-[#004bad] tracking-tighter">P.</div>
+                                                {/* Planity Logo Simulation */}
+                                                <div className="font-sans font-black text-2xl md:text-3xl text-[#004bad] tracking-tight flex items-center gap-1">
+                                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden flex-shrink-0">
+                                                        <svg viewBox="0 0 100 100" className="w-full h-full fill-[#004bad]">
+                                                            <path d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90C27.9 90 10 72.1 10 50S27.9 10 50 10s40 17.9 40 40-17.9 40-40 40z" />
+                                                            <path d="M50 25c-13.8 0-25 11.2-25 25s11.2 25 25 25 25-11.2 25-25-11.2-25-25-25zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z" />
+                                                        </svg>
+                                                    </div>
+                                                    planity
+                                                </div>
                                             </div>
                                             <div className="text-xs font-bold text-gray-500 uppercase tracking-widest group-hover/node:text-[#004bad] transition-colors">Planity</div>
                                         </div>
 
                                         {/* Flow Animation - Particles Only (No Arrow) */}
-                                        <div className="flex-1 mx-4 md:mx-12 h-[2px] bg-white/10 relative">
-                                            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-full h-full overflow-visible">
-                                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary to-transparent w-1/2 animate-[scan_1.5s_infinite] translate-x-[-100%]" />
-                                            </div>
+                                        {/* Flow Animation - Particles */}
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-8rem)] max-w-md h-[1px] bg-white/10 z-0">
 
-                                            {/* Flying Data Particles - Start from Planity bubble */}
-                                            <div className="absolute top-1/2 -left-8 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0s' }} />
-                                            <div className="absolute top-1/2 -left-8 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.2s' }} />
-                                            <div className="absolute top-1/2 -left-8 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.4s' }} />
-                                            <div className="absolute top-1/2 -left-8 w-2 h-2 bg-blue-400 rounded-full blur-[2px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.6s' }} />
-                                            <div className="absolute top-1/2 -left-8 w-1.5 h-1.5 bg-primary rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '0.8s' }} />
-                                            <div className="absolute top-1/2 -left-8 w-1 h-1 bg-white rounded-full blur-[1px] animate-[fly_1.5s_infinite_ease-in-out]" style={{ animationDelay: '1s' }} />
+                                            {/* Particles coming from Planity center */}
+                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0s', transformOrigin: 'left center' }} />
+                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0.3s', transformOrigin: 'left center' }} />
+                                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0.6s', transformOrigin: 'left center' }} />
+                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-blue-400 rounded-full blur-[2px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0.9s', transformOrigin: 'left center' }} />
+                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-primary rounded-full blur-[1px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '1.2s', transformOrigin: 'left center' }} />
 
                                             <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 text-[10px] text-primary uppercase tracking-[0.3em] font-black animate-pulse bg-black px-2">Transfert</div>
                                         </div>
