@@ -421,7 +421,7 @@ function LandingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white selection:bg-primary selection:text-black font-sans relative">
+        <div className="min-h-screen bg-black text-white selection:bg-primary selection:text-black font-sans relative overflow-x-hidden">
             <style>{`
                 @keyframes scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
                 @keyframes growBar { from { height: 0; } to { height: 85%; } }
@@ -635,7 +635,7 @@ function LandingPage() {
                             visual={
                                 <div className="w-full h-full min-h-[400px] relative overflow-visible flex items-center justify-center group">
                                     {/* Starry Background Container - Removed Borders */}
-                                    <div className="absolute inset-x-[-50vw] inset-y-[-50vh] opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 to-transparent pointer-events-none"></div>
+                                    <div className="absolute inset-x-0 inset-y-[-50vh] opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/10 to-transparent pointer-events-none"></div>
 
                                     <div className="relative w-full max-w-lg h-64 flex items-center justify-between px-0 md:px-4">
 
