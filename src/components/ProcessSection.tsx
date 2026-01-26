@@ -1,6 +1,6 @@
-import { useRef, useState, MouseEvent } from 'react';
+import { useRef, useState, type MouseEvent } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
-import { Database, BarChart3, Bot, CheckCircle, Sparkles, TrendingUp, Search, Layers, ShieldCheck, Calendar, MessageCircle, Megaphone } from 'lucide-react';
+import { Database, BarChart3, Bot, CheckCircle, Sparkles, Search, Layers, ShieldCheck, Calendar, MessageCircle, Megaphone } from 'lucide-react';
 
 // Separate Card Component to handle 3D tilt individually
 const Process3DCard = ({ step }: any) => {
@@ -35,10 +35,10 @@ const Process3DCard = ({ step }: any) => {
                 ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
-                className="w-full max-w-4xl perspective-1000 pointer-events-auto"
+                className={`w-full ${step.isWebElite ? 'max-w-3xl' : 'max-w-5xl'} perspective-1000 pointer-events-auto`}
             >
                 <motion.div
-                    className={`w-full bg-gradient-to-br ${step.bgGradient} backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-12 lg:p-16 shadow-2xl relative overflow-hidden transition-all duration-200`}
+                    className={`w-full bg-gradient-to-br ${step.bgGradient} backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden transition-all duration-200`}
                     style={{
                         rotateX,
                         rotateY,
@@ -49,88 +49,106 @@ const Process3DCard = ({ step }: any) => {
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent pointer-events-none z-0"></div>
 
                     <div className="relative z-10 transform-style-3d">
-                        {/* Step Number Badge */}
-                        <div className="inline-flex items-center gap-4 mb-6 md:mb-8">
-                            <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-black/50 border-2 border-white/20 flex items-center justify-center ${step.color} shadow-lg`}>
-                                <step.icon size={32} strokeWidth={1.5} />
-                            </div>
-                            <div className={`text-6xl md:text-7xl font-black ${step.color} opacity-30`}>{step.number}</div>
-                        </div>
 
-                        {/* Content */}
-                        <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-tight drop-shadow-lg">
-                            {step.title}
-                        </h3>
+                        <div className={`flex flex-col md:flex-row ${step.image ? 'items-center gap-12' : 'gap-4'}`}>
 
-                        {/* Special Layout for Step 3 - Web Elite */}
-                        {step.isWebElite ? (
-                            <div className="mb-8">
-                                <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-6">
-                                    {step.description}
-                                </p>
-                                <div className="relative rounded-xl overflow-hidden border border-white/10 group-hover:border-purple-500/30 transition-all shadow-2xl">
-                                    <div className="absolute inset-0 bg-purple-900/20 mix-blend-overlay z-10"></div>
-                                    <div className="grid grid-cols-2 gap-[1px] bg-white/5">
-                                        <div className="aspect-square bg-[#0a0a0a] flex items-center justify-center p-4">
-                                            <div className="w-full h-full border border-white/5 rounded-lg flex flex-col gap-2 p-2">
-                                                <div className="h-2 w-1/3 bg-white/10 rounded"></div>
-                                                <div className="h-16 w-full bg-white/5 rounded flex items-center justify-center">
-                                                    <div className="w-8 h-8 rounded-full bg-purple-500/20"></div>
-                                                </div>
-                                                <div className="flex-1 grid grid-cols-2 gap-2">
-                                                    <div className="bg-white/5 rounded"></div>
-                                                    <div className="bg-white/5 rounded"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="aspect-square bg-[#0a0a0a] flex items-center justify-center p-4">
-                                            <div className="text-center">
-                                                <div className="text-2xl font-black text-white mb-1">98/100</div>
-                                                <div className="text-[10px] text-gray-500 uppercase tracking-widest">Score Google</div>
+                            {/* Text Content */}
+                            <div className="flex-1">
+                                {/* Step Number Badge */}
+                                <div className="inline-flex items-center gap-4 mb-6 md:mb-8">
+                                    <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-black/50 border-2 border-white/20 flex items-center justify-center ${step.color} shadow-lg`}>
+                                        <step.icon size={32} strokeWidth={1.5} />
+                                    </div>
+                                    <div className={`text-6xl md:text-7xl font-black ${step.color} opacity-30`}>{step.number}</div>
+                                </div>
+
+                                <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-6 leading-tight drop-shadow-lg">
+                                    {step.title}
+                                </h3>
+
+                                {step.isWebElite ? (
+                                    <div className="mb-0">
+                                        <p className="text-lg text-gray-300 leading-relaxed font-light mb-6">
+                                            {step.description}
+                                        </p>
+                                        <div className="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl h-48 group">
+                                            {/* Generated Audit Image Reuse or Abstract */}
+                                            <div className="absolute inset-0 bg-purple-900/20 mix-blend-overlay z-10"></div>
+                                            {/* A smaller, elegant visual for the Web Elite card */}
+                                            <div className="absolute inset-0 bg-[url('/audit_visual.png')] bg-cover bg-center opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700"></div>
+                                            <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur px-4 py-2 rounded-full border border-white/10 z-20">
+                                                <span className="text-xs font-bold text-white uppercase tracking-widest">Score 98/100</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+                                ) : step.isInfrastructure ? (
+                                    <div className="mt-8">
+                                        <p className="text-lg text-gray-300 leading-relaxed font-light mb-8 max-w-xl">
+                                            {step.description}
+                                        </p>
+                                        {/* Infrastructure - 5 Elements in One Line */}
+                                        <div className="relative p-8 rounded-3xl border border-white/10 overflow-hidden bg-black/40">
+                                            {/* Background Eco Visual */}
+                                            <div className="absolute inset-0 bg-[url('/ecosystem_visual.png')] bg-cover bg-center opacity-40 mix-blend-screen pointer-events-none"></div>
+
+                                            <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 relative z-10">
+                                                {[
+                                                    { icon: Calendar, label: "Booking" },
+                                                    { icon: Bot, label: "AI" },
+                                                    { icon: BarChart3, label: "Finance" },
+                                                    { icon: MessageCircle, label: "Avis" },
+                                                    { icon: Megaphone, label: "Growth" }
+                                                ].map((item, i) => (
+                                                    <div key={i} className="flex flex-col items-center gap-3 group/icon">
+                                                        <div className={`w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-black/60 backdrop-blur border border-white/10 flex items-center justify-center text-${step.baseColor}-400 group-hover/icon:scale-110 group-hover/icon:text-white group-hover/icon:border-${step.baseColor}-500/50 transition-all shadow-lg`}>
+                                                            <item.icon size={24} />
+                                                        </div>
+                                                        <span className="text-[10px] uppercase font-bold text-gray-500 tracking-widest group-hover/icon:text-white transition-colors">{item.label}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="text-center mt-6">
+                                                <span className="inline-block px-4 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(249,115,22,0.2)]">
+                                                    StyleOS Ecosystem
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-8 max-w-xl">
+                                        {step.description}
+                                    </p>
+                                )}
+
+                                {/* Completion Check */}
+                                <div className="mt-6 flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500/40 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                                        <CheckCircle size={18} className="text-green-400" strokeWidth={3} />
+                                    </div>
+                                    <span className="text-sm text-green-400 font-bold uppercase tracking-widest">
+                                        {step.number === "05" ? "Liberté Atteinte" : "Étape Complétée"}
+                                    </span>
                                 </div>
                             </div>
-                        ) : step.isInfrastructure ? (
-                            <div className="flex flex-wrap justify-center gap-4 mb-8 max-w-lg mx-auto relative perspective-500">
-                                {/* Central Node */}
-                                <div className="absolute inset-0 bg-orange-500/5 blur-3xl rounded-full z-0"></div>
 
-                                {/* Orbiting Satellites */}
-                                <div className="absolute inset-0 border border-orange-500/20 rounded-full animate-[spin_10s_linear_infinite] pointer-events-none opacity-30"></div>
-                                <div className="absolute inset-4 border border-orange-500/10 rounded-full animate-[spin_15s_linear_infinite_reverse] pointer-events-none opacity-20"></div>
-
-                                {[
-                                    { icon: Calendar, label: "Booking" },
-                                    { icon: Bot, label: "Sarah IA" },
-                                    { icon: BarChart3, label: "Finance" },
-                                    { icon: MessageCircle, label: "Avis" },
-                                    { icon: Megaphone, label: "Marketing" }
-                                ].map((item, i) => (
-                                    <div key={i} className={`flex flex-col items-center gap-2 p-3 w-24 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 hover:border-${step.baseColor}-500/50 transition-all group z-10 hover:scale-110 shadow-lg`}>
-                                        <div className={`w-8 h-8 rounded-lg bg-${step.baseColor}-500/20 flex items-center justify-center text-${step.baseColor}-400 group-hover:text-white transition-colors`}>
-                                            <item.icon size={16} />
+                            {/* Side Image for Standard Steps (1, 2, 5) */}
+                            {step.image && (
+                                <div className="hidden md:block w-72 lg:w-96 shrink-0 md:translate-x-8 lg:translate-x-12 relative group/img">
+                                    <div className={`absolute inset-0 bg-${step.baseColor}-500/20 blur-3xl opacity-40 rounded-full group-hover/img:opacity-60 transition-opacity`}></div>
+                                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl rotate-3 group-hover/img:rotate-0 transition-transform duration-500">
+                                        <div className="aspect-[3/4] bg-black/50">
+                                            <img
+                                                src={step.image}
+                                                alt={step.title}
+                                                className="w-full h-full object-cover opacity-90 group-hover/img:scale-110 transition-transform duration-700"
+                                            />
                                         </div>
-                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-wide">{item.label}</span>
+                                        {/* Overlay Gradient */}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                                     </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-light mb-8">
-                                {step.description}
-                            </p>
-                        )}
+                                </div>
+                            )}
 
-                        {/* Completion Check */}
-                        <div className="mt-4 flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border-2 border-green-500/40 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
-                                <CheckCircle size={18} className="text-green-400" strokeWidth={3} />
-                            </div>
-                            <span className="text-sm text-green-400 font-bold uppercase tracking-widest">
-                                {step.number === "05" ? "Liberté Atteinte" : "Étape Complétée"}
-                            </span>
                         </div>
                     </div>
                 </motion.div>
@@ -176,7 +194,8 @@ const ProcessSection = () => {
             description: "Analyse approfondie de votre identité visuelle, positionnement marché, et présence digitale actuelle. Nous identifions vos forces et opportunités de croissance cachées.",
             color: "text-cyan-400",
             bgGradient: "from-cyan-500/10 to-transparent",
-            baseColor: "cyan"
+            baseColor: "cyan",
+            image: "/audit_visual.png"
         },
         {
             opacity: step2Opacity,
@@ -187,7 +206,8 @@ const ProcessSection = () => {
             description: "Récupération sécurisée de votre historique Planity/Booksy. Fichiers clients, historique de RDV, préférences. Transition invisible en 24h sans perte de données.",
             color: "text-blue-400",
             bgGradient: "from-blue-500/10 to-transparent",
-            baseColor: "blue"
+            baseColor: "blue",
+            image: "/migration_visual.png"
         },
         {
             opacity: step3Opacity,
@@ -195,7 +215,7 @@ const ProcessSection = () => {
             icon: Sparkles,
             number: "03",
             title: "Création Site Web Elite",
-            description: "Design sur-mesure, shooting photo professionnel, intégration de votre identité visuelle. Configuration SEO local optimisée. Votre nouveau bastion digital premium.",
+            description: "Design sur-mesure et shooting photo. Votre nouveau bastion digital.",
             color: "text-purple-400",
             bgGradient: "from-purple-500/10 to-transparent",
             baseColor: "purple",
@@ -206,8 +226,8 @@ const ProcessSection = () => {
             scale: step4Scale,
             icon: Layers,
             number: "04",
-            title: "Choix de l'Infrastructure",
-            description: "Configuration complète de votre écosystème.",
+            title: "L'Écosystème StyleOS",
+            description: "Configuration complète de tous les piliers de votre croissance.",
             color: "text-orange-400",
             bgGradient: "from-orange-500/10 to-transparent",
             baseColor: "orange",
@@ -219,10 +239,11 @@ const ProcessSection = () => {
             icon: ShieldCheck,
             number: "05",
             title: "Support VIP & Liberté",
-            description: "Tout est en place. Vous bénéficiez désormais d'un support prioritaire 24/7 pour toute question. Concentrez-vous sur votre art, StyleOS gère le reste. Bienvenue dans la cour des grands.",
+            description: "Support prioritaire 24/7. Concentrez-vous sur votre art, StyleOS gère le reste.",
             color: "text-green-400",
             bgGradient: "from-green-500/10 to-transparent",
-            baseColor: "green"
+            baseColor: "green",
+            image: "/support_visual.png"
         }
     ];
 

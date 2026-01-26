@@ -2,7 +2,7 @@ import { ArrowUpRight, Check, Shield, Zap, Crown, TrendingUp, Globe, XCircle } f
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, type MouseEvent } from 'react';
 
-const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, originalAnnualPrice, description, icon: Icon, features, isPopular, planId, actionLabel, theme, roiText, disabledFeatures = [], billingPeriod }: any) => {
+const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, originalAnnualPrice, description, icon: Icon, features, isPopular, planId, actionLabel, roiText, disabledFeatures = [], billingPeriod }: any) => {
     const navigate = useNavigate();
     const cardRef = useRef<HTMLDivElement>(null);
     const [rotateX, setRotateX] = useState(0);
@@ -36,17 +36,63 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
         setGlareY(50);
     };
 
-    const isElite = theme === 'elite';
     const displayPrice = billingPeriod === 'annual' ? annualPrice : monthlyPrice;
     const originalPrice = billingPeriod === 'annual' ? originalAnnualPrice : originalMonthlyPrice;
 
     // Calculate savings based on annual discount vs monthly
-    // If annual, savings = (monthly * 12) - (annual * 12)
     const savings = billingPeriod === 'annual' ? Math.round(monthlyPrice * 12 - annualPrice * 12) : 0;
 
     const handleCardClick = () => {
         navigate(`/plan/${planId}`);
     };
+
+    // Theme Configuration
+    const getThemeStyles = () => {
+        switch (planId) {
+            case 'basic': return {
+                border: 'border-emerald-500/30',
+                glow: 'shadow-[0_0_30px_rgba(16,185,129,0.1)]',
+                iconBg: 'bg-emerald-500/10',
+                iconColor: 'text-emerald-400',
+                button: 'bg-gradient-to-r from-emerald-900/40 to-emerald-800/40 border border-emerald-500/30 text-emerald-100 hover:bg-emerald-500/20',
+                check: 'bg-emerald-500/20 text-emerald-300'
+            };
+            case 'pro': return {
+                border: 'border-blue-500/30',
+                glow: 'shadow-[0_0_30px_rgba(59,130,246,0.1)]',
+                iconBg: 'bg-blue-500/10',
+                iconColor: 'text-blue-400',
+                button: 'bg-gradient-to-r from-blue-900/40 to-blue-800/40 border border-blue-500/30 text-blue-100 hover:bg-blue-500/20',
+                check: 'bg-blue-500/20 text-blue-300'
+            };
+            case 'elite': return {
+                border: 'border-[#D4AF37]/50',
+                glow: 'shadow-[0_0_40px_rgba(212,175,55,0.2)]',
+                iconBg: 'bg-[#D4AF37]/10',
+                iconColor: 'text-[#D4AF37]',
+                button: 'bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-black font-black',
+                check: 'bg-[#D4AF37] text-black'
+            };
+            case 'empire': return {
+                border: 'border-rose-500/40',
+                glow: 'shadow-[0_0_40px_rgba(244,63,94,0.2)]',
+                iconBg: 'bg-rose-500/10',
+                iconColor: 'text-rose-400',
+                button: 'bg-gradient-to-r from-rose-900/40 to-rose-800/40 border border-rose-500/30 text-rose-100 hover:bg-rose-500/20',
+                check: 'bg-rose-500/20 text-rose-300'
+            };
+            default: return {
+                border: 'border-white/10',
+                glow: '',
+                iconBg: 'bg-white/5',
+                iconColor: 'text-white',
+                button: 'bg-white/10 text-white',
+                check: 'bg-white/10'
+            };
+        }
+    };
+
+    const s = getThemeStyles();
 
     return (
         <div
@@ -60,20 +106,19 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                 transition: 'transform 0.1s ease-out',
             }}
         >
-            <div className={`relative rounded-3xl p-[2px] transition-all duration-500 hover:scale-[1.05] group h-full flex flex-col ${isElite ? 'bg-gradient-to-br from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] shadow-[0_0_60px_rgba(212,175,55,0.3)]' : 'bg-gradient-to-br from-white/20 via-white/10 to-white/5'}`}>
+            <div className={`relative rounded-3xl p-[1px] transition-all duration-500 hover:scale-[1.02] group h-full flex flex-col bg-black ${s.glow}`}>
+                {/* Border Gradient */}
+                <div className={`absolute inset-0 rounded-3xl border ${s.border} pointer-events-none`}></div>
 
                 {/* Animated Glare Effect */}
                 <div
                     className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl overflow-hidden z-40"
                     style={{
-                        background: `radial-gradient(circle 200px at ${glareX}% ${glareY}%, rgba(255,255,255,0.3) 0%, transparent 70%)`
+                        background: `radial-gradient(circle 200px at ${glareX}% ${glareY}%, rgba(255,255,255,0.1) 0%, transparent 70%)`
                     }}
                 />
 
-                {/* Glossy Shine */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-60 pointer-events-none z-30" />
-
-                <div className={`h-full rounded-[22px] p-8 flex flex-col relative overflow-hidden ${isElite ? 'bg-gradient-to-br from-black via-[#0a0a0a] to-black' : 'bg-gradient-to-br from-[#050505] via-[#0a0a0a] to-[#050505]'}`}>
+                <div className={`h-full rounded-[23px] p-8 flex flex-col relative overflow-hidden bg-gradient-to-b from-[#0a0a0a] to-[#050505]`}>
 
                     {/* Popular Badge */}
                     {isPopular && (
@@ -87,19 +132,21 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                     {/* Annual Savings Badge */}
                     {billingPeriod === 'annual' && savings > 0 && (
                         <div className="absolute top-4 left-4 z-20">
-                            <span className="bg-gradient-to-r from-emerald-500 to-green-400 text-black text-[10px] font-black uppercase tracking-wider px-4 py-2 rounded-full shadow-[0_0_20px_rgba(16,185,129,0.6)]">
-                                💰 -{savings}€/an
+                            <span className="bg-red-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-lg">
+                                -{savings}€/an
                             </span>
                         </div>
                     )}
 
                     {/* Header Section */}
                     <div className="mb-8 relative z-10">
-                        <div className={`w-16 h-16 rounded-2xl border-2 flex items-center justify-center mb-6 backdrop-blur-sm transition-all duration-300 ${isElite ? 'border-[#D4AF37] bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/5 text-[#D4AF37] shadow-[0_0_30px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_50px_rgba(212,175,55,0.5)]' : 'border-white/20 bg-gradient-to-br from-white/10 to-white/5 group-hover:border-white/40 text-white'}`}>
+                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm transition-all duration-300 ${s.iconBg} ${s.iconColor} border border-white/5`}>
                             <Icon size={28} strokeWidth={1.5} />
                         </div>
 
-                        <h3 className="text-4xl font-black text-white uppercase tracking-tighter mb-3 drop-shadow-2xl">{title}</h3>
+                        <h3 className={`text-3xl font-black uppercase tracking-tighter mb-3 ${planId === 'elite' ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB]' : 'text-white'}`}>
+                            {title}
+                        </h3>
                         <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-relaxed">{description}</p>
                     </div>
 
@@ -108,62 +155,62 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                         <div className="flex items-end gap-1 leading-none mb-4">
                             <div className="flex flex-col items-end mr-2 mb-1">
                                 {originalPrice && (
-                                    <span className="text-xl text-gray-500 line-through font-bold">{originalPrice}€</span>
+                                    <span className="text-xl text-red-500 line-through font-bold decoration-red-500/50">{originalPrice}€</span>
                                 )}
                                 {billingPeriod === 'annual' && !originalPrice && (
-                                    <span className="text-2xl text-gray-600 line-through font-bold mb-2">{monthlyPrice}€</span>
+                                    <span className="text-xl text-red-500 line-through font-bold decoration-red-500/50 mb-1">{monthlyPrice}€</span>
                                 )}
                             </div>
 
-                            <span className={`text-7xl font-black tracking-tighter drop-shadow-2xl ${isElite ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] bg-[length:200%_auto] animate-shimmer' : 'text-white'}`}>
+                            <span className={`text-6xl font-black tracking-tighter ${planId === 'elite' ? 'text-[#D4AF37]' : planId === 'empire' ? 'text-rose-400' : 'text-white'}`}>
                                 {displayPrice}
                             </span>
                             <div className="flex flex-col pb-2">
-                                <span className={`text-2xl font-bold ${isElite ? 'text-[#D4AF37]' : 'text-white/70'}`}>€</span>
-                                <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">/mois</span>
+                                <span className={`text-2xl font-bold ${planId === 'elite' ? 'text-[#D4AF37]' : 'text-gray-400'}`}>€</span>
+                                <span className="text-[9px] font-bold text-gray-600 uppercase tracking-wider">/mois</span>
                             </div>
                         </div>
 
                         {/* ROI Pill */}
                         {roiText && (
-                            <div className="inline-block bg-gradient-to-r from-emerald-900/60 to-emerald-800/60 backdrop-blur-md border border-emerald-500/30 rounded-full px-4 py-2 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-                                <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">
+                            <div className="inline-block bg-white/5 border border-white/10 rounded-full px-4 py-2">
+                                <span className={`text-[9px] font-black uppercase tracking-widest ${s.iconColor}`}>
                                     💎 {roiText}
                                 </span>
                             </div>
                         )}
                     </div>
 
-                    <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-white/20 to-transparent mb-8"></div>
+                    <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
 
                     {/* Features */}
                     <ul className="space-y-4 mb-10 flex-1 relative z-10">
                         {features.map((feature: any, i: number) => {
                             const isBold = feature.includes('SARAH') || feature.includes('SITE WEB') || feature.includes('COMPTA');
                             return (
-                                <li key={i} className="flex items-start gap-3 text-sm text-gray-300 font-medium group/item hover:text-white transition-colors">
-                                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-lg transition-all ${isElite ? 'bg-gradient-to-br from-[#D4AF37] to-[#F3E5AB] text-black shadow-[0_0_10px_rgba(212,175,55,0.4)]' : 'bg-gradient-to-br from-white/30 to-white/20 text-black group-hover/item:from-white group-hover/item:to-white/90'}`}>
+                                <li key={i} className="flex items-start gap-3 text-sm text-gray-400 font-medium group/item hover:text-gray-200 transition-colors">
+                                    <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 shadow-sm transition-all ${s.check}`}>
                                         <Check size={12} strokeWidth={4} />
                                     </div>
-                                    <span className={isBold ? 'text-white font-black uppercase drop-shadow-md' : ''}>{feature}</span>
+                                    <span className={isBold ? 'text-white font-bold' : ''}>{feature}</span>
                                 </li>
                             );
                         })}
                         {disabledFeatures.map((feature: string, i: number) => (
-                            <li key={`disabled-${i}`} className="flex items-start gap-3 text-sm text-gray-500 font-medium opacity-100">
-                                <div className="w-5 h-5 rounded-full border-2 border-white/10 flex items-center justify-center shrink-0 mt-0.5 text-gray-600 bg-white/5">
+                            <li key={`disabled-${i}`} className="flex items-start gap-3 text-sm text-gray-600 font-medium opacity-80">
+                                <div className="w-5 h-5 rounded-md border border-white/5 flex items-center justify-center shrink-0 mt-0.5 text-gray-700 bg-black/50">
                                     <XCircle size={12} />
                                 </div>
-                                <span className="line-through decoration-gray-700 text-gray-500">{feature}</span>
+                                <span className="line-through decoration-gray-800 text-gray-600">{feature}</span>
                             </li>
                         ))}
                     </ul>
 
                     <button
                         onClick={() => navigate(`/plan/${planId}`)}
-                        className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all shadow-2xl hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] group-hover:scale-[1.02] active:scale-95 relative overflow-hidden ${isElite ? 'bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-black hover:shadow-[0_0_60px_rgba(212,175,55,0.8)] bg-[length:200%_auto] hover:bg-[position:100%_center] transition-[background-position] duration-500' : 'bg-gradient-to-r from-white/15 to-white/10 text-white hover:from-white hover:to-white/95 hover:text-black backdrop-blur-md border-2 border-white/20 hover:border-white'}`}
+                        className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all relative overflow-hidden group-hover:shadow-lg ${s.button}`}
                     >
-                        {actionLabel} <ArrowUpRight size={16} />
+                        {actionLabel} <ArrowUpRight size={14} />
                     </button>
                 </div>
             </div>
@@ -308,6 +355,7 @@ const PricingSection = () => {
                     icon={Crown}
                     roiText="~1200€ / MOIS ÉCONOMISÉS"
                     features={["Tout du Pack Pro", "PILOTAGE COMPTA IA COMPLET", "AUTOMATISATION DES AVIS", "GESTION DE RÉPUTATION AUTO", "Support Dédié"]}
+                    disabledFeatures={["Gestion Réseaux Sociaux", "Campagnes Marketing"]}
                     planId="elite"
                     actionLabel="DEVENIR ELITE"
                     theme="elite"
