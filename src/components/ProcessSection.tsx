@@ -75,7 +75,7 @@ const Process3DCard = ({ step }: any) => {
                                             {/* Generated Audit Image Reuse or Abstract */}
                                             <div className="absolute inset-0 bg-purple-900/10 mix-blend-overlay z-10"></div>
                                             {/* A smaller, elegant visual for the Web Elite card */}
-                                            <div className="absolute inset-0 bg-[url('/audit_real.png')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-all duration-700"></div>
+                                            <div className="absolute inset-0 bg-[url('/web_human.png')] bg-cover bg-center opacity-80 group-hover:opacity-100 transition-all duration-700"></div>
                                             <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur px-4 py-2 rounded-full border border-white/10 z-20">
                                                 <span className="text-xs font-bold text-white uppercase tracking-widest">Score 98/100</span>
                                             </div>
@@ -195,7 +195,7 @@ const ProcessSection = () => {
             color: "text-cyan-400",
             bgGradient: "from-cyan-500/10 to-transparent",
             baseColor: "cyan",
-            image: "/audit_real.png"
+            image: "/audit_human.png"
         },
         {
             opacity: step2Opacity,
@@ -207,7 +207,7 @@ const ProcessSection = () => {
             color: "text-blue-400",
             bgGradient: "from-blue-500/10 to-transparent",
             baseColor: "blue",
-            image: "/migration_real.png"
+            image: "/migration_human.png"
         },
         {
             opacity: step3Opacity,
@@ -219,7 +219,8 @@ const ProcessSection = () => {
             color: "text-purple-400",
             bgGradient: "from-purple-500/10 to-transparent",
             baseColor: "purple",
-            isWebElite: true
+            isWebElite: true,
+            image: "/web_human.png"
         },
         {
             opacity: step4Opacity,

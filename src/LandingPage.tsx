@@ -11,7 +11,6 @@ import PricingSection from './components/PricingSection';
 import OfferSection from './components/OfferSection';
 import GuaranteeSection from './components/GuaranteeSection';
 import ProcessSection from './components/ProcessSection';
-import LandingBackground from './components/LandingBackground';
 
 // --- ANIMATION WRAPPER ---
 const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }: any) => {
@@ -74,26 +73,25 @@ const ChatMock = () => {
         <>
             <div onClick={() => setIsExpanded(true)} className="w-full md:w-3/4 mx-auto h-full bg-black flex flex-col rounded-[2rem] border border-white/10 overflow-hidden relative shadow-2xl cursor-pointer hover:border-primary/50 transition-colors group">
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="h-14 bg-white/5 border-b border-white/5 flex items-center px-6 gap-4 relative z-10">
+                <div className="h-14 bg-white/5 border-b border-white/5 flex items-center px-6 gap-4 relative z-10 shrink-0">
                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary relative"><Bot size={16} /></div>
                     <div>
                         <div className="text-xs font-bold text-white">Sarah IA</div>
                         <div className="text-[8px] text-green-500 font-mono">En ligne</div>
                     </div>
-                    <div className="ml-auto text-[8px] uppercase font-bold text-gray-500 bg-white/5 px-2 py-1 rounded border border-white/5 group-hover:bg-primary group-hover:text-black transition-colors">Agrandir</div>
                 </div>
-                <div className="flex-1 p-4 space-y-4 font-sans text-[10px] bg-black relative flex flex-col justify-end pb-8 z-10">
-                    <div className="flex gap-2 relative z-10 opacity-50">
-                        <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Bonjour, c'est ouvert lundi ?</div>
+                <div className="flex-1 p-4 space-y-3 font-sans text-[10px] bg-black relative flex flex-col justify-end z-10 overflow-hidden">
+                    <div className="flex gap-2 relative z-10 opacity-60">
+                        <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">C'est ouvert lundi ?</div>
                     </div>
-                    <div className="flex gap-2 justify-end relative z-10 opacity-50">
-                        <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Oui, de 10h à 19h.</div>
+                    <div className="flex gap-2 justify-end relative z-10 opacity-80">
+                        <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Oui, 10h-19h.</div>
                     </div>
                     <div className="flex gap-2 relative z-10">
-                        <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Top. Est-ce que vous faites la taille de barbe à l'ancienne avec serviette ?</div>
+                        <div className="p-3 bg-white/10 rounded-2xl rounded-tl-none text-gray-300 max-w-[85%] border border-white/5">Taille barbe + soin dispo ?</div>
                     </div>
                     <div className="flex gap-2 justify-end relative z-10">
-                        <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Absolument ! Notre forfait "Rituel" à 35€ inclut le soin complet. Je vous réserve un créneau pour ce lundi ?</div>
+                        <div className="p-3 bg-primary/10 text-white rounded-2xl rounded-tr-none max-w-[85%] border border-primary/20">Oui ! Forfait Rituel (35€). Je vous réserve 14h ?</div>
                     </div>
                 </div>
             </div>
@@ -424,7 +422,6 @@ function LandingPage() {
 
     return (
         <div className="min-h-screen bg-black text-white selection:bg-primary selection:text-black font-sans relative">
-            <LandingBackground />
             <style>{`
                 @keyframes scan { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
                 @keyframes growBar { from { height: 0; } to { height: 85%; } }
@@ -665,28 +662,6 @@ function LandingPage() {
                                                     transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
                                                 />
                                             </div>
-
-                                            {/* Floating Data Particles - Enhanced Visibility */}
-                                            {[...Array(8)].map((_, i) => (
-                                                <motion.div
-                                                    key={i}
-                                                    className="absolute top-1/2 left-0"
-                                                    initial={{ x: 0, opacity: 0, y: (Math.random() - 0.5) * 60 }}
-                                                    animate={{
-                                                        x: "100%",
-                                                        opacity: [0, 1, 1, 0],
-                                                        scale: [0.8, 1.2, 0.8]
-                                                    }}
-                                                    transition={{
-                                                        duration: 1.5 + Math.random(),
-                                                        repeat: Infinity,
-                                                        delay: i * 0.2,
-                                                        ease: "easeInOut"
-                                                    }}
-                                                >
-                                                    <div className={`rounded-full blur-[0.5px] ${i % 2 === 0 ? 'w-3 h-3 bg-primary shadow-[0_0_15px_#D4AF37]' : 'w-2 h-2 bg-blue-400 shadow-[0_0_15px_#60A5FA]'}`}></div>
-                                                </motion.div>
-                                            ))}
 
                                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[200%] text-[10px] uppercase tracking-[0.3em] text-white font-black bg-black/60 px-3 py-1.5 border border-white/10 rounded-full backdrop-blur-md shadow-lg animate-pulse whitespace-nowrap">
                                                 Transfert <span className="text-primary">Auto</span>
