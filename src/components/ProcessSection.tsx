@@ -38,15 +38,15 @@ const Process3DCard = ({ step }: any) => {
                 className={`w-full ${step.isWebElite ? 'max-w-3xl' : 'max-w-5xl'} perspective-1000 pointer-events-auto`}
             >
                 <motion.div
-                    className={`w-full bg-gradient-to-br ${step.bgGradient} backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden transition-all duration-200`}
+                    className={`w-full bg-[#050505] backdrop-blur-xl border border-white/10 rounded-[3rem] p-8 md:p-12 shadow-2xl relative overflow-hidden transition-all duration-200 group`}
                     style={{
                         rotateX,
                         rotateY,
                         transformStyle: "preserve-3d"
                     }}
                 >
-                    {/* Background glow */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 to-transparent pointer-events-none z-0"></div>
+                    {/* Background glow - Uniform Gold/Yellow for all */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 to-transparent pointer-events-none z-0 opacity-40 group-hover:opacity-60 transition-opacity"></div>
 
                     <div className="relative z-10 transform-style-3d">
 

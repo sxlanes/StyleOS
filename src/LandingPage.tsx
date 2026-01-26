@@ -614,7 +614,7 @@ function LandingPage() {
                             icon={Star}
                             visual={<ReviewsMock />}
                             action={
-                                <Link to="/demos" className="inline-flex items-center gap-2 bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
+                                <Link to="/reviews-demo" className="inline-flex items-center gap-2 bg-primary text-black font-black uppercase text-[10px] tracking-widest py-3 px-6 rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:scale-105 transition-transform">
                                     Voir la Démo <ArrowRight size={14} />
                                 </Link>
                             }
@@ -634,46 +634,89 @@ function LandingPage() {
                             icon={Server}
                             align="left"
                             visual={
-                                <div className="w-full h-full bg-[#111] rounded-[2.5rem] border border-white/10 flex items-center justify-center relative overflow-hidden group hover:border-primary/30 transition-all p-8 md:p-16 shadow-2xl">
-                                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 to-transparent opacity-50" />
+                                <div className="w-full h-full min-h-[400px] rounded-[2.5rem] bg-black border border-white/10 relative overflow-hidden flex items-center justify-center group">
+                                    {/* Starry Background */}
+                                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 animate-pulse"></div>
 
-                                    <div className="flex items-center justify-between w-full max-w-2xl relative z-10">
-                                        {/* Planity Node */}
-                                        <div className="flex flex-col items-center gap-6 group/node">
-                                            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/5 border border-white/10 flex items-center justify-center relative z-10 grayscale opacity-60 group-hover/node:grayscale-0 group-hover/node:opacity-100 transition-all duration-500 bg-[#004bad]/10">
-                                                {/* Planity Logo Simulation */}
-                                                {/* Planity Logo Simulation */}
-                                                <div className="font-sans font-black text-2xl md:text-3xl text-[#004bad] tracking-tight flex items-center gap-1">
-                                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden flex-shrink-0 flex items-center justify-center bg-[#004bad] text-white">
-                                                        P
-                                                    </div>
-                                                    <span>Planity</span>
-                                                </div>
+                                    <div className="relative w-full max-w-lg h-64 flex items-center justify-between px-8 md:px-16">
+
+                                        {/* Source Bubble: "Planet" (Old System) */}
+                                        <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0">
+                                            {/* Planet Visual */}
+                                            <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-900 to-black border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.2)] relative z-10 overflow-hidden flex items-center justify-center group-hover:scale-95 transition-transform duration-700">
+                                                {/* Crutched Texture */}
+                                                <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-400/20 via-transparent to-transparent"></div>
+                                                <div className="font-bold text-blue-300/80 text-sm tracking-widest uppercase z-20">Ancien</div>
                                             </div>
-                                            <div className="text-xs font-bold text-gray-500 uppercase tracking-widest group-hover/node:text-[#004bad] transition-colors">Planity</div>
-                                        </div>
-                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-8rem)] max-w-md h-[1px] bg-white/10 z-0">
-
-                                            {/* Particles coming from Planity center */}
-                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-primary rounded-full blur-[2px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0s', transformOrigin: 'left center' }} />
-                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-white rounded-full blur-[1px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0.3s', transformOrigin: 'left center' }} />
-                                            <div className="absolute top-1/2 left-0 w-1 h-1 bg-[#D4AF37] rounded-full blur-[1px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0.6s', transformOrigin: 'left center' }} />
-                                            <div className="absolute top-1/2 left-0 w-2 h-2 bg-blue-400 rounded-full blur-[2px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '0.9s', transformOrigin: 'left center' }} />
-                                            <div className="absolute top-1/2 left-0 w-1.5 h-1.5 bg-primary rounded-full blur-[1px] animate-[fly_2s_infinite_ease-in-out]" style={{ animationDelay: '1.2s', transformOrigin: 'left center' }} />
-
-                                            <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-6 text-[10px] text-primary uppercase tracking-[0.3em] font-black animate-pulse bg-black px-2">Transfert</div>
+                                            {/* Rings */}
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[30%] border border-blue-500/20 rounded-full -rotate-12 pointer-events-none"></div>
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[40%] border border-blue-500/10 rounded-full -rotate-45 pointer-events-none"></div>
                                         </div>
 
-                                        {/* StyleOS Node */}
-                                        <div className="flex flex-col items-center gap-6">
-                                            <div className="w-28 h-28 md:w-40 md:h-40 rounded-full bg-primary/10 border border-primary/50 flex items-center justify-center relative z-10 shadow-[0_0_60px_rgba(212,175,55,0.3)] animate-[pulse_3s_infinite]">
-                                                <Bot size={50} className="text-primary" />
-                                                <div className="absolute top-2 right-2 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 bg-green-500 rounded-full border-4 border-[#111] flex items-center justify-center">
-                                                    <Check size={14} className="text-black stroke-[4]" />
-                                                </div>
+                                        {/* Particle Stream */}
+                                        <div className="flex-1 h-20 relative mx-4">
+                                            {/* Stream Container */}
+                                            <div className="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-blue-900/50 via-primary/50 to-primary/20 -translate-y-1/2 overflow-hidden">
+                                                <motion.div
+                                                    className="w-full h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-50 block"
+                                                    animate={{ x: ["-100%", "100%"] }}
+                                                    transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                                                />
                                             </div>
-                                            <div className="text-sm font-black text-white uppercase tracking-widest">StyleOS</div>
+
+                                            {/* Floating Data Particles */}
+                                            {[...Array(6)].map((_, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    className="absolute top-1/2 left-0 w-2 h-2 rounded-full"
+                                                    initial={{ x: 0, opacity: 0, y: (Math.random() - 0.5) * 40 }}
+                                                    animate={{
+                                                        x: "100%",
+                                                        opacity: [0, 1, 1, 0],
+                                                        scale: [0.5, 1, 0.5]
+                                                    }}
+                                                    transition={{
+                                                        duration: 2 + Math.random(),
+                                                        repeat: Infinity,
+                                                        delay: i * 0.4,
+                                                        ease: "easeInOut"
+                                                    }}
+                                                >
+                                                    <div className={`w-full h-full rounded-full ${i % 2 === 0 ? 'bg-primary shadow-[0_0_10px_#D4AF37]' : 'bg-blue-400 shadow-[0_0_10px_#60A5FA]'}`}></div>
+                                                </motion.div>
+                                            ))}
+
+                                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[150%] text-[8px] uppercase tracking-[0.3em] text-primary/80 font-bold bg-black/80 px-2 py-1 border border-white/5 rounded backdrop-blur-sm animate-pulse">
+                                                Transfert Auto
+                                            </div>
                                         </div>
+
+                                        {/* Destination Bubble: StyleOS Sphere */}
+                                        <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0">
+                                            <div className="w-full h-full rounded-full bg-black border border-primary/50 relative z-10 flex items-center justify-center shadow-[0_0_60px_rgba(212,175,55,0.2)] group-hover:shadow-[0_0_80px_rgba(212,175,55,0.4)] transition-all duration-700">
+                                                {/* Liquid Gold Core */}
+                                                <div className="absolute inset-2 rounded-full bg-gradient-to-br from-primary/20 via-black to-black overflow-hidden">
+                                                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+                                                    <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/40 blur-[40px] rounded-full animate-pulse"></div>
+                                                </div>
+
+                                                {/* Core Icon */}
+                                                <div className="relative z-20 flex flex-col items-center">
+                                                    <Bot size={32} className="text-primary mb-1 drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]" />
+                                                    <span className="font-black text-white tracking-tighter text-lg">StyleOS</span>
+                                                </div>
+
+                                                {/* Orbiting Satellite */}
+                                                <motion.div
+                                                    className="absolute inset-0 rounded-full border border-primary/10"
+                                                    animate={{ rotate: 360 }}
+                                                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                                >
+                                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full shadow-[0_0_15px_#D4AF37]"></div>
+                                                </motion.div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             }

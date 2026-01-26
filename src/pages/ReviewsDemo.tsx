@@ -1,44 +1,20 @@
-import { useState } from 'react';
-import { Star, MessageCircle, ThumbsUp, TrendingUp, Calendar, ArrowLeft, Send, Search, Filter, MoreHorizontal, Bot, CheckCircle2 } from 'lucide-react';
+import { Star, MessageCircle, ThumbsUp, TrendingUp, ArrowLeft, Send, Bot, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const ReviewsDemo = () => {
-    const [activeTab, setActiveTab] = useState('all');
 
     const reviews = [
         {
             id: 1,
-            author: "Thomas Dubois",
+            author: "Thomas R.",
             rating: 5,
             date: "Il y a 2 heures",
-            content: "Incroyable expérience ! La réservation en ligne est super simple et le résultat est parfait. Merci à toute l'équipe.",
+            content: "Super expérience ! J'ai pris RDV pour une coupe + barbe à la dernière minute. Le salon est magnifique et l'équipe au top. Je recommande à 100%.",
             platform: "Google",
             status: "answered",
-            response: "Merci beaucoup Thomas ! Ravi que notre nouveau système de réservation vous plaise. À très vite pour votre prochaine coupe ! ✂️",
+            response: "Merci beaucoup Thomas ! Ravi que le combo Coupe + Barbe vous ait plu. On fait le maximum pour vous trouver des créneaux qui arrangent tout le monde. À très vite au salon ! 💈",
             autoResponse: true
-        },
-        {
-            id: 2,
-            author: "Sarah Martin",
-            rating: 5,
-            date: "Il y a 5 heures",
-            content: "Toujours au top. Ambiance géniale et coiffeurs très pros.",
-            platform: "Planity",
-            status: "answered",
-            response: "Merci Sarah pour votre fidélité ! L'ambiance c'est grâce à vous aussi. À bientôt !",
-            autoResponse: true
-        },
-        {
-            id: 3,
-            author: "Julien R.",
-            rating: 4,
-            date: "Il y a 1 jour",
-            content: "Bonne coupe, mais un peu d'attente malgré le RDV.",
-            platform: "Google",
-            status: "pending",
-            response: "",
-            autoResponse: false
         }
     ];
 

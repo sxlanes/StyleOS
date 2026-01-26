@@ -2,6 +2,47 @@ import { ArrowUpRight, Check, Shield, Zap, Crown, TrendingUp, Globe, XCircle } f
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState, type MouseEvent } from 'react';
 
+// Helper to get theme styles
+const getThemeStyles = (planId: string) => {
+    switch (planId) {
+        case 'basic': return {
+            border: 'border-emerald-500/30 group-hover:border-emerald-500/50',
+            glow: 'shadow-[0_0_20px_rgba(16,185,129,0.1)]',
+            iconBg: 'bg-emerald-500/10 text-emerald-400',
+            button: 'bg-gradient-to-r from-emerald-900/40 to-emerald-800/40 border border-emerald-500/30 hover:bg-emerald-500 hover:text-white',
+            text: 'text-emerald-400'
+        };
+        case 'pro': return {
+            border: 'border-blue-500/30 group-hover:border-blue-500/50',
+            glow: 'shadow-[0_0_20px_rgba(59,130,246,0.1)]',
+            iconBg: 'bg-blue-500/10 text-blue-400',
+            button: 'bg-gradient-to-r from-blue-900/40 to-blue-800/40 border border-blue-500/30 hover:bg-blue-500 hover:text-white',
+            text: 'text-blue-400'
+        };
+        case 'elite': return {
+            border: 'border-[#D4AF37]/50 group-hover:border-[#D4AF37]',
+            glow: 'shadow-[0_0_40px_rgba(212,175,55,0.2)]',
+            iconBg: 'bg-[#D4AF37]/20 text-[#D4AF37]',
+            button: 'bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-black',
+            text: 'text-[#D4AF37]'
+        };
+        case 'empire': return {
+            border: 'border-red-500/30 group-hover:border-red-500/50',
+            glow: 'shadow-[0_0_20px_rgba(239,68,68,0.1)]',
+            iconBg: 'bg-red-500/10 text-red-400',
+            button: 'bg-gradient-to-r from-red-900/40 to-red-800/40 border border-red-500/30 hover:bg-red-500 hover:text-white',
+            text: 'text-red-500' // Copper/Red look
+        };
+        default: return {
+            border: 'border-white/10',
+            glow: '',
+            iconBg: 'bg-white/10 text-white',
+            button: 'bg-white/10',
+            text: 'text-white'
+        };
+    }
+}
+
 const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, originalAnnualPrice, description, icon: Icon, features, isPopular, planId, actionLabel, roiText, disabledFeatures = [], billingPeriod }: any) => {
     const navigate = useNavigate();
     const cardRef = useRef<HTMLDivElement>(null);
@@ -10,19 +51,18 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
     const [glareX, setGlareX] = useState(50);
     const [glareY, setGlareY] = useState(50);
 
+    const theme = getThemeStyles(planId);
+    const isElite = planId === 'elite';
+
     const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (!cardRef.current) return;
-
         const rect = cardRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-
         const rotateXValue = ((y - centerY) / centerY) * -8;
         const rotateYValue = ((x - centerX) / centerX) * 8;
-
         setRotateX(rotateXValue);
         setRotateY(rotateYValue);
         setGlareX((x / rect.width) * 100);
@@ -38,61 +78,11 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
 
     const displayPrice = billingPeriod === 'annual' ? annualPrice : monthlyPrice;
     const originalPrice = billingPeriod === 'annual' ? originalAnnualPrice : originalMonthlyPrice;
-
-    // Calculate savings based on annual discount vs monthly
     const savings = billingPeriod === 'annual' ? Math.round(monthlyPrice * 12 - annualPrice * 12) : 0;
 
     const handleCardClick = () => {
         navigate(`/plan/${planId}`);
     };
-
-    // Theme Configuration
-    const getThemeStyles = () => {
-        switch (planId) {
-            case 'basic': return {
-                border: 'border-emerald-500/30',
-                glow: 'shadow-[0_0_30px_rgba(16,185,129,0.1)]',
-                iconBg: 'bg-emerald-500/10',
-                iconColor: 'text-emerald-400',
-                button: 'bg-gradient-to-r from-emerald-900/40 to-emerald-800/40 border border-emerald-500/30 text-emerald-100 hover:bg-emerald-500/20',
-                check: 'bg-emerald-500/20 text-emerald-300'
-            };
-            case 'pro': return {
-                border: 'border-blue-500/30',
-                glow: 'shadow-[0_0_30px_rgba(59,130,246,0.1)]',
-                iconBg: 'bg-blue-500/10',
-                iconColor: 'text-blue-400',
-                button: 'bg-gradient-to-r from-blue-900/40 to-blue-800/40 border border-blue-500/30 text-blue-100 hover:bg-blue-500/20',
-                check: 'bg-blue-500/20 text-blue-300'
-            };
-            case 'elite': return {
-                border: 'border-[#D4AF37]/50',
-                glow: 'shadow-[0_0_40px_rgba(212,175,55,0.2)]',
-                iconBg: 'bg-[#D4AF37]/10',
-                iconColor: 'text-[#D4AF37]',
-                button: 'bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] text-black font-black',
-                check: 'bg-[#D4AF37] text-black'
-            };
-            case 'empire': return {
-                border: 'border-rose-500/40',
-                glow: 'shadow-[0_0_40px_rgba(244,63,94,0.2)]',
-                iconBg: 'bg-rose-500/10',
-                iconColor: 'text-rose-400',
-                button: 'bg-gradient-to-r from-rose-900/40 to-rose-800/40 border border-rose-500/30 text-rose-100 hover:bg-rose-500/20',
-                check: 'bg-rose-500/20 text-rose-300'
-            };
-            default: return {
-                border: 'border-white/10',
-                glow: '',
-                iconBg: 'bg-white/5',
-                iconColor: 'text-white',
-                button: 'bg-white/10 text-white',
-                check: 'bg-white/10'
-            };
-        }
-    };
-
-    const s = getThemeStyles();
 
     return (
         <div
@@ -106,9 +96,11 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                 transition: 'transform 0.1s ease-out',
             }}
         >
-            <div className={`relative rounded-3xl p-[1px] transition-all duration-500 hover:scale-[1.02] group h-full flex flex-col bg-black ${s.glow}`}>
-                {/* Border Gradient */}
-                <div className={`absolute inset-0 rounded-3xl border ${s.border} pointer-events-none`}></div>
+            {/* Main Card Container */}
+            <div className={`relative rounded-3xl transition-all duration-500 hover:scale-[1.02] group h-full flex flex-col border ${theme.border} bg-[#050505] overflow-hidden ${theme.glow}`}>
+
+                {/* Yellow/Gold Ambient Glow (User requested "fondo tenga solamente el difuminado amarillo") */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[80px] rounded-full pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity"></div>
 
                 {/* Animated Glare Effect */}
                 <div
@@ -118,7 +110,7 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                     }}
                 />
 
-                <div className={`h-full rounded-[23px] p-8 flex flex-col relative overflow-hidden bg-gradient-to-b from-[#0a0a0a] to-[#050505]`}>
+                <div className="h-full p-8 flex flex-col relative z-20">
 
                     {/* Popular Badge */}
                     {isPopular && (
@@ -132,7 +124,7 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                     {/* Annual Savings Badge */}
                     {billingPeriod === 'annual' && savings > 0 && (
                         <div className="absolute top-4 left-4 z-20">
-                            <span className="bg-red-500 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-lg">
+                            <span className="bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-full">
                                 -{savings}€/an
                             </span>
                         </div>
@@ -140,13 +132,11 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
 
                     {/* Header Section */}
                     <div className="mb-8 relative z-10">
-                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm transition-all duration-300 ${s.iconBg} ${s.iconColor} border border-white/5`}>
+                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm transition-all duration-300 ${theme.iconBg} border border-white/5`}>
                             <Icon size={28} strokeWidth={1.5} />
                         </div>
 
-                        <h3 className={`text-3xl font-black uppercase tracking-tighter mb-3 ${planId === 'elite' ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB]' : 'text-white'}`}>
-                            {title}
-                        </h3>
+                        <h3 className={`text-4xl font-black uppercase tracking-tighter mb-3 drop-shadow-2xl ${isElite ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37]' : 'text-white'}`}>{title}</h3>
                         <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest leading-relaxed">{description}</p>
                     </div>
 
@@ -155,26 +145,23 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                         <div className="flex items-end gap-1 leading-none mb-4">
                             <div className="flex flex-col items-end mr-2 mb-1">
                                 {originalPrice && (
-                                    <span className="text-xl text-red-500 line-through font-bold decoration-red-500/50">{originalPrice}€</span>
-                                )}
-                                {billingPeriod === 'annual' && !originalPrice && (
-                                    <span className="text-xl text-red-500 line-through font-bold decoration-red-500/50 mb-1">{monthlyPrice}€</span>
+                                    <span className="text-xl text-red-500 line-through font-bold opacity-80">{originalPrice}€</span>
                                 )}
                             </div>
 
-                            <span className={`text-6xl font-black tracking-tighter ${planId === 'elite' ? 'text-[#D4AF37]' : planId === 'empire' ? 'text-rose-400' : 'text-white'}`}>
+                            <span className={`text-7xl font-black tracking-tighter drop-shadow-2xl ${isElite ? 'text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#D4AF37] bg-[length:200%_auto] animate-shimmer' : 'text-white'}`}>
                                 {displayPrice}
                             </span>
                             <div className="flex flex-col pb-2">
-                                <span className={`text-2xl font-bold ${planId === 'elite' ? 'text-[#D4AF37]' : 'text-gray-400'}`}>€</span>
-                                <span className="text-[9px] font-bold text-gray-600 uppercase tracking-wider">/mois</span>
+                                <span className={`text-2xl font-bold ${isElite ? 'text-[#D4AF37]' : 'text-white/70'}`}>€</span>
+                                <span className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">/mois</span>
                             </div>
                         </div>
 
                         {/* ROI Pill */}
                         {roiText && (
                             <div className="inline-block bg-white/5 border border-white/10 rounded-full px-4 py-2">
-                                <span className={`text-[9px] font-black uppercase tracking-widest ${s.iconColor}`}>
+                                <span className={`text-[9px] font-black uppercase tracking-widest ${theme.text}`}>
                                     💎 {roiText}
                                 </span>
                             </div>
@@ -188,29 +175,29 @@ const PricingCard = ({ title, monthlyPrice, annualPrice, originalMonthlyPrice, o
                         {features.map((feature: any, i: number) => {
                             const isBold = feature.includes('SARAH') || feature.includes('SITE WEB') || feature.includes('COMPTA');
                             return (
-                                <li key={i} className="flex items-start gap-3 text-sm text-gray-400 font-medium group/item hover:text-gray-200 transition-colors">
-                                    <div className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 shadow-sm transition-all ${s.check}`}>
+                                <li key={i} className="flex items-start gap-3 text-sm text-gray-300 font-medium group/item hover:text-white transition-colors">
+                                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${theme.iconBg}`}>
                                         <Check size={12} strokeWidth={4} />
                                     </div>
-                                    <span className={isBold ? 'text-white font-bold' : ''}>{feature}</span>
+                                    <span className={isBold ? 'text-white font-black uppercase' : ''}>{feature}</span>
                                 </li>
                             );
                         })}
                         {disabledFeatures.map((feature: string, i: number) => (
-                            <li key={`disabled-${i}`} className="flex items-start gap-3 text-sm text-gray-600 font-medium opacity-80">
-                                <div className="w-5 h-5 rounded-md border border-white/5 flex items-center justify-center shrink-0 mt-0.5 text-gray-700 bg-black/50">
+                            <li key={`disabled-${i}`} className="flex items-start gap-3 text-sm text-gray-600 font-medium">
+                                <div className="w-5 h-5 rounded-full border border-white/5 flex items-center justify-center shrink-0 mt-0.5 text-gray-700 bg-white/5">
                                     <XCircle size={12} />
                                 </div>
-                                <span className="line-through decoration-gray-800 text-gray-600">{feature}</span>
+                                <span className="line-through decoration-gray-800">{feature}</span>
                             </li>
                         ))}
                     </ul>
 
                     <button
                         onClick={() => navigate(`/plan/${planId}`)}
-                        className={`w-full py-4 rounded-xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 transition-all relative overflow-hidden group-hover:shadow-lg ${s.button}`}
+                        className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-sm flex items-center justify-center gap-3 transition-all shadow-2xl relative overflow-hidden group-hover:scale-[1.02] active:scale-95 ${theme.button}`}
                     >
-                        {actionLabel} <ArrowUpRight size={14} />
+                        {actionLabel} <ArrowUpRight size={16} />
                     </button>
                 </div>
             </div>
@@ -249,7 +236,7 @@ const PricingSection = () => {
     };
 
     return (
-        <div className="max-w-[1400px] mx-auto px-6">
+        <div className="max-w-[1400px] mx-auto px-6 py-24">
             <div className="text-center mb-16 relative">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary/20 blur-[120px] w-2/3 h-full rounded-full pointer-events-none"></div>
 
@@ -272,20 +259,20 @@ const PricingSection = () => {
                         transition: 'transform 0.1s ease-out',
                     }}
                 >
-                    <div className="relative bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border-2 border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden hover:border-primary/50 hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] transition-all duration-500 group max-w-5xl mx-auto">
+                    <div className="relative bg-gradient-to-br from-[#0a0a0a] to-black rounded-3xl border border-primary/30 p-8 flex flex-col md:flex-row items-center justify-between shadow-[0_0_60px_rgba(212,175,55,0.1)] overflow-hidden hover:border-primary/50 hover:shadow-[0_0_80px_rgba(212,175,55,0.2)] transition-all duration-500 group max-w-5xl mx-auto">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                         <div className="absolute top-0 right-0 p-4 opacity-5 transition-all group-hover:opacity-10 group-hover:scale-110 duration-700"><Globe size={140} /></div>
 
                         <div className="relative z-10 flex-1 text-center md:text-left mb-6 md:mb-0">
-                            <div className="inline-block px-4 py-2 bg-primary/20 text-primary uppercase text-[10px] font-black tracking-widest rounded-full mb-4 border border-primary/30">Pack Démarrage</div>
+                            <div className="inline-block px-4 py-2 bg-primary/10 text-primary uppercase text-[10px] font-black tracking-widest rounded-full mb-4 border border-primary/20">Pack Démarrage</div>
                             <h3 className="text-3xl md:text-4xl font-black uppercase text-white mb-3 group-hover:text-primary transition-colors">Création Site Web "Élite"</h3>
                             <p className="text-gray-400 text-sm max-w-xl">
-                                Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus (Offre de lancement).
+                                Design sur-mesure par nos experts. Intégration de votre identité visuelle. Configuration SEO local Bordeaux. Shooting photo inclus.
                             </p>
                         </div>
                         <div className="relative z-10 flex flex-col items-center md:items-end shrink-0">
-                            <span className="text-xl text-gray-500 line-through font-bold mb-1">489€</span>
-                            <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-primary tracking-tighter group-hover:scale-110 transition-transform">289€</div>
+                            <span className="text-xl text-red-500 line-through font-bold mb-1 opacity-80">489€</span>
+                            <div className="text-5xl font-black text-white tracking-tighter group-hover:text-primary transition-colors">289€</div>
                             <div className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mt-1">Paiement Unique</div>
                             <div className="mt-3 flex items-center gap-2 text-xs text-emerald-400 font-bold uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                                 <Check size={14} /> Satisfait ou Refait
@@ -294,7 +281,7 @@ const PricingSection = () => {
                     </div>
                 </div>
 
-                {/* Billing Toggle - MOVED HERE */}
+                {/* Billing Toggle */}
                 <div className="inline-flex items-center gap-4 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl mb-12 relative z-10">
                     <button
                         onClick={() => setBillingPeriod('monthly')}
@@ -307,7 +294,7 @@ const PricingSection = () => {
                         className={`px-8 py-3 rounded-full font-black uppercase tracking-widest text-xs transition-all relative ${billingPeriod === 'annual' ? 'bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] text-black shadow-lg shadow-primary/50' : 'text-gray-400 hover:text-white'}`}
                     >
                         Annuel
-                        <span className="absolute -top-2 -right-2 bg-emerald-500 text-black text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg">
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg">
                             -20%
                         </span>
                     </button>
@@ -323,8 +310,8 @@ const PricingSection = () => {
                     description="PROPULSEZ VOTRE IDENTITÉ VISUELLE."
                     icon={Shield}
                     roiText="IMAGE DE MARQUE ELITE"
-                    features={["CRÉATION SITE WEB (SETUP INITIAL)", "Système de Réservation", "Maintenance & Hébergement", "Nom de domaine inclus"]}
-                    disabledFeatures={["Sarah IA", "Pilotage Compta IA"]}
+                    features={["CRÉATION SITE WEB", "Système de Réservation", "Maintenance & Hébergement", "Nom de domaine inclus"]}
+                    disabledFeatures={["Sarah IA", "Pilotage Compta IA", "Marketing", "Avis Automatiques"]}
                     planId="basic"
                     actionLabel="DÉMARRER EN BASIC"
                     billingPeriod={billingPeriod}
@@ -338,10 +325,9 @@ const PricingSection = () => {
                     icon={Zap}
                     roiText="~450€ / MOIS ÉCONOMISÉS"
                     features={["Tout du Pack Basic", "SARAH IA ILLIMITÉE", "Support Technique 24/7", "Maintenance Premium"]}
-                    disabledFeatures={["Pilotage Compta IA"]}
+                    disabledFeatures={["Pilotage Compta IA", "Gestion Réputation", "Marketing"]}
                     planId="pro"
                     actionLabel="DÉMARRER EN PRO"
-                    theme="pro"
                     billingPeriod={billingPeriod}
                 />
 
@@ -358,7 +344,6 @@ const PricingSection = () => {
                     disabledFeatures={["Gestion Réseaux Sociaux", "Campagnes Marketing"]}
                     planId="elite"
                     actionLabel="DEVENIR ELITE"
-                    theme="elite"
                     isPopular={true}
                     billingPeriod={billingPeriod}
                 />
@@ -373,7 +358,6 @@ const PricingSection = () => {
                     features={["TOUT DU PACK ELITE", "GESTION DE RÉSEAUX SOCIAUX", "STRATÉGIE MARKETING DÉDIÉE", "SUPPORT 24/7 VIP", "Rapports Multi-sièges"]}
                     planId="empire"
                     actionLabel="BÂTIR L'EMPIRE"
-                    theme="empire"
                     billingPeriod={billingPeriod}
                 />
             </div>
