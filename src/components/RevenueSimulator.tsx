@@ -134,8 +134,29 @@ const RevenueSimulator = () => {
             {/* 3 Info Boxes */}
             <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/5 bg-black/40">
 
-                {/* Box 1: Competitors Cost */}
-                <div className="p-8 md:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group/box1">
+                {/* Box 1: Missed Revenue Loss */}
+                <div className="p-8 md:p-10 flex flex-col justify-between bg-red-900/10 border border-red-500/20 relative overflow-hidden group/loss hover:bg-red-900/20 transition-all">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-red-500/10 to-transparent opacity-50"></div>
+                    {/* Pulse Effect */}
+                    <div className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full animate-ping opacity-75"></div>
+                    <div className="absolute top-4 right-4 w-3 h-3 bg-red-500 rounded-full"></div>
+
+                    <div className="flex items-center gap-2 mb-4 relative z-10">
+                        <PhoneMissed className="w-5 h-5 text-red-500" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.2em] text-red-400">Pertes Appels / Mois</span>
+                    </div>
+                    <div className="relative z-10">
+                        <div className="text-4xl font-black text-red-500 tracking-tighter mb-1 tabular-nums drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]">
+                            -{monthlyMissedRevenue.toLocaleString()}€
+                        </div>
+                        <div className="text-[9px] text-red-400/80 uppercase tracking-widest font-bold">
+                            Ne laissez plus cet argent s'envoler
+                        </div>
+                    </div>
+                </div>
+
+                {/* Box 1.5 (Middle): Commission Cost */}
+                <div className="p-8 md:p-10 flex flex-col justify-between hover:bg-white/[0.02] transition-colors group/box1 border-r border-white/5 md:border-r-0 md:border-b-0">
                     <div className="flex items-center gap-2 mb-4 opacity-70 group-hover/box1:opacity-100 transition-opacity">
                         <AlertCircle className="w-4 h-4 text-red-500" />
                         <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">Coût Commissions</span>

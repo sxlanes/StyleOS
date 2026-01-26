@@ -13,6 +13,7 @@ import PlanDetails from './pages/PlanDetails';
 import LegalMentions from './pages/LegalMentions';
 import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import ReviewsDemo from './pages/ReviewsDemo';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/demos" element={<DemosPage />} />
+                <Route path="/reviews-demo" element={<ReviewsDemo />} />
                 <Route path="/demo/253-barber-club" element={<Demo253 />} />
                 <Route path="/demo/carol-ann" element={<DemoCarolAnn />} />
                 <Route path="/dashboard" element={<Dashboard />} />

@@ -183,6 +183,49 @@ const ReviewsMock = () => (
     </div>
 );
 
+/* --- PARALLAX COMPONENT --- */
+const BackgroundParallax = () => {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({
+                x: (e.clientX / window.innerWidth - 0.5) * 20,
+                y: (e.clientY / window.innerHeight - 0.5) * 20
+            });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30 select-none">
+            {/* Animated Grid/Wave */}
+            <motion.div
+                className="absolute inset-0"
+                animate={{
+                    x: mousePosition.x * -1,
+                    y: mousePosition.y * -1
+                }}
+                transition={{ type: "tween", ease: "linear", duration: 0.2 }}
+            >
+                <svg className="w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path d="M0 50 Q 25 60 50 50 T 100 50" fill="none" stroke="white" strokeWidth="0.1">
+                        <animate attributeName="d" dur="10s" repeatCount="indefinite" values="M0 50 Q 25 60 50 50 T 100 50; M0 50 Q 25 40 50 50 T 100 50; M0 50 Q 25 60 50 50 T 100 50" />
+                    </path>
+                    <path d="M0 30 Q 25 40 50 30 T 100 30" fill="none" stroke="white" strokeWidth="0.1">
+                        <animate attributeName="d" dur="15s" repeatCount="indefinite" values="M0 30 Q 25 40 50 30 T 100 30; M0 30 Q 25 20 50 30 T 100 30; M0 30 Q 25 40 50 30 T 100 30" />
+                    </path>
+                    <path d="M0 70 Q 25 80 50 70 T 100 70" fill="none" stroke="white" strokeWidth="0.1">
+                        <animate attributeName="d" dur="12s" repeatCount="indefinite" values="M0 70 Q 25 80 50 70 T 100 70; M0 70 Q 25 60 50 70 T 100 70; M0 70 Q 25 80 50 70 T 100 70" />
+                    </path>
+                </svg>
+            </motion.div>
+        </div>
+    );
+};
+
 /* --- FEATURE ROW --- */
 const FeatureRow = ({ title, description, icon: Icon, align = 'left', action, visual }: any) => {
     return (
@@ -411,19 +454,27 @@ function LandingPage() {
             <div ref={heroRef} className="relative h-[150vh] mb-0 pointer-events-none">
                 <div className="sticky top-0 h-screen overflow-hidden flex flex-col items-center justify-center bg-black">
                     <StickyCanvas scale={heroScale} rotate={heroScale} opacity={heroOpacity} />
+
+                    {/* Parallax Background Effect */}
+                    <BackgroundParallax />
+
                     <motion.div className="absolute inset-0 flex items-center justify-center text-center px-4" style={{ opacity: heroOpacity }}>
-                        <div className="max-w-5xl mx-auto z-10 mt-20">
-                            <div className="inline-block mb-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md">StyleOS</div>
-                            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+                        <div className="max-w-5xl mx-auto z-10 mt-20 relative">
+                            {/* Floating Elements Animation */}
+                            <div className="absolute -top-20 -left-20 w-40 h-40 bg-primary/20 rounded-full blur-[80px] animate-pulse"></div>
+                            <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-white/5 rounded-full blur-[100px] animate-pulse delay-700"></div>
+
+                            <div className="inline-block mb-8 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-primary text-[10px] font-black uppercase tracking-[0.5em] backdrop-blur-md hover:scale-105 transition-transform duration-500 cursor-default">StyleOS</div>
+                            <h1 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6 relative z-10">
                                 Distinguez<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#F3E5AB] to-primary bg-[length:200%_auto] animate-shimmer italic">VOUS.</span>
                             </h1>
-                            <div className="max-w-3xl mx-auto space-y-6">
+                            <div className="max-w-3xl mx-auto space-y-6 relative z-10">
                                 <h2 className="text-xl md:text-3xl text-white font-black uppercase tracking-widest mb-4">Devenez une Marque.</h2>
                                 <p className="text-lg text-gray-400 font-light">Vous méritez quelque chose de <span className="text-white font-bold">mieux que Planity</span>.</p>
                             </div>
 
                             {/* Explore Icon */}
-                            <div className="mt-24 flex flex-col items-center gap-4 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity" onClick={() => scrollToSection('features')}>
+                            <div className="mt-24 flex flex-col items-center gap-4 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity pointer-events-auto" onClick={() => scrollToSection('features')}>
                                 <div className="text-[10px] uppercase tracking-[0.3em] text-white font-bold">Explorer</div>
                                 <div className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center p-1">
                                     <div className="w-1 h-3 bg-white rounded-full animate-scroll-down" />
@@ -593,20 +644,14 @@ function LandingPage() {
                                                 {/* Planity Logo Simulation */}
                                                 {/* Planity Logo Simulation */}
                                                 <div className="font-sans font-black text-2xl md:text-3xl text-[#004bad] tracking-tight flex items-center gap-1">
-                                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden flex-shrink-0">
-                                                        <svg viewBox="0 0 100 100" className="w-full h-full fill-[#004bad]">
-                                                            <path d="M50 0C22.4 0 0 22.4 0 50s22.4 50 50 50 50-22.4 50-50S77.6 0 50 0zm0 90C27.9 90 10 72.1 10 50S27.9 10 50 10s40 17.9 40 40-17.9 40-40 40z" />
-                                                            <path d="M50 25c-13.8 0-25 11.2-25 25s11.2 25 25 25 25-11.2 25-25-11.2-25-25-25zm0 40c-8.3 0-15-6.7-15-15s6.7-15 15-15 15 6.7 15 15-6.7 15-15 15z" />
-                                                        </svg>
+                                                    <div className="w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden flex-shrink-0 flex items-center justify-center bg-[#004bad] text-white">
+                                                        P
                                                     </div>
-                                                    planity
+                                                    <span>Planity</span>
                                                 </div>
                                             </div>
                                             <div className="text-xs font-bold text-gray-500 uppercase tracking-widest group-hover/node:text-[#004bad] transition-colors">Planity</div>
                                         </div>
-
-                                        {/* Flow Animation - Particles Only (No Arrow) */}
-                                        {/* Flow Animation - Particles */}
                                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-8rem)] max-w-md h-[1px] bg-white/10 z-0">
 
                                             {/* Particles coming from Planity center */}
